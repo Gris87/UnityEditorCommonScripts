@@ -911,7 +911,7 @@ namespace Common.UI.DockWidgets
             if (dockWidget != null)
             {
                 // TODO: [Major] Show context menu
-                AppUtils.ShowContributeMessage();
+                AppCommonUtils.ShowContributeMessage();
             }
             else
             {
@@ -925,7 +925,7 @@ namespace Common.UI.DockWidgets
         private void OnLockButtonClicked()
         {
             // TODO: [Major] Implement DockingGroupScript.OnLockButtonClicked
-            AppUtils.ShowContributeMessage();
+            AppCommonUtils.ShowContributeMessage();
         }
 
         /// <summary>
@@ -934,7 +934,7 @@ namespace Common.UI.DockWidgets
         private void OnContextMenuButtonClicked()
         {
             // TODO: [Major] Implement DockingGroupScript.OnContextMenuButtonClicked
-            AppUtils.ShowContributeMessage();
+            AppCommonUtils.ShowContributeMessage();
         }
     }
 }
