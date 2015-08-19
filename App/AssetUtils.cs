@@ -29,7 +29,7 @@ namespace Common.App
 			
 			
 			/// <summary>
-			/// Initializes the <see cref="Assets+Common+Fonts"/> class.
+			/// Initializes the <see cref="Common.App.AssetUtils+Fonts"/> class.
 			/// </summary>
 			static Fonts()
 			{				
@@ -47,8 +47,18 @@ namespace Common.App
 				defaultFont = AssetUtils.LoadResource<Font>("Common/Fonts/Default");
 
 				sFonts.Clear();
-				
-				Font[] fontList = Resources.LoadAll<Font>("Common/Fonts/"); // TODO: [Trivial] And "Fonts/"
+
+				LoadFonts("Common/Fonts/");
+				LoadFonts("Fonts/");
+			}
+
+			/// <summary>
+			/// Loads fonts from specified path.
+			/// </summary>
+			/// <param name="path">Path to fonts.</param>
+			private static void LoadFonts(string path)
+			{
+				Font[] fontList = Resources.LoadAll<Font>(path);
 				
 				foreach (Font font in fontList)
 				{
@@ -64,16 +74,6 @@ namespace Common.App
 						{
 							Debug.LogWarning("Already has a font with name: " + fontName);
 						}
-					}
-				}
-				
-				string[] defaultFontNames = defaultFont.fontNames;
-				
-				foreach (string fontName in defaultFontNames)
-				{
-					if (!sFonts.ContainsKey(fontName))
-					{
-						sFonts.Add(fontName, defaultFont);
 					}
 				}
 			}
