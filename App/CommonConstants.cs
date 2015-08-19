@@ -1,4 +1,4 @@
-namespace Common
+namespace Common.App
 {
 	/// <summary>
 	/// Class with constants.

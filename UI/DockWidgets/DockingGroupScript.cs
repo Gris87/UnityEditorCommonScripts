@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityTranslation;
 
+using Common.App;
 using Common.UI.Popups;
 
 
@@ -34,17 +35,17 @@ namespace Common.UI.DockWidgets
                 lockedButtonSpriteState      = new SpriteState();
                 contextMenuButtonSpriteState = new SpriteState();
 
-                unlockedButtonSpriteState.disabledSprite       = Assets.DockWidgets.Textures.unlockedButtonDisabled;
-                unlockedButtonSpriteState.highlightedSprite    = Assets.DockWidgets.Textures.unlockedButtonHighlighted;
-                unlockedButtonSpriteState.pressedSprite        = Assets.DockWidgets.Textures.unlockedButtonPressed;
+                unlockedButtonSpriteState.disabledSprite       = Assets.Common.DockWidgets.Textures.unlockedButtonDisabled;
+                unlockedButtonSpriteState.highlightedSprite    = Assets.Common.DockWidgets.Textures.unlockedButtonHighlighted;
+                unlockedButtonSpriteState.pressedSprite        = Assets.Common.DockWidgets.Textures.unlockedButtonPressed;
 
-                lockedButtonSpriteState.disabledSprite         = Assets.DockWidgets.Textures.lockedButtonDisabled;
-                lockedButtonSpriteState.highlightedSprite      = Assets.DockWidgets.Textures.lockedButtonHighlighted;
-                lockedButtonSpriteState.pressedSprite          = Assets.DockWidgets.Textures.lockedButtonPressed;
+                lockedButtonSpriteState.disabledSprite         = Assets.Common.DockWidgets.Textures.lockedButtonDisabled;
+                lockedButtonSpriteState.highlightedSprite      = Assets.Common.DockWidgets.Textures.lockedButtonHighlighted;
+                lockedButtonSpriteState.pressedSprite          = Assets.Common.DockWidgets.Textures.lockedButtonPressed;
 
-                contextMenuButtonSpriteState.disabledSprite    = Assets.DockWidgets.Textures.contextMenuButtonDisabled;
-                contextMenuButtonSpriteState.highlightedSprite = Assets.DockWidgets.Textures.contextMenuButtonHighlighted;
-                contextMenuButtonSpriteState.pressedSprite     = Assets.DockWidgets.Textures.contextMenuButtonPressed;
+                contextMenuButtonSpriteState.disabledSprite    = Assets.Common.DockWidgets.Textures.contextMenuButtonDisabled;
+                contextMenuButtonSpriteState.highlightedSprite = Assets.Common.DockWidgets.Textures.contextMenuButtonHighlighted;
+                contextMenuButtonSpriteState.pressedSprite     = Assets.Common.DockWidgets.Textures.contextMenuButtonPressed;
             }
         }
     }
@@ -202,7 +203,7 @@ namespace Common.UI.DockWidgets
             #region Image Component
             Image contextMenuImage = contextMenuGameObject.AddComponent<Image>();
 
-            contextMenuImage.sprite = Assets.DockWidgets.Textures.contextMenuButton;
+            contextMenuImage.sprite = Assets.Common.DockWidgets.Textures.contextMenuButton;
             contextMenuImage.type   = Image.Type.Sliced;
             #endregion
 
@@ -247,7 +248,7 @@ namespace Common.UI.DockWidgets
             #region Image Component
             Image lockImage = lockGameObject.AddComponent<Image>();
 
-            lockImage.sprite = Assets.DockWidgets.Textures.unlockedButton;
+            lockImage.sprite = Assets.Common.DockWidgets.Textures.unlockedButton;
             lockImage.type   = Image.Type.Sliced;
             #endregion
 
@@ -293,7 +294,7 @@ namespace Common.UI.DockWidgets
             #region Image Component
             Image pagesImage = pages.AddComponent<Image>();
 
-            pagesImage.sprite = Assets.DockWidgets.Textures.pageBackground;
+            pagesImage.sprite = Assets.Common.DockWidgets.Textures.pageBackground;
             pagesImage.type   = Image.Type.Sliced;
             #endregion
 
@@ -830,7 +831,7 @@ namespace Common.UI.DockWidgets
             #region Text Component
             Text text = textObject.AddComponent<Text>();
 
-            Assets.DockWidgets.TextStyles.title.Apply(text);
+            Assets.Common.DockWidgets.TextStyles.title.Apply(text);
             text.text = dockWidget.title;
             #endregion
             #endregion
@@ -911,7 +912,7 @@ namespace Common.UI.DockWidgets
             if (dockWidget != null)
             {
                 // TODO: [Major] Show context menu
-                AppCommonUtils.ShowContributeMessage();
+                AppUtils.ShowContributeMessage();
             }
             else
             {
@@ -925,7 +926,7 @@ namespace Common.UI.DockWidgets
         private void OnLockButtonClicked()
         {
             // TODO: [Major] Implement DockingGroupScript.OnLockButtonClicked
-            AppCommonUtils.ShowContributeMessage();
+            AppUtils.ShowContributeMessage();
         }
 
         /// <summary>
@@ -934,7 +935,7 @@ namespace Common.UI.DockWidgets
         private void OnContextMenuButtonClicked()
         {
             // TODO: [Major] Implement DockingGroupScript.OnContextMenuButtonClicked
-            AppCommonUtils.ShowContributeMessage();
+            AppUtils.ShowContributeMessage();
         }
     }
 }

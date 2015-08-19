@@ -244,7 +244,7 @@ namespace Common.UI.Tooltips
             #region Image Component
             Image tooltipImage = tooltip.AddComponent<Image>();
 
-            tooltipImage.sprite = Assets.Tooltips.Textures.tooltipBackground;
+            tooltipImage.sprite = Assets.Common.Tooltips.Textures.tooltipBackground;
             tooltipImage.type   = Image.Type.Sliced;
 
             Vector4 tooltipBorders = tooltipImage.sprite.border;
@@ -291,7 +291,7 @@ namespace Common.UI.Tooltips
             #region Text Component
             Text tooltipText = tooltipTextObject.AddComponent<Text>();
 
-            Assets.Tooltips.TextStyles.tooltipText.Apply(tooltipText);
+            Assets.Common.Tooltips.TextStyles.tooltipText.Apply(tooltipText);
 
             tooltipText.text = Translator.GetString(mCurrentOwner.tokenId);
             #endregion

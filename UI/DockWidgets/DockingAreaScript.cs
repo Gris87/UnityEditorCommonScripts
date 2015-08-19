@@ -1683,14 +1683,14 @@ namespace Common.UI.DockWidgets
                         case MouseLocation.North:
                         case MouseLocation.South:
                         {
-							Cursor.SetCursor(Assets.Cursors.northSouth, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
+							Cursor.SetCursor(Assets.Common.Cursors.northSouth, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
 						}
                         break;
 
                         case MouseLocation.West:
                         case MouseLocation.East:
                         {
-							Cursor.SetCursor(Assets.Cursors.eastWest, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
+							Cursor.SetCursor(Assets.Common.Cursors.eastWest, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
                         }
                         break;
 

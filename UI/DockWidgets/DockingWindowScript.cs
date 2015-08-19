@@ -29,13 +29,13 @@ namespace Common.UI.DockWidgets
                 maximizeButtonSpriteState = new SpriteState();
                 closeButtonSpriteState    = new SpriteState();
 
-                maximizeButtonSpriteState.disabledSprite    = Assets.DockWidgets.Textures.maximizeButtonDisabled;
-                maximizeButtonSpriteState.highlightedSprite = Assets.DockWidgets.Textures.maximizeButtonHighlighted;
-                maximizeButtonSpriteState.pressedSprite     = Assets.DockWidgets.Textures.maximizeButtonPressed;
+                maximizeButtonSpriteState.disabledSprite    = Assets.Common.DockWidgets.Textures.maximizeButtonDisabled;
+                maximizeButtonSpriteState.highlightedSprite = Assets.Common.DockWidgets.Textures.maximizeButtonHighlighted;
+                maximizeButtonSpriteState.pressedSprite     = Assets.Common.DockWidgets.Textures.maximizeButtonPressed;
 
-                closeButtonSpriteState.disabledSprite       = Assets.DockWidgets.Textures.closeButtonDisabled;
-                closeButtonSpriteState.highlightedSprite    = Assets.DockWidgets.Textures.closeButtonHighlighted;
-                closeButtonSpriteState.pressedSprite        = Assets.DockWidgets.Textures.closeButtonPressed;
+                closeButtonSpriteState.disabledSprite       = Assets.Common.DockWidgets.Textures.closeButtonDisabled;
+                closeButtonSpriteState.highlightedSprite    = Assets.Common.DockWidgets.Textures.closeButtonHighlighted;
+                closeButtonSpriteState.pressedSprite        = Assets.Common.DockWidgets.Textures.closeButtonPressed;
             }
         }
     }
@@ -77,7 +77,7 @@ namespace Common.UI.DockWidgets
             mDockingAreaScript = null;
 
             frame           = WindowFrameType.SingleFrame;
-            backgroundColor = Assets.DockWidgets.Colors.dockingWindow;
+            backgroundColor = Assets.Common.DockWidgets.Colors.dockingWindow;
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Common.UI.DockWidgets
             #region Image Component
             Image closeImage = closeGameObject.AddComponent<Image>();
 
-            closeImage.sprite = Assets.DockWidgets.Textures.closeButton;
+            closeImage.sprite = Assets.Common.DockWidgets.Textures.closeButton;
             closeImage.type   = Image.Type.Sliced;
             #endregion
 
@@ -179,7 +179,7 @@ namespace Common.UI.DockWidgets
             #region Image Component
             Image maximizeImage = maximizeGameObject.AddComponent<Image>();
 
-            maximizeImage.sprite = Assets.DockWidgets.Textures.maximizeButton;
+            maximizeImage.sprite = Assets.Common.DockWidgets.Textures.maximizeButton;
             maximizeImage.type   = Image.Type.Sliced;
             #endregion
 

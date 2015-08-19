@@ -32,13 +32,13 @@ namespace Common.UI.DockWidgets
                 buttonSpriteState       = new SpriteState();
                 activeButtonSpriteState = new SpriteState();
 
-                buttonSpriteState.disabledSprite          = Assets.DockWidgets.Textures.tabDisabled;
-                buttonSpriteState.highlightedSprite       = Assets.DockWidgets.Textures.tabHighlighted;
-                buttonSpriteState.pressedSprite           = Assets.DockWidgets.Textures.tabPressed;
+                buttonSpriteState.disabledSprite          = Assets.Common.DockWidgets.Textures.tabDisabled;
+                buttonSpriteState.highlightedSprite       = Assets.Common.DockWidgets.Textures.tabHighlighted;
+                buttonSpriteState.pressedSprite           = Assets.Common.DockWidgets.Textures.tabPressed;
 
-                activeButtonSpriteState.disabledSprite    = Assets.DockWidgets.Textures.tabActiveDisabled;
-                activeButtonSpriteState.highlightedSprite = Assets.DockWidgets.Textures.tabActiveHighlighted;
-                activeButtonSpriteState.pressedSprite     = Assets.DockWidgets.Textures.tabActivePressed;
+                activeButtonSpriteState.disabledSprite    = Assets.Common.DockWidgets.Textures.tabActiveDisabled;
+                activeButtonSpriteState.highlightedSprite = Assets.Common.DockWidgets.Textures.tabActiveHighlighted;
+                activeButtonSpriteState.pressedSprite     = Assets.Common.DockWidgets.Textures.tabActivePressed;
             }
         }
     }
@@ -355,12 +355,12 @@ namespace Common.UI.DockWidgets
         {
             if (mActive)
             {
-                image.sprite = Assets.DockWidgets.Textures.tabActive;
+                image.sprite = Assets.Common.DockWidgets.Textures.tabActive;
                 spriteState = Internal.DockingTabCommon.activeButtonSpriteState;
             }
             else
             {
-                image.sprite = Assets.DockWidgets.Textures.tab;
+                image.sprite = Assets.Common.DockWidgets.Textures.tab;
                 spriteState = Internal.DockingTabCommon.buttonSpriteState;
             }
         }

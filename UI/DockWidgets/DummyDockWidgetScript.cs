@@ -55,7 +55,7 @@ namespace Common.UI.DockWidgets
 
             sInstance.image           = baseScript.image;
             sInstance.tokenId         = baseScript.tokenId;
-            sInstance.backgroundColor = Assets.DockWidgets.Colors.dummyBackground;
+            sInstance.backgroundColor = Assets.Common.DockWidgets.Colors.dummyBackground;
             #endregion
             #endregion
 

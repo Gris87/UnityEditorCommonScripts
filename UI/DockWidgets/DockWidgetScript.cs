@@ -129,8 +129,8 @@ namespace Common.UI.DockWidgets
             : base()
         {
             mParent          = null;
-            mBackgroundColor = Assets.DockWidgets.Colors.background;
-            mImage           = Assets.DockWidgets.Textures.icon;
+            mBackgroundColor = Assets.Common.DockWidgets.Colors.background;
+            mImage           = Assets.Common.DockWidgets.Textures.icon;
             mTokenId         = R.sections.DockWidgets.strings.Count;
 
             mContentTransform       = null;

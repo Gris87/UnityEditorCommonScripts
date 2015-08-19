@@ -102,7 +102,7 @@ namespace Common.UI.Toasts
             #region Image Component
             Image toastImage = gameObject.AddComponent<Image>();
 
-            toastImage.sprite = Assets.Toasts.Textures.toastBackground;
+            toastImage.sprite = Assets.Common.Toasts.Textures.toastBackground;
             toastImage.type   = Image.Type.Sliced;
             #endregion
 
@@ -142,7 +142,7 @@ namespace Common.UI.Toasts
             #region Text Component
             mToastText = toastTextObject.AddComponent<Text>();
 
-            Assets.Toasts.TextStyles.toastText.Apply(mToastText);
+            Assets.Common.Toasts.TextStyles.toastText.Apply(mToastText);
 
             if (tokenId != R.sections.Toasts.strings.Count)
             {
