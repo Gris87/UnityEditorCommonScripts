@@ -17,8 +17,6 @@ namespace Common.UI.Popups
         /// </summary>
         static class PopupMenuCommon
         {
-            public static SpriteState buttonSpriteState;
-            public static SpriteState buttonDisabledSpriteState;
             public static Navigation  defaultNavigation;
             public static Navigation  noneNavigation;
 
@@ -29,17 +27,6 @@ namespace Common.UI.Popups
             /// </summary>
             static PopupMenuCommon()
             {
-                buttonSpriteState         = new SpriteState();
-                buttonDisabledSpriteState = new SpriteState();
-
-				buttonSpriteState.disabledSprite            = Assets.Common.Popups.Textures.button.sprite;
-				buttonSpriteState.highlightedSprite         = Assets.Common.Popups.Textures.buttonHighlighted.sprite;
-				buttonSpriteState.pressedSprite             = Assets.Common.Popups.Textures.buttonPressed.sprite;
-
-				buttonDisabledSpriteState.disabledSprite    = Assets.Common.Popups.Textures.button.sprite;
-				buttonDisabledSpriteState.highlightedSprite = Assets.Common.Popups.Textures.buttonDisabled.sprite;
-				buttonDisabledSpriteState.pressedSprite     = Assets.Common.Popups.Textures.buttonDisabled.sprite;
-
                 defaultNavigation   = Navigation.defaultNavigation;
                 noneNavigation      = new Navigation();
                 noneNavigation.mode = Navigation.Mode.None;
@@ -276,7 +263,7 @@ namespace Common.UI.Popups
 
                         if (enabled)
                         {
-                            menuItemButtonButton.spriteState = Internal.PopupMenuCommon.buttonSpriteState;
+							menuItemButtonButton.spriteState = Assets.Common.Popups.SpriteStates.button.spriteState;
                             menuItemButtonButton.navigation  = Internal.PopupMenuCommon.defaultNavigation;
 
                             if (hasChildren)
@@ -308,7 +295,7 @@ namespace Common.UI.Popups
                         }
                         else
                         {
-                            menuItemButtonButton.spriteState = Internal.PopupMenuCommon.buttonDisabledSpriteState;
+							menuItemButtonButton.spriteState = Assets.Common.Popups.SpriteStates.buttonDisabled.spriteState;
                             menuItemButtonButton.navigation  = Internal.PopupMenuCommon.noneNavigation;
                         }
                         #endregion

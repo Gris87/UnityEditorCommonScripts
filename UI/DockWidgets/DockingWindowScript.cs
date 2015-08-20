@@ -8,42 +8,7 @@ using Common.UI.Windows;
 
 namespace Common.UI.DockWidgets
 {
-    #region Internal namespace
-    namespace Internal
-    {
-        /// <summary>
-        /// Docking window common things.
-        /// </summary>
-        static class DockingWindowCommon
-        {
-            public static SpriteState maximizeButtonSpriteState;
-            public static SpriteState closeButtonSpriteState;
-
-
-
-            /// <summary>
-            /// Initializes the <see cref="Common.UI.DockWidgets.Internal.DockingWindowCommon"/> class.
-            /// </summary>
-            static DockingWindowCommon()
-            {
-                maximizeButtonSpriteState = new SpriteState();
-                closeButtonSpriteState    = new SpriteState();
-
-                maximizeButtonSpriteState.disabledSprite    = Assets.Common.DockWidgets.Textures.maximizeButtonDisabled.sprite;
-				maximizeButtonSpriteState.highlightedSprite = Assets.Common.DockWidgets.Textures.maximizeButtonHighlighted.sprite;
-				maximizeButtonSpriteState.pressedSprite     = Assets.Common.DockWidgets.Textures.maximizeButtonPressed.sprite;
-
-				closeButtonSpriteState.disabledSprite       = Assets.Common.DockWidgets.Textures.closeButtonDisabled.sprite;
-				closeButtonSpriteState.highlightedSprite    = Assets.Common.DockWidgets.Textures.closeButtonHighlighted.sprite;
-				closeButtonSpriteState.pressedSprite        = Assets.Common.DockWidgets.Textures.closeButtonPressed.sprite;
-            }
-        }
-    }
-    #endregion
-
-
-
-    /// <summary>
+	/// <summary>
     /// Script that realize docking window behaviour.
     /// </summary>
     public class DockingWindowScript : WindowScript, IPointerDownHandler
@@ -146,7 +111,7 @@ namespace Common.UI.DockWidgets
 
             closeButton.targetGraphic = closeImage;
             closeButton.transition    = Selectable.Transition.SpriteSwap;
-            closeButton.spriteState   = Internal.DockingWindowCommon.closeButtonSpriteState;
+            closeButton.spriteState   = Assets.Common.DockWidgets.SpriteStates.closeButton.spriteState;
             closeButton.onClick.AddListener(Close);
             #endregion
             #endregion
@@ -191,7 +156,7 @@ namespace Common.UI.DockWidgets
 
             maximizeButton.targetGraphic = maximizeImage;
             maximizeButton.transition    = Selectable.Transition.SpriteSwap;
-            maximizeButton.spriteState   = Internal.DockingWindowCommon.maximizeButtonSpriteState;
+            maximizeButton.spriteState   = Assets.Common.DockWidgets.SpriteStates.maximizeButton.spriteState;
             maximizeButton.onClick.AddListener(OnMaximizeClicked);
             #endregion
             #endregion

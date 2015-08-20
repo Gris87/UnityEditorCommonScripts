@@ -12,47 +12,6 @@ using Common.UI.Popups;
 
 namespace Common.UI.DockWidgets
 {
-    #region Internal namespace
-    namespace Internal
-    {
-        /// <summary>
-        /// Docking group common things.
-        /// </summary>
-        static class DockingGroupCommon
-        {
-            public static SpriteState unlockedButtonSpriteState;
-            public static SpriteState lockedButtonSpriteState;
-            public static SpriteState contextMenuButtonSpriteState;
-
-
-
-            /// <summary>
-            /// Initializes the <see cref="Common.UI.DockWidgets.Internal.DockingGroupCommon"/> class.
-            /// </summary>
-            static DockingGroupCommon()
-            {
-                unlockedButtonSpriteState    = new SpriteState();
-                lockedButtonSpriteState      = new SpriteState();
-                contextMenuButtonSpriteState = new SpriteState();
-
-                unlockedButtonSpriteState.disabledSprite       = Assets.Common.DockWidgets.Textures.unlockedButtonDisabled.sprite;
-                unlockedButtonSpriteState.highlightedSprite    = Assets.Common.DockWidgets.Textures.unlockedButtonHighlighted.sprite;
-                unlockedButtonSpriteState.pressedSprite        = Assets.Common.DockWidgets.Textures.unlockedButtonPressed.sprite;
-
-                lockedButtonSpriteState.disabledSprite         = Assets.Common.DockWidgets.Textures.lockedButtonDisabled.sprite;
-				lockedButtonSpriteState.highlightedSprite      = Assets.Common.DockWidgets.Textures.lockedButtonHighlighted.sprite;
-				lockedButtonSpriteState.pressedSprite          = Assets.Common.DockWidgets.Textures.lockedButtonPressed.sprite;
-
-				contextMenuButtonSpriteState.disabledSprite    = Assets.Common.DockWidgets.Textures.contextMenuButtonDisabled.sprite;
-				contextMenuButtonSpriteState.highlightedSprite = Assets.Common.DockWidgets.Textures.contextMenuButtonHighlighted.sprite;
-				contextMenuButtonSpriteState.pressedSprite     = Assets.Common.DockWidgets.Textures.contextMenuButtonPressed.sprite;
-            }
-        }
-    }
-    #endregion
-
-
-
     /// <summary>
     /// Script that realize docking group behaviour.
     /// </summary>
@@ -215,7 +174,7 @@ namespace Common.UI.DockWidgets
 
             contextMenuButton.targetGraphic = contextMenuImage;
             contextMenuButton.transition    = Selectable.Transition.SpriteSwap;
-            contextMenuButton.spriteState   = Internal.DockingGroupCommon.contextMenuButtonSpriteState;
+            contextMenuButton.spriteState   = Assets.Common.DockWidgets.SpriteStates.contextMenuButton.spriteState;
             contextMenuButton.onClick.AddListener(OnContextMenuButtonClicked);
             #endregion
             #endregion
@@ -260,7 +219,7 @@ namespace Common.UI.DockWidgets
 
             lockButton.targetGraphic = lockImage;
             lockButton.transition    = Selectable.Transition.SpriteSwap;
-            lockButton.spriteState   = Internal.DockingGroupCommon.unlockedButtonSpriteState;
+            lockButton.spriteState   = Assets.Common.DockWidgets.SpriteStates.unlockedButton.spriteState;
             lockButton.onClick.AddListener(OnLockButtonClicked);
             #endregion
             #endregion

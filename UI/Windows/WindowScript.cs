@@ -21,59 +21,6 @@ using Common.UI.Popups;
 
 namespace Common.UI.Windows
 {
-    #region Internal namespace
-    namespace Internal
-    {
-        /// <summary>
-        /// Window common things.
-        /// </summary>
-        static class WindowCommon
-        {
-            public static SpriteState minimizeButtonSpriteState;
-            public static SpriteState maximizeButtonSpriteState;
-            public static SpriteState normalizeButtonSpriteState;
-            public static SpriteState closeButtonSpriteState;
-            public static SpriteState toolCloseButtonSpriteState;
-
-
-
-            /// <summary>
-            /// Initializes the <see cref="Common.UI.Popups.Internal.PopupMenuCommon"/> class.
-            /// </summary>
-            static WindowCommon()
-            {
-                minimizeButtonSpriteState  = new SpriteState();
-                maximizeButtonSpriteState  = new SpriteState();
-                normalizeButtonSpriteState = new SpriteState();
-                closeButtonSpriteState     = new SpriteState();
-                toolCloseButtonSpriteState = new SpriteState();
-
-				minimizeButtonSpriteState.disabledSprite     = Assets.Common.Windows.Textures.minimizeButtonDisabled.sprite;
-				minimizeButtonSpriteState.highlightedSprite  = Assets.Common.Windows.Textures.minimizeButtonHighlighted.sprite;
-				minimizeButtonSpriteState.pressedSprite      = Assets.Common.Windows.Textures.minimizeButtonPressed.sprite;
-
-				maximizeButtonSpriteState.disabledSprite     = Assets.Common.Windows.Textures.maximizeButtonDisabled.sprite;
-				maximizeButtonSpriteState.highlightedSprite  = Assets.Common.Windows.Textures.maximizeButtonHighlighted.sprite;
-				maximizeButtonSpriteState.pressedSprite      = Assets.Common.Windows.Textures.maximizeButtonPressed.sprite;
-
-				normalizeButtonSpriteState.disabledSprite    = Assets.Common.Windows.Textures.normalizeButtonDisabled.sprite;
-				normalizeButtonSpriteState.highlightedSprite = Assets.Common.Windows.Textures.normalizeButtonHighlighted.sprite;
-				normalizeButtonSpriteState.pressedSprite     = Assets.Common.Windows.Textures.normalizeButtonPressed.sprite;
-
-				closeButtonSpriteState.disabledSprite        = Assets.Common.Windows.Textures.closeButtonDisabled.sprite;
-				closeButtonSpriteState.highlightedSprite     = Assets.Common.Windows.Textures.closeButtonHighlighted.sprite;
-				closeButtonSpriteState.pressedSprite         = Assets.Common.Windows.Textures.closeButtonPressed.sprite;
-
-				toolCloseButtonSpriteState.disabledSprite    = Assets.Common.Windows.Textures.toolCloseButtonDisabled.sprite;
-				toolCloseButtonSpriteState.highlightedSprite = Assets.Common.Windows.Textures.toolCloseButtonHighlighted.sprite;
-				toolCloseButtonSpriteState.pressedSprite     = Assets.Common.Windows.Textures.toolCloseButtonPressed.sprite;
-            }
-        }
-    }
-    #endregion
-
-
-
     /// <summary>
     /// Script that realize behaviour for window.
     /// </summary>
@@ -1715,7 +1662,7 @@ namespace Common.UI.Windows
                         closeButton.interactable  = mAllowClose;
                         closeButton.targetGraphic = mCloseImage;
                         closeButton.transition    = Selectable.Transition.SpriteSwap;
-                        closeButton.spriteState   = Internal.WindowCommon.closeButtonSpriteState;
+                        closeButton.spriteState   = Assets.Common.Windows.SpriteStates.closeButton.spriteState;
                         closeButton.onClick.AddListener(Close);
                         #endregion
                         #endregion
@@ -1820,11 +1767,11 @@ namespace Common.UI.Windows
 
                             if (mState != WindowState.Maximized)
                             {
-                                maximizeButton.spriteState   = Internal.WindowCommon.maximizeButtonSpriteState;
+								maximizeButton.spriteState = Assets.Common.Windows.SpriteStates.maximizeButton.spriteState;
                             }
                             else
                             {
-                                maximizeButton.spriteState   = Internal.WindowCommon.normalizeButtonSpriteState;
+								maximizeButton.spriteState = Assets.Common.Windows.SpriteStates.normalizeButton.spriteState;
                             }
 
                             maximizeButton.onClick.AddListener(OnMaximizeClicked);
@@ -1925,11 +1872,11 @@ namespace Common.UI.Windows
 
                             if (mState != WindowState.Minimized)
                             {
-                                minimizeButton.spriteState = Internal.WindowCommon.minimizeButtonSpriteState;
+								minimizeButton.spriteState = Assets.Common.Windows.SpriteStates.minimizeButton.spriteState;
                             }
                             else
                             {
-                                minimizeButton.spriteState = Internal.WindowCommon.normalizeButtonSpriteState;
+								minimizeButton.spriteState = Assets.Common.Windows.SpriteStates.normalizeButton.spriteState;
                             }
 
                             minimizeButton.onClick.AddListener(OnMinimizeClicked);
@@ -2049,7 +1996,7 @@ namespace Common.UI.Windows
                         closeButton.interactable  = mAllowClose;
                         closeButton.targetGraphic = mCloseImage;
                         closeButton.transition    = Selectable.Transition.SpriteSwap;
-                        closeButton.spriteState   = Internal.WindowCommon.toolCloseButtonSpriteState;
+						closeButton.spriteState   = Assets.Common.Windows.SpriteStates.toolCloseButton.spriteState;
                         closeButton.onClick.AddListener(Close);
                         #endregion
                         #endregion
