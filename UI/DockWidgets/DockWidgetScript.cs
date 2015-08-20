@@ -130,7 +130,7 @@ namespace Common.UI.DockWidgets
         {
             mParent          = null;
             mBackgroundColor = Assets.Common.DockWidgets.Colors.background;
-            mImage           = Assets.Common.DockWidgets.Textures.icon;
+            mImage           = Assets.Common.DockWidgets.Textures.icon.sprite;
             mTokenId         = R.sections.DockWidgets.strings.Count;
 
             mContentTransform       = null;

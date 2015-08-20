@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Common.UI.ResourceTypes;
+using Common.App.ResourceTypes;
 
 
 

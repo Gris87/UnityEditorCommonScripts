@@ -244,7 +244,7 @@ namespace Common.UI.Tooltips
             #region Image Component
             Image tooltipImage = tooltip.AddComponent<Image>();
 
-            tooltipImage.sprite = Assets.Common.Tooltips.Textures.tooltipBackground;
+			tooltipImage.sprite = Assets.Common.Tooltips.Textures.tooltipBackground.sprite;
             tooltipImage.type   = Image.Type.Sliced;
 
             Vector4 tooltipBorders = tooltipImage.sprite.border;

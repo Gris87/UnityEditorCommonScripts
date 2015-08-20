@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 
 
-namespace Common.UI.ResourceTypes // TODO: [Trivial] Move to Common/App
+namespace Common.App.ResourceTypes
 {
     /// <summary>
     /// Text style.

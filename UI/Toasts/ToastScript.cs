@@ -102,7 +102,7 @@ namespace Common.UI.Toasts
             #region Image Component
             Image toastImage = gameObject.AddComponent<Image>();
 
-            toastImage.sprite = Assets.Common.Toasts.Textures.toastBackground;
+			toastImage.sprite = Assets.Common.Toasts.Textures.toastBackground.sprite;
             toastImage.type   = Image.Type.Sliced;
             #endregion
 

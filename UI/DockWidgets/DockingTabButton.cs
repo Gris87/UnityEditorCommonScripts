@@ -32,13 +32,14 @@ namespace Common.UI.DockWidgets
                 buttonSpriteState       = new SpriteState();
                 activeButtonSpriteState = new SpriteState();
 
-                buttonSpriteState.disabledSprite          = Assets.Common.DockWidgets.Textures.tabDisabled;
-                buttonSpriteState.highlightedSprite       = Assets.Common.DockWidgets.Textures.tabHighlighted;
-                buttonSpriteState.pressedSprite           = Assets.Common.DockWidgets.Textures.tabPressed;
+				// TODO: [Major] Try to optimize for image loading when needed (Move SpriteStates to Assets)
+				buttonSpriteState.disabledSprite          = Assets.Common.DockWidgets.Textures.tabDisabled.sprite;
+				buttonSpriteState.highlightedSprite       = Assets.Common.DockWidgets.Textures.tabHighlighted.sprite;
+				buttonSpriteState.pressedSprite           = Assets.Common.DockWidgets.Textures.tabPressed.sprite;
 
-                activeButtonSpriteState.disabledSprite    = Assets.Common.DockWidgets.Textures.tabActiveDisabled;
-                activeButtonSpriteState.highlightedSprite = Assets.Common.DockWidgets.Textures.tabActiveHighlighted;
-                activeButtonSpriteState.pressedSprite     = Assets.Common.DockWidgets.Textures.tabActivePressed;
+				activeButtonSpriteState.disabledSprite    = Assets.Common.DockWidgets.Textures.tabActiveDisabled.sprite;
+				activeButtonSpriteState.highlightedSprite = Assets.Common.DockWidgets.Textures.tabActiveHighlighted.sprite;
+				activeButtonSpriteState.pressedSprite     = Assets.Common.DockWidgets.Textures.tabActivePressed.sprite;
             }
         }
     }
@@ -355,12 +356,12 @@ namespace Common.UI.DockWidgets
         {
             if (mActive)
             {
-                image.sprite = Assets.Common.DockWidgets.Textures.tabActive;
+				image.sprite = Assets.Common.DockWidgets.Textures.tabActive.sprite;
                 spriteState = Internal.DockingTabCommon.activeButtonSpriteState;
             }
             else
             {
-                image.sprite = Assets.Common.DockWidgets.Textures.tab;
+				image.sprite = Assets.Common.DockWidgets.Textures.tab.sprite;
                 spriteState = Internal.DockingTabCommon.buttonSpriteState;
             }
         }

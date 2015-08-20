@@ -48,25 +48,25 @@ namespace Common.UI.Windows
                 closeButtonSpriteState     = new SpriteState();
                 toolCloseButtonSpriteState = new SpriteState();
 
-                minimizeButtonSpriteState.disabledSprite     = Assets.Common.Windows.Textures.minimizeButtonDisabled;
-                minimizeButtonSpriteState.highlightedSprite  = Assets.Common.Windows.Textures.minimizeButtonHighlighted;
-                minimizeButtonSpriteState.pressedSprite      = Assets.Common.Windows.Textures.minimizeButtonPressed;
+				minimizeButtonSpriteState.disabledSprite     = Assets.Common.Windows.Textures.minimizeButtonDisabled.sprite;
+				minimizeButtonSpriteState.highlightedSprite  = Assets.Common.Windows.Textures.minimizeButtonHighlighted.sprite;
+				minimizeButtonSpriteState.pressedSprite      = Assets.Common.Windows.Textures.minimizeButtonPressed.sprite;
 
-                maximizeButtonSpriteState.disabledSprite     = Assets.Common.Windows.Textures.maximizeButtonDisabled;
-                maximizeButtonSpriteState.highlightedSprite  = Assets.Common.Windows.Textures.maximizeButtonHighlighted;
-                maximizeButtonSpriteState.pressedSprite      = Assets.Common.Windows.Textures.maximizeButtonPressed;
+				maximizeButtonSpriteState.disabledSprite     = Assets.Common.Windows.Textures.maximizeButtonDisabled.sprite;
+				maximizeButtonSpriteState.highlightedSprite  = Assets.Common.Windows.Textures.maximizeButtonHighlighted.sprite;
+				maximizeButtonSpriteState.pressedSprite      = Assets.Common.Windows.Textures.maximizeButtonPressed.sprite;
 
-                normalizeButtonSpriteState.disabledSprite    = Assets.Common.Windows.Textures.normalizeButtonDisabled;
-                normalizeButtonSpriteState.highlightedSprite = Assets.Common.Windows.Textures.normalizeButtonHighlighted;
-                normalizeButtonSpriteState.pressedSprite     = Assets.Common.Windows.Textures.normalizeButtonPressed;
+				normalizeButtonSpriteState.disabledSprite    = Assets.Common.Windows.Textures.normalizeButtonDisabled.sprite;
+				normalizeButtonSpriteState.highlightedSprite = Assets.Common.Windows.Textures.normalizeButtonHighlighted.sprite;
+				normalizeButtonSpriteState.pressedSprite     = Assets.Common.Windows.Textures.normalizeButtonPressed.sprite;
 
-                closeButtonSpriteState.disabledSprite        = Assets.Common.Windows.Textures.closeButtonDisabled;
-                closeButtonSpriteState.highlightedSprite     = Assets.Common.Windows.Textures.closeButtonHighlighted;
-                closeButtonSpriteState.pressedSprite         = Assets.Common.Windows.Textures.closeButtonPressed;
+				closeButtonSpriteState.disabledSprite        = Assets.Common.Windows.Textures.closeButtonDisabled.sprite;
+				closeButtonSpriteState.highlightedSprite     = Assets.Common.Windows.Textures.closeButtonHighlighted.sprite;
+				closeButtonSpriteState.pressedSprite         = Assets.Common.Windows.Textures.closeButtonPressed.sprite;
 
-                toolCloseButtonSpriteState.disabledSprite    = Assets.Common.Windows.Textures.toolCloseButtonDisabled;
-                toolCloseButtonSpriteState.highlightedSprite = Assets.Common.Windows.Textures.toolCloseButtonHighlighted;
-                toolCloseButtonSpriteState.pressedSprite     = Assets.Common.Windows.Textures.toolCloseButtonPressed;
+				toolCloseButtonSpriteState.disabledSprite    = Assets.Common.Windows.Textures.toolCloseButtonDisabled.sprite;
+				toolCloseButtonSpriteState.highlightedSprite = Assets.Common.Windows.Textures.toolCloseButtonHighlighted.sprite;
+				toolCloseButtonSpriteState.pressedSprite     = Assets.Common.Windows.Textures.toolCloseButtonPressed.sprite;
             }
         }
     }
@@ -1523,11 +1523,11 @@ namespace Common.UI.Windows
                 {
 					if (sSelectedWindow == this)
                     {
-                        mBorderImage.sprite = Assets.Common.Windows.Textures.window;
+						mBorderImage.sprite = Assets.Common.Windows.Textures.window.sprite;
                     }
                     else
                     {
-                        mBorderImage.sprite = Assets.Common.Windows.Textures.windowDeselected;
+                        mBorderImage.sprite = Assets.Common.Windows.Textures.windowDeselected.sprite;
                     }
                 }
                 break;
@@ -1536,11 +1536,11 @@ namespace Common.UI.Windows
                 {
 					if (sSelectedWindow == this)
                     {
-                        mBorderImage.sprite = Assets.Common.Windows.Textures.subWindow;
+                        mBorderImage.sprite = Assets.Common.Windows.Textures.subWindow.sprite;
                     }
                     else
                     {
-                        mBorderImage.sprite = Assets.Common.Windows.Textures.subWindowDeselected;
+                        mBorderImage.sprite = Assets.Common.Windows.Textures.subWindowDeselected.sprite;
                     }
                 }
                 break;
@@ -1549,11 +1549,11 @@ namespace Common.UI.Windows
                 {
 					if (sSelectedWindow == this)
                     {
-                        mBorderImage.sprite = Assets.Common.Windows.Textures.drawer;
+                        mBorderImage.sprite = Assets.Common.Windows.Textures.drawer.sprite;
                     }
                     else
                     {
-                        mBorderImage.sprite = Assets.Common.Windows.Textures.drawerDeselected;
+                        mBorderImage.sprite = Assets.Common.Windows.Textures.drawerDeselected.sprite;
                     }
                 }
                 break;
@@ -1562,11 +1562,11 @@ namespace Common.UI.Windows
                 {
 					if (sSelectedWindow == this)
                     {
-                        mBorderImage.sprite = Assets.Common.Windows.Textures.singleFrame;
+                        mBorderImage.sprite = Assets.Common.Windows.Textures.singleFrame.sprite;
                     }
                     else
                     {
-                        mBorderImage.sprite = Assets.Common.Windows.Textures.singleFrameDeselected;
+                        mBorderImage.sprite = Assets.Common.Windows.Textures.singleFrameDeselected.sprite;
                     }
                 }
                 break;
@@ -1686,14 +1686,14 @@ namespace Common.UI.Windows
 
 						if (sSelectedWindow == this)
                         {
-                            mCloseImage.sprite = Assets.Common.Windows.Textures.closeButton;
+							mCloseImage.sprite = Assets.Common.Windows.Textures.closeButton.sprite;
                         }
                         else
                         {
-                            mCloseImage.sprite = Assets.Common.Windows.Textures.closeButtonDeselected;
+                            mCloseImage.sprite = Assets.Common.Windows.Textures.closeButtonDeselected.sprite;
                         }
 
-                        mCloseImage.type   = Image.Type.Sliced;
+                        mCloseImage.type = Image.Type.Sliced;
                         #endregion
 
                         //===========================================================================
@@ -1776,26 +1776,26 @@ namespace Common.UI.Windows
                             {
 								if (sSelectedWindow == this)
                                 {
-                                    mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButton;
+									mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButton.sprite;
                                 }
                                 else
                                 {
-                                    mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButtonDeselected;
+									mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButtonDeselected.sprite;
                                 }
                             }
                             else
                             {
 								if (sSelectedWindow == this)
                                 {
-                                    mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton;
+									mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton.sprite;
                                 }
                                 else
                                 {
-                                    mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected;
+									mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected.sprite;
                                 }
                             }
 
-                            mMaximizeImage.type   = Image.Type.Sliced;
+                            mMaximizeImage.type = Image.Type.Sliced;
                             #endregion
 
                             //===========================================================================
@@ -1881,26 +1881,26 @@ namespace Common.UI.Windows
                             {
 								if (sSelectedWindow == this)
                                 {
-                                    mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButton;
+									mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButton.sprite;
                                 }
                                 else
                                 {
-                                    mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButtonDeselected;
+									mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButtonDeselected.sprite;
                                 }
                             }
                             else
                             {
 								if (sSelectedWindow == this)
                                 {
-                                    mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton;
+									mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton.sprite;
                                 }
                                 else
                                 {
-                                    mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected;
+									mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected.sprite;
                                 }
                             }
 
-                            mMinimizeImage.type   = Image.Type.Sliced;
+                            mMinimizeImage.type = Image.Type.Sliced;
                             #endregion
 
                             //===========================================================================
@@ -2020,14 +2020,14 @@ namespace Common.UI.Windows
 
 						if (sSelectedWindow == this)
                         {
-                            mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButton;
+							mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButton.sprite;
                         }
                         else
                         {
-                            mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButtonDeselected;
+							mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButtonDeselected.sprite;
                         }
 
-                        mCloseImage.type   = Image.Type.Sliced;
+                        mCloseImage.type = Image.Type.Sliced;
                         #endregion
 
                         //===========================================================================
@@ -2302,7 +2302,7 @@ namespace Common.UI.Windows
                 #region Image Component
                 Image replacementImage = mReplacementGameObject.AddComponent<Image>();
 
-                replacementImage.sprite = Assets.Common.Windows.Textures.replacement;
+                replacementImage.sprite = Assets.Common.Windows.Textures.replacement.sprite;
                 replacementImage.type   = Image.Type.Sliced;
                 #endregion
                 #endregion
@@ -2714,28 +2714,28 @@ namespace Common.UI.Windows
                                             case MouseLocation.North:
                                             case MouseLocation.South:
                                             {
-												Cursor.SetCursor(Assets.Common.Cursors.northSouth, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
+												Cursor.SetCursor(Assets.Common.Cursors.northSouth.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
                                             }
                                             break;
 
                                             case MouseLocation.West:
                                             case MouseLocation.East:
                                             {
-												Cursor.SetCursor(Assets.Common.Cursors.eastWest, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
+												Cursor.SetCursor(Assets.Common.Cursors.eastWest.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
                                             }
                                             break;
 
                                             case MouseLocation.NorthWest:
                                             case MouseLocation.SouthEast:
                                             {
-												Cursor.SetCursor(Assets.Common.Cursors.northWestSouthEast, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
+												Cursor.SetCursor(Assets.Common.Cursors.northWestSouthEast.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
                                             }
                                             break;
 
                                             case MouseLocation.NorthEast:
                                             case MouseLocation.SouthWest:
                                             {
-												Cursor.SetCursor(Assets.Common.Cursors.northEastSouthWest, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
+												Cursor.SetCursor(Assets.Common.Cursors.northEastSouthWest.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
                                             }
                                             break;
 
@@ -3457,22 +3457,22 @@ namespace Common.UI.Windows
                                 {
                                     if (value)
                                     {
-                                        mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButton;
+                                        mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButton.sprite;
                                     }
                                     else
                                     {
-                                        mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButtonDeselected;
+                                        mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButtonDeselected.sprite;
                                     }
                                 }
                                 else
                                 {
                                     if (value)
                                     {
-                                        mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton;
+                                        mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton.sprite;
                                     }
                                     else
                                     {
-                                        mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected;
+                                        mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected.sprite;
                                     }
                                 }
                             }
@@ -3483,22 +3483,22 @@ namespace Common.UI.Windows
                                 {
                                     if (value)
                                     {
-                                        mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButton;
+                                        mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButton.sprite;
                                     }
                                     else
                                     {
-                                        mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButtonDeselected;
+                                        mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButtonDeselected.sprite;
                                     }
                                 }
                                 else
                                 {
                                     if (value)
                                     {
-                                        mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton;
+                                        mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton.sprite;
                                     }
                                     else
                                     {
-                                        mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected;
+                                        mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected.sprite;
                                     }
                                 }
                             }
@@ -3507,11 +3507,11 @@ namespace Common.UI.Windows
                             {
                                 if (value)
                                 {
-                                    mCloseImage.sprite = Assets.Common.Windows.Textures.closeButton;
+                                    mCloseImage.sprite = Assets.Common.Windows.Textures.closeButton.sprite;
                                 }
                                 else
                                 {
-                                    mCloseImage.sprite = Assets.Common.Windows.Textures.closeButtonDeselected;
+                                    mCloseImage.sprite = Assets.Common.Windows.Textures.closeButtonDeselected.sprite;
                                 }
                             }
                         }
@@ -3523,11 +3523,11 @@ namespace Common.UI.Windows
                             {
                                 if (value)
                                 {
-                                    mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButton;
+                                    mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButton.sprite;
                                 }
                                 else
                                 {
-                                    mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButtonDeselected;
+                                    mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButtonDeselected.sprite;
                                 }
                             }
                         }
