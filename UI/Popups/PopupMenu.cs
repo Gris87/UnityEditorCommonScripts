@@ -128,7 +128,7 @@ namespace Common.UI.Popups
             #region Image Component
             Image popupMenuImage = mGameObject.AddComponent<Image>();
 
-			popupMenuImage.sprite = Assets.Common.Popups.Textures.popupBackground.sprite;
+            popupMenuImage.sprite = Assets.Common.Popups.Textures.popupBackground.sprite;
             popupMenuImage.type   = Image.Type.Sliced;
             #endregion
 
@@ -209,7 +209,7 @@ namespace Common.UI.Popups
                         #region Image Component
                         Image image = menuSeparator.AddComponent<Image>();
 
-						image.sprite = Assets.Common.Popups.Textures.separator.sprite;
+                        image.sprite = Assets.Common.Popups.Textures.separator.sprite;
                         #endregion
                         #endregion
                     }
@@ -248,7 +248,7 @@ namespace Common.UI.Popups
                         #region Image Component
                         Image menuItemButtonImage = menuItemButton.AddComponent<Image>();
 
-						menuItemButtonImage.sprite = Assets.Common.Popups.Textures.button.sprite;
+                        menuItemButtonImage.sprite = Assets.Common.Popups.Textures.button.sprite;
                         menuItemButtonImage.type   = Image.Type.Sliced;
                         #endregion
 
@@ -263,7 +263,7 @@ namespace Common.UI.Popups
 
                         if (enabled)
                         {
-							menuItemButtonButton.spriteState = Assets.Common.Popups.SpriteStates.button.spriteState;
+                            menuItemButtonButton.spriteState = Assets.Common.Popups.SpriteStates.button.spriteState;
                             menuItemButtonButton.navigation  = Internal.PopupMenuCommon.defaultNavigation;
 
                             if (hasChildren)
@@ -295,7 +295,7 @@ namespace Common.UI.Popups
                         }
                         else
                         {
-							menuItemButtonButton.spriteState = Assets.Common.Popups.SpriteStates.buttonDisabled.spriteState;
+                            menuItemButtonButton.spriteState = Assets.Common.Popups.SpriteStates.buttonDisabled.spriteState;
                             menuItemButtonButton.navigation  = Internal.PopupMenuCommon.noneNavigation;
                         }
                         #endregion
@@ -313,7 +313,7 @@ namespace Common.UI.Popups
                         //===========================================================================
                         #region RectTransform Component
                         RectTransform menuItemTextTransform = menuItemText.AddComponent<RectTransform>();
-						Utils.AlignRectTransformStretchStretch(menuItemTextTransform, Assets.Common.Popups.Textures.background.sprite.border.x + 4f);
+                        Utils.AlignRectTransformStretchStretch(menuItemTextTransform, Assets.Common.Popups.Textures.background.sprite.border.x + 4f);
                         #endregion
 
                         //===========================================================================
@@ -335,7 +335,7 @@ namespace Common.UI.Popups
                         #endregion
                         #endregion
 
-						float buttonWidth  = menuItemTextText.preferredWidth + Assets.Common.Popups.Textures.background.sprite.border.x + 16f;
+                        float buttonWidth  = menuItemTextText.preferredWidth + Assets.Common.Popups.Textures.background.sprite.border.x + 16f;
                         float buttonHeight = 22f; // TODO: [Trivial] Report request for prefferedHeight for specified width
 
                         Utils.AlignRectTransformTopStretch(menuItemButtonTransform, buttonHeight, contentHeight);
@@ -561,7 +561,7 @@ namespace Common.UI.Popups
                                 #region Image Component
                                 Image arrowImage = arrow.AddComponent<Image>();
 
-								arrowImage.sprite = Assets.Common.Popups.Textures.arrow.sprite;
+                                arrowImage.sprite = Assets.Common.Popups.Textures.arrow.sprite;
                                 arrowImage.type   = Image.Type.Sliced;
                                 #endregion
                                 #endregion
@@ -624,7 +624,7 @@ namespace Common.UI.Popups
                             #region Image Component
                             Image checkboxImage = checkbox.AddComponent<Image>();
 
-							checkboxImage.sprite = Assets.Common.Popups.Textures.checkbox.sprite;
+                            checkboxImage.sprite = Assets.Common.Popups.Textures.checkbox.sprite;
                             checkboxImage.type   = Image.Type.Sliced;
                             #endregion
                             #endregion
@@ -663,7 +663,7 @@ namespace Common.UI.Popups
             #region Image Component
             Image scrollAreaImage = scrollArea.AddComponent<Image>();
 
-			scrollAreaImage.sprite = Assets.Common.Popups.Textures.background.sprite;
+            scrollAreaImage.sprite = Assets.Common.Popups.Textures.background.sprite;
             scrollAreaImage.type   = Image.Type.Sliced;
             #endregion
 

@@ -244,7 +244,7 @@ namespace Common.UI.Tooltips
             #region Image Component
             Image tooltipImage = tooltip.AddComponent<Image>();
 
-			tooltipImage.sprite = Assets.Common.Tooltips.Textures.tooltipBackground.sprite;
+            tooltipImage.sprite = Assets.Common.Tooltips.Textures.tooltipBackground.sprite;
             tooltipImage.type   = Image.Type.Sliced;
 
             Vector4 tooltipBorders = tooltipImage.sprite.border;
@@ -297,8 +297,8 @@ namespace Common.UI.Tooltips
             #endregion
             #endregion
 
-			float mouseX = Mouse.scaledX;
-			float mouseY = Mouse.scaledY;
+            float mouseX = Mouse.scaledX;
+            float mouseY = Mouse.scaledY;
 
             float tooltipWidth = tooltipText.preferredWidth + tooltipBorderLeft + tooltipBorderRight;
             float screenWidth  = Utils.scaledScreenWidth;
@@ -311,7 +311,7 @@ namespace Common.UI.Tooltips
             tooltipTransform.sizeDelta = new Vector2(tooltipWidth, 0f);
             float tooltipHeight = tooltipText.preferredHeight + tooltipBorderTop + tooltipBorderBottom;
 
-			Utils.FitRectTransformToScreen(tooltipTransform, tooltipWidth, tooltipHeight, mouseX, mouseY);
+            Utils.FitRectTransformToScreen(tooltipTransform, tooltipWidth, tooltipHeight, mouseX, mouseY);
             #endregion
         }
 

@@ -114,29 +114,29 @@ namespace Common.UI.Windows
 
 
 
-		/// <summary>
-		/// Gets instances.
-		/// </summary>
-		/// <value>List of all window instances.</value>
-		public static ReadOnlyCollection<WindowScript> instances
-		{
-			get { return sInstances.AsReadOnly(); }
-		}
+        /// <summary>
+        /// Gets instances.
+        /// </summary>
+        /// <value>List of all window instances.</value>
+        public static ReadOnlyCollection<WindowScript> instances
+        {
+            get { return sInstances.AsReadOnly(); }
+        }
 
-		/// <summary>
-		/// Gets the selected window.
-		/// </summary>
-		/// <value>Selected window.</value>
-		public static WindowScript selectedWindow
-		{
-			get { return sSelectedWindow; }
-		}
+        /// <summary>
+        /// Gets the selected window.
+        /// </summary>
+        /// <value>Selected window.</value>
+        public static WindowScript selectedWindow
+        {
+            get { return sSelectedWindow; }
+        }
 
 
 
-		private static List<WindowScript>                           sInstances         = new List<WindowScript>();
-		private static WindowScript                                 sSelectedWindow    = null;
-		private static List<Pair<WindowScript, List<WindowScript>>> sFullscreenWindows = new List<Pair<WindowScript, List<WindowScript>>>();
+        private static List<WindowScript>                           sInstances         = new List<WindowScript>();
+        private static WindowScript                                 sSelectedWindow    = null;
+        private static List<Pair<WindowScript, List<WindowScript>>> sFullscreenWindows = new List<Pair<WindowScript, List<WindowScript>>>();
 
 
 
@@ -248,7 +248,7 @@ namespace Common.UI.Windows
             {
                 if (mState != value)
                 {
-					WindowState oldValue = mState;
+                    WindowState oldValue = mState;
                     bool wasFramePresent = IsFramePresent();
 
                     mState = value;
@@ -285,17 +285,17 @@ namespace Common.UI.Windows
                         }
                     }
 
-					if ((oldValue == WindowState.FullScreen) || (mState == WindowState.FullScreen))
-					{
-						if (mState == WindowState.FullScreen)
-						{
-							AddToFullscreenList();
-						}
-						else
-						{
-							RemoveFromFullscreenList();
-						}
-					}
+                    if ((oldValue == WindowState.FullScreen) || (mState == WindowState.FullScreen))
+                    {
+                        if (mState == WindowState.FullScreen)
+                        {
+                            AddToFullscreenList();
+                        }
+                        else
+                        {
+                            RemoveFromFullscreenList();
+                        }
+                    }
                 }
             }
         }
@@ -829,7 +829,7 @@ namespace Common.UI.Windows
 
                 if (mState == WindowState.FullScreen)
                 {
-					return Utils.scaledScreenHeight;
+                    return Utils.scaledScreenHeight;
                 }
 
                 if (mState == WindowState.Maximized)
@@ -1468,9 +1468,9 @@ namespace Common.UI.Windows
             {
                 case WindowFrameType.Window:
                 {
-					if (sSelectedWindow == this)
+                    if (sSelectedWindow == this)
                     {
-						mBorderImage.sprite = Assets.Common.Windows.Textures.window.sprite;
+                        mBorderImage.sprite = Assets.Common.Windows.Textures.window.sprite;
                     }
                     else
                     {
@@ -1481,7 +1481,7 @@ namespace Common.UI.Windows
 
                 case WindowFrameType.SubWindow:
                 {
-					if (sSelectedWindow == this)
+                    if (sSelectedWindow == this)
                     {
                         mBorderImage.sprite = Assets.Common.Windows.Textures.subWindow.sprite;
                     }
@@ -1494,7 +1494,7 @@ namespace Common.UI.Windows
 
                 case WindowFrameType.Drawer:
                 {
-					if (sSelectedWindow == this)
+                    if (sSelectedWindow == this)
                     {
                         mBorderImage.sprite = Assets.Common.Windows.Textures.drawer.sprite;
                     }
@@ -1507,7 +1507,7 @@ namespace Common.UI.Windows
 
                 case WindowFrameType.SingleFrame:
                 {
-					if (sSelectedWindow == this)
+                    if (sSelectedWindow == this)
                     {
                         mBorderImage.sprite = Assets.Common.Windows.Textures.singleFrame.sprite;
                     }
@@ -1631,9 +1631,9 @@ namespace Common.UI.Windows
                         #region Image Component
                         mCloseImage = closeImageObject.AddComponent<Image>();
 
-						if (sSelectedWindow == this)
+                        if (sSelectedWindow == this)
                         {
-							mCloseImage.sprite = Assets.Common.Windows.Textures.closeButton.sprite;
+                            mCloseImage.sprite = Assets.Common.Windows.Textures.closeButton.sprite;
                         }
                         else
                         {
@@ -1721,24 +1721,24 @@ namespace Common.UI.Windows
 
                             if (mState != WindowState.Maximized)
                             {
-								if (sSelectedWindow == this)
+                                if (sSelectedWindow == this)
                                 {
-									mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButton.sprite;
+                                    mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButton.sprite;
                                 }
                                 else
                                 {
-									mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButtonDeselected.sprite;
+                                    mMaximizeImage.sprite = Assets.Common.Windows.Textures.maximizeButtonDeselected.sprite;
                                 }
                             }
                             else
                             {
-								if (sSelectedWindow == this)
+                                if (sSelectedWindow == this)
                                 {
-									mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton.sprite;
+                                    mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton.sprite;
                                 }
                                 else
                                 {
-									mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected.sprite;
+                                    mMaximizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected.sprite;
                                 }
                             }
 
@@ -1767,11 +1767,11 @@ namespace Common.UI.Windows
 
                             if (mState != WindowState.Maximized)
                             {
-								maximizeButton.spriteState = Assets.Common.Windows.SpriteStates.maximizeButton.spriteState;
+                                maximizeButton.spriteState = Assets.Common.Windows.SpriteStates.maximizeButton.spriteState;
                             }
                             else
                             {
-								maximizeButton.spriteState = Assets.Common.Windows.SpriteStates.normalizeButton.spriteState;
+                                maximizeButton.spriteState = Assets.Common.Windows.SpriteStates.normalizeButton.spriteState;
                             }
 
                             maximizeButton.onClick.AddListener(OnMaximizeClicked);
@@ -1826,24 +1826,24 @@ namespace Common.UI.Windows
 
                             if (mState != WindowState.Minimized)
                             {
-								if (sSelectedWindow == this)
+                                if (sSelectedWindow == this)
                                 {
-									mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButton.sprite;
+                                    mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButton.sprite;
                                 }
                                 else
                                 {
-									mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButtonDeselected.sprite;
+                                    mMinimizeImage.sprite = Assets.Common.Windows.Textures.minimizeButtonDeselected.sprite;
                                 }
                             }
                             else
                             {
-								if (sSelectedWindow == this)
+                                if (sSelectedWindow == this)
                                 {
-									mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton.sprite;
+                                    mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButton.sprite;
                                 }
                                 else
                                 {
-									mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected.sprite;
+                                    mMinimizeImage.sprite = Assets.Common.Windows.Textures.normalizeButtonDeselected.sprite;
                                 }
                             }
 
@@ -1872,11 +1872,11 @@ namespace Common.UI.Windows
 
                             if (mState != WindowState.Minimized)
                             {
-								minimizeButton.spriteState = Assets.Common.Windows.SpriteStates.minimizeButton.spriteState;
+                                minimizeButton.spriteState = Assets.Common.Windows.SpriteStates.minimizeButton.spriteState;
                             }
                             else
                             {
-								minimizeButton.spriteState = Assets.Common.Windows.SpriteStates.normalizeButton.spriteState;
+                                minimizeButton.spriteState = Assets.Common.Windows.SpriteStates.normalizeButton.spriteState;
                             }
 
                             minimizeButton.onClick.AddListener(OnMinimizeClicked);
@@ -1965,13 +1965,13 @@ namespace Common.UI.Windows
                         #region Image Component
                         mCloseImage = closeImageObject.AddComponent<Image>();
 
-						if (sSelectedWindow == this)
+                        if (sSelectedWindow == this)
                         {
-							mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButton.sprite;
+                            mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButton.sprite;
                         }
                         else
                         {
-							mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButtonDeselected.sprite;
+                            mCloseImage.sprite = Assets.Common.Windows.Textures.toolCloseButtonDeselected.sprite;
                         }
 
                         mCloseImage.type = Image.Type.Sliced;
@@ -1996,7 +1996,7 @@ namespace Common.UI.Windows
                         closeButton.interactable  = mAllowClose;
                         closeButton.targetGraphic = mCloseImage;
                         closeButton.transition    = Selectable.Transition.SpriteSwap;
-						closeButton.spriteState   = Assets.Common.Windows.SpriteStates.toolCloseButton.spriteState;
+                        closeButton.spriteState   = Assets.Common.Windows.SpriteStates.toolCloseButton.spriteState;
                         closeButton.onClick.AddListener(Close);
                         #endregion
                         #endregion
@@ -2291,15 +2291,15 @@ namespace Common.UI.Windows
 
 
 
-			foreach (Pair<WindowScript, List<WindowScript>> pair in sFullscreenWindows)
-			{
-				pair.second.Remove(this);
-			}
+            foreach (Pair<WindowScript, List<WindowScript>> pair in sFullscreenWindows)
+            {
+                pair.second.Remove(this);
+            }
 
-			if (mState == WindowState.FullScreen)
-			{
-				RemoveFromFullscreenList();
-			}
+            if (mState == WindowState.FullScreen)
+            {
+                RemoveFromFullscreenList();
+            }
 
             if (!sInstances.Remove(this))
             {
@@ -2467,7 +2467,7 @@ namespace Common.UI.Windows
         protected void StartDragging()
         {
             float mouseX = Mouse.scaledX;
-			float mouseY = Mouse.scaledY;
+            float mouseY = Mouse.scaledY;
 
             mMouseState = MouseState.Dragging;
 
@@ -2492,7 +2492,7 @@ namespace Common.UI.Windows
                             bool isInsideButtons = false;
 
                             float mouseX = Mouse.scaledX;
-							float mouseY = Mouse.scaledY;
+                            float mouseY = Mouse.scaledY;
 
                             if (mMinimizeGameObject != null)
                             {
@@ -2661,28 +2661,28 @@ namespace Common.UI.Windows
                                             case MouseLocation.North:
                                             case MouseLocation.South:
                                             {
-												Cursor.SetCursor(Assets.Common.Cursors.northSouth.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
+                                                Cursor.SetCursor(Assets.Common.Cursors.northSouth.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
                                             }
                                             break;
 
                                             case MouseLocation.West:
                                             case MouseLocation.East:
                                             {
-												Cursor.SetCursor(Assets.Common.Cursors.eastWest.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
+                                                Cursor.SetCursor(Assets.Common.Cursors.eastWest.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
                                             }
                                             break;
 
                                             case MouseLocation.NorthWest:
                                             case MouseLocation.SouthEast:
                                             {
-												Cursor.SetCursor(Assets.Common.Cursors.northWestSouthEast.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
+                                                Cursor.SetCursor(Assets.Common.Cursors.northWestSouthEast.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
                                             }
                                             break;
 
                                             case MouseLocation.NorthEast:
                                             case MouseLocation.SouthWest:
                                             {
-												Cursor.SetCursor(Assets.Common.Cursors.northEastSouthWest.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
+                                                Cursor.SetCursor(Assets.Common.Cursors.northEastSouthWest.texture, new Vector2(16f * Utils.canvasScale, 16f * Utils.canvasScale), CursorMode.Auto);
                                             }
                                             break;
 
@@ -2813,11 +2813,11 @@ namespace Common.UI.Windows
                     case MouseState.Dragging:
                     {
                         float mouseX = Mouse.scaledX;
-						float mouseY = Mouse.scaledY;
+                        float mouseY = Mouse.scaledY;
 
                         #region Calculate new position
                         float screenWidth  = Utils.scaledScreenWidth;
-						float screenHeight = Utils.scaledScreenHeight;
+                        float screenHeight = Utils.scaledScreenHeight;
 
                         if (mState == WindowState.Maximized)
                         {
@@ -3053,10 +3053,10 @@ namespace Common.UI.Windows
                     case MouseState.Resizing:
                     {
                         float mouseX = Mouse.scaledX;
-						float mouseY = Mouse.scaledY;
+                        float mouseY = Mouse.scaledY;
 
                         #region Calculate new geometry
-						float screenWidth  = Utils.scaledScreenWidth;
+                        float screenWidth  = Utils.scaledScreenWidth;
                         float screenHeight = Utils.scaledScreenHeight;
 
                         #region West
@@ -3288,7 +3288,7 @@ namespace Common.UI.Windows
                 List<RaycastResult> hits = new List<RaycastResult>();
                 Mouse.RaycastAll(hits);
 
-				bool isOk       = true;
+                bool isOk       = true;
                 bool isSelected = false;
 
                 if (hits.Count > 0)
@@ -3309,21 +3309,21 @@ namespace Common.UI.Windows
                             break;
                         }
 
-						if (curTransform.GetComponent<PopupMenuAreaScript>() != null)
-						{
-							isOk = false;
+                        if (curTransform.GetComponent<PopupMenuAreaScript>() != null)
+                        {
+                            isOk = false;
 
-							break;
-						}
-                        
+                            break;
+                        }
+
                         curTransform = curTransform.parent;
                     }
                 }
 
-				if (isOk)
-				{
-					SetSelected(isSelected);
-				}
+                if (isOk)
+                {
+                    SetSelected(isSelected);
+                }
             }
         }
 
@@ -3366,7 +3366,7 @@ namespace Common.UI.Windows
                     }
 
                     sSelectedWindow = this;
-					OnSelected();
+                    OnSelected();
 
                     if (sInstances.Count > 0)
                     {
@@ -3382,7 +3382,7 @@ namespace Common.UI.Windows
                 }
                 else
                 {
-					OnDeselected();
+                    OnDeselected();
                     sSelectedWindow = null;
                 }
 
@@ -3497,92 +3497,92 @@ namespace Common.UI.Windows
             }
         }
 
-		/// <summary>
-		/// Select this window.
-		/// </summary>
-		public void Select()
-		{
-			SetSelected(true);
-		}
-				
-		/// <summary>
-		/// Handler for select event.
-		/// </summary>
-		protected virtual void OnSelected()
-		{
-			// Nothing
-		}
-		
-		/// <summary>
-		/// Handler for deselect event.
-		/// </summary>
-		protected virtual void OnDeselected()
-		{
-			// Nothing
-		}
+        /// <summary>
+        /// Select this window.
+        /// </summary>
+        public void Select()
+        {
+            SetSelected(true);
+        }
 
-		/// <summary>
-		/// Adds this instance to fullscreen list.
-		/// </summary>
-		private void AddToFullscreenList()
-		{
-			if (mState == WindowState.FullScreen)
-			{
-				List<WindowScript> visibleWindows = new List<WindowScript>();
+        /// <summary>
+        /// Handler for select event.
+        /// </summary>
+        protected virtual void OnSelected()
+        {
+            // Nothing
+        }
 
-				foreach (WindowScript window in sInstances)
-				{
-					if (window != this && window.IsVisible())
-					{
-						visibleWindows.Add(window);
-						window.Hide();
-					}
-				}
+        /// <summary>
+        /// Handler for deselect event.
+        /// </summary>
+        protected virtual void OnDeselected()
+        {
+            // Nothing
+        }
 
-				sFullscreenWindows.Add(new Pair<WindowScript, List<WindowScript>>(this, visibleWindows));
-			}
-			else
-			{
-				Debug.LogError("Unexpected behaviour in WindowScript.AddToFullscreenList");
-			}
-		}
+        /// <summary>
+        /// Adds this instance to fullscreen list.
+        /// </summary>
+        private void AddToFullscreenList()
+        {
+            if (mState == WindowState.FullScreen)
+            {
+                List<WindowScript> visibleWindows = new List<WindowScript>();
 
-		/// <summary>
-		/// Removes this instance from fullscreen list.
-		/// </summary>
-		private void RemoveFromFullscreenList()
-		{
-			int index = -1;
+                foreach (WindowScript window in sInstances)
+                {
+                    if (window != this && window.IsVisible())
+                    {
+                        visibleWindows.Add(window);
+                        window.Hide();
+                    }
+                }
 
-			for (int i = sFullscreenWindows.Count - 1; i >= 0; --i)
-			{
-				if (sFullscreenWindows[i].first == this)
-				{
-					break;
-				}
-			}
+                sFullscreenWindows.Add(new Pair<WindowScript, List<WindowScript>>(this, visibleWindows));
+            }
+            else
+            {
+                Debug.LogError("Unexpected behaviour in WindowScript.AddToFullscreenList");
+            }
+        }
 
-			if (index >= 0)
-			{
-				if (index == sFullscreenWindows.Count - 1)
-				{
-					foreach (WindowScript window in sFullscreenWindows[index].second)
-					{
-						window.Show();
-					}
-				}
-				else
-				{
-					sFullscreenWindows[index + 1].second.AddRange(sFullscreenWindows[index].second);
-				}
+        /// <summary>
+        /// Removes this instance from fullscreen list.
+        /// </summary>
+        private void RemoveFromFullscreenList()
+        {
+            int index = -1;
 
-				sFullscreenWindows.RemoveAt(index);
-			}
-			else
-			{
-				Debug.LogError("Unexpected behaviour in WindowScript.RemoveFromFullscreenList");
-			}
-		}
+            for (int i = sFullscreenWindows.Count - 1; i >= 0; --i)
+            {
+                if (sFullscreenWindows[i].first == this)
+                {
+                    break;
+                }
+            }
+
+            if (index >= 0)
+            {
+                if (index == sFullscreenWindows.Count - 1)
+                {
+                    foreach (WindowScript window in sFullscreenWindows[index].second)
+                    {
+                        window.Show();
+                    }
+                }
+                else
+                {
+                    sFullscreenWindows[index + 1].second.AddRange(sFullscreenWindows[index].second);
+                }
+
+                sFullscreenWindows.RemoveAt(index);
+            }
+            else
+            {
+                Debug.LogError("Unexpected behaviour in WindowScript.RemoveFromFullscreenList");
+            }
+        }
 
         /// <summary>
         /// Save window state.
@@ -3597,7 +3597,7 @@ namespace Common.UI.Windows
 
             PlayerPrefs.Save();
         }
-        
+
         /// <summary>
         /// Load window state.
         /// </summary>

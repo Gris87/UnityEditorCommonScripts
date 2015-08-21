@@ -77,7 +77,7 @@ namespace Common.UI.Popups
         {
             if (InputControl.GetMouseButtonDown(MouseButton.Left))
             {
-				List<RaycastResult> hits = new List<RaycastResult>();
+                List<RaycastResult> hits = new List<RaycastResult>();
                 Mouse.RaycastAll(hits);
 
                 bool hitPopupMenu = false;
@@ -116,21 +116,21 @@ namespace Common.UI.Popups
             }
         }
 
-		/// <summary>
-		/// Handles escape button press event.
-		/// </summary>
-		/// <returns><c>true</c>, if escape button was handled, <c>false</c> otherwise.</returns>
-		public bool OnEscapeButtonPressed()
-		{
-			mPopupMenus[mPopupMenus.Count - 1].Destroy();
+        /// <summary>
+        /// Handles escape button press event.
+        /// </summary>
+        /// <returns><c>true</c>, if escape button was handled, <c>false</c> otherwise.</returns>
+        public bool OnEscapeButtonPressed()
+        {
+            mPopupMenus[mPopupMenus.Count - 1].Destroy();
 
-			return true;
-		}
+            return true;
+        }
 
-		/// <summary>
-		/// Handler for auto popup item destroy event.
-		/// </summary>
-		/// <param name="item">Popup menu item.</param>
+        /// <summary>
+        /// Handler for auto popup item destroy event.
+        /// </summary>
+        /// <param name="item">Popup menu item.</param>
         public static void OnAutoPopupItemDestroy(AutoPopupItemScript item)
         {
             if (sInstance != null)
@@ -146,10 +146,10 @@ namespace Common.UI.Popups
             }
         }
 
-		/// <summary>
-		/// Handler for auto popup item disable event.
-		/// </summary>
-		/// <param name="item">Popup menu item.</param>
+        /// <summary>
+        /// Handler for auto popup item disable event.
+        /// </summary>
+        /// <param name="item">Popup menu item.</param>
         public static void OnAutoPopupItemDisable(AutoPopupItemScript item)
         {
             if (sInstance != null)
@@ -169,10 +169,10 @@ namespace Common.UI.Popups
             }
         }
 
-		/// <summary>
-		/// Handler for auto popup item enter event.
-		/// </summary>
-		/// <param name="item">Popup menu item.</param>
+        /// <summary>
+        /// Handler for auto popup item enter event.
+        /// </summary>
+        /// <param name="item">Popup menu item.</param>
         public static void OnAutoPopupItemEnter(AutoPopupItemScript item)
         {
             if (sInstance != null)
@@ -189,10 +189,10 @@ namespace Common.UI.Popups
             }
         }
 
-		/// <summary>
-		/// Handler for auto popup item exit event.
-		/// </summary>
-		/// <param name="item">Popup menu item.</param>
+        /// <summary>
+        /// Handler for auto popup item exit event.
+        /// </summary>
+        /// <param name="item">Popup menu item.</param>
         public static void OnAutoPopupItemExit(AutoPopupItemScript item)
         {
             if (sInstance != null)
@@ -220,7 +220,7 @@ namespace Common.UI.Popups
                 sInstance.mPopupMenus.Add(menu);
                 sInstance.enabled = true;
 
-				EscapeButtonListenerScript.PushHandlerToTop(sInstance);
+                EscapeButtonListenerScript.PushHandlerToTop(sInstance);
             }
             else
             {
@@ -244,7 +244,7 @@ namespace Common.UI.Popups
                         sInstance.mAutoPopupItem = null;
                         sInstance.StopTimer();
 
-						EscapeButtonListenerScript.RemoveHandler(sInstance);
+                        EscapeButtonListenerScript.RemoveHandler(sInstance);
                     }
                 }
                 else

@@ -255,12 +255,12 @@ namespace Common.UI.DockWidgets
             Vector3[] corners = Utils.GetWindowCorners(mDockWidget.parent.transform as RectTransform);
 
             float screenWidth  = Screen.width;
-			float screenHeight = Screen.height;
+            float screenHeight = Screen.height;
 
             float left   = corners[0].x * Utils.canvasScale;
-			float top    = corners[0].y * Utils.canvasScale;
-			float right  = corners[3].x * Utils.canvasScale;
-			float bottom = corners[3].y * Utils.canvasScale;
+            float top    = corners[0].y * Utils.canvasScale;
+            float right  = corners[3].x * Utils.canvasScale;
+            float bottom = corners[3].y * Utils.canvasScale;
 
             if (left < 0f)
             {
@@ -287,8 +287,8 @@ namespace Common.UI.DockWidgets
             int widgetWidth  = Mathf.FloorToInt(right  - left);
             int widgetHeight = Mathf.FloorToInt(bottom - top);
 
-			float dragPosX = (eventData.pressPosition.x                - widgetX) / Utils.canvasScale;
-			float dragPosY = (screenHeight - eventData.pressPosition.y - widgetY) / Utils.canvasScale;
+            float dragPosX = (eventData.pressPosition.x                - widgetX) / Utils.canvasScale;
+            float dragPosY = (screenHeight - eventData.pressPosition.y - widgetY) / Utils.canvasScale;
 
             DragData.BeginDrag(
                                  DraggingType.DockWidget
@@ -298,8 +298,8 @@ namespace Common.UI.DockWidgets
                                                , new Rect(0, 0, widgetWidth, widgetHeight)
                                                , new Vector2(0.5f, 0.5f)
                                               )
-				               , widgetWidth  / Utils.canvasScale
-							   , widgetHeight / Utils.canvasScale
+                               , widgetWidth  / Utils.canvasScale
+                               , widgetHeight / Utils.canvasScale
                                , dragPosX
                                , dragPosY
                               );
@@ -320,12 +320,12 @@ namespace Common.UI.DockWidgets
         {
             if (mActive)
             {
-				image.sprite = Assets.Common.DockWidgets.Textures.tabActive.sprite;
+                image.sprite = Assets.Common.DockWidgets.Textures.tabActive.sprite;
                 spriteState = Assets.Common.DockWidgets.SpriteStates.activeButton.spriteState;
             }
             else
             {
-				image.sprite = Assets.Common.DockWidgets.Textures.tab.sprite;
+                image.sprite = Assets.Common.DockWidgets.Textures.tab.sprite;
                 spriteState = Assets.Common.DockWidgets.SpriteStates.button.spriteState;
             }
         }

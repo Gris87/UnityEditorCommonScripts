@@ -8,7 +8,7 @@ using Common.UI.Windows;
 
 namespace Common.UI.DockWidgets
 {
-	/// <summary>
+    /// <summary>
     /// Script that realize docking window behaviour.
     /// </summary>
     public class DockingWindowScript : WindowScript, IPointerDownHandler
@@ -144,7 +144,7 @@ namespace Common.UI.DockWidgets
             #region Image Component
             Image maximizeImage = maximizeGameObject.AddComponent<Image>();
 
-			maximizeImage.sprite = Assets.Common.DockWidgets.Textures.maximizeButton.sprite;
+            maximizeImage.sprite = Assets.Common.DockWidgets.Textures.maximizeButton.sprite;
             maximizeImage.type   = Image.Type.Sliced;
             #endregion
 
@@ -196,7 +196,7 @@ namespace Common.UI.DockWidgets
         public void OnPointerDown(PointerEventData eventData)
         {
             float mouseX = Mouse.scaledX;
-			float mouseY = Mouse.scaledY;
+            float mouseY = Mouse.scaledY;
 
             float headerX      = contentX;
             float headerY      = contentY;

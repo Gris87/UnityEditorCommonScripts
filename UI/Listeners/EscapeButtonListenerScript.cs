@@ -5,106 +5,106 @@ using UnityEngine;
 
 namespace Common.UI.Listeners
 {
-	/// <summary>
-	/// Script that listen for escape button press events.
-	/// </summary>
-	public class EscapeButtonListenerScript : MonoBehaviour
-	{
-		private static EscapeButtonListenerScript sInstance = null;
+    /// <summary>
+    /// Script that listen for escape button press events.
+    /// </summary>
+    public class EscapeButtonListenerScript : MonoBehaviour
+    {
+        private static EscapeButtonListenerScript sInstance = null;
 
 
 
-		private List<EscapeButtonHandler> mHandlers;
+        private List<EscapeButtonHandler> mHandlers;
 
 
 
-		/// <summary>
-		/// Script starting callback.
-		/// </summary>
-		void Start()
-		{
-			if (sInstance == null)
-			{
-				sInstance = this;
-			}
-			else
-			{
-				Debug.LogError("Two instances of EscapeButtonListener not supported");
-			}
-			
-			mHandlers = new List<EscapeButtonHandler>();
+        /// <summary>
+        /// Script starting callback.
+        /// </summary>
+        void Start()
+        {
+            if (sInstance == null)
+            {
+                sInstance = this;
+            }
+            else
+            {
+                Debug.LogError("Two instances of EscapeButtonListener not supported");
+            }
 
-			enabled = false;
-		}
+            mHandlers = new List<EscapeButtonHandler>();
 
-		/// <summary>
-		/// Handler for destroy event.
-		/// </summary>
-		void OnDestroy()
-		{
-			if (sInstance == this)
-			{
-				sInstance = null;
-			}
-		}
+            enabled = false;
+        }
 
-		/// <summary>
-		/// Update is called once per frame.
-		/// </summary>
-		void Update()
-		{
-			if (InputControl.GetButtonDown(Controls.buttons.escape, true))
-			{
-				for (int i = mHandlers.Count - 1; i >= 0; --i)
-				{
-					if (mHandlers[i].OnEscapeButtonPressed())
-					{
-						break;
-					}
-				}
-			}
-		}
+        /// <summary>
+        /// Handler for destroy event.
+        /// </summary>
+        void OnDestroy()
+        {
+            if (sInstance == this)
+            {
+                sInstance = null;
+            }
+        }
 
-		/// <summary>
-		/// Push handler to the top.
-		/// </summary>
-		/// <param name="handler">Handler.</param>
-		public static void PushHandlerToTop(EscapeButtonHandler handler)
-		{
-			if (sInstance != null)
-			{
-				sInstance.mHandlers.Remove(handler);
-				sInstance.mHandlers.Add(handler);
-
-				sInstance.enabled = true;
-			}
-			else
-			{
-				Debug.LogError("There is no EscapeButtonListener instance");
-			}
-		}
-		
-		/// <summary>
-		/// Removes the handler.
-		/// </summary>
-		/// <param name="handler">Handler.</param>
-		public static void RemoveHandler(EscapeButtonHandler handler)
-		{
-			if (sInstance != null)
-			{
-				if (sInstance.mHandlers.Remove(handler))
-				{
-					if (sInstance.mHandlers.Count == 0)
-					{
-						sInstance.enabled = false;
+        /// <summary>
+        /// Update is called once per frame.
+        /// </summary>
+        void Update()
+        {
+            if (InputControl.GetButtonDown(Controls.buttons.escape, true))
+            {
+                for (int i = mHandlers.Count - 1; i >= 0; --i)
+                {
+                    if (mHandlers[i].OnEscapeButtonPressed())
+                    {
+                        break;
                     }
-				}
-				else
-				{
-					Debug.LogError("Failed to remove handler");
-				}
-			}
-		}
-	}
+                }
+            }
+        }
+
+        /// <summary>
+        /// Push handler to the top.
+        /// </summary>
+        /// <param name="handler">Handler.</param>
+        public static void PushHandlerToTop(EscapeButtonHandler handler)
+        {
+            if (sInstance != null)
+            {
+                sInstance.mHandlers.Remove(handler);
+                sInstance.mHandlers.Add(handler);
+
+                sInstance.enabled = true;
+            }
+            else
+            {
+                Debug.LogError("There is no EscapeButtonListener instance");
+            }
+        }
+
+        /// <summary>
+        /// Removes the handler.
+        /// </summary>
+        /// <param name="handler">Handler.</param>
+        public static void RemoveHandler(EscapeButtonHandler handler)
+        {
+            if (sInstance != null)
+            {
+                if (sInstance.mHandlers.Remove(handler))
+                {
+                    if (sInstance.mHandlers.Count == 0)
+                    {
+                        sInstance.enabled = false;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Failed to remove handler");
+                }
+            }
+        }
+    }
 }
 

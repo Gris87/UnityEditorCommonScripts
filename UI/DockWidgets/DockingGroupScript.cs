@@ -162,7 +162,7 @@ namespace Common.UI.DockWidgets
             #region Image Component
             Image contextMenuImage = contextMenuGameObject.AddComponent<Image>();
 
-			contextMenuImage.sprite = Assets.Common.DockWidgets.Textures.contextMenuButton.sprite;
+            contextMenuImage.sprite = Assets.Common.DockWidgets.Textures.contextMenuButton.sprite;
             contextMenuImage.type   = Image.Type.Sliced;
             #endregion
 
@@ -207,7 +207,7 @@ namespace Common.UI.DockWidgets
             #region Image Component
             Image lockImage = lockGameObject.AddComponent<Image>();
 
-			lockImage.sprite = Assets.Common.DockWidgets.Textures.unlockedButton.sprite;
+            lockImage.sprite = Assets.Common.DockWidgets.Textures.unlockedButton.sprite;
             lockImage.type   = Image.Type.Sliced;
             #endregion
 
@@ -253,7 +253,7 @@ namespace Common.UI.DockWidgets
             #region Image Component
             Image pagesImage = pages.AddComponent<Image>();
 
-			pagesImage.sprite = Assets.Common.DockWidgets.Textures.pageBackground.sprite;
+            pagesImage.sprite = Assets.Common.DockWidgets.Textures.pageBackground.sprite;
             pagesImage.type   = Image.Type.Sliced;
             #endregion
 
