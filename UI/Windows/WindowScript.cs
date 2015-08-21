@@ -3580,7 +3580,7 @@ namespace Common.UI.Windows
             }
             else
             {
-                Debug.LogError("Unexpected behaviour in WindowScript.RemoveFromFullscreenList");
+                Debug.LogError("Unexpected behaviour in WindowScript.RemoveFromFullscreenList"); // TODO: [Major] Fix it
             }
         }
 
