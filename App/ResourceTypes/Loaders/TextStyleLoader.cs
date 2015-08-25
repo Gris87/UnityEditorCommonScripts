@@ -1,8 +1,4 @@
-using UnityEngine;
 using UnityEngine.UI;
-
-using Common.App;
-using Common.App.ResourceTypes;
 
 
 

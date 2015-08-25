@@ -54,7 +54,7 @@ namespace Common.UI.MenuItems
         }
 
         /// <summary>
-        /// Register the specifiedm menu item to radio group.
+        /// Register the specified menu item to radio group.
         /// </summary>
         /// <param name="item">Menu item.</param>
         public void Register(MenuItem item)

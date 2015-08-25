@@ -3558,6 +3558,8 @@ namespace Common.UI.Windows
             {
                 if (sFullscreenWindows[i].first == this)
                 {
+					index = i;
+
                     break;
                 }
             }
@@ -3580,7 +3582,7 @@ namespace Common.UI.Windows
             }
             else
             {
-                Debug.LogError("Unexpected behaviour in WindowScript.RemoveFromFullscreenList"); // TODO: [Major] Fix it
+                Debug.LogError("Unexpected behaviour in WindowScript.RemoveFromFullscreenList");
             }
         }
 

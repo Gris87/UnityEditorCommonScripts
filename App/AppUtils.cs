@@ -26,23 +26,23 @@ namespace Common.App
 
             switch (Version.buildType)
             {
-            case Version.BuildType.Personal:
-            {
-                res += Translator.GetString(R.sections.Version.strings.personal);
-            }
+	            case Version.BuildType.Personal:
+	            {
+	                res += Translator.GetString(R.sections.Version.strings.personal);
+	            }
                 break;
 
-            case Version.BuildType.Professional:
-            {
-                res += Translator.GetString(R.sections.Version.strings.professional);
-            }
+	            case Version.BuildType.Professional:
+	            {
+	                res += Translator.GetString(R.sections.Version.strings.professional);
+	            }
                 break;
 
-            default:
-            {
-                Debug.LogWarning("Unknown localization for build type \"" + Version.buildType.ToString() + "\". Using default value.");
-                res += Version.buildType.ToString();
-            }
+	            default:
+	            {
+	                Debug.LogWarning("Unknown localization for build type \"" + Version.buildType.ToString() + "\". Using default value.");
+	                res += Version.buildType.ToString();
+	            }
                 break;
             }
 

@@ -45,13 +45,33 @@ namespace Common.UI.Popups
         private const float SHADOW_WIDTH     = 5f;
         private const float AUTO_POPUP_DELAY = 500f;
 
+		
+		
+		/// <summary>
+		/// Gets the menu items.
+		/// </summary>
+		/// <value>The menu items.</value>
+		public TreeNode<CustomMenuItem> items
+		{
+			get { return mItems; }
+		}
+		
+		/// <summary>
+		/// Gets the destroy event handler.
+		/// </summary>
+		/// <value>The destroy event handler.</value>
+		public UnityEvent OnDestroy
+		{
+			get { return mOnDestroy; }
+		}
+
 
 
         private TreeNode<CustomMenuItem> mItems;
-        private GameObject               mGameObject;
-        private UnityEvent               mOnDestroy;
+		private UnityEvent               mOnDestroy;
 
-        private PopupMenu                mChildPopupMenu;
+        private GameObject mGameObject;
+        private PopupMenu  mChildPopupMenu;
 
 
 
@@ -61,10 +81,10 @@ namespace Common.UI.Popups
         /// <param name="items">Items.</param>
         public PopupMenu(TreeNode<CustomMenuItem> items)
         {
-            mItems          = items;
-            mGameObject     = null;
-            mOnDestroy      = new UnityEvent();
+            mItems     = items;
+			mOnDestroy = new UnityEvent();
 
+			mGameObject     = null;
             mChildPopupMenu = null;
         }
 
@@ -198,7 +218,7 @@ namespace Common.UI.Popups
 
                         RectTransform menuItemSeparatorTransform = menuSeparator.AddComponent<RectTransform>();
 
-                        Utils.AlignRectTransformTopStretch(menuItemSeparatorTransform, separatorHeight, contentHeight, 28f); // TODO: [Trivial] Incorrect position
+                        Utils.AlignRectTransformTopStretch(menuItemSeparatorTransform, separatorHeight, contentHeight, 28f);
 
                         contentHeight += separatorHeight;
                         #endregion
@@ -715,7 +735,7 @@ namespace Common.UI.Popups
                 }
 
                 mChildPopupMenu = new PopupMenu(node);
-                mChildPopupMenu.OnDestroy.AddListener(OnPopupMenuDestroyed);
+                mChildPopupMenu.mOnDestroy.AddListener(OnPopupMenuDestroyed);
 
                 int index = node.parent.children.IndexOf(node);
 
@@ -743,24 +763,6 @@ namespace Common.UI.Popups
             Debug.Log("PopupMenu.OnPopupMenuDestroyed");
 
             mChildPopupMenu = null;
-        }
-
-        /// <summary>
-        /// Gets the menu items.
-        /// </summary>
-        /// <value>The menu items.</value>
-        public TreeNode<CustomMenuItem> items
-        {
-            get { return mItems; }
-        }
-
-        /// <summary>
-        /// Gets the destroy event handler.
-        /// </summary>
-        /// <value>The destroy event handler.</value>
-        public UnityEvent OnDestroy
-        {
-            get { return mOnDestroy; }
         }
     }
 }

@@ -252,9 +252,9 @@ namespace Common.UI.MenuItems
                                          , null                               // Text
                                          , enabled                            // Enabled
                                          , onClick                            // Click event handler
-                                         , shortcutHandler    			      // Shortcut handler
-                                          , KeyboardInput.FromString(shortcut) // Shortcut
-                                          , radioGroup                         // Menu radio group
+                                         , shortcutHandler                    // Shortcut handler
+                                         , KeyboardInput.FromString(shortcut) // Shortcut
+                                         , radioGroup                         // Menu radio group
                                         );
 
             TreeNode<CustomMenuItem> node = owner.AddChild(item);
@@ -287,11 +287,11 @@ namespace Common.UI.MenuItems
         {
             MenuItem item = new MenuItem(
                                            R.sections.MenuItems.strings.Count // Token ID
-                                         , null    							  // Token arguments
+                                         , null                               // Token arguments
                                          , text                               // Text
-                                         , enabled 							  // Enabled
-                                         , onClick 							  // Click event handler
-                                         , shortcutHandler    			      // Shortcut handler
+                                         , enabled                            // Enabled
+                                         , onClick                            // Click event handler
+                                         , shortcutHandler                    // Shortcut handler
                                          , KeyboardInput.FromString(shortcut) // Shortcut
                                          , radioGroup                         // Menu radio group
                                         );

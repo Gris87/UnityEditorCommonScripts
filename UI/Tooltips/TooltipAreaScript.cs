@@ -3,8 +3,6 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityTranslation;
 
-using Common;
-
 
 
 namespace Common.UI.Tooltips

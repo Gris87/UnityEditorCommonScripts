@@ -45,7 +45,7 @@ namespace Common
         /// <value>The scaled x coordinate.</value>
         public static float scaledX
         {
-            get	{ return x / Utils.canvasScale;	}
+            get { return x / Utils.canvasScale; }
         }
 
         /// <summary>
