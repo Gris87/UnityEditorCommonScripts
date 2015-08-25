@@ -18,4 +18,3 @@ namespace Common.UI.MenuItems
         void DeregisterShortcut(MenuItem shortcut);
     }
 }
-

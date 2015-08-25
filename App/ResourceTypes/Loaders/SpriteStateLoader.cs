@@ -57,4 +57,3 @@ namespace Common.App.ResourceTypes.Loaders
         }
     }
 }
-

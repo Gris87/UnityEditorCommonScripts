@@ -28,4 +28,3 @@ namespace Common.UI.Windows
         SingleFrame
     }
 }
-

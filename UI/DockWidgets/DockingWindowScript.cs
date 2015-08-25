@@ -225,4 +225,3 @@ namespace Common.UI.DockWidgets
         }
     }
 }
-

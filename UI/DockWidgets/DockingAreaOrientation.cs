@@ -21,4 +21,3 @@ namespace Common.UI.DockWidgets
         Vertical
     }
 }
-

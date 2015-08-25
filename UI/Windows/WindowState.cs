@@ -26,4 +26,3 @@ namespace Common.UI.Windows
         FullScreen
     }
 }
-

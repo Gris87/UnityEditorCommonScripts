@@ -86,4 +86,3 @@ namespace Common.UI.DockWidgets
         }
     }
 }
-

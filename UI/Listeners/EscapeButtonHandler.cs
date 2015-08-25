@@ -12,4 +12,3 @@ namespace Common.UI.Listeners
         bool OnEscapeButtonPressed();
     }
 }
-

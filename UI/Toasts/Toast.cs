@@ -150,4 +150,3 @@ namespace Common.UI.Toasts
         }
     }
 }
-

@@ -331,4 +331,3 @@ namespace Common.UI.DockWidgets
         }
     }
 }
-
