@@ -106,7 +106,7 @@ namespace Common.App.ResourceTypes
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Common.UI.ResourceTypes.TextStyle"/> class.
+        /// Initializes a new instance of the <see cref="Common.App.ResourceTypes.TextStyle"/> class.
         /// </summary>
         public TextStyle()
         {

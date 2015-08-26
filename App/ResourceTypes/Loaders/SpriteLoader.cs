@@ -34,7 +34,7 @@ namespace Common.App.ResourceTypes.Loaders
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Common.App.ResourceTypes.SpriteLoader"/> class.
+        /// Initializes a new instance of the <see cref="Common.App.ResourceTypes.Loaders.SpriteLoader"/> class.
         /// </summary>
         /// <param name="path">Path to sprite.</param>
         public SpriteLoader(string path)

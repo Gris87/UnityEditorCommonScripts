@@ -86,7 +86,7 @@ namespace Common
         }
 
         /// <summary>
-        /// Creates a new <see cref="Common.TreeNode`1"/> instances for each children and adds them to the children list.
+        /// Creates a new <see cref="Common.TreeNode`1"/> instance for each child and adds them to the children list.
         /// </summary>
         /// <returns>The array of <see cref="Common.TreeNode`1"/> instances.</returns>
         /// <param name="values">Data values.</param>

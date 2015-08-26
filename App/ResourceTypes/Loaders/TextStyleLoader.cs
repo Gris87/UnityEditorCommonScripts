@@ -15,7 +15,7 @@ namespace Common.App.ResourceTypes.Loaders
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Common.App.ResourceTypes.TextStyleLoader"/> class.
+        /// Initializes a new instance of the <see cref="Common.App.ResourceTypes.Loaders.TextStyleLoader"/> class.
         /// </summary>
         /// <param name="path">Path to text style.</param>
         public TextStyleLoader(string path)

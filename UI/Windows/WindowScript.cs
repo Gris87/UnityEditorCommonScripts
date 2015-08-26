@@ -45,6 +45,14 @@ namespace Common.UI.Windows
             /// <summary>
             /// Initializes a new instance of the <see cref="Common.UI.Windows.WindowScript+MouseContext"/> class.
             /// </summary>
+			/// <param name="mouseX">Previous mouse x.</param>
+			/// <param name="mouseY">Previous mouse y.</param>
+			/// <param name="x">Previous x coordinate.</param>
+			/// <param name="y">Previous y coordinate.</param>
+			/// <param name="width">Previous Width.</param>
+			/// <param name="height">Previous Height.</param>
+			/// <param name="rectX">Previous rectangle x.</param>
+			/// <param name="rectY">Previous rectangle y.</param>
             public MouseContext(
                                   float mouseX
                                 , float mouseY

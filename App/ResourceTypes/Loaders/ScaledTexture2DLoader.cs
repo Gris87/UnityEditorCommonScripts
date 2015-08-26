@@ -34,7 +34,7 @@ namespace Common.App.ResourceTypes.Loaders
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Common.App.ResourceTypes.ScaledTexture2DLoader"/> class.
+        /// Initializes a new instance of the <see cref="Common.App.ResourceTypes.Loaders.ScaledTexture2DLoader"/> class.
         /// </summary>
         /// <param name="path">Path to texture.</param>
         public ScaledTexture2DLoader(string path)
