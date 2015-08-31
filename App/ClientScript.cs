@@ -15,6 +15,14 @@ namespace Common.App
         void Start()
         {
             // TODO: [Major] Implement ClientScript
+			PollHostList();
         }
+
+		public void PollHostList()
+		{
+			HostData[] hosts = MasterServer.PollHostList();
+
+			Debug.Log(hosts.Length);
+		}
     }
 }
