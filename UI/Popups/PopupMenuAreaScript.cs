@@ -34,7 +34,7 @@ namespace Common.UI.Popups
 
         private List<PopupMenu>     mPopupMenus;
         private AutoPopupItemScript mAutoPopupItem;
-        private float               mRemainingTime;
+        private float               mDelay;
 
 
 
@@ -54,7 +54,7 @@ namespace Common.UI.Popups
 
             mPopupMenus    = new List<PopupMenu>();
             mAutoPopupItem = null;
-            mRemainingTime = TIMER_NOT_ACTIVE;
+            mDelay         = TIMER_NOT_ACTIVE;
 
             enabled = false;
         }
@@ -106,9 +106,9 @@ namespace Common.UI.Popups
 
             if (IsTimerActive())
             {
-                mRemainingTime -= Time.deltaTime;
+                mDelay -= Time.deltaTime;
 
-                if (mRemainingTime <= 0)
+                if (mDelay <= 0f)
                 {
                     mAutoPopupItem.Click();
                     StopTimer();
@@ -287,7 +287,7 @@ namespace Common.UI.Popups
                 Debug.LogError("Incorrect delay value: " + ms);
             }
 
-            mRemainingTime = ms / 1000f;
+            mDelay = ms / 1000f;
         }
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace Common.UI.Popups
         /// </summary>
         private void StopTimer()
         {
-            mRemainingTime = TIMER_NOT_ACTIVE;
+            mDelay = TIMER_NOT_ACTIVE;
         }
 
         /// <summary>
@@ -304,7 +304,7 @@ namespace Common.UI.Popups
         /// <returns><c>true</c> if timer is active; otherwise, <c>false</c>.</returns>
         private bool IsTimerActive()
         {
-            return mRemainingTime != TIMER_NOT_ACTIVE;
+            return mDelay != TIMER_NOT_ACTIVE;
         }
     }
 }

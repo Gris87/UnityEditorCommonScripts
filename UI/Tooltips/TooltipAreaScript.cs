@@ -24,7 +24,7 @@ namespace Common.UI.Tooltips
 
         private TooltipOwnerScript mCurrentOwner;
         private TooltipOwnerScript mNextOwner;
-        private float              mRemainingTime;
+        private float              mDelay;
         private UnityAction        mOnTimeout;
 
 
@@ -45,7 +45,7 @@ namespace Common.UI.Tooltips
 
             mCurrentOwner  = null;
             mNextOwner     = null;
-            mRemainingTime = TIMER_NOT_ACTIVE;
+            mDelay         = TIMER_NOT_ACTIVE;
             mOnTimeout     = null;
         }
 
@@ -67,9 +67,9 @@ namespace Common.UI.Tooltips
         {
             if (IsTimerActive())
             {
-                mRemainingTime -= Time.deltaTime;
+                mDelay -= Time.deltaTime;
 
-                if (mRemainingTime <= 0)
+                if (mDelay <= 0f)
                 {
                     mOnTimeout.Invoke();
                     StopTimer();
@@ -345,8 +345,8 @@ namespace Common.UI.Tooltips
                 Debug.LogError("Incorrect delay value: " + ms);
             }
 
-            mRemainingTime = ms / 1000f;
-            mOnTimeout     = onTimeout;
+            mDelay     = ms / 1000f;
+            mOnTimeout = onTimeout;
         }
 
         /// <summary>
@@ -354,8 +354,8 @@ namespace Common.UI.Tooltips
         /// </summary>
         private void StopTimer()
         {
-            mRemainingTime = TIMER_NOT_ACTIVE;
-            mOnTimeout     = null;
+            mDelay     = TIMER_NOT_ACTIVE;
+            mOnTimeout = null;
         }
 
         /// <summary>
@@ -364,7 +364,7 @@ namespace Common.UI.Tooltips
         /// <returns><c>true</c> if timer is active; otherwise, <c>false</c>.</returns>
         private bool IsTimerActive()
         {
-            return mRemainingTime != TIMER_NOT_ACTIVE;
+            return mDelay != TIMER_NOT_ACTIVE;
         }
     }
 }

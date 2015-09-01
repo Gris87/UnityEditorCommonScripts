@@ -22,7 +22,7 @@ namespace Common.UI.Toasts
 
 
 
-        private float mRemainingTime;
+        private float mDelay;
 
         private CanvasGroup mToastCanvasGroup;
         private Text        mToastText;
@@ -35,7 +35,7 @@ namespace Common.UI.Toasts
         public ToastScript()
             : base()
         {
-            mRemainingTime = 0f;
+            mDelay = 0f;
 
             mToastCanvasGroup = null;
             mToastText        = null;
@@ -69,17 +69,17 @@ namespace Common.UI.Toasts
         /// </summary>
         void Update()
         {
-            mRemainingTime -= Time.deltaTime;
+            mDelay -= Time.deltaTime;
 
-            if (mRemainingTime <= 0)
+            if (mDelay <= 0f)
             {
                 DestroyToast();
             }
             else
             {
-                if (mRemainingTime < FADE_TIME)
+                if (mDelay < FADE_TIME)
                 {
-                    mToastCanvasGroup.alpha = mRemainingTime / FADE_TIME;
+                    mToastCanvasGroup.alpha = mDelay / FADE_TIME;
                 }
             }
         }
@@ -156,7 +156,7 @@ namespace Common.UI.Toasts
             #endregion
             #endregion
 
-            mRemainingTime = duration / 1000f;
+            mDelay = duration / 1000f;
             enabled = true;
         }
 
