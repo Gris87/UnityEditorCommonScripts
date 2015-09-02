@@ -32,6 +32,9 @@ namespace Common.App.Net
 		/// <returns>Host list.</returns>
 		public HostData[] PollHostList()
 		{
+			// TODO: Request hosts
+			MasterServer.RequestHostList("UnityEditor");
+
 			return MasterServer.PollHostList();
 		}
     }
