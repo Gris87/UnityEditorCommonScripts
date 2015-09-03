@@ -11,15 +11,15 @@ namespace Common.UI.Tooltips
     /// </summary>
     public class TooltipOwnerScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-		/// <summary>
-		/// Gets or sets token ID for translation.
-		/// </summary>
-		/// <value>Token ID for translation.</value>
-		public R.sections.Tooltips.strings tokenId
-		{
-			get { return mTokenId;  }
-			set { mTokenId = value; }
-		}
+        /// <summary>
+        /// Gets or sets token ID for translation.
+        /// </summary>
+        /// <value>Token ID for translation.</value>
+        public R.sections.Tooltips.strings tokenId
+        {
+            get { return mTokenId;  }
+            set { mTokenId = value; }
+        }
 
 
 

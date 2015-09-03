@@ -45,30 +45,30 @@ namespace Common.UI.Popups
         private const float SHADOW_WIDTH     = 5f;
         private const float AUTO_POPUP_DELAY = 500f;
 
-		
-		
-		/// <summary>
-		/// Gets the menu items.
-		/// </summary>
-		/// <value>The menu items.</value>
-		public TreeNode<CustomMenuItem> items
-		{
-			get { return mItems; }
-		}
-		
-		/// <summary>
-		/// Gets the destroy event handler.
-		/// </summary>
-		/// <value>The destroy event handler.</value>
-		public UnityEvent OnDestroy
-		{
-			get { return mOnDestroy; }
-		}
+
+
+        /// <summary>
+        /// Gets the menu items.
+        /// </summary>
+        /// <value>The menu items.</value>
+        public TreeNode<CustomMenuItem> items
+        {
+            get { return mItems; }
+        }
+
+        /// <summary>
+        /// Gets the destroy event handler.
+        /// </summary>
+        /// <value>The destroy event handler.</value>
+        public UnityEvent OnDestroy
+        {
+            get { return mOnDestroy; }
+        }
 
 
 
         private TreeNode<CustomMenuItem> mItems;
-		private UnityEvent               mOnDestroy;
+        private UnityEvent               mOnDestroy;
 
         private GameObject mGameObject;
         private PopupMenu  mChildPopupMenu;
@@ -82,9 +82,9 @@ namespace Common.UI.Popups
         public PopupMenu(TreeNode<CustomMenuItem> items)
         {
             mItems     = items;
-			mOnDestroy = new UnityEvent();
+            mOnDestroy = new UnityEvent();
 
-			mGameObject     = null;
+            mGameObject     = null;
             mChildPopupMenu = null;
         }
 
