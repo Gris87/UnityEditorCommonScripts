@@ -9,33 +9,34 @@ namespace Common.App.Net
 	/// </summary>
 	public class ServerBrowserScript : MonoBehaviour
 	{
-		private const float TIMER_NOT_ACTIVE = -10000f;
-		private const float DEFAULT_DURATION = 1000f / 1000f;
+		private const float TIMER_NOT_ACTIVE         = -10000f;
+		private const float DEFAULT_REQUEST_DURATION = 60000f / 1000f;
+		private const float DEFAULT_POLL_DURATION    = 1000f  / 1000f;
 
 
 
 		/// <summary>
-		/// Gets or sets the duration.
+		/// Gets or sets the duration of the request.
 		/// </summary>
-		/// <value>The duration.</value>
-		public float duration
+		/// <value>The duration of the request.</value>
+		public float requestDuration
 		{
 			get
 			{
-				return mDuration;
+				return mRequestDuration;
 			}
 
 			set
 			{
 				if (value >= 0f)
 				{
-					if (mDuration != value)
+					if (mRequestDuration != value)
 					{
-						mDuration = value;
+						mRequestDuration = value;
 						
-						if (IsTimerActive())
+						if (mRequestDelay != TIMER_NOT_ACTIVE)
 						{
-							StartTimer();
+							mRequestDelay = mRequestDuration;
 						}
 					}
 				}
@@ -48,8 +49,10 @@ namespace Common.App.Net
 
 
 
-		private float mDuration;
-		private float mDelay;
+		private float      mRequestDuration;
+		private float      mRequestDelay;
+		private float      mPollDelay;
+		private HostData[] mHosts;
 
 
 
@@ -58,10 +61,10 @@ namespace Common.App.Net
 		/// </summary>
 		void Start()
 		{
-			mDuration = DEFAULT_DURATION;
-			mDelay    = 0f;
-
-			StartTimer();
+			mRequestDuration = DEFAULT_REQUEST_DURATION;
+			mRequestDelay    = 0f;
+			mPollDelay       = TIMER_NOT_ACTIVE;
+			mHosts           = null;
 		}
 
 		/// <summary>
@@ -69,52 +72,51 @@ namespace Common.App.Net
 		/// </summary>
 		void Update()
 		{
-			if (IsTimerActive())
+			if (mRequestDelay != TIMER_NOT_ACTIVE)
 			{
-				mDelay -= Time.deltaTime;
+				mRequestDelay -= Time.deltaTime;
 				
-				if (mDelay <= 0f)
+				if (mRequestDelay <= 0f)
 				{
-					OnTimeout();
+					OnRequestTimeout();
+
+					return;
+				}
+			}
+
+			if (mPollDelay != TIMER_NOT_ACTIVE)
+			{
+				mPollDelay -= Time.deltaTime;
+				
+				if (mPollDelay <= 0f)
+				{
+					OnPollTimeout();
+
+					return;
 				}
 			}
 		}
 
 		/// <summary>
-		/// Handler for timeout event.
+		/// Handler for request timeout event.
 		/// </summary>
-		private void OnTimeout()
+		private void OnRequestTimeout()
 		{
-			HostData[] hosts = Global.clientScript.PollHostList();
+			Global.clientScript.RequestHostList();
 
-			Debug.LogError(hosts.Length);
-
-			StartTimer();
+			mRequestDelay = mRequestDuration;
+			mPollDelay    = DEFAULT_POLL_DURATION;
 		}
 
 		/// <summary>
-		/// Starts timer.
+		/// Handler for poll timeout event.
 		/// </summary>
-		private void StartTimer()
+		private void OnPollTimeout()
 		{
-			mDelay = mDuration;
-		}
-		
-		/// <summary>
-		/// Stops timer.
-		/// </summary>
-		private void StopTimer()
-		{
-			mDelay = TIMER_NOT_ACTIVE;
-		}
-		
-		/// <summary>
-		/// Determines whether timer is active.
-		/// </summary>
-		/// <returns><c>true</c> if timer is active; otherwise, <c>false</c>.</returns>
-		private bool IsTimerActive()
-		{
-			return mDelay != TIMER_NOT_ACTIVE;
+			mHosts = Global.clientScript.PollHostList();
+
+
+			mPollDelay = DEFAULT_POLL_DURATION; // TODO: Should be TIMER_NOT_ACTIVE and we need to handle each server
 		}
 	}
 }

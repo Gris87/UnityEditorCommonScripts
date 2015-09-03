@@ -27,14 +27,19 @@ namespace Common.App.Net
         }
 
 		/// <summary>
+		/// Requests the host list.
+		/// </summary>
+		public void RequestHostList()
+		{
+			MasterServer.RequestHostList(CommonConstants.SERVER_NAME);
+		}
+
+		/// <summary>
 		/// Polls host list from master server.
 		/// </summary>
 		/// <returns>Host list.</returns>
 		public HostData[] PollHostList()
 		{
-			// TODO: Request hosts
-			MasterServer.RequestHostList("UnityEditor");
-
 			return MasterServer.PollHostList();
 		}
     }
