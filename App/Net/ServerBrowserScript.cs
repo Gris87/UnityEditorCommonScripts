@@ -183,5 +183,49 @@ namespace Common.App.Net
 			mHosts       = null;
 			mCurrentHost = -1;
 		}
+
+		/// <summary>
+		/// Handler for event on establishing connection.
+		/// </summary>
+		void OnConnectedToServer()
+		{
+			Debug.Log("Connected to server");
+		}
+
+		/// <summary>
+		/// Handler for event on disconnection.
+		/// </summary>
+		/// <param name="info">Disconnection info.</param>
+		void OnDisconnectedFromServer(NetworkDisconnection info)
+		{
+			Debug.Log("Disconnected from server: " + info);
+		}
+
+		/// <summary>
+		/// Handler for connecting failure event.
+		/// </summary>
+		/// <param name="error">Error description.</param>
+		void OnFailedToConnect(NetworkConnectionError error)
+		{
+			Debug.Log("Could not connect to server: " + error);
+		}
+
+		/// <summary>
+		/// Handler for connecting failure event to the master server.
+		/// </summary>
+		/// <param name="error">Error description.</param>
+		void OnFailedToConnectToMasterServer(NetworkConnectionError error)
+		{
+			Debug.Log("Could not connect to master server: " + error);
+		}
+
+		/// <summary>
+		/// Handler for master server event.
+		/// </summary>
+		/// <param name="msEvent">Master server event.</param>
+		void OnMasterServerEvent(MasterServerEvent msEvent)
+		{
+			Debug.Log("Master server event: " + msEvent);
+		}
     }
 }
