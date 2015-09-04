@@ -189,7 +189,7 @@ namespace Common.App.Net
 		/// </summary>
 		void OnConnectedToServer()
 		{
-			Debug.Log("Connected to server");
+			Debug.Log("Connected to server"); // TODO: Change it
 		}
 
 		/// <summary>
@@ -198,7 +198,7 @@ namespace Common.App.Net
 		/// <param name="info">Disconnection info.</param>
 		void OnDisconnectedFromServer(NetworkDisconnection info)
 		{
-			Debug.Log("Disconnected from server: " + info);
+			Debug.Log("Disconnected from server: " + info); // TODO: Change it
 		}
 
 		/// <summary>
@@ -207,7 +207,7 @@ namespace Common.App.Net
 		/// <param name="error">Error description.</param>
 		void OnFailedToConnect(NetworkConnectionError error)
 		{
-			Debug.Log("Could not connect to server: " + error);
+			Debug.LogError("Could not connect to server: " + error);
 		}
 
 		/// <summary>
@@ -216,7 +216,7 @@ namespace Common.App.Net
 		/// <param name="error">Error description.</param>
 		void OnFailedToConnectToMasterServer(NetworkConnectionError error)
 		{
-			Debug.Log("Could not connect to master server: " + error);
+			Debug.LogError("Could not connect to master server: " + error);
 		}
 
 		/// <summary>
@@ -225,7 +225,29 @@ namespace Common.App.Net
 		/// <param name="msEvent">Master server event.</param>
 		void OnMasterServerEvent(MasterServerEvent msEvent)
 		{
-			Debug.Log("Master server event: " + msEvent);
+			switch (msEvent)
+			{
+				case MasterServerEvent.HostListReceived:
+				{
+					// TODO: Need to handle it
+				}
+				break;
+
+				case MasterServerEvent.RegistrationSucceeded:
+				case MasterServerEvent.RegistrationFailedGameName:
+				case MasterServerEvent.RegistrationFailedGameType:
+				case MasterServerEvent.RegistrationFailedNoServer:
+				{
+					// Nothing
+				}
+				break;
+				
+				default:
+				{
+					Debug.LogError("Unknown master server event: " + msEvent);
+				}
+				break;
+			}
 		}
     }
 }
