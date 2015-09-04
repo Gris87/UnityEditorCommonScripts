@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -49,10 +50,12 @@ namespace Common.App.Net
 
 
 
-        private float      mRequestDuration;
-        private float      mRequestDelay;
-        private float      mPollDelay;
-        private HostData[] mHosts;
+        private float           mRequestDuration;
+        private float           mRequestDelay;
+        private float           mPollDelay;
+		private HashSet<string> mAskedHosts;
+        private HostData[]      mHosts;
+		private int             mCurrentHost;
 
 
 
@@ -64,7 +67,9 @@ namespace Common.App.Net
             mRequestDuration = DEFAULT_REQUEST_DURATION;
             mRequestDelay    = 0f;
             mPollDelay       = TIMER_NOT_ACTIVE;
+			mAskedHosts      = new HashSet<string>();
             mHosts           = null;
+			mCurrentHost     = -1;
         }
 
         /// <summary>
@@ -102,10 +107,14 @@ namespace Common.App.Net
         /// </summary>
         private void OnRequestTimeout()
         {
-            Global.clientScript.RequestHostList();
-
-            mRequestDelay = mRequestDuration;
-            mPollDelay    = DEFAULT_POLL_DURATION;
+			if (mHosts == null)
+			{
+				Global.clientScript.RequestHostList();
+				mAskedHosts.Clear();
+				
+				mRequestDelay = mRequestDuration;
+				mPollDelay    = DEFAULT_POLL_DURATION;
+			}
         }
 
         /// <summary>
@@ -113,10 +122,66 @@ namespace Common.App.Net
         /// </summary>
         private void OnPollTimeout()
         {
-            mHosts = Global.clientScript.PollHostList();
+            mHosts       = Global.clientScript.PollHostList();
+			mCurrentHost = 0;
 
+            mPollDelay = TIMER_NOT_ACTIVE;
 
-            mPollDelay = DEFAULT_POLL_DURATION; // TODO: Should be TIMER_NOT_ACTIVE and we need to handle each server
+			ConnectToHost();
         }
+
+		/// <summary>
+		/// Connects to current host in the array.
+		/// </summary>
+		private void ConnectToHost()
+		{
+			// TODO: [Trivial] Maybe move it to somewhere
+			if (
+				mRequestDelay != TIMER_NOT_ACTIVE
+				&&
+				mRequestDelay < 0f
+			   )
+			{
+				StopPolling();
+				return;
+			}
+
+			while (
+				   mCurrentHost < mHosts.Length
+				   &&
+				   mAskedHosts.Contains(mHosts[mCurrentHost].guid)
+			      )
+			{
+				++mCurrentHost;
+			}
+
+			if (mCurrentHost < mHosts.Length)
+			{
+				Network.Connect(mHosts[mCurrentHost]);
+			}
+			else
+			{
+				StartPolling();
+			}
+		}
+
+		/// <summary>
+		/// Starts hosts polling.
+		/// </summary>
+		private void StartPolling()
+		{
+			StopPolling();
+			
+			mPollDelay = DEFAULT_POLL_DURATION;
+		}
+
+		/// <summary>
+		/// Stops hosts polling.
+		/// </summary>
+		private void StopPolling()
+		{
+			mHosts       = null;
+			mCurrentHost = -1;
+		}
     }
 }
