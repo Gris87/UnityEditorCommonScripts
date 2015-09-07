@@ -14,11 +14,136 @@ namespace Common.App.Net
     /// </summary>
     public class ClientScript : MonoBehaviour
     {
+		/// <summary>
+		/// Client state.
+		/// </summary>
+        private class IClientState
+		{
+			/// <summary>
+			/// Handler for enter event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="previousState">Previous state.</param>
+			public virtual void OnEnter(ClientScript script, ClientState previousState)
+			{
+				// Nothing
+			}
+
+			/// <summary>
+			/// Handler for exit event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="nextState">Next state.</param>
+			public virtual void OnExit(ClientScript script, ClientState nextState)
+			{
+				// Nothing
+            }
+
+			/// <summary>
+			/// Handler for request timeout event.
+            /// </summary>
+			/// <param name="script">Script.</param>
+			public virtual void OnRequestTimeout(ClientScript script)
+			{
+				Debug.LogError("Unexpected OnRequestTimeout in " + script.mState + " state");
+			}
+
+			/// <summary>
+			/// Handler for poll timeout event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			public virtual void OnPollTimeout(ClientScript script)
+            {
+				Debug.LogError("Unexpected OnPollTimeout in " + script.mState + " state");
+            }
+
+			/// <summary>
+			/// Handler for master server event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="msEvent">Master server event.</param>
+			public virtual void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
+			{
+				Debug.LogError("Unexpected OnMasterServerEvent in " + script.mState + " state");
+			}
+		}
+            
+        /// <summary>
+		/// Client state when client requesting host list.
+		/// </summary>
+		private class RequestingState: IClientState
+		{
+			/// <summary>
+			/// Handler for enter event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="previousState">Previous state.</param>
+			public override void OnEnter(ClientScript script, ClientState previousState)
+            {
+				Client.RequestHostList();
+				script.mAskedHosts.Clear();
+
+				script.mRequestTimer.Start();
+            }
+        }
+        
+		/// <summary>
+		/// Client state when client polling host list.
+		/// </summary>
+		private class PollingState: IClientState
+		{
+			/// <summary>
+			/// Handler for enter event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="previousState">Previous state.</param>
+			public override void OnEnter(ClientScript script, ClientState previousState)
+			{
+
+			}
+        }
+
+		/// <summary>
+		/// Client state when client asking hosts about files revision.
+		/// </summary>
+		private class AskingState: IClientState
+		{
+			
+        }
+        
+
+        
         private const float TIMER_NOT_ACTIVE         = -10000f;
         private const float DEFAULT_REQUEST_DURATION = 60000f / 1000f;
         private const float DEFAULT_POLL_DURATION    = 1000f  / 1000f;
 
 
+
+		/// <summary>
+		/// Gets or sets client state.
+		/// </summary>
+		/// <value>Client state.</value>
+		public ClientState state
+		{
+			get
+			{
+				return mState; 
+			}
+
+			set
+			{
+				if (mState != value)
+				{
+					mCurrentState.OnExit(this, value);
+					mCurrentState = mAllStates[(int)value];
+					mCurrentState.OnEnter(this, mState);
+
+					Debug.Log("Client state changed: " + mState + " => " + value);
+
+					mState = value;
+				}
+			}
+		}
 
         /// <summary>
         /// Gets or sets the duration of the request.
@@ -28,35 +153,23 @@ namespace Common.App.Net
         {
             get
             {
-                return mRequestDuration;
+                return mRequestTimer.duration;
             }
 
             set
             {
-                if (value >= 0f)
-                {
-                    if (mRequestDuration != value)
-                    {
-                        mRequestDuration = value;
-
-                        if (mRequestDelay != TIMER_NOT_ACTIVE)
-                        {
-                            mRequestDelay = mRequestDuration;
-                        }
-                    }
-                }
-                else
-                {
-                    Debug.LogError("Incorrect delay value: " + value);
-                }
+				mRequestTimer.duration = value;
             }
         }
 
 
 
-        private float           mRequestDuration;
-        private float           mRequestDelay;
-        private float           mPollDelay;
+		private IClientState    mAllStates;
+		private ClientState     mState;
+		private IClientState    mCurrentState;
+
+		private Timer           mRequestTimer;
+        private Timer           mPollTimer;
 		private HashSet<string> mAskedHosts;
         private HostData[]      mHosts;
 		private int             mCurrentHost;
@@ -68,12 +181,19 @@ namespace Common.App.Net
         /// </summary>
         void Start()
         {
-            mRequestDuration = DEFAULT_REQUEST_DURATION;
-            mRequestDelay    = 0f;
-            mPollDelay       = TIMER_NOT_ACTIVE;
-			mAskedHosts      = new HashSet<string>();
-            mHosts           = null;
-			mCurrentHost     = -1;
+			mAllStates                              = new IClientState[(int)ClientState.Count];
+			mAllStates[(int)ClientState.Requesting] = new RequestingState();
+			mAllStates[(int)ClientState.Polling]    = new PollingState();
+			mAllStates[(int)ClientState.Asking]     = new AskingState();
+
+			mState        = ClientState.Requesting;
+			mCurrentState = mAllStates[(int)mState];
+
+			mRequestTimer = new Timer(OnRequestTimeout, DEFAULT_REQUEST_DURATION);
+			mPollTimer    = new Timer(OnPollTimeout);
+			mAskedHosts   = new HashSet<string>();
+            mHosts        = null;
+			mCurrentHost  = -1;
 
 #if LOOPBACK_SERVER
 			MasterServer.ipAddress     = "127.0.0.1";
@@ -81,6 +201,8 @@ namespace Common.App.Net
 			Network.natFacilitatorIP   = "127.0.0.1";
 			Network.natFacilitatorPort = 50005;
 #endif
+
+			mCurrentState.OnEnter(ClientState.Count);
         }
 
         /// <summary>
@@ -88,29 +210,8 @@ namespace Common.App.Net
         /// </summary>
         void Update()
         {
-            if (mRequestDelay != TIMER_NOT_ACTIVE)
-            {
-                mRequestDelay -= Time.deltaTime;
-
-                if (mRequestDelay <= 0f)
-                {
-                    OnRequestTimeout();
-
-                    return;
-                }
-            }
-
-            if (mPollDelay != TIMER_NOT_ACTIVE)
-            {
-                mPollDelay -= Time.deltaTime;
-
-                if (mPollDelay <= 0f)
-                {
-                    OnPollTimeout();
-
-                    return;
-                }
-            }
+			mRequestTimer.Update();                
+			mPollTimer.Update();
         }
 
         /// <summary>
@@ -118,6 +219,8 @@ namespace Common.App.Net
         /// </summary>
         private void OnRequestTimeout()
         {
+			mCurrentState.OnRequestTimeout(this);
+
 			if (mHosts == null)
 			{
 				Client.RequestHostList();
@@ -133,6 +236,8 @@ namespace Common.App.Net
         /// </summary>
         private void OnPollTimeout()
         {
+			mCurrentState.OnPollTimeout(this);
+
 			mHosts       = Client.PollHostList();
 			mCurrentHost = 0;
 
@@ -242,7 +347,7 @@ namespace Common.App.Net
 			{
 				case MasterServerEvent.HostListReceived:
 				{
-					// TODO: Need to handle it
+					state = ClientState.Polling;
 				}
 				break;
 
