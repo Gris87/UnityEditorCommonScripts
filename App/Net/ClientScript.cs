@@ -58,6 +58,45 @@ namespace Common.App.Net
             }
 
 			/// <summary>
+			/// Handler for event on establishing connection.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			public virtual void OnConnectedToServer(ClientScript script)
+			{
+				Debug.LogError("Unexpected OnConnectedToServer in " + script.mState + " state");
+			}
+			
+			/// <summary>
+			/// Handler for event on disconnection.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="info">Disconnection info.</param>
+			public virtual void OnDisconnectedFromServer(ClientScript script, NetworkDisconnection info)
+			{
+				Debug.LogError("Unexpected OnDisconnectedFromServer in " + script.mState + " state");
+			}
+			
+			/// <summary>
+			/// Handler for connecting failure event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="error">Error description.</param>
+			public virtual void OnFailedToConnect(ClientScript script, NetworkConnectionError error)
+			{
+				Debug.LogError("Unexpected OnFailedToConnect in " + script.mState + " state");
+			}
+			
+			/// <summary>
+			/// Handler for connecting failure event to the master server.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="error">Error description.</param>
+			public virtual void OnFailedToConnectToMasterServer(ClientScript script, NetworkConnectionError error)
+			{
+				Debug.LogError("Unexpected OnFailedToConnectToMasterServer in " + script.mState + " state");
+			}
+
+			/// <summary>
 			/// Handler for master server event.
 			/// </summary>
 			/// <param name="script">Script.</param>
@@ -80,11 +119,82 @@ namespace Common.App.Net
 			/// <param name="previousState">Previous state.</param>
 			public override void OnEnter(ClientScript script, ClientState previousState)
             {
+				if (previousState != ClientState.Count)
+				{
+					script.mAskedHosts.Clear();
+					script.mHosts       = null;
+					script.mCurrentHost = -1;
+				}
+
+				OnRequestTimeout(script);
+            }
+
+			/// <summary>
+			/// Handler for request timeout event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			public override void OnRequestTimeout(ClientScript script)
+			{
 				Client.RequestHostList();
-				script.mAskedHosts.Clear();
+
+				script.mRequestTimer.Stop();
+			}
+
+			/// <summary>
+			/// Handler for connecting failure event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="error">Error description.</param>
+			public override void OnFailedToConnect(ClientScript script, NetworkConnectionError error)
+			{
+				// Nothing
+			}
+
+			/// <summary>
+			/// Handler for connecting failure event to the master server.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="error">Error description.</param>
+			public override void OnFailedToConnectToMasterServer(ClientScript script, NetworkConnectionError error)
+			{
+				Debug.LogError("Could not connect to master server: " + error);
 
 				script.mRequestTimer.Start();
-            }
+			}
+
+			/// <summary>
+			/// Handler for master server event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="msEvent">Master server event.</param>
+			public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
+			{
+				switch (msEvent)
+				{
+					case MasterServerEvent.HostListReceived:
+					{
+						script.mRequestTimer.Start();
+
+						script.state = ClientState.Polling;
+					}
+					break;
+					
+					case MasterServerEvent.RegistrationSucceeded:
+					case MasterServerEvent.RegistrationFailedGameName:
+					case MasterServerEvent.RegistrationFailedGameType:
+					case MasterServerEvent.RegistrationFailedNoServer:
+					{
+						// Nothing
+					}
+					break;
+					
+					default:
+					{
+						Debug.LogError("Unknown master server event: " + msEvent);
+					}
+					break;
+				}
+			}
         }
         
 		/// <summary>
@@ -99,7 +209,40 @@ namespace Common.App.Net
 			/// <param name="previousState">Previous state.</param>
 			public override void OnEnter(ClientScript script, ClientState previousState)
 			{
+				if (previousState == ClientState.Requesting)
+				{
+					OnPollTimeout(script);
+				}
+				else
+				{
+					script.mPollTimer.Start();
+				}
+			}
 
+			/// <summary>
+			/// Handler for request timeout event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			public override void OnRequestTimeout(ClientScript script)
+			{
+				script.mRequestTimer.Stop();
+				script.mPollTimer.Stop();
+
+				script.state = ClientState.Requesting;
+			}
+
+			/// <summary>
+			/// Handler for poll timeout event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			public override void OnPollTimeout(ClientScript script)
+			{
+				script.mHosts       = Client.PollHostList();
+				script.mCurrentHost = 0;
+				
+				script.mPollTimer.Stop();
+
+				script.state = ClientState.Asking;
 			}
         }
 
@@ -108,12 +251,125 @@ namespace Common.App.Net
 		/// </summary>
 		private class AskingState: IClientState
 		{
-			
-        }
-        
+			/// <summary>
+			/// Handler for enter event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="previousState">Previous state.</param>
+			public override void OnEnter(ClientScript script, ClientState previousState)
+			{
+				while (
+				       script.mCurrentHost < script.mHosts.Length
+					   &&
+					   script.mAskedHosts.Contains(script.mHosts[script.mCurrentHost].guid)
+					  )
+				{
+					++script.mCurrentHost;
+				}
 
+				if (script.mCurrentHost < script.mHosts.Length)
+				{
+					script.state = ClientState.Connecting;
+				}
+				else
+				{
+					if (script.mRequestTimer.isAboutToShot)
+					{
+						script.state = ClientState.Requesting;
+					}
+					else
+					{
+						script.state = ClientState.Polling;
+					}
+				}
+			}
+        }
+
+		/// <summary>
+		/// Client state when client connecting to the host.
+		/// </summary>
+		private class ConnectingState: IClientState
+		{
+			/// <summary>
+			/// Handler for enter event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="previousState">Previous state.</param>
+			public override void OnEnter(ClientScript script, ClientState previousState)
+			{
+				Network.Connect(script.mHosts[script.mCurrentHost]);
+			}
+
+			/// <summary>
+			/// Handler for request timeout event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			public override void OnRequestTimeout(ClientScript script)
+			{
+				// Nothing
+			}
+
+			/// <summary>
+			/// Handler for event on establishing connection.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			public override void OnConnectedToServer(ClientScript script)
+			{
+				script.state = ClientState.Connected;
+			}
+
+			/// <summary>
+			/// Handler for connecting failure event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="error">Error description.</param>
+			public override void OnFailedToConnect(ClientScript script, NetworkConnectionError error)
+			{
+				Debug.LogError("Could not connect to server: " + error);
+
+				++script.mCurrentHost;
+				script.state = ClientState.Asking;
+			}
+		}
+
+		/// <summary>
+		/// Client state when client connected to the host.
+		/// </summary>
+		private class ConnectedState: IClientState
+		{
+			/// <summary>
+			/// Handler for enter event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="previousState">Previous state.</param>
+			public override void OnEnter(ClientScript script, ClientState previousState)
+			{
+				// TODO: Send revision request message
+			}
+			
+			/// <summary>
+			/// Handler for request timeout event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			public override void OnRequestTimeout(ClientScript script)
+			{
+				// Nothing
+			}
+
+			/// <summary>
+			/// Handler for event on disconnection.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="info">Disconnection info.</param>
+			public override void OnDisconnectedFromServer(ClientScript script, NetworkDisconnection info)
+			{
+				++script.mCurrentHost;
+				script.state = ClientState.Asking;
+			}
+		}
         
-        private const float TIMER_NOT_ACTIVE         = -10000f;
+		// =======================================================================
+        
         private const float DEFAULT_REQUEST_DURATION = 60000f / 1000f;
         private const float DEFAULT_POLL_DURATION    = 1000f  / 1000f;
 
@@ -134,13 +390,14 @@ namespace Common.App.Net
 			{
 				if (mState != value)
 				{
-					mCurrentState.OnExit(this, value);
-					mCurrentState = mAllStates[(int)value];
-					mCurrentState.OnEnter(this, mState);
-
-					Debug.Log("Client state changed: " + mState + " => " + value);
-
+					ClientState oldState = mState;
 					mState = value;
+
+					Debug.Log("Client state changed: " + oldState + " => " + mState);
+
+					mCurrentState.OnExit(this, mState);
+					mCurrentState = mAllStates[(int)mState];
+					mCurrentState.OnEnter(this, oldState);
 				}
 			}
 		}
@@ -164,12 +421,13 @@ namespace Common.App.Net
 
 
 
-		private IClientState    mAllStates;
+		private IClientState[]  mAllStates;
 		private ClientState     mState;
 		private IClientState    mCurrentState;
 
 		private Timer           mRequestTimer;
         private Timer           mPollTimer;
+
 		private HashSet<string> mAskedHosts;
         private HostData[]      mHosts;
 		private int             mCurrentHost;
@@ -181,20 +439,6 @@ namespace Common.App.Net
         /// </summary>
         void Start()
         {
-			mAllStates                              = new IClientState[(int)ClientState.Count];
-			mAllStates[(int)ClientState.Requesting] = new RequestingState();
-			mAllStates[(int)ClientState.Polling]    = new PollingState();
-			mAllStates[(int)ClientState.Asking]     = new AskingState();
-
-			mState        = ClientState.Requesting;
-			mCurrentState = mAllStates[(int)mState];
-
-			mRequestTimer = new Timer(OnRequestTimeout, DEFAULT_REQUEST_DURATION);
-			mPollTimer    = new Timer(OnPollTimeout);
-			mAskedHosts   = new HashSet<string>();
-            mHosts        = null;
-			mCurrentHost  = -1;
-
 #if LOOPBACK_SERVER
 			MasterServer.ipAddress     = "127.0.0.1";
 			MasterServer.port          = 23466;
@@ -202,7 +446,26 @@ namespace Common.App.Net
 			Network.natFacilitatorPort = 50005;
 #endif
 
-			mCurrentState.OnEnter(ClientState.Count);
+			mAllStates                              = new IClientState[(int)ClientState.Count];
+			mAllStates[(int)ClientState.Requesting] = new RequestingState();
+			mAllStates[(int)ClientState.Polling]    = new PollingState();
+			mAllStates[(int)ClientState.Asking]     = new AskingState();
+			mAllStates[(int)ClientState.Connecting] = new ConnectingState();
+			mAllStates[(int)ClientState.Connected]  = new ConnectedState();
+
+			mState        = ClientState.Requesting;
+			mCurrentState = mAllStates[(int)mState];
+
+			mRequestTimer = new Timer(OnRequestTimeout, DEFAULT_REQUEST_DURATION);
+			mPollTimer    = new Timer(OnPollTimeout,    DEFAULT_POLL_DURATION);
+
+			mAskedHosts  = new HashSet<string>();
+            mHosts       = null;
+			mCurrentHost = -1;
+
+
+
+			mCurrentState.OnEnter(this, ClientState.Count);
         }
 
         /// <summary>
@@ -220,15 +483,6 @@ namespace Common.App.Net
         private void OnRequestTimeout()
         {
 			mCurrentState.OnRequestTimeout(this);
-
-			if (mHosts == null)
-			{
-				Client.RequestHostList();
-				mAskedHosts.Clear();
-				
-				mRequestDelay = mRequestDuration;
-				mPollDelay    = DEFAULT_POLL_DURATION;
-			}
         }
 
         /// <summary>
@@ -237,77 +491,14 @@ namespace Common.App.Net
         private void OnPollTimeout()
         {
 			mCurrentState.OnPollTimeout(this);
-
-			mHosts       = Client.PollHostList();
-			mCurrentHost = 0;
-
-            mPollDelay = TIMER_NOT_ACTIVE;
-
-			ConnectToHost();
         }
-
-		/// <summary>
-		/// Connects to current host in the array.
-		/// </summary>
-		private void ConnectToHost()
-		{
-			// TODO: [Trivial] Maybe move it to somewhere
-			if (
-				mRequestDelay != TIMER_NOT_ACTIVE
-				&&
-				mRequestDelay < 0f
-			   )
-			{
-				StopPolling();
-				return;
-			}
-
-			while (
-				   mCurrentHost < mHosts.Length
-				   &&
-				   mAskedHosts.Contains(mHosts[mCurrentHost].guid)
-			      )
-			{
-				++mCurrentHost;
-			}
-
-			Debug.LogError(mHosts.Length);
-
-			if (mCurrentHost < mHosts.Length)
-			{
-				Network.Connect(mHosts[mCurrentHost]);
-			}
-			else
-			{
-				StartPolling();
-			}
-		}
-
-		/// <summary>
-		/// Starts hosts polling.
-		/// </summary>
-		private void StartPolling()
-		{
-			StopPolling();
-			
-			mPollDelay = DEFAULT_POLL_DURATION;
-		}
-
-		/// <summary>
-		/// Stops hosts polling.
-		/// </summary>
-		private void StopPolling()
-		{
-			mHosts       = null;
-			mCurrentHost = -1;
-		}
 
 		/// <summary>
 		/// Handler for event on establishing connection.
 		/// </summary>
 		void OnConnectedToServer()
 		{
-			Debug.Log("Connected to server"); // TODO: Change it
+			mCurrentState.OnConnectedToServer(this);
 		}
 
 		/// <summary>
@@ -316,7 +507,7 @@ namespace Common.App.Net
 		/// <param name="info">Disconnection info.</param>
 		void OnDisconnectedFromServer(NetworkDisconnection info)
 		{
-			Debug.Log("Disconnected from server: " + info); // TODO: Change it
+			mCurrentState.OnDisconnectedFromServer(this, info);
 		}
 
 		/// <summary>
@@ -325,7 +516,7 @@ namespace Common.App.Net
 		/// <param name="error">Error description.</param>
 		void OnFailedToConnect(NetworkConnectionError error)
 		{
-			Debug.LogError("Could not connect to server: " + error);
+			mCurrentState.OnFailedToConnect(this, error);
 		}
 
 		/// <summary>
@@ -334,7 +525,7 @@ namespace Common.App.Net
 		/// <param name="error">Error description.</param>
 		void OnFailedToConnectToMasterServer(NetworkConnectionError error)
 		{
-			Debug.LogError("Could not connect to master server: " + error);
+			mCurrentState.OnFailedToConnectToMasterServer(this, error);
 		}
 
 		/// <summary>
@@ -343,29 +534,7 @@ namespace Common.App.Net
 		/// <param name="msEvent">Master server event.</param>
 		void OnMasterServerEvent(MasterServerEvent msEvent)
 		{
-			switch (msEvent)
-			{
-				case MasterServerEvent.HostListReceived:
-				{
-					state = ClientState.Polling;
-				}
-				break;
-
-				case MasterServerEvent.RegistrationSucceeded:
-				case MasterServerEvent.RegistrationFailedGameName:
-				case MasterServerEvent.RegistrationFailedGameType:
-				case MasterServerEvent.RegistrationFailedNoServer:
-				{
-					// Nothing
-				}
-				break;
-				
-				default:
-				{
-					Debug.LogError("Unknown master server event: " + msEvent);
-				}
-				break;
-			}
+			mCurrentState.OnMasterServerEvent(this, msEvent);
 		}
     }
 }

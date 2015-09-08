@@ -20,6 +20,16 @@ namespace Common.App.Net
 		/// </summary>
 		Asking
 		,
+		/// <summary>
+		/// Client state when client connecting to the host.
+		/// </summary>
+		Connecting
+		,
+		/// <summary>
+		/// Client state when client connected to the host.
+		/// </summary>
+		Connected
+		,
 		Count
 	}
 }

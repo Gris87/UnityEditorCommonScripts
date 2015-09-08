@@ -68,6 +68,15 @@ namespace Common
 			}
 		}
 
+		/// <summary>
+		/// Gets a value indicating whether this <see cref="Common.Timer"/> is about to shot.
+		/// </summary>
+		/// <value><c>true</c> if timer is about to shot; otherwise, <c>false</c>.</value>
+		public bool isAboutToShot
+		{
+			get { return mTime >= mDuration; }
+		}
+
 
 
 		private float       mDuration;
