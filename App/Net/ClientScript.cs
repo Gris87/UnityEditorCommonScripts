@@ -239,10 +239,23 @@ namespace Common.App.Net
 			{
 				script.mHosts       = Client.PollHostList();
 				script.mCurrentHost = 0;
-				
+
 				script.mPollTimer.Stop();
 
-				script.state = ClientState.Asking;
+				if (script.mHosts.Length > 0)
+				{
+					script.state = ClientState.Asking;
+				}
+			}
+
+			/// <summary>
+			/// Handler for master server event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="msEvent">Master server event.</param>
+			public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
+			{
+				// Nothing
 			}
         }
 
@@ -329,6 +342,16 @@ namespace Common.App.Net
 
 				++script.mCurrentHost;
 				script.state = ClientState.Asking;
+			}			
+			
+			/// <summary>
+			/// Handler for master server event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="msEvent">Master server event.</param>
+			public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
+			{
+				// Nothing
 			}
 		}
 
@@ -365,6 +388,16 @@ namespace Common.App.Net
 			{
 				++script.mCurrentHost;
 				script.state = ClientState.Asking;
+			}
+			
+			/// <summary>
+			/// Handler for master server event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="msEvent">Master server event.</param>
+			public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
+			{
+				// Nothing
 			}
 		}
         
