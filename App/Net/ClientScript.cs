@@ -105,6 +105,16 @@ namespace Common.App.Net
 			{
 				Debug.LogError("Unexpected OnMasterServerEvent in " + script.mState + " state");
 			}
+
+			/// <summary>
+			/// Handler for message received from server.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="bytes">Byte array.</param>
+			public virtual void OnMessageReceivedFromServer(ClientScript script, byte[] bytes)
+			{
+				Debug.LogError("Unexpected OnMessageReceivedFromServer in " + script.mState + " state");
+			}
 		}
             
         /// <summary>
@@ -367,7 +377,7 @@ namespace Common.App.Net
 			/// <param name="previousState">Previous state.</param>
 			public override void OnEnter(ClientScript script, ClientState previousState)
 			{
-				// TODO: Send revision request message
+				Client.Send(Client.BuildRevisionRequestMessage());
 			}
 			
 			/// <summary>
@@ -568,6 +578,26 @@ namespace Common.App.Net
 		void OnMasterServerEvent(MasterServerEvent msEvent)
 		{
 			mCurrentState.OnMasterServerEvent(this, msEvent);
+		}
+
+		/// <summary>
+		/// RPC for sending message to server.
+		/// </summary>
+		/// <param name="bytes">Byte array.</param>
+		[RPC]
+		private void RPC_SendToServer(byte[] bytes)
+		{
+			// Nothing
+		}
+
+		/// <summary>
+		/// RPC for receiving message from server.
+		/// </summary>
+		/// <param name="bytes">Byte array.</param>
+		[RPC]
+		private void RPC_SendToClient(byte[] bytes)
+		{
+			mCurrentState.OnMessageReceivedFromServer(this, bytes);
 		}
     }
 }
