@@ -1,3 +1,7 @@
+#pragma warning disable 618
+
+
+
 #define LOOPBACK_SERVER
 
 
@@ -377,7 +381,7 @@ namespace Common.App.Net
 			/// <param name="previousState">Previous state.</param>
 			public override void OnEnter(ClientScript script, ClientState previousState)
 			{
-				Client.Send(Client.BuildRevisionRequestMessage());
+				script.Send(Client.BuildRevisionRequestMessage());
 			}
 			
 			/// <summary>
@@ -475,6 +479,8 @@ namespace Common.App.Net
         private HostData[]      mHosts;
 		private int             mCurrentHost;
 
+		private NetworkView     mNetworkView;
+
 
 
         /// <summary>
@@ -505,6 +511,8 @@ namespace Common.App.Net
 			mAskedHosts  = new HashSet<string>();
             mHosts       = null;
 			mCurrentHost = -1;
+
+			mNetworkView = gameObject.AddComponent<NetworkView>();
 
 
 
@@ -581,11 +589,21 @@ namespace Common.App.Net
 		}
 
 		/// <summary>
-		/// RPC for sending message to server.
+		/// Sends byte array to server.
 		/// </summary>
 		/// <param name="bytes">Byte array.</param>
+		public void Send(byte[] bytes)
+		{
+			mNetworkView.RPC("RPC_SendToServer", RPCMode.Server, mNetworkView.viewID, bytes);
+		}
+
+		/// <summary>
+		/// RPC for sending message to server.
+		/// </summary>
+		/// <param name="id">Network view ID.</param>
+		/// <param name="bytes">Byte array.</param>
 		[RPC]
-		private void RPC_SendToServer(byte[] bytes)
+		private void RPC_SendToServer(NetworkViewID id, byte[] bytes)
 		{
 			// Nothing
 		}

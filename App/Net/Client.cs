@@ -1,3 +1,7 @@
+#pragma warning disable 618
+
+
+
 using System.IO;
 using UnityEngine;
 
@@ -10,18 +14,6 @@ namespace Common.App.Net
 	/// </summary>
     public static class Client
     {
-		private static NetworkView sNetworkView;
-
-
-
-		/// <summary>
-		/// Initializes the <see cref="Common.App.Net.Client"/> class.
-		/// </summary>
-		static Client()
-		{
-			sNetworkView = new NetworkView();
-		}
-
         /// <summary>
         /// Requests the host list.
         /// </summary>
@@ -60,16 +52,7 @@ namespace Common.App.Net
 
 			FillMessageHeader(writer, MessageType.RevisionRequest);
 
-			return stream.GetBuffer();
-		}
-
-		/// <summary>
-		/// Sends byte array to server.
-		/// </summary>
-		/// <param name="bytes">Byte array.</param>
-		public static void Send(byte[] bytes)
-		{
-			sNetworkView.RPC("RPC_SendToServer", RPCMode.Server, bytes);
+			return stream.ToArray();
 		}
     }
 }
