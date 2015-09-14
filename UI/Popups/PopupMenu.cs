@@ -369,7 +369,7 @@ namespace Common.UI.Popups
                     }
                     else
                     {
-                        Debug.LogError("Unknown menu item type");
+                        DebugEx.Error("Unknown menu item type");
                     }
                 }
             }
@@ -714,7 +714,7 @@ namespace Common.UI.Popups
             }
             else
             {
-                Debug.LogError("Unexpected OnSelectItem call");
+                DebugEx.Error("Unexpected OnSelectItem call");
             }
         }
 
@@ -727,7 +727,7 @@ namespace Common.UI.Popups
             if (node.data is MenuItem)
             {
                 MenuItem item = node.data as MenuItem;
-                Debug.Log("PopupMenu.OnShowMenuSubItems(" + item.name + ")");
+                DebugEx.Verbose("PopupMenu.OnShowMenuSubItems(" + item.name + ")");
 
                 if (mChildPopupMenu != null)
                 {
@@ -751,7 +751,7 @@ namespace Common.UI.Popups
             }
             else
             {
-                Debug.LogError("Unknown menu item type");
+                DebugEx.Error("Unknown menu item type");
             }
         }
 
@@ -760,7 +760,7 @@ namespace Common.UI.Popups
         /// </summary>
         public void OnPopupMenuDestroyed()
         {
-            Debug.Log("PopupMenu.OnPopupMenuDestroyed");
+            DebugEx.Verbose("PopupMenu.OnPopupMenuDestroyed");
 
             mChildPopupMenu = null;
         }

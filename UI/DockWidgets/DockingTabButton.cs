@@ -192,7 +192,7 @@ namespace Common.UI.DockWidgets
                 }
                 else
                 {
-                    Debug.LogError("Unexpected behaviour in DockingTabButton.OnEndDrag");
+                    DebugEx.Error("Unexpected behaviour in DockingTabButton.OnEndDrag");
                 }
 
                 DummyDockWidgetScript.DestroyInstance();
@@ -230,7 +230,7 @@ namespace Common.UI.DockWidgets
                 }
                 else
                 {
-                    Debug.LogError("Unexpected behaviour in DockingTabButton.OnEndDrag");
+                    DebugEx.Error("Unexpected behaviour in DockingTabButton.OnEndDrag");
                 }
             }
 

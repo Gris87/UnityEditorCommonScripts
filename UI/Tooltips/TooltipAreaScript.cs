@@ -40,7 +40,7 @@ namespace Common.UI.Tooltips
             }
             else
             {
-                Debug.LogError("Two instances of TooltipAreaScript not supported");
+                DebugEx.Error("Two instances of TooltipAreaScript not supported");
             }
 
             mCurrentOwner  = null;
@@ -106,7 +106,7 @@ namespace Common.UI.Tooltips
             }
             else
             {
-                Debug.LogError("There is no TooltipAreaScript instance");
+                DebugEx.Error("There is no TooltipAreaScript instance");
             }
         }
 
@@ -131,7 +131,7 @@ namespace Common.UI.Tooltips
             }
             else
             {
-                Debug.LogError("There is no TooltipAreaScript instance");
+                DebugEx.Error("There is no TooltipAreaScript instance");
             }
         }
 
@@ -173,7 +173,7 @@ namespace Common.UI.Tooltips
             }
             else
             {
-                Debug.LogError("There is no TooltipAreaScript instance");
+                DebugEx.Error("There is no TooltipAreaScript instance");
             }
         }
 
@@ -201,7 +201,7 @@ namespace Common.UI.Tooltips
             }
             else
             {
-                Debug.LogError("There is no TooltipAreaScript instance");
+                DebugEx.Error("There is no TooltipAreaScript instance");
             }
         }
 
@@ -326,7 +326,7 @@ namespace Common.UI.Tooltips
                 }
                 else
                 {
-                    Debug.LogError("Unexpected behaviour in TooltipAreaScript.DestroyTooltip");
+                    DebugEx.Error("Unexpected behaviour in TooltipAreaScript.DestroyTooltip");
                 }
             }
 
@@ -342,7 +342,7 @@ namespace Common.UI.Tooltips
         {
             if (ms < 0f)
             {
-                Debug.LogError("Incorrect delay value: " + ms);
+                DebugEx.Error("Incorrect delay value: " + ms);
             }
 
             mDelay     = ms / 1000f;

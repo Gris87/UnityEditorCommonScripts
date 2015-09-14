@@ -72,7 +72,7 @@ namespace Common.App
                         }
                         else
                         {
-                            Debug.LogWarning("Already has a font with name: " + fontName);
+                            DebugEx.Warning("Already has a font with name: " + fontName);
                         }
                     }
                 }
@@ -146,7 +146,7 @@ namespace Common.App
 
             if (res == null)
             {
-                Debug.LogError("Resource \"" + path + "\" is not found");
+                DebugEx.Error("Resource \"" + path + "\" is not found");
             }
 
             return res;
@@ -230,7 +230,7 @@ namespace Common.App
             }
             catch (Exception)
             {
-                Debug.LogError("Invalid font style value \"" + fontStyle + "\" for text style: " + path);
+                DebugEx.Error("Invalid font style value \"" + fontStyle + "\" for text style: " + path);
             }
 
             res.fontSize    = fontSize;
@@ -242,7 +242,7 @@ namespace Common.App
             }
             catch (Exception)
             {
-                Debug.LogError("Invalid alignment value \"" + alignment + "\" for text style: " + path);
+                DebugEx.Error("Invalid alignment value \"" + alignment + "\" for text style: " + path);
             }
 
             res.color = color;

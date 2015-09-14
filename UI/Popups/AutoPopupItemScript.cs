@@ -36,7 +36,7 @@ namespace Common.UI.Popups
 
             if (mButton == null)
             {
-                Debug.LogError("Button component not found");
+                DebugEx.Error("Button component not found");
             }
         }
 

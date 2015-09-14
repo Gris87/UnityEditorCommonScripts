@@ -131,7 +131,7 @@ namespace Common.UI.DragAndDrop
         {
             if (draggingType == DraggingType.None)
             {
-                Debug.LogError("Invalid dragging type value: " + draggingType);
+                DebugEx.Error("Invalid dragging type value: " + draggingType);
                 return;
             }
 
@@ -191,12 +191,12 @@ namespace Common.UI.DragAndDrop
                 }
                 else
                 {
-                    Debug.LogError("Canvas not found");
+                    DebugEx.Error("Canvas not found");
                 }
             }
             else
             {
-                Debug.LogError("Dragging in progress already");
+                DebugEx.Error("Dragging in progress already");
             }
         }
 

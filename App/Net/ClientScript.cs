@@ -49,7 +49,7 @@ namespace Common.App.Net
 			/// <param name="script">Script.</param>
 			public virtual void OnRequestTimeout(ClientScript script)
 			{
-				Debug.LogError("Unexpected OnRequestTimeout in " + script.mState + " state");
+				DebugEx.Error("Unexpected OnRequestTimeout in " + script.mState + " state");
 			}
 
 			/// <summary>
@@ -58,7 +58,7 @@ namespace Common.App.Net
 			/// <param name="script">Script.</param>
 			public virtual void OnPollTimeout(ClientScript script)
             {
-				Debug.LogError("Unexpected OnPollTimeout in " + script.mState + " state");
+				DebugEx.Error("Unexpected OnPollTimeout in " + script.mState + " state");
             }
 
 			/// <summary>
@@ -67,7 +67,7 @@ namespace Common.App.Net
 			/// <param name="script">Script.</param>
 			public virtual void OnConnectedToServer(ClientScript script)
 			{
-				Debug.LogError("Unexpected OnConnectedToServer in " + script.mState + " state");
+				DebugEx.Error("Unexpected OnConnectedToServer in " + script.mState + " state");
 			}
 			
 			/// <summary>
@@ -77,7 +77,7 @@ namespace Common.App.Net
 			/// <param name="info">Disconnection info.</param>
 			public virtual void OnDisconnectedFromServer(ClientScript script, NetworkDisconnection info)
 			{
-				Debug.LogError("Unexpected OnDisconnectedFromServer in " + script.mState + " state");
+				DebugEx.Error("Unexpected OnDisconnectedFromServer in " + script.mState + " state");
 			}
 			
 			/// <summary>
@@ -87,7 +87,7 @@ namespace Common.App.Net
 			/// <param name="error">Error description.</param>
 			public virtual void OnFailedToConnect(ClientScript script, NetworkConnectionError error)
 			{
-				Debug.LogError("Unexpected OnFailedToConnect in " + script.mState + " state");
+				DebugEx.Error("Unexpected OnFailedToConnect in " + script.mState + " state");
 			}
 			
 			/// <summary>
@@ -97,7 +97,7 @@ namespace Common.App.Net
 			/// <param name="error">Error description.</param>
 			public virtual void OnFailedToConnectToMasterServer(ClientScript script, NetworkConnectionError error)
 			{
-				Debug.LogError("Unexpected OnFailedToConnectToMasterServer in " + script.mState + " state");
+				DebugEx.Error("Unexpected OnFailedToConnectToMasterServer in " + script.mState + " state");
 			}
 
 			/// <summary>
@@ -107,7 +107,7 @@ namespace Common.App.Net
 			/// <param name="msEvent">Master server event.</param>
 			public virtual void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
 			{
-				Debug.LogError("Unexpected OnMasterServerEvent in " + script.mState + " state");
+				DebugEx.Error("Unexpected OnMasterServerEvent in " + script.mState + " state");
 			}
 
 			/// <summary>
@@ -117,7 +117,7 @@ namespace Common.App.Net
 			/// <param name="bytes">Byte array.</param>
 			public virtual void OnMessageReceivedFromServer(ClientScript script, byte[] bytes)
 			{
-				Debug.LogError("Unexpected OnMessageReceivedFromServer in " + script.mState + " state");
+				DebugEx.Error("Unexpected OnMessageReceivedFromServer in " + script.mState + " state");
 			}
 		}
             
@@ -171,7 +171,7 @@ namespace Common.App.Net
 			/// <param name="error">Error description.</param>
 			public override void OnFailedToConnectToMasterServer(ClientScript script, NetworkConnectionError error)
 			{
-				Debug.LogError("Could not connect to master server: " + error);
+				DebugEx.Error("Could not connect to master server: " + error);
 
 				script.mRequestTimer.Start();
 			}
@@ -204,7 +204,7 @@ namespace Common.App.Net
 					
 					default:
 					{
-						Debug.LogError("Unknown master server event: " + msEvent);
+						DebugEx.Error("Unknown master server event: " + msEvent);
 					}
 					break;
 				}
@@ -352,7 +352,7 @@ namespace Common.App.Net
 			/// <param name="error">Error description.</param>
 			public override void OnFailedToConnect(ClientScript script, NetworkConnectionError error)
 			{
-				Debug.LogError("Could not connect to server: " + error);
+				DebugEx.Error("Could not connect to server: " + error);
 
 				++script.mCurrentHost;
 				script.state = ClientState.Asking;
@@ -440,7 +440,7 @@ namespace Common.App.Net
 					ClientState oldState = mState;
 					mState = value;
 
-					Debug.Log("Client state changed: " + oldState + " => " + mState);
+					DebugEx.Verbose("Client state changed: " + oldState + " => " + mState);
 
 					mCurrentState.OnExit(this, mState);
 					mCurrentState = mAllStates[(int)mState];

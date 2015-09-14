@@ -128,7 +128,7 @@ namespace Common.UI.DockWidgets
                             }
                             else
                             {
-                                Debug.LogError("Incorrect size (" + size + ") in size list");
+                                DebugEx.Error("Incorrect size (" + size + ") in size list");
                                 return;
                             }
                         }
@@ -141,7 +141,7 @@ namespace Common.UI.DockWidgets
 
                             if (newSize < MINIMUM_SIZE)
                             {
-                                Debug.LogError("New size " + newSize + " is less than minimum value: " + MINIMUM_SIZE);
+                                DebugEx.Error("New size " + newSize + " is less than minimum value: " + MINIMUM_SIZE);
                                 return;
                             }
 
@@ -180,7 +180,7 @@ namespace Common.UI.DockWidgets
                         listStr += value[i];
                     }
 
-                    Debug.LogError("Invalid size list argument: [" + listStr + "]");
+                    DebugEx.Error("Invalid size list argument: [" + listStr + "]");
                 }
             }
         }
@@ -256,7 +256,7 @@ namespace Common.UI.DockWidgets
 
             if (!sInstances.Remove(this))
             {
-                Debug.LogError("Failed to remove docking area");
+                DebugEx.Error("Failed to remove docking area");
             }
         }
 
@@ -372,7 +372,7 @@ namespace Common.UI.DockWidgets
 
                 default:
                 {
-                    Debug.LogError("Unknown orientation: " + mOrientation);
+                    DebugEx.Error("Unknown orientation: " + mOrientation);
                 }
                 break;
             }
@@ -513,7 +513,7 @@ namespace Common.UI.DockWidgets
             }
             else
             {
-                Debug.LogError("Unexpected behaviour in DockingAreaScript.PreprocessDockWidgetDrag");
+                DebugEx.Error("Unexpected behaviour in DockingAreaScript.PreprocessDockWidgetDrag");
             }
         }
 
@@ -656,7 +656,7 @@ namespace Common.UI.DockWidgets
                                 }
                                 else
                                 {
-                                    Debug.LogError("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag");
+                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag");
                                 }
                             }
                             else
@@ -864,7 +864,7 @@ namespace Common.UI.DockWidgets
                                 }
                                 else
                                 {
-                                    Debug.LogError("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag");
+                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag");
                                 }
                             }
                             else
@@ -1101,7 +1101,7 @@ namespace Common.UI.DockWidgets
                                 }
                                 else
                                 {
-                                    Debug.LogError("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag");
+                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag");
                                 }
                             }
                             else
@@ -1200,13 +1200,13 @@ namespace Common.UI.DockWidgets
 
                 case DragInfoHolder.MouseLocation.Outside:
                 {
-                    Debug.LogError("Unexpected mouse location: " + DragInfoHolder.mouseLocation);
+                    DebugEx.Error("Unexpected mouse location: " + DragInfoHolder.mouseLocation);
                 }
                 break;
 
                 default:
                 {
-                    Debug.LogError("Unknown mouse location: " + DragInfoHolder.mouseLocation);
+                    DebugEx.Error("Unknown mouse location: " + DragInfoHolder.mouseLocation);
                 }
                 break;
             }
@@ -1437,13 +1437,13 @@ namespace Common.UI.DockWidgets
                                             case MouseLocation.Inside:
                                             case MouseLocation.Outside:
                                             {
-                                                Debug.LogError("Incorrect mouse location: " + usedLocation);
+                                                DebugEx.Error("Incorrect mouse location: " + usedLocation);
                                             }
                                             break;
 
                                             default:
                                             {
-                                                Debug.LogError("Unknown mouse location: " + usedLocation);
+                                                DebugEx.Error("Unknown mouse location: " + usedLocation);
                                             }
                                             break;
                                         }
@@ -1459,7 +1459,7 @@ namespace Common.UI.DockWidgets
 
                                         if (attempt == 2)
                                         {
-                                            Debug.LogError("Unexpected behaviour in DockingAreaScript.Update");
+                                            DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
                                             return;
                                         }
 
@@ -1475,7 +1475,7 @@ namespace Common.UI.DockWidgets
                                                 }
                                                 else
                                                 {
-                                                    Debug.LogError("Unexpected behaviour in DockingAreaScript.Update");
+                                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
                                                     return;
                                                 }
                                             }
@@ -1491,7 +1491,7 @@ namespace Common.UI.DockWidgets
                                                 }
                                                 else
                                                 {
-                                                    Debug.LogError("Unexpected behaviour in DockingAreaScript.Update");
+                                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
                                                     return;
                                                 }
                                             }
@@ -1507,7 +1507,7 @@ namespace Common.UI.DockWidgets
                                                 }
                                                 else
                                                 {
-                                                    Debug.LogError("Unexpected behaviour in DockingAreaScript.Update");
+                                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
                                                     return;
                                                 }
                                             }
@@ -1523,7 +1523,7 @@ namespace Common.UI.DockWidgets
                                                 }
                                                 else
                                                 {
-                                                    Debug.LogError("Unexpected behaviour in DockingAreaScript.Update");
+                                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
                                                     return;
                                                 }
                                             }
@@ -1532,13 +1532,13 @@ namespace Common.UI.DockWidgets
                                             case MouseLocation.Inside:
                                             case MouseLocation.Outside:
                                             {
-                                                Debug.LogError("Incorrect mouse location: " + usedLocation);
+                                                DebugEx.Error("Incorrect mouse location: " + usedLocation);
                                             }
                                             break;
 
                                             default:
                                             {
-                                                Debug.LogError("Unknown mouse location: " + usedLocation);
+                                                DebugEx.Error("Unknown mouse location: " + usedLocation);
                                             }
                                             break;
                                         }
@@ -1611,13 +1611,13 @@ namespace Common.UI.DockWidgets
                                             case MouseLocation.Inside:
                                             case MouseLocation.Outside:
                                             {
-                                                Debug.LogError("Incorrect mouse location: " + usedLocation);
+                                                DebugEx.Error("Incorrect mouse location: " + usedLocation);
                                             }
                                             break;
 
                                             default:
                                             {
-                                                Debug.LogError("Unknown mouse location: " + usedLocation);
+                                                DebugEx.Error("Unknown mouse location: " + usedLocation);
                                             }
                                             break;
                                         }
@@ -1633,12 +1633,12 @@ namespace Common.UI.DockWidgets
                                 }
                                 else
                                 {
-                                    Debug.LogError("Unexpected behaviour in DockingAreaScript.Update");
+                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
                                 }
                             }
                             else
                             {
-                                Debug.LogError("Unexpected behaviour in DockingAreaScript.Update");
+                                DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
                             }
                         }
                     }
@@ -1646,7 +1646,7 @@ namespace Common.UI.DockWidgets
 
                     default:
                     {
-                        Debug.LogError("Unknown mouse state: " + sMouseState);
+                        DebugEx.Error("Unknown mouse state: " + sMouseState);
                     }
                     break;
                 }
@@ -1703,7 +1703,7 @@ namespace Common.UI.DockWidgets
 
                         default:
                         {
-                            Debug.LogError("Unknown mouse location: " + sMouseLocation);
+                            DebugEx.Error("Unknown mouse location: " + sMouseLocation);
                         }
                         break;
                     }
@@ -1998,7 +1998,7 @@ namespace Common.UI.DockWidgets
                 }
                 else
                 {
-                    Debug.LogError("Invalid orientation value: " + orientation);
+                    DebugEx.Error("Invalid orientation value: " + orientation);
                 }
             }
 
@@ -2027,7 +2027,7 @@ namespace Common.UI.DockWidgets
             }
             else
             {
-                Debug.LogError("Failed to remove docking group");
+                DebugEx.Error("Failed to remove docking group");
             }
         }
 
@@ -2105,12 +2105,12 @@ namespace Common.UI.DockWidgets
                 }
                 else
                 {
-                    Debug.LogError("Failed to remove docking area");
+                    DebugEx.Error("Failed to remove docking area");
                 }
             }
             else
             {
-                Debug.LogError("Docking area belongs not to this docking area");
+                DebugEx.Error("Docking area belongs not to this docking area");
             }
         }
 

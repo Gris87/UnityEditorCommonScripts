@@ -37,7 +37,7 @@ namespace Common.UI.Listeners
             }
             else
             {
-                Debug.LogError("Two instances of ResizeListenerScript not supported");
+                DebugEx.Error("Two instances of ResizeListenerScript not supported");
             }
 
             mScreenWidth  = Screen.width;
@@ -98,7 +98,7 @@ namespace Common.UI.Listeners
             }
             else
             {
-                Debug.LogError("There is no ResizeListenerScript instance");
+                DebugEx.Error("There is no ResizeListenerScript instance");
             }
         }
 

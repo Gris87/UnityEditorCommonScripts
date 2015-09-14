@@ -31,7 +31,7 @@ namespace Common.UI.MenuItems
                     }
                     else
                     {
-                        Debug.LogError("Trying to select item \"" + value.name + "\" that is not registered in this radio group");
+                        DebugEx.Error("Trying to select item \"" + value.name + "\" that is not registered in this radio group");
                     }
                 }
             }
@@ -72,7 +72,7 @@ namespace Common.UI.MenuItems
             }
             else
             {
-                Debug.LogError("Item \"" + item.name + "\" already registered in radio group");
+                DebugEx.Error("Item \"" + item.name + "\" already registered in radio group");
             }
         }
 
@@ -102,12 +102,12 @@ namespace Common.UI.MenuItems
                 }
                 else
                 {
-                    Debug.LogError("Failed to deregister item \"" + item.name + "\" from radio froup");
+                    DebugEx.Error("Failed to deregister item \"" + item.name + "\" from radio froup");
                 }
             }
             else
             {
-                Debug.LogError("Item \"" + item.name + "\" is not registered in this radio group");
+                DebugEx.Error("Item \"" + item.name + "\" is not registered in this radio group");
             }
         }
     }

@@ -40,7 +40,7 @@ namespace Common.App
 
                 default:
                 {
-                    Debug.LogWarning("Unknown localization for build type \"" + Version.buildType.ToString() + "\". Using default value.");
+                    DebugEx.Warning("Unknown localization for build type \"" + Version.buildType.ToString() + "\". Using default value.");
                     res += Version.buildType.ToString();
                 }
                 break;

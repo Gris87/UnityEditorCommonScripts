@@ -49,7 +49,7 @@ namespace Common.UI.MenuItems
                     return mTokenId.ToString();
                 }
 
-                Debug.LogError("MenuItem.Name returns empty string");
+                DebugEx.Error("MenuItem.Name returns empty string");
                 return "";
             }
         }
@@ -79,7 +79,7 @@ namespace Common.UI.MenuItems
                     }
                 }
 
-                Debug.LogError("MenuItem.Text returns empty string");
+                DebugEx.Error("MenuItem.Text returns empty string");
                 return "";
             }
 

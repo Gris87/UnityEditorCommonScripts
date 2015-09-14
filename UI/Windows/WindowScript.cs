@@ -1463,7 +1463,7 @@ namespace Common.UI.Windows
             }
             else
             {
-                Debug.LogError("Border game object already created");
+                DebugEx.Error("Border game object already created");
             }
         }
 
@@ -1528,7 +1528,7 @@ namespace Common.UI.Windows
 
                 default:
                 {
-                    Debug.LogError("Unknown window frame: " + mFrame);
+                    DebugEx.Error("Unknown window frame: " + mFrame);
                 }
                 break;
             }
@@ -2042,13 +2042,13 @@ namespace Common.UI.Windows
                 case WindowFrameType.SingleFrame:
                 case WindowFrameType.Frameless:
                 {
-                    Debug.LogError("Incorrect window frame: " + mFrame);
+                    DebugEx.Error("Incorrect window frame: " + mFrame);
                 }
                 break;
 
                 default:
                 {
-                    Debug.LogError("Unknown window frame: " + mFrame);
+                    DebugEx.Error("Unknown window frame: " + mFrame);
                 }
                 break;
             }
@@ -2179,7 +2179,7 @@ namespace Common.UI.Windows
 
                 default:
                 {
-                    Debug.LogError("Unknown window state: " + mState);
+                    DebugEx.Error("Unknown window state: " + mState);
                 }
                 break;
             }
@@ -2311,7 +2311,7 @@ namespace Common.UI.Windows
 
             if (!sInstances.Remove(this))
             {
-                Debug.LogError("Failed to remove window");
+                DebugEx.Error("Failed to remove window");
             }
 
             if (sSelectedWindow == this)
@@ -2703,13 +2703,13 @@ namespace Common.UI.Windows
 
                                             case MouseLocation.Outside:
                                             {
-                                                Debug.LogError("Incorrect mouse location: " + mMouseLocation);
+                                                DebugEx.Error("Incorrect mouse location: " + mMouseLocation);
                                             }
                                             break;
 
                                             default:
                                             {
-                                                Debug.LogError("Unknown mouse location: " + mMouseLocation);
+                                                DebugEx.Error("Unknown mouse location: " + mMouseLocation);
                                             }
                                             break;
                                         }
@@ -2753,13 +2753,13 @@ namespace Common.UI.Windows
 
                                 case WindowState.FullScreen:
                                 {
-                                    Debug.LogError("Incorrect window state: " + mState);
+                                    DebugEx.Error("Incorrect window state: " + mState);
                                 }
                                 break;
 
                                 default:
                                 {
-                                    Debug.LogError("Unknown window state: " + mState);
+                                    DebugEx.Error("Unknown window state: " + mState);
                                 }
                                 break;
                             }
@@ -2804,13 +2804,13 @@ namespace Common.UI.Windows
 
                                 case MouseLocation.Outside:
                                 {
-                                    Debug.LogError("Incorrect mouse location: " + mMouseLocation);
+                                    DebugEx.Error("Incorrect mouse location: " + mMouseLocation);
                                 }
                                 break;
 
                                 default:
                                 {
-                                    Debug.LogError("Unknown mouse location: " + mMouseLocation);
+                                    DebugEx.Error("Unknown mouse location: " + mMouseLocation);
                                 }
                                 break;
                             }
@@ -2871,13 +2871,13 @@ namespace Common.UI.Windows
                             case WindowState.Maximized:
                             case WindowState.FullScreen:
                             {
-                                Debug.LogError("Incorrect window state: " + mState);
+                                DebugEx.Error("Incorrect window state: " + mState);
                             }
                             break;
 
                             default:
                             {
-                                Debug.LogError("Unknown window state: " + mState);
+                                DebugEx.Error("Unknown window state: " + mState);
                             }
                             break;
                         }
@@ -2935,13 +2935,13 @@ namespace Common.UI.Windows
                             case WindowState.Maximized:
                             case WindowState.FullScreen:
                             {
-                                Debug.LogError("Incorrect window state: " + mState);
+                                DebugEx.Error("Incorrect window state: " + mState);
                             }
                             break;
 
                             default:
                             {
-                                Debug.LogError("Unknown window state: " + mState);
+                                DebugEx.Error("Unknown window state: " + mState);
                             }
                             break;
                         }
@@ -3285,7 +3285,7 @@ namespace Common.UI.Windows
 
                     default:
                     {
-                        Debug.LogError("Unknown mouse state: " + mMouseState);
+                        DebugEx.Error("Unknown mouse state: " + mMouseState);
                     }
                     break;
                 }
@@ -3385,7 +3385,7 @@ namespace Common.UI.Windows
                     }
                     else
                     {
-                        Debug.LogError("Unexpected behaviour in WindowScript.SetSelected");
+                        DebugEx.Error("Unexpected behaviour in WindowScript.SetSelected");
                     }
                 }
                 else
@@ -3497,7 +3497,7 @@ namespace Common.UI.Windows
 
                         default:
                         {
-                            Debug.LogError("Unknown window frame: " + mFrame);
+                            DebugEx.Error("Unknown window frame: " + mFrame);
                         }
                         break;
                     }
@@ -3551,7 +3551,7 @@ namespace Common.UI.Windows
             }
             else
             {
-                Debug.LogError("Unexpected behaviour in WindowScript.AddToFullscreenList");
+                DebugEx.Error("Unexpected behaviour in WindowScript.AddToFullscreenList");
             }
         }
 
@@ -3590,7 +3590,7 @@ namespace Common.UI.Windows
             }
             else
             {
-                Debug.LogError("Unexpected behaviour in WindowScript.RemoveFromFullscreenList");
+                DebugEx.Error("Unexpected behaviour in WindowScript.RemoveFromFullscreenList");
             }
         }
 

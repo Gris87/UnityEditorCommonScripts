@@ -29,7 +29,7 @@ namespace Common.UI.Listeners
             }
             else
             {
-                Debug.LogError("Two instances of EscapeButtonListener not supported");
+                DebugEx.Error("Two instances of EscapeButtonListener not supported");
             }
 
             mHandlers = new List<EscapeButtonHandler>();
@@ -80,7 +80,7 @@ namespace Common.UI.Listeners
             }
             else
             {
-                Debug.LogError("There is no EscapeButtonListener instance");
+                DebugEx.Error("There is no EscapeButtonListener instance");
             }
         }
 
@@ -101,7 +101,7 @@ namespace Common.UI.Listeners
                 }
                 else
                 {
-                    Debug.LogError("Failed to remove handler");
+                    DebugEx.Error("Failed to remove handler");
                 }
             }
         }

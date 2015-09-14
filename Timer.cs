@@ -33,7 +33,7 @@ namespace Common
 				}
 				else
 				{
-					Debug.LogError("Invalid duration value: " + duration);
+					DebugEx.Error("Invalid duration value: " + duration);
 				}
 			}
 		}
@@ -134,7 +134,7 @@ namespace Common
 			}
 			else
 			{
-				Debug.LogError("Invalid duration value: " + duration);
+				DebugEx.Error("Invalid duration value: " + duration);
 			}
 		}
 

@@ -49,7 +49,7 @@ namespace Common.UI.Popups
             }
             else
             {
-                Debug.LogError("Two instances of PopupMenuAreaScript not supported");
+                DebugEx.Error("Two instances of PopupMenuAreaScript not supported");
             }
 
             mPopupMenus    = new List<PopupMenu>();
@@ -165,7 +165,7 @@ namespace Common.UI.Popups
             }
             else
             {
-                Debug.LogError("There is no PopupMenuAreaScript instance");
+                DebugEx.Error("There is no PopupMenuAreaScript instance");
             }
         }
 
@@ -185,7 +185,7 @@ namespace Common.UI.Popups
             }
             else
             {
-                Debug.LogError("There is no PopupMenuAreaScript instance");
+                DebugEx.Error("There is no PopupMenuAreaScript instance");
             }
         }
 
@@ -205,7 +205,7 @@ namespace Common.UI.Popups
             }
             else
             {
-                Debug.LogError("There is no PopupMenuAreaScript instance");
+                DebugEx.Error("There is no PopupMenuAreaScript instance");
             }
         }
 
@@ -224,7 +224,7 @@ namespace Common.UI.Popups
             }
             else
             {
-                Debug.LogError("There is no PopupMenuAreaScript instance");
+                DebugEx.Error("There is no PopupMenuAreaScript instance");
             }
         }
 
@@ -249,12 +249,12 @@ namespace Common.UI.Popups
                 }
                 else
                 {
-                    Debug.LogError("Failed to deregister popup menu");
+                    DebugEx.Error("Failed to deregister popup menu");
                 }
             }
             else
             {
-                Debug.LogError("There is no PopupMenuAreaScript instance");
+                DebugEx.Error("There is no PopupMenuAreaScript instance");
             }
         }
 
@@ -272,7 +272,7 @@ namespace Common.UI.Popups
             }
             else
             {
-                Debug.LogError("There is no PopupMenuAreaScript instance");
+                DebugEx.Error("There is no PopupMenuAreaScript instance");
             }
         }
 
@@ -284,7 +284,7 @@ namespace Common.UI.Popups
         {
             if (ms < 0f)
             {
-                Debug.LogError("Incorrect delay value: " + ms);
+                DebugEx.Error("Incorrect delay value: " + ms);
             }
 
             mDelay = ms / 1000f;

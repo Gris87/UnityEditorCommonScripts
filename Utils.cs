@@ -32,14 +32,14 @@ namespace Common
                     {
                         if (scalers.Length > 1)
                         {
-                            Debug.LogWarning("Several CanvasScalers found: " + scalers.Length);
+                            DebugEx.Warning("Several CanvasScalers found: " + scalers.Length);
                         }
 
                         sCanvasScaler = scalers[0];
                     }
                     else
                     {
-                        Debug.LogError("Failed to find CanvasScaler");
+                        DebugEx.Error("Failed to find CanvasScaler");
                         return 1f;
                     }
                 }

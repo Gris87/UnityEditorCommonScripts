@@ -73,7 +73,7 @@ namespace Common.UI.DockWidgets
                     }
                     else
                     {
-                        Debug.LogError("Invalid selected index value: " + value);
+                        DebugEx.Error("Invalid selected index value: " + value);
                     }
                 }
             }
@@ -421,12 +421,12 @@ namespace Common.UI.DockWidgets
                 }
                 else
                 {
-                    Debug.LogError("Failed to update tab image");
+                    DebugEx.Error("Failed to update tab image");
                 }
             }
             else
             {
-                Debug.LogError("Dock widget belongs not to this docking group");
+                DebugEx.Error("Dock widget belongs not to this docking group");
             }
         }
 
@@ -450,12 +450,12 @@ namespace Common.UI.DockWidgets
                 }
                 else
                 {
-                    Debug.LogError("Failed to update tab");
+                    DebugEx.Error("Failed to update tab");
                 }
             }
             else
             {
-                Debug.LogError("Dock widget belongs not to this docking group");
+                DebugEx.Error("Dock widget belongs not to this docking group");
             }
         }
 
@@ -475,12 +475,12 @@ namespace Common.UI.DockWidgets
                 }
                 else
                 {
-                    Debug.LogError("Failed to select tab");
+                    DebugEx.Error("Failed to select tab");
                 }
             }
             else
             {
-                Debug.LogError("Dock widget belongs not to this docking group");
+                DebugEx.Error("Dock widget belongs not to this docking group");
             }
         }
 
@@ -651,7 +651,7 @@ namespace Common.UI.DockWidgets
                     }
                     else
                     {
-                        Debug.LogError("Failed to insert dock widget");
+                        DebugEx.Error("Failed to insert dock widget");
                     }
 
                     return;
@@ -851,12 +851,12 @@ namespace Common.UI.DockWidgets
                 }
                 else
                 {
-                    Debug.LogError("Failed to remove dock widget");
+                    DebugEx.Error("Failed to remove dock widget");
                 }
             }
             else
             {
-                Debug.LogError("Dock widget belongs not to this docking group");
+                DebugEx.Error("Dock widget belongs not to this docking group");
             }
         }
 
@@ -875,7 +875,7 @@ namespace Common.UI.DockWidgets
             }
             else
             {
-                Debug.LogError("Unexpected behaviour in DockingGroupScript.OnShowContextMenu");
+                DebugEx.Error("Unexpected behaviour in DockingGroupScript.OnShowContextMenu");
             }
         }
 
