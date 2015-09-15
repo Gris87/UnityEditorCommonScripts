@@ -26,7 +26,7 @@ namespace Common.App
         /// <summary>
         /// Version build.
         /// </summary>
-        public const string BUILD = "0.5.1.1f1";
+        public const string BUILD = "0.5.2.0f3";
 
         /// <summary>
         /// Version postfix.
