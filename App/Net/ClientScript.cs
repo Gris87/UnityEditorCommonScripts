@@ -435,12 +435,14 @@ namespace Common.App.Net
 
 			set
 			{
+				DebugEx.Verbose("mState: " + mState + " => " + value);
+
 				if (mState != value)
 				{
 					ClientState oldState = mState;
 					mState = value;
 
-					DebugEx.Verbose("Client state changed: " + oldState + " => " + mState);
+					DebugEx.Debug("Client state changed: " + oldState + " => " + mState);
 
 					mCurrentState.OnExit(this, mState);
 					mCurrentState = mAllStates[(int)mState];

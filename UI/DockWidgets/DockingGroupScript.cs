@@ -875,7 +875,7 @@ namespace Common.UI.DockWidgets
             }
             else
             {
-                DebugEx.Error("Unexpected behaviour in DockingGroupScript.OnShowContextMenu");
+                DebugEx.Fatal("Unexpected behaviour in DockingGroupScript.OnShowContextMenu()");
             }
         }
 

@@ -145,7 +145,7 @@ namespace Common.UI.Toasts
             }
             else
             {
-                DebugEx.Error("Unexpected behaviour for toast destroyed handler");
+				DebugEx.Fatal("Unexpected behaviour in Toast.ToastDestroyed()");
             }
         }
     }

@@ -3385,7 +3385,7 @@ namespace Common.UI.Windows
                     }
                     else
                     {
-                        DebugEx.Error("Unexpected behaviour in WindowScript.SetSelected");
+                        DebugEx.Fatal("Unexpected behaviour in WindowScript.SetSelected()");
                     }
                 }
                 else
@@ -3551,7 +3551,7 @@ namespace Common.UI.Windows
             }
             else
             {
-                DebugEx.Error("Unexpected behaviour in WindowScript.AddToFullscreenList");
+                DebugEx.Fatal("Unexpected behaviour in WindowScript.AddToFullscreenList()");
             }
         }
 
@@ -3590,7 +3590,7 @@ namespace Common.UI.Windows
             }
             else
             {
-                DebugEx.Error("Unexpected behaviour in WindowScript.RemoveFromFullscreenList");
+                DebugEx.Fatal("Unexpected behaviour in WindowScript.RemoveFromFullscreenList()");
             }
         }
 

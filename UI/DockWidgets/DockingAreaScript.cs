@@ -513,7 +513,7 @@ namespace Common.UI.DockWidgets
             }
             else
             {
-                DebugEx.Error("Unexpected behaviour in DockingAreaScript.PreprocessDockWidgetDrag");
+                DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.PreprocessDockWidgetDrag()");
             }
         }
 
@@ -656,7 +656,7 @@ namespace Common.UI.DockWidgets
                                 }
                                 else
                                 {
-                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag");
+                                    DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag()");
                                 }
                             }
                             else
@@ -864,7 +864,7 @@ namespace Common.UI.DockWidgets
                                 }
                                 else
                                 {
-                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag");
+                                    DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag()");
                                 }
                             }
                             else
@@ -1101,7 +1101,7 @@ namespace Common.UI.DockWidgets
                                 }
                                 else
                                 {
-                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag");
+                                    DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.ProcessDockWidgetDrag()");
                                 }
                             }
                             else
@@ -1459,7 +1459,7 @@ namespace Common.UI.DockWidgets
 
                                         if (attempt == 2)
                                         {
-                                            DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
+                                            DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.Update()");
                                             return;
                                         }
 
@@ -1475,7 +1475,7 @@ namespace Common.UI.DockWidgets
                                                 }
                                                 else
                                                 {
-                                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
+                                                    DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.Update()");
                                                     return;
                                                 }
                                             }
@@ -1491,7 +1491,7 @@ namespace Common.UI.DockWidgets
                                                 }
                                                 else
                                                 {
-                                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
+                                                    DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.Update()");
                                                     return;
                                                 }
                                             }
@@ -1507,7 +1507,7 @@ namespace Common.UI.DockWidgets
                                                 }
                                                 else
                                                 {
-                                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
+                                                    DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.Update()");
                                                     return;
                                                 }
                                             }
@@ -1523,7 +1523,7 @@ namespace Common.UI.DockWidgets
                                                 }
                                                 else
                                                 {
-                                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
+                                                    DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.Update()");
                                                     return;
                                                 }
                                             }
@@ -1633,12 +1633,12 @@ namespace Common.UI.DockWidgets
                                 }
                                 else
                                 {
-                                    DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
+                                    DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.Update()");
                                 }
                             }
                             else
                             {
-                                DebugEx.Error("Unexpected behaviour in DockingAreaScript.Update");
+                                DebugEx.Fatal("Unexpected behaviour in DockingAreaScript.Update()");
                             }
                         }
                     }

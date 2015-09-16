@@ -326,7 +326,7 @@ namespace Common.UI.Tooltips
                 }
                 else
                 {
-                    DebugEx.Error("Unexpected behaviour in TooltipAreaScript.DestroyTooltip");
+                    DebugEx.Fatal("Unexpected behaviour in TooltipAreaScript.DestroyTooltip()");
                 }
             }
 

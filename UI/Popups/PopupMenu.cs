@@ -724,10 +724,12 @@ namespace Common.UI.Popups
         /// <param name="node"><see cref="Common.TreeNode`1"/> instance.</param>
         public void OnShowMenuSubItems(TreeNode<CustomMenuItem> node)
         {
+			DebugEx.VerboseFormat("PopupMenu.OnShowMenuSubItems(node = {0})", node);
+
             if (node.data is MenuItem)
             {
                 MenuItem item = node.data as MenuItem;
-                DebugEx.Verbose("PopupMenu.OnShowMenuSubItems(" + item.name + ")");
+                DebugEx.UserInteraction("PopupMenu.OnShowMenuSubItems(" + item.name + ")");
 
                 if (mChildPopupMenu != null)
                 {
@@ -760,7 +762,7 @@ namespace Common.UI.Popups
         /// </summary>
         public void OnPopupMenuDestroyed()
         {
-            DebugEx.Verbose("PopupMenu.OnPopupMenuDestroyed");
+            DebugEx.Verbose("PopupMenu.OnPopupMenuDestroyed()");
 
             mChildPopupMenu = null;
         }
