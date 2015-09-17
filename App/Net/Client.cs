@@ -9,9 +9,9 @@ using UnityEngine;
 
 namespace Common.App.Net
 {
-	/// <summary>
-	/// Class that represents client.
-	/// </summary>
+    /// <summary>
+    /// Class that represents client.
+    /// </summary>
     public static class Client
     {
         /// <summary>
@@ -26,33 +26,33 @@ namespace Common.App.Net
         /// Polls host list from master server.
         /// </summary>
         /// <returns>Host list.</returns>
-		public static HostData[] PollHostList()
+        public static HostData[] PollHostList()
         {
             return MasterServer.PollHostList();
         }
 
-		/// <summary>
-		/// Fills the message header.
-		/// </summary>
-		/// <param name="writer">Binary writer.</param>
-		/// <param name="type">Message type.</param>
-		private static void FillMessageHeader(BinaryWriter writer, MessageType type)
-		{
-			writer.Write((byte)type);
-		}
+        /// <summary>
+        /// Fills the message header.
+        /// </summary>
+        /// <param name="writer">Binary writer.</param>
+        /// <param name="type">Message type.</param>
+        private static void FillMessageHeader(BinaryWriter writer, MessageType type)
+        {
+            writer.Write((byte)type);
+        }
 
-		/// <summary>
-		/// Builds RevisionRequest message.
-		/// </summary>
-		/// <returns>Byte array that represents RevisionRequest message.</returns>
-		public static byte[] BuildRevisionRequestMessage()
-		{
-			MemoryStream stream = new MemoryStream();
-			BinaryWriter writer = new BinaryWriter(stream);
+        /// <summary>
+        /// Builds RevisionRequest message.
+        /// </summary>
+        /// <returns>Byte array that represents RevisionRequest message.</returns>
+        public static byte[] BuildRevisionRequestMessage()
+        {
+            MemoryStream stream = new MemoryStream();
+            BinaryWriter writer = new BinaryWriter(stream);
 
-			FillMessageHeader(writer, MessageType.RevisionRequest);
+            FillMessageHeader(writer, MessageType.RevisionRequest);
 
-			return stream.ToArray();
-		}
+            return stream.ToArray();
+        }
     }
 }

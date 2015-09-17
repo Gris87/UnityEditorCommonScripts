@@ -86,41 +86,41 @@ namespace Common
 
 
 
-		/// <summary>
-		/// Converts byte array to HEX.
-		/// </summary>
-		/// <returns>Byte array representation in HEX.</returns>
-		/// <param name="bytes">Byte array.</param>
-		public static string BytesInHex(byte[] bytes)
-		{
-			string res = "";
+        /// <summary>
+        /// Converts byte array to HEX.
+        /// </summary>
+        /// <returns>Byte array representation in HEX.</returns>
+        /// <param name="bytes">Byte array.</param>
+        public static string BytesInHex(byte[] bytes)
+        {
+            string res = "";
 
-			for (int i = 0; i < bytes.Length; ++i)
-			{
-				byte left  = (byte)(bytes[i] >> 4);
-				byte right = (byte)(bytes[i] & 0x0F);
+            for (int i = 0; i < bytes.Length; ++i)
+            {
+                byte left  = (byte)(bytes[i] >> 4);
+                byte right = (byte)(bytes[i] & 0x0F);
 
-				if (left > 9)
-				{
-					res += (char)('A' + left - 10);
-				}
-				else
-				{
-					res += (char)('0' + left);
-				}
+                if (left > 9)
+                {
+                    res += (char)('A' + left - 10);
+                }
+                else
+                {
+                    res += (char)('0' + left);
+                }
 
-				if (right > 9)
-				{
-					res += (char)('A' + right - 10);
-				}
-				else
-				{
-					res += (char)('0' + right);
-				}
-			}
+                if (right > 9)
+                {
+                    res += (char)('A' + right - 10);
+                }
+                else
+                {
+                    res += (char)('0' + right);
+                }
+            }
 
-			return res;
-		}
+            return res;
+        }
 
         /// <summary>
         /// Put UI object in specified transform and initialize this UI object.

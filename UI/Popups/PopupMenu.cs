@@ -724,7 +724,7 @@ namespace Common.UI.Popups
         /// <param name="node"><see cref="Common.TreeNode`1"/> instance.</param>
         public void OnShowMenuSubItems(TreeNode<CustomMenuItem> node)
         {
-			DebugEx.VerboseFormat("PopupMenu.OnShowMenuSubItems(node = {0})", node);
+            DebugEx.VerboseFormat("PopupMenu.OnShowMenuSubItems(node = {0})", node);
 
             if (node.data is MenuItem)
             {
