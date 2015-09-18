@@ -714,7 +714,7 @@ namespace Common.UI.Popups
             }
             else
             {
-				DebugEx.Fatal("Unexpected behaviour in PopupMenu.OnSelectItem");
+				DebugEx.Fatal("Unexpected behaviour in PopupMenu.OnSelectItem()");
             }
         }
 
