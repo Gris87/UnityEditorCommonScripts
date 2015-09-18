@@ -49,7 +49,7 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public virtual void OnRequestTimeout(ClientScript script)
             {
-                DebugEx.Error("Unexpected OnRequestTimeout in " + script.mState + " state");
+                DebugEx.Fatal("Unexpected OnRequestTimeout in " + script.mState + " state");
             }
 
             /// <summary>
@@ -58,7 +58,7 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public virtual void OnPollTimeout(ClientScript script)
             {
-                DebugEx.Error("Unexpected OnPollTimeout in " + script.mState + " state");
+                DebugEx.Fatal("Unexpected OnPollTimeout in " + script.mState + " state");
             }
 
             /// <summary>
@@ -67,7 +67,7 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public virtual void OnConnectedToServer(ClientScript script)
             {
-                DebugEx.Error("Unexpected OnConnectedToServer in " + script.mState + " state");
+                DebugEx.Fatal("Unexpected OnConnectedToServer in " + script.mState + " state");
             }
 
             /// <summary>
@@ -77,7 +77,7 @@ namespace Common.App.Net
             /// <param name="info">Disconnection info.</param>
             public virtual void OnDisconnectedFromServer(ClientScript script, NetworkDisconnection info)
             {
-                DebugEx.Error("Unexpected OnDisconnectedFromServer in " + script.mState + " state");
+                DebugEx.Fatal("Unexpected OnDisconnectedFromServer in " + script.mState + " state");
             }
 
             /// <summary>
@@ -87,7 +87,7 @@ namespace Common.App.Net
             /// <param name="error">Error description.</param>
             public virtual void OnFailedToConnect(ClientScript script, NetworkConnectionError error)
             {
-                DebugEx.Error("Unexpected OnFailedToConnect in " + script.mState + " state");
+                DebugEx.Fatal("Unexpected OnFailedToConnect in " + script.mState + " state");
             }
 
             /// <summary>
@@ -97,7 +97,7 @@ namespace Common.App.Net
             /// <param name="error">Error description.</param>
             public virtual void OnFailedToConnectToMasterServer(ClientScript script, NetworkConnectionError error)
             {
-                DebugEx.Error("Unexpected OnFailedToConnectToMasterServer in " + script.mState + " state");
+                DebugEx.Fatal("Unexpected OnFailedToConnectToMasterServer in " + script.mState + " state");
             }
 
             /// <summary>
@@ -107,7 +107,7 @@ namespace Common.App.Net
             /// <param name="msEvent">Master server event.</param>
             public virtual void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
             {
-                DebugEx.Error("Unexpected OnMasterServerEvent in " + script.mState + " state");
+                DebugEx.Fatal("Unexpected OnMasterServerEvent in " + script.mState + " state");
             }
 
             /// <summary>
@@ -117,7 +117,7 @@ namespace Common.App.Net
             /// <param name="bytes">Byte array.</param>
             public virtual void OnMessageReceivedFromServer(ClientScript script, byte[] bytes)
             {
-                DebugEx.Error("Unexpected OnMessageReceivedFromServer in " + script.mState + " state");
+                DebugEx.Fatal("Unexpected OnMessageReceivedFromServer in " + script.mState + " state");
             }
         }
 

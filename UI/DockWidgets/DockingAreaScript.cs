@@ -1200,7 +1200,7 @@ namespace Common.UI.DockWidgets
 
                 case DragInfoHolder.MouseLocation.Outside:
                 {
-                    DebugEx.Error("Unexpected mouse location: " + DragInfoHolder.mouseLocation);
+                    DebugEx.Fatal("Unexpected mouse location: " + DragInfoHolder.mouseLocation);
                 }
                 break;
 
