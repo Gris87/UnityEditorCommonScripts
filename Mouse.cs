@@ -21,6 +21,8 @@ namespace Common
             {
                 UpdatePosition();
 
+				DebugEx.VeryVeryVerboseFormat("Mouse.x = {0}", sX);
+
                 return sX;
             }
         }
@@ -35,6 +37,8 @@ namespace Common
             {
                 UpdatePosition();
 
+				DebugEx.VeryVeryVerboseFormat("Mouse.y = {0}", sY);
+
                 return sY;
             }
         }
@@ -45,7 +49,14 @@ namespace Common
         /// <value>The scaled x coordinate.</value>
         public static float scaledX
         {
-            get { return x / Utils.canvasScale; }
+            get
+			{
+				float res = x / Utils.canvasScale;
+
+				DebugEx.VeryVeryVerboseFormat("Mouse.scaledX = {0}", res);
+
+				return res;
+			}
         }
 
         /// <summary>
@@ -54,7 +65,14 @@ namespace Common
         /// <value>The scaled y coordinate.</value>
         public static float scaledY
         {
-            get { return y / Utils.canvasScale;	}
+            get
+			{
+				float res = y / Utils.canvasScale;
+				
+				DebugEx.VeryVeryVerboseFormat("Mouse.scaledY = {0}", res);
+				
+				return res;
+			}
         }
 
 
@@ -71,6 +89,8 @@ namespace Common
         /// </summary>
         static Mouse()
         {
+			DebugEx.Verbose("Static class Mouse initialized");
+
             sLastUpdate = -1;
             sX          = -1;
             sY          = -1;
@@ -82,6 +102,8 @@ namespace Common
         /// </summary>
         private static void UpdatePosition()
         {
+			DebugEx.VeryVeryVerbose("Mouse.UpdatePosition()");
+
             if (sLastUpdate != Time.frameCount)
             {
                 sLastUpdate = Time.frameCount;
@@ -101,6 +123,8 @@ namespace Common
         /// <param name="hits">List of raycast results.</param>
         public static void RaycastAll(List<RaycastResult> hits)
         {
+			DebugEx.VeryVeryVerbose("Mouse.RaycastAll()");
+
             UpdatePosition();
 
             if (sHits == null)

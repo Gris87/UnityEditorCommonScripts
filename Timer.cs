@@ -22,11 +22,15 @@ namespace Common
         {
             get
             {
+				DebugEx.VeryVeryVerboseFormat("Timer.duration = {0}", mDuration);
+
                 return mDuration;
             }
 
             set
             {
+				DebugEx.VeryVerboseFormat("Timer.duration: {0} => {1}", mDuration, value);
+
                 if (value >= 0f)
                 {
                     mDuration = value;
@@ -46,25 +50,30 @@ namespace Common
         {
             get
             {
-                return mTime != TIMER_NOT_ACTIVE;
+				bool res = (mTime != TIMER_NOT_ACTIVE);
+
+				DebugEx.VeryVeryVerboseFormat("Timer.active = {0}", res);
+
+                return res;
             }
 
             set
             {
-                if (value)
-                {
-                    if (mTime == TIMER_NOT_ACTIVE)
-                    {
-                        Start();
-                    }
-                }
-                else
-                {
-                    if (mTime != TIMER_NOT_ACTIVE)
-                    {
-                        Stop();
-                    }
-                }
+				bool isActive = (mTime != TIMER_NOT_ACTIVE);
+
+				DebugEx.VeryVeryVerboseFormat("Timer.active: {0} => {1}", isActive, value);
+
+				if (isActive != value)
+				{
+					if (value)
+					{
+						Start();
+					}
+					else
+					{
+						Stop();
+					}
+				}
             }
         }
 
@@ -74,7 +83,14 @@ namespace Common
         /// <value><c>true</c> if timer is about to shot; otherwise, <c>false</c>.</value>
         public bool isAboutToShot
         {
-            get { return mTime >= mDuration; }
+            get
+			{
+				bool res = mTime >= mDuration;
+
+				DebugEx.VeryVeryVerboseFormat("Timer.isAboutToShot = {0}", res);
+
+				return res;
+			}
         }
 
 
@@ -92,6 +108,8 @@ namespace Common
         /// <param name="duration">Duration.</param>
         public Timer(UnityAction onTimeout, float duration = 0f)
         {
+			DebugEx.VerboseFormat("Created Timer(onTimeout = {0}, duration = {1}) object", onTimeout, duration);
+
             mDuration  = duration;
             mTime      = TIMER_NOT_ACTIVE;
             mOnTimeout = onTimeout;
@@ -102,6 +120,8 @@ namespace Common
         /// </summary>
         public void Update()
         {
+			DebugEx.VeryVeryVerbose("Timer.Update()");
+
             if (mTime != TIMER_NOT_ACTIVE)
             {
                 mTime += Time.deltaTime;
@@ -118,6 +138,8 @@ namespace Common
         /// </summary>
         public void Start()
         {
+			DebugEx.Verbose("Timer.Start()");
+
             mTime = 0f;
         }
 
@@ -127,6 +149,8 @@ namespace Common
         /// <param name="duration">Duration.</param>
         public void Start(float duration)
         {
+			DebugEx.VerboseFormat("Timer.Start(duration = {0})", duration);
+
             if (duration >= 0f)
             {
                 mDuration = duration;
@@ -143,6 +167,8 @@ namespace Common
         /// </summary>
         public void Stop()
         {
+			DebugEx.Verbose("Timer.Stop()");
+
             mTime = TIMER_NOT_ACTIVE;
         }
     }

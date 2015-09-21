@@ -16,8 +16,19 @@ namespace Common
         /// <value>The data value.</value>
         public T data
         {
-            get { return mData;  }
-            set { mData = value; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("TreeNode<T>.data = {0}", mData);
+
+				return mData;
+			}
+
+            set
+			{
+				DebugEx.VeryVerboseFormat("TreeNode<T>.data: {0} => {1}", mData, value);
+
+				mData = value; 
+			}
         }
 
         /// <summary>
@@ -26,7 +37,12 @@ namespace Common
         /// <value>The parent <see cref="Common.TreeNode`1"/> instance.</value>
         public TreeNode<T> parent
         {
-            get { return mParent; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("TreeNode<T>.parent = {0}", mParent);
+
+				return mParent; 
+			}
         }
 
         /// <summary>
@@ -39,8 +55,12 @@ namespace Common
             {
                 if (mChildren == null)
                 {
+					DebugEx.VeryVeryVerbose("TreeNode<T>.children = null");
+
                     return null;
                 }
+
+				DebugEx.VeryVeryVerboseFormat("TreeNode<T>.children = List({0})", mChildren.Count);
 
                 return mChildren.AsReadOnly();
             }
@@ -60,6 +80,8 @@ namespace Common
         /// <param name="data">Data value.</param>
         public TreeNode(T data)
         {
+			DebugEx.VerboseFormat("Created TreeNode<T>(data = {0}) object", data);
+
             mData     = data;
             mParent   = null;
             mChildren = null;
@@ -72,6 +94,8 @@ namespace Common
         /// <param name="data">Data value.</param>
         public TreeNode<T> AddChild(T data)
         {
+			DebugEx.VerboseFormat("TreeNode<T>.AddChild(data = {0})", data);
+
             if (mChildren == null)
             {
                 mChildren = new List<TreeNode<T>>();
@@ -92,6 +116,8 @@ namespace Common
         /// <param name="values">Data values.</param>
         public TreeNode<T>[] AddChildren(params T[] values)
         {
+			DebugEx.VerboseFormat("TreeNode<T>.AddChildren(values = T[{0}])", values.Length);
+
             TreeNode<T>[] res = new TreeNode<T>[values.Length];
 
             for (int i = 0; i < values.Length; ++i)
@@ -109,6 +135,8 @@ namespace Common
         /// <param name="node">The child <see cref="Common.TreeNode`1"/> instance.</param>
         public bool RemoveChild(TreeNode<T> node)
         {
+			DebugEx.VerboseFormat("TreeNode<T>.RemoveChild(node = {0})", node);
+
             if (mChildren == null)
             {
                 return false;
@@ -135,6 +163,8 @@ namespace Common
         /// <returns><c>true</c> if this instance has children; otherwise, <c>false</c>.</returns>
         public bool HasChildren()
         {
+			DebugEx.Verbose("TreeNode<T>.HasChildren()");
+
             return (mChildren != null && mChildren.Count > 0);
         }
     }
