@@ -220,7 +220,7 @@ namespace Common
             // TODO: [Minor] Try to use RenderTexture on Unity Pro
             RenderTexture rt = new RenderTexture(screenWidth, screenHeight, 24);
 
-            //foreach(Camera cam in Camera.allCameras)
+            //foreach (Camera cam in Camera.allCameras)
             //{
             //	cam.targetTexture = rt;
             //	cam.Render();

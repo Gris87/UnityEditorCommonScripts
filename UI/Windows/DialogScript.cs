@@ -61,7 +61,7 @@ namespace Common.UI.Windows
         {
             base.OnDestroy();
 
-            foreach(KeyValuePair<MonoBehaviour, bool> componentState in mComponentStates)
+            foreach (KeyValuePair<MonoBehaviour, bool> componentState in mComponentStates)
             {
                 if (componentState.Key != null)
                 {
