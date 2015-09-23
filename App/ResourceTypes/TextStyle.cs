@@ -16,8 +16,19 @@ namespace Common.App.ResourceTypes
         /// <value>Font.</value>
         public Font font
         {
-            get { return mFont;  }
-            set { mFont = value; }
+            get 
+			{
+				DebugEx.VeryVeryVerboseFormat("TextStyle.font = {0}", mFont);
+
+				return mFont;  
+			}
+
+            set 
+			{
+				DebugEx.VeryVerboseFormat("TextStyle.font: {0} => {1}", mFont, value);
+
+				mFont = value;
+			}
         }
 
         /// <summary>
@@ -26,8 +37,19 @@ namespace Common.App.ResourceTypes
         /// <value>The font style.</value>
         public FontStyle fontStyle
         {
-            get { return mFontStyle;  }
-            set { mFontStyle = value; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("TextStyle.fontStyle = {0}", mFontStyle);
+
+				return mFontStyle;
+			}
+
+            set
+			{
+				DebugEx.VeryVerboseFormat("TextStyle.fontStyle: {0} => {1}", mFontStyle, value);
+
+				mFontStyle = value;
+			}
         }
 
         /// <summary>
@@ -38,11 +60,15 @@ namespace Common.App.ResourceTypes
         {
             get
             {
+				DebugEx.VeryVeryVerboseFormat("TextStyle.fontSize = {0}", mFontSize);
+
                 return mFontSize;
             }
 
             set
             {
+				DebugEx.VeryVerboseFormat("TextStyle.fontSize: {0} => {1}", mFontSize, value);
+
                 if (value < 0)
                 {
                     value = 0;
@@ -60,11 +86,15 @@ namespace Common.App.ResourceTypes
         {
             get
             {
+				DebugEx.VeryVeryVerboseFormat("TextStyle.lineSpacing = {0}", mLineSpacing);
+
                 return mLineSpacing;
             }
 
             set
             {
+				DebugEx.VeryVerboseFormat("TextStyle.lineSpacing: {0} => {1}", mLineSpacing, value);
+
                 if (value < 0f)
                 {
                     value = 0f;
@@ -80,8 +110,19 @@ namespace Common.App.ResourceTypes
         /// <value>The alignment.</value>
         public TextAnchor alignment
         {
-            get { return mAlignment;  }
-            set { mAlignment = value; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("TextStyle.alignment = {0}", mAlignment);
+
+				return mAlignment;
+			}
+
+            set
+			{
+				DebugEx.VeryVerboseFormat("TextStyle.alignment: {0} => {1}", mAlignment, value);
+
+				mAlignment = value;
+			}
         }
 
         /// <summary>
@@ -90,8 +131,19 @@ namespace Common.App.ResourceTypes
         /// <value>Font color.</value>
         public Color color
         {
-            get { return mColor;  }
-            set { mColor = value; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("TextStyle.color = {0}", mColor);
+
+				return mColor;
+			}
+
+            set
+			{
+				DebugEx.VeryVerboseFormat("TextStyle.color: {0} => {1}", mColor, value);
+
+				mColor = value;
+			}
         }
 
 
@@ -110,6 +162,8 @@ namespace Common.App.ResourceTypes
         /// </summary>
         public TextStyle()
         {
+			DebugEx.Verbose("Created TextStyle object");
+
             mFont        = null;
             mFontStyle   = FontStyle.Normal;
             mFontSize    = 12;
@@ -124,6 +178,8 @@ namespace Common.App.ResourceTypes
         /// <param name="text">Text component.</param>
         public void Apply(Text text)
         {
+			DebugEx.VerboseFormat("TextStyle.Apply(text = {0})", text);
+
             text.font        = mFont;
             text.fontStyle   = mFontStyle;
             text.fontSize    = mFontSize;

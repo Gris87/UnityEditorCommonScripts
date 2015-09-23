@@ -22,6 +22,8 @@ namespace Common.App.ResourceTypes.Loaders
                     mTexture2D = AssetUtils.LoadScaledTexture2D(mPath);
                 }
 
+				DebugEx.VeryVeryVerboseFormat("ScaledTexture2DLoader.texture = {0}", mTexture2D);
+
                 return mTexture2D;
             }
         }
@@ -39,6 +41,8 @@ namespace Common.App.ResourceTypes.Loaders
         /// <param name="path">Path to texture.</param>
         public ScaledTexture2DLoader(string path)
         {
+			DebugEx.VerboseFormat("Created ScaledTexture2DLoader(path = {0}) object", path);
+
             mPath      = path;
             mTexture2D = null;
         }

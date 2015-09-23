@@ -37,7 +37,7 @@ namespace Common
                 }
                 else
                 {
-                    DebugEx.Error("Invalid duration value: " + duration);
+					DebugEx.ErrorFormat("Invalid duration value: {0}", duration);
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace Common
             {
 				bool isActive = (mTime != TIMER_NOT_ACTIVE);
 
-				DebugEx.VeryVeryVerboseFormat("Timer.active: {0} => {1}", isActive, value);
+				DebugEx.VeryVerboseFormat("Timer.active: {0} => {1}", isActive, value);
 
 				if (isActive != value)
 				{
@@ -158,7 +158,7 @@ namespace Common
             }
             else
             {
-                DebugEx.Error("Invalid duration value: " + duration);
+				DebugEx.ErrorFormat("Invalid duration value: {0}", duration);
             }
         }
 

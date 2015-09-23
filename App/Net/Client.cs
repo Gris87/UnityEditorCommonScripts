@@ -19,6 +19,8 @@ namespace Common.App.Net
         /// </summary>
         public static void RequestHostList()
         {
+			DebugEx.Verbose("Client.RequestHostList()");
+
             MasterServer.RequestHostList(CommonConstants.SERVER_NAME);
         }
 
@@ -28,6 +30,8 @@ namespace Common.App.Net
         /// <returns>Host list.</returns>
         public static HostData[] PollHostList()
         {
+			DebugEx.Verbose("Client.PollHostList()");
+
             return MasterServer.PollHostList();
         }
 
@@ -38,6 +42,8 @@ namespace Common.App.Net
         /// <param name="type">Message type.</param>
         private static void FillMessageHeader(BinaryWriter writer, MessageType type)
         {
+			DebugEx.VerboseFormat("Client.FillMessageHeader(writer = {0}, type = {1})", writer, type);
+
             writer.Write((byte)type);
         }
 
@@ -47,6 +53,8 @@ namespace Common.App.Net
         /// <returns>Byte array that represents RevisionRequest message.</returns>
         public static byte[] BuildRevisionRequestMessage()
         {
+			DebugEx.Verbose("Client.BuildRevisionRequestMessage()");
+
             MemoryStream stream = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(stream);
 
