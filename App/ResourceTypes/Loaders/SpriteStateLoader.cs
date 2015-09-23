@@ -28,7 +28,7 @@ namespace Common.App.ResourceTypes.Loaders
                     mInitialized = true;
                 }
 
-				DebugEx.VeryVeryVerboseFormat("SpriteStateLoader.spriteState = {0}", mSpriteState);
+                DebugEx.VeryVeryVerboseFormat("SpriteStateLoader.spriteState = {0}", mSpriteState);
 
                 return mSpriteState;
             }
@@ -52,7 +52,7 @@ namespace Common.App.ResourceTypes.Loaders
         /// <param name="pressed">Pressed sprite.</param>
         public SpriteStateLoader(SpriteLoader disabled, SpriteLoader highlighted, SpriteLoader pressed)
         {
-			DebugEx.VerboseFormat("Created SpriteStateLoader(disabled = {0}, highlighted = {1}, pressed = {2}) object", disabled, highlighted, pressed);
+            DebugEx.VerboseFormat("Created SpriteStateLoader(disabled = {0}, highlighted = {1}, pressed = {2}) object", disabled, highlighted, pressed);
 
             mDisabled    = disabled;
             mHighlighted = highlighted;

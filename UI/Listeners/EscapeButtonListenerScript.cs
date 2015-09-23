@@ -23,7 +23,7 @@ namespace Common.UI.Listeners
         /// </summary>
         void Start()
         {
-			DebugEx.Verbose("EscapeButtonListenerScript.Start()");
+            DebugEx.Verbose("EscapeButtonListenerScript.Start()");
 
             if (sInstance == null)
             {
@@ -44,7 +44,7 @@ namespace Common.UI.Listeners
         /// </summary>
         void OnDestroy()
         {
-			DebugEx.Verbose("EscapeButtonListenerScript.OnDestroy()");
+            DebugEx.Verbose("EscapeButtonListenerScript.OnDestroy()");
 
             if (sInstance == this)
             {
@@ -57,7 +57,7 @@ namespace Common.UI.Listeners
         /// </summary>
         void Update()
         {
-			DebugEx.VeryVeryVerbose("EscapeButtonListenerScript.Update()");
+            DebugEx.VeryVeryVerbose("EscapeButtonListenerScript.Update()");
 
             if (InputControl.GetButtonDown(Controls.buttons.escape, true))
             {
@@ -77,7 +77,7 @@ namespace Common.UI.Listeners
         /// <param name="handler">Handler.</param>
         public static void PushHandlerToTop(IEscapeButtonHandler handler)
         {
-			DebugEx.VerboseFormat("EscapeButtonListenerScript.PushHandlerToTop(handler = {0})", handler);
+            DebugEx.VerboseFormat("EscapeButtonListenerScript.PushHandlerToTop(handler = {0})", handler);
 
             if (sInstance != null)
             {
@@ -98,7 +98,7 @@ namespace Common.UI.Listeners
         /// <param name="handler">Handler.</param>
         public static void RemoveHandler(IEscapeButtonHandler handler)
         {
-			DebugEx.VerboseFormat("EscapeButtonListenerScript.RemoveHandler(handler = {0})", handler);
+            DebugEx.VerboseFormat("EscapeButtonListenerScript.RemoveHandler(handler = {0})", handler);
 
             if (sInstance != null)
             {

@@ -18,14 +18,14 @@ namespace Common.UI.MenuItems
         {
             get
             {
-				DebugEx.VeryVeryVerboseFormat("MenuRadioGroup.selectedItem = {0}", mSelectedItem);
+                DebugEx.VeryVeryVerboseFormat("MenuRadioGroup.selectedItem = {0}", mSelectedItem);
 
                 return mSelectedItem;
             }
 
             set
             {
-				DebugEx.VeryVerboseFormat("MenuRadioGroup.selectedItem: {0} => {1}", mSelectedItem, value);
+                DebugEx.VeryVerboseFormat("MenuRadioGroup.selectedItem: {0} => {1}", mSelectedItem, value);
 
                 if (mSelectedItem != value)
                 {
@@ -35,7 +35,7 @@ namespace Common.UI.MenuItems
                     }
                     else
                     {
-						DebugEx.Error("Trying to select item \"{0}\" that is not registered in this radio group", value.name);
+                        DebugEx.Error("Trying to select item \"{0}\" that is not registered in this radio group", value.name);
                     }
                 }
             }
@@ -53,7 +53,7 @@ namespace Common.UI.MenuItems
         /// </summary>
         public MenuRadioGroup()
         {
-			DebugEx.Verbose("Created MenuRadioGroup object");
+            DebugEx.Verbose("Created MenuRadioGroup object");
 
             mItems        = new List<MenuItem>();
             mSelectedItem = null;
@@ -65,7 +65,7 @@ namespace Common.UI.MenuItems
         /// <param name="item">Menu item.</param>
         public void Register(MenuItem item)
         {
-			DebugEx.VerboseFormat("MenuRadioGroup.Register(item = {0})", item);
+            DebugEx.VerboseFormat("MenuRadioGroup.Register(item = {0})", item);
 
             if (item.radioGroup == null)
             {
@@ -80,7 +80,7 @@ namespace Common.UI.MenuItems
             }
             else
             {
-				DebugEx.ErrorFormat("Item \"{0}\" already registered in radio group", item.name);
+                DebugEx.ErrorFormat("Item \"{0}\" already registered in radio group", item.name);
             }
         }
 
@@ -90,7 +90,7 @@ namespace Common.UI.MenuItems
         /// <param name="item">Menu item.</param>
         public void Deregister(MenuItem item)
         {
-			DebugEx.VerboseFormat("MenuRadioGroup.Deregister(item = {0})", item);
+            DebugEx.VerboseFormat("MenuRadioGroup.Deregister(item = {0})", item);
 
             if (item.radioGroup == this)
             {
@@ -112,12 +112,12 @@ namespace Common.UI.MenuItems
                 }
                 else
                 {
-					DebugEx.ErrorFormat("Failed to deregister item \"{0}\" from radio froup", item.name);
+                    DebugEx.ErrorFormat("Failed to deregister item \"{0}\" from radio froup", item.name);
                 }
             }
             else
             {
-				DebugEx.ErrorFormat("Item \"{0}\" is not registered in this radio group", item.name);
+                DebugEx.ErrorFormat("Item \"{0}\" is not registered in this radio group", item.name);
             }
         }
     }

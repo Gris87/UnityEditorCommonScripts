@@ -18,18 +18,18 @@ namespace Common.UI.Popups
         public object sourceObject
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("ContextMenuScript.sourceObject = {0}", mSourceObject);
+            {
+                DebugEx.VeryVeryVerboseFormat("ContextMenuScript.sourceObject = {0}", mSourceObject);
 
-				return mSourceObject; 
-			}
+                return mSourceObject;
+            }
 
             set
-			{
-				DebugEx.VeryVerboseFormat("ContextMenuScript.sourceObject: {0} => {1}", mSourceObject, value);
+            {
+                DebugEx.VeryVerboseFormat("ContextMenuScript.sourceObject: {0} => {1}", mSourceObject, value);
 
-				mSourceObject = value; 
-			}
+                mSourceObject = value;
+            }
         }
 
         /// <summary>
@@ -39,18 +39,18 @@ namespace Common.UI.Popups
         public UnityAction<object> onShowContextMenu
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("ContextMenuScript.onShowContextMenu = {0}", mOnShowContextMenu);
+            {
+                DebugEx.VeryVeryVerboseFormat("ContextMenuScript.onShowContextMenu = {0}", mOnShowContextMenu);
 
-				return mOnShowContextMenu; 
-			}
+                return mOnShowContextMenu;
+            }
 
             set
-			{
-				DebugEx.VeryVerboseFormat("ContextMenuScript.onShowContextMenu: {0} => {1}", mOnShowContextMenu, value);
+            {
+                DebugEx.VeryVerboseFormat("ContextMenuScript.onShowContextMenu: {0} => {1}", mOnShowContextMenu, value);
 
-				mOnShowContextMenu = value; 
-			}
+                mOnShowContextMenu = value;
+            }
         }
 
 
@@ -66,7 +66,7 @@ namespace Common.UI.Popups
         /// <param name="eventData">Pointer data.</param>
         public void OnPointerDown(PointerEventData eventData)
         {
-			DebugEx.VerboseFormat("ContextMenuScript.OnPointerDown(eventData = {0})", eventData);
+            DebugEx.VerboseFormat("ContextMenuScript.OnPointerDown(eventData = {0})", eventData);
 
             if (eventData.button == PointerEventData.InputButton.Right)
             {

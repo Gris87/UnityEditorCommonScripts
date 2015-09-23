@@ -17,7 +17,7 @@ namespace Common.App
         /// </summary>
         public static string GetVersionString()
         {
-			DebugEx.Verbose("AppUtils.GetVersionString()");
+            DebugEx.Verbose("AppUtils.GetVersionString()");
 
             string res = Version.BUILD + " ";
 
@@ -42,7 +42,7 @@ namespace Common.App
 
                 default:
                 {
-					DebugEx.WarningFormat("Unknown localization for build type \"{0}\"", Version.buildType);
+                    DebugEx.WarningFormat("Unknown localization for build type \"{0}\"", Version.buildType);
                     res += Version.buildType.ToString();
                 }
                 break;
@@ -56,7 +56,7 @@ namespace Common.App
         /// </summary>
         public static void ShowContributeMessage()
         {
-			DebugEx.Verbose("AppUtils.ShowContributeMessage()");
+            DebugEx.Verbose("AppUtils.ShowContributeMessage()");
 
             ShowContributeMessage(Global.dockingAreaScript.transform);
         }
@@ -67,7 +67,7 @@ namespace Common.App
         /// <param name="parent">Parent transform.</param>
         public static void ShowContributeMessage(Transform parent)
         {
-			DebugEx.VerboseFormat("AppUtils.ShowContributeMessage(parent = {0})", parent);
+            DebugEx.VerboseFormat("AppUtils.ShowContributeMessage(parent = {0})", parent);
 
             Toast.Show(parent, R.sections.Toasts.strings.contribute, Toast.LENGTH_LONG, CommonConstants.SOURCE_CODE_URL);
         }

@@ -32,7 +32,7 @@ namespace Common
                     {
                         if (scalers.Length > 1)
                         {
-							DebugEx.WarningFormat("Several CanvasScalers found: {0}", scalers.Length);
+                            DebugEx.WarningFormat("Several CanvasScalers found: {0}", scalers.Length);
                         }
 
                         sCanvasScaler = scalers[0];
@@ -44,11 +44,11 @@ namespace Common
                     }
                 }
 
-				float res = sCanvasScaler.scaleFactor;
+                float res = sCanvasScaler.scaleFactor;
 
-				DebugEx.VeryVeryVerboseFormat("Utils.canvasScale = {0}", res);
+                DebugEx.VeryVeryVerboseFormat("Utils.canvasScale = {0}", res);
 
-				return res;
+                return res;
             }
         }
 
@@ -60,11 +60,11 @@ namespace Common
         {
             get
             {
-				float res = Screen.width / canvasScale;
+                float res = Screen.width / canvasScale;
 
-				DebugEx.VeryVeryVerboseFormat("Utils.scaledScreenWidth = {0}", res);
+                DebugEx.VeryVeryVerboseFormat("Utils.scaledScreenWidth = {0}", res);
 
-				return res;
+                return res;
             }
         }
 
@@ -76,11 +76,11 @@ namespace Common
         {
             get
             {
-				float res = Screen.height / canvasScale;
+                float res = Screen.height / canvasScale;
 
-				DebugEx.VeryVeryVerboseFormat("Utils.scaledScreenHeight = {0}", res);
+                DebugEx.VeryVeryVerboseFormat("Utils.scaledScreenHeight = {0}", res);
 
-				return res;
+                return res;
             }
         }
 
@@ -91,7 +91,7 @@ namespace Common
         /// </summary>
         static Utils()
         {
-			DebugEx.Verbose("Static class Utils initialized");
+            DebugEx.Verbose("Static class Utils initialized");
 
             sUiLayer = LayerMask.NameToLayer("UI");
 
@@ -133,7 +133,7 @@ namespace Common
                 }
             }
 
-			DebugEx.VeryVerboseFormat("Utils.BytesInHex(bytes = {0})", res);
+            DebugEx.VeryVerboseFormat("Utils.BytesInHex(bytes = {0})", res);
 
             return res;
         }
@@ -146,7 +146,7 @@ namespace Common
         /// <param name="worldPositionStays">If true, the parent-relative position, scale and rotation is modified such that the object keeps the same world space position, rotation and scale as before.</param>
         public static void InitUIObject(GameObject uiObject, Transform parent, bool worldPositionStays = false)
         {
-			DebugEx.VeryVerboseFormat("Utils.InitUIObject(uiObject = {0}, parent = {1}, worldPositionStays = {2})", uiObject, parent, worldPositionStays);
+            DebugEx.VeryVerboseFormat("Utils.InitUIObject(uiObject = {0}, parent = {1}, worldPositionStays = {2})", uiObject, parent, worldPositionStays);
 
             uiObject.transform.SetParent(parent, worldPositionStays);
             uiObject.layer = sUiLayer;
@@ -160,7 +160,7 @@ namespace Common
         /// <typeparam name="T">Type of component.</typeparam>
         public static T FindInParents<T>(GameObject gameObject) where T : Component
         {
-			DebugEx.VeryVerboseFormat("Utils.FindInParents<{0}>(gameObject = {1})", typeof(T).FullName, gameObject);
+            DebugEx.VeryVerboseFormat("Utils.FindInParents<{0}>(gameObject = {1})", typeof(T).FullName, gameObject);
 
             T component = gameObject.GetComponent<T>();
 
@@ -191,7 +191,7 @@ namespace Common
         /// <param name="height">Height.</param>
         public static Texture2D TakeScreenshot(int x = 0, int y = 0, int width = 0, int height = 0)
         {
-			DebugEx.VeryVerboseFormat("Utils.TakeScreenshot(x = {0}, y = {1}, width = {2}, height = {3})", x, y, width, height);
+            DebugEx.VeryVerboseFormat("Utils.TakeScreenshot(x = {0}, y = {1}, width = {2}, height = {3})", x, y, width, height);
 
             int screenWidth  = Screen.width;
             int screenHeight = Screen.height;
@@ -251,7 +251,7 @@ namespace Common
         /// <param name="transform">RectTransform instance.</param>
         public static Vector3[] GetWindowCorners(RectTransform transform)
         {
-			DebugEx.VeryVerboseFormat("Utils.GetWindowCorners(transform = {0})", transform);
+            DebugEx.VeryVerboseFormat("Utils.GetWindowCorners(transform = {0})", transform);
 
             RectTransform canvasTransform = transform;
 
@@ -317,16 +317,16 @@ namespace Common
                                                     , float shadowBottom = 0f
                                                    )
         {
-			DebugEx.VeryVerboseFormat("Utils.FitRectTransformToScreen(transform = {0}, width = {1}, height = {2}, x = {3}, y = {4}, left = {5}, bottom = {6}, shadowRight = {7}, shadowBottom = {8})"
-			                          , transform
-			                          , width
-			                          , height
-			                          , x
-			                          , y
-			                          , left
-			                          , bottom
-			                          , shadowRight
-			                          , shadowBottom);
+            DebugEx.VeryVerboseFormat("Utils.FitRectTransformToScreen(transform = {0}, width = {1}, height = {2}, x = {3}, y = {4}, left = {5}, bottom = {6}, shadowRight = {7}, shadowBottom = {8})"
+                                      , transform
+                                      , width
+                                      , height
+                                      , x
+                                      , y
+                                      , left
+                                      , bottom
+                                      , shadowRight
+                                      , shadowBottom);
 
             float screenWidth  = scaledScreenWidth;
             float screenHeight = scaledScreenHeight;
@@ -394,12 +394,12 @@ namespace Common
                                                      , float y = 0f
                                                     )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformTopLeft(transform = {0}, width = {1}, height = {2}, x = {3}, y = {4})"
-			                          , transform
-			                          , width
-			                          , height
-			                          , x
-			                          , y);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformTopLeft(transform = {0}, width = {1}, height = {2}, x = {3}, y = {4})"
+                                      , transform
+                                      , width
+                                      , height
+                                      , x
+                                      , y);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0f, 1f);
@@ -425,12 +425,12 @@ namespace Common
                                                        , float offsetTop  = 0f
                                                       )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformTopCenter(transform = {0}, width = {1}, height = {2}, offsetX = {3}, offsetTop = {4})"
-			                          , transform
-			                          , width
-			                          , height
-			                          , offsetX
-			                          , offsetTop);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformTopCenter(transform = {0}, width = {1}, height = {2}, offsetX = {3}, offsetTop = {4})"
+                                      , transform
+                                      , width
+                                      , height
+                                      , offsetX
+                                      , offsetTop);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0.5f, 1f);
@@ -456,12 +456,12 @@ namespace Common
                                                       , float offsetTop   = 0f
                                                      )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformTopRight(transform = {0}, width = {1}, height = {2}, offsetRight = {3}, offsetTop = {4})"
-			                          , transform
-			                          , width
-			                          , height
-			                          , offsetRight
-			                          , offsetTop);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformTopRight(transform = {0}, width = {1}, height = {2}, offsetRight = {3}, offsetTop = {4})"
+                                      , transform
+                                      , width
+                                      , height
+                                      , offsetRight
+                                      , offsetTop);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(1f, 1f);
@@ -491,14 +491,14 @@ namespace Common
                                                         , float pivotY      = 0.5f
                                                        )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformTopStretch(transform = {0}, height = {1}, offsetTop = {2}, offsetLeft = {3}, offsetRight = {4}, pivotX = {4}, pivotY = {4})"
-			                          , transform
-			                          , height
-			                          , offsetTop
-			                          , offsetLeft
-			                          , offsetRight
-			                          , pivotX
-			                          , pivotY);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformTopStretch(transform = {0}, height = {1}, offsetTop = {2}, offsetLeft = {3}, offsetRight = {4}, pivotX = {4}, pivotY = {4})"
+                                      , transform
+                                      , height
+                                      , offsetTop
+                                      , offsetLeft
+                                      , offsetRight
+                                      , pivotX
+                                      , pivotY);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0f, 1f);
@@ -525,12 +525,12 @@ namespace Common
                                                         , float offsetY    = 0f
                                                        )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformMiddleLeft(transform = {0}, width = {1}, height = {2}, offsetLeft = {3}, offsetY = {4})"
-			                          , transform
-			                          , width
-			                          , height
-			                          , offsetLeft
-			                          , offsetY);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformMiddleLeft(transform = {0}, width = {1}, height = {2}, offsetLeft = {3}, offsetY = {4})"
+                                      , transform
+                                      , width
+                                      , height
+                                      , offsetLeft
+                                      , offsetY);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0f, 0.5f);
@@ -556,12 +556,12 @@ namespace Common
                                                           , float offsetY = 0f
                                                          )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformMiddleCenter(transform = {0}, width = {1}, height = {2}, offsetX = {3}, offsetY = {4})"
-			                          , transform
-			                          , width
-			                          , height
-			                          , offsetX
-			                          , offsetY);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformMiddleCenter(transform = {0}, width = {1}, height = {2}, offsetX = {3}, offsetY = {4})"
+                                      , transform
+                                      , width
+                                      , height
+                                      , offsetX
+                                      , offsetY);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0.5f, 0.5f);
@@ -587,12 +587,12 @@ namespace Common
                                                          , float offsetY     = 0f
                                                         )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformMiddleRight(transform = {0}, width = {1}, height = {2}, offsetRight = {3}, offsetY = {4})"
-			                          , transform
-			                          , width
-			                          , height
-			                          , offsetRight
-			                          , offsetY);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformMiddleRight(transform = {0}, width = {1}, height = {2}, offsetRight = {3}, offsetY = {4})"
+                                      , transform
+                                      , width
+                                      , height
+                                      , offsetRight
+                                      , offsetY);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(1f, 0.5f);
@@ -622,14 +622,14 @@ namespace Common
                                                            , float pivotY      = 0.5f
                                                           )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformMiddleStretch(transform = {0}, height = {1}, offsetY = {2}, offsetLeft = {3}, offsetRight = {4}, pivotX = {4}, pivotY = {4})"
-			                          , transform
-			                          , height
-			                          , offsetY
-			                          , offsetLeft
-			                          , offsetRight
-			                          , pivotX
-			                          , pivotY);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformMiddleStretch(transform = {0}, height = {1}, offsetY = {2}, offsetLeft = {3}, offsetRight = {4}, pivotX = {4}, pivotY = {4})"
+                                      , transform
+                                      , height
+                                      , offsetY
+                                      , offsetLeft
+                                      , offsetRight
+                                      , pivotX
+                                      , pivotY);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0f, 0.5f);
@@ -656,12 +656,12 @@ namespace Common
                                                         , float offsetBottom = 0f
                                                        )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformBottomLeft(transform = {0}, width = {1}, height = {2}, offsetLeft = {3}, offsetBottom = {4})"
-			                          , transform
-			                          , width
-			                          , height
-			                          , offsetLeft
-			                          , offsetBottom);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformBottomLeft(transform = {0}, width = {1}, height = {2}, offsetLeft = {3}, offsetBottom = {4})"
+                                      , transform
+                                      , width
+                                      , height
+                                      , offsetLeft
+                                      , offsetBottom);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0f, 0f);
@@ -687,12 +687,12 @@ namespace Common
                                                           , float offsetBottom = 0f
                                                          )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformBottomCenter(transform = {0}, width = {1}, height = {2}, offsetX = {3}, offsetBottom = {4})"
-			                          , transform
-			                          , width
-			                          , height
-			                          , offsetX
-			                          , offsetBottom);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformBottomCenter(transform = {0}, width = {1}, height = {2}, offsetX = {3}, offsetBottom = {4})"
+                                      , transform
+                                      , width
+                                      , height
+                                      , offsetX
+                                      , offsetBottom);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0.5f, 0f);
@@ -718,12 +718,12 @@ namespace Common
                                                          , float offsetBottom = 0f
                                                         )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformBottomRight(transform = {0}, width = {1}, height = {2}, offsetRight = {3}, offsetBottom = {4})"
-			                          , transform
-			                          , width
-			                          , height
-			                          , offsetRight
-			                          , offsetBottom);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformBottomRight(transform = {0}, width = {1}, height = {2}, offsetRight = {3}, offsetBottom = {4})"
+                                      , transform
+                                      , width
+                                      , height
+                                      , offsetRight
+                                      , offsetBottom);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(1f, 0f);
@@ -753,14 +753,14 @@ namespace Common
                                                            , float pivotY       = 0.5f
                                                           )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformBottomStretch(transform = {0}, height = {1}, offsetBottom = {2}, offsetLeft = {3}, offsetRight = {4}, pivotX = {5}, pivotY = {6})"
-			                          , transform
-			                          , height
-			                          , offsetBottom
-			                          , offsetLeft
-			                          , offsetRight
-			                          , pivotX
-			                          , pivotY);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformBottomStretch(transform = {0}, height = {1}, offsetBottom = {2}, offsetLeft = {3}, offsetRight = {4}, pivotX = {5}, pivotY = {6})"
+                                      , transform
+                                      , height
+                                      , offsetBottom
+                                      , offsetLeft
+                                      , offsetRight
+                                      , pivotX
+                                      , pivotY);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0f, 0f);
@@ -791,14 +791,14 @@ namespace Common
                                                          , float pivotY       = 0.5f
                                                         )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformStretchLeft(transform = {0}, width = {1}, offsetLeft = {2}, offsetTop = {3}, offsetBottom = {4}, pivotX = {5}, pivotY = {6})"
-			                          , transform
-			                          , width
-			                          , offsetLeft
-			                          , offsetTop
-			                          , offsetBottom
-			                          , pivotX
-			                          , pivotY);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformStretchLeft(transform = {0}, width = {1}, offsetLeft = {2}, offsetTop = {3}, offsetBottom = {4}, pivotX = {5}, pivotY = {6})"
+                                      , transform
+                                      , width
+                                      , offsetLeft
+                                      , offsetTop
+                                      , offsetBottom
+                                      , pivotX
+                                      , pivotY);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0f, 0f);
@@ -829,14 +829,14 @@ namespace Common
                                                            , float pivotY       = 0.5f
                                                           )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformStretchCenter(transform = {0}, width = {1}, offsetX = {2}, offsetTop = {3}, offsetBottom = {4}, pivotX = {5}, pivotY = {6})"
-			                          , transform
-			                          , width
-			                          , offsetX
-			                          , offsetTop
-			                          , offsetBottom
-			                          , pivotX
-			                          , pivotY);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformStretchCenter(transform = {0}, width = {1}, offsetX = {2}, offsetTop = {3}, offsetBottom = {4}, pivotX = {5}, pivotY = {6})"
+                                      , transform
+                                      , width
+                                      , offsetX
+                                      , offsetTop
+                                      , offsetBottom
+                                      , pivotX
+                                      , pivotY);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0.5f, 0f);
@@ -867,14 +867,14 @@ namespace Common
                                                           , float pivotY       = 0.5f
                                                          )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformStretchRight(transform = {0}, width = {1}, offsetRight = {2}, offsetTop = {3}, offsetBottom = {4}, pivotX = {5}, pivotY = {6})"
-			                          , transform
-			                          , width
-			                          , offsetRight
-			                          , offsetTop
-			                          , offsetBottom
-			                          , pivotX
-			                          , pivotY);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformStretchRight(transform = {0}, width = {1}, offsetRight = {2}, offsetTop = {3}, offsetBottom = {4}, pivotX = {5}, pivotY = {6})"
+                                      , transform
+                                      , width
+                                      , offsetRight
+                                      , offsetTop
+                                      , offsetBottom
+                                      , pivotX
+                                      , pivotY);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(1f, 0f);
@@ -905,14 +905,14 @@ namespace Common
                                                             , float pivotY       = 0.5f
                                                            )
         {
-			DebugEx.VeryVerboseFormat("Utils.AlignRectTransformStretchStretch(transform = {0}, offsetLeft = {1}, offsetTop = {2}, offsetRight = {3}, offsetBottom = {4}, pivotX = {5}, pivotY = {6})"
-			                          , transform
-			                          , offsetLeft
-			                          , offsetTop
-			                          , offsetRight
-			                          , offsetBottom
-			                          , pivotX
-			                          , pivotY);
+            DebugEx.VeryVerboseFormat("Utils.AlignRectTransformStretchStretch(transform = {0}, offsetLeft = {1}, offsetTop = {2}, offsetRight = {3}, offsetBottom = {4}, pivotX = {5}, pivotY = {6})"
+                                      , transform
+                                      , offsetLeft
+                                      , offsetTop
+                                      , offsetRight
+                                      , offsetBottom
+                                      , pivotX
+                                      , pivotY);
 
             transform.localScale         = new Vector3(1f, 1f, 1f);
             transform.anchorMin          = new Vector2(0f, 0f);

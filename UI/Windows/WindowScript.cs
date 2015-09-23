@@ -64,6 +64,8 @@ namespace Common.UI.Windows
                                 , float rectY
                                )
             {
+                DebugEx.Verbose("Created WindowScript.MouseContext object");
+
                 previousMouseX = mouseX;
                 previousMouseY = mouseY;
                 previousX      = x;
@@ -128,7 +130,12 @@ namespace Common.UI.Windows
         /// <value>List of all window instances.</value>
         public static ReadOnlyCollection<WindowScript> instances
         {
-            get { return sInstances.AsReadOnly(); }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.instances = List({0})", sInstances.Count);
+
+                return sInstances.AsReadOnly();
+            }
         }
 
         /// <summary>
@@ -137,7 +144,12 @@ namespace Common.UI.Windows
         /// <value>Selected window.</value>
         public static WindowScript selectedWindow
         {
-            get { return sSelectedWindow; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.selectedWindow = {0}", sSelectedWindow);
+
+                return sSelectedWindow;
+            }
         }
 
 
@@ -156,11 +168,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.frame = {0}", mFrame);
+
                 return mFrame;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.frame: {0} => {1}", mFrame, value);
+
                 if (mFrame != value)
                 {
                     WindowFrameType oldValue = mFrame;
@@ -249,11 +265,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.state = {0}", mState);
+
                 return mState;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.state: {0} => {1}", mState, value);
+
                 if (mState != value)
                 {
                     WindowState oldValue = mState;
@@ -316,21 +336,33 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (mFrame != WindowFrameType.Frameless)
                 {
-                    return mX + SHADOW_WIDTH;
+                    res = mX + SHADOW_WIDTH;
                 }
                 else
                 {
-                    return mX;
+                    res = mX;
                 }
+
+                DebugEx.VeryVeryVerboseFormat("WindowScript.x = {0}", res);
+
+                return res;
             }
 
             set
             {
                 if (mFrame != WindowFrameType.Frameless)
                 {
+                    DebugEx.VeryVerboseFormat("WindowScript.x: {0} => {1}", mX + SHADOW_WIDTH, value);
+
                     value -= SHADOW_WIDTH;
+                }
+                else
+                {
+                    DebugEx.VeryVerboseFormat("WindowScript.x: {0} => {1}", mX, value);
                 }
 
                 if (mX != value)
@@ -357,21 +389,33 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (mFrame != WindowFrameType.Frameless)
                 {
-                    return mY + SHADOW_WIDTH;
+                    res = mY + SHADOW_WIDTH;
                 }
                 else
                 {
-                    return mY;
+                    res = mY;
                 }
+
+                DebugEx.VeryVeryVerboseFormat("WindowScript.y = {0}", res);
+
+                return res;
             }
 
             set
             {
                 if (mFrame != WindowFrameType.Frameless)
                 {
+                    DebugEx.VeryVerboseFormat("WindowScript.y: {0} => {1}", mY + SHADOW_WIDTH, value);
+
                     value -= SHADOW_WIDTH;
+                }
+                else
+                {
+                    DebugEx.VeryVerboseFormat("WindowScript.y: {0} => {1}", mY, value);
                 }
 
                 if (mY != value)
@@ -398,23 +442,49 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (mWidth == 0)
                 {
-                    return 0;
-                }
-
-                if (mFrame != WindowFrameType.Frameless)
-                {
-                    return mWidth - SHADOW_WIDTH * 2;
+                    res = 0;
                 }
                 else
                 {
-                    return mWidth;
+                    if (mFrame != WindowFrameType.Frameless)
+                    {
+                        res = mWidth - SHADOW_WIDTH * 2;
+                    }
+                    else
+                    {
+                        res = mWidth;
+                    }
                 }
+
+                DebugEx.VeryVeryVerboseFormat("WindowScript.width = {0}", res);
+
+                return res;
             }
 
             set
             {
+#if LOGGING_VERY_VERBOSE
+                if (mWidth == 0)
+                {
+                    DebugEx.VeryVerboseFormat("WindowScript.width: 0 => {0}", value);
+                }
+                else
+                {
+                    if (mFrame != WindowFrameType.Frameless)
+                    {
+                        DebugEx.VeryVerboseFormat("WindowScript.width: {0} => {1}", mWidth - SHADOW_WIDTH * 2, value);
+                    }
+                    else
+                    {
+                        DebugEx.VeryVerboseFormat("WindowScript.width: {0} => {1}", mWidth, value);
+                    }
+                }
+#endif
+
                 if (value < MINIMAL_WIDTH)
                 {
                     value = MINIMAL_WIDTH;
@@ -461,23 +531,49 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (mHeight == 0)
                 {
-                    return 0;
-                }
-
-                if (mFrame != WindowFrameType.Frameless)
-                {
-                    return mHeight - SHADOW_WIDTH * 2;
+                    res = 0;
                 }
                 else
                 {
-                    return mHeight;
+                    if (mFrame != WindowFrameType.Frameless)
+                    {
+                        res = mHeight - SHADOW_WIDTH * 2;
+                    }
+                    else
+                    {
+                        res = mHeight;
+                    }
                 }
+
+                DebugEx.VeryVeryVerboseFormat("WindowScript.height = {0}", res);
+
+                return res;
             }
 
             set
             {
+#if LOGGING_VERY_VERBOSE
+                if (mHeight == 0)
+                {
+                    DebugEx.VeryVerboseFormat("WindowScript.height: 0 => {0}", value);
+                }
+                else
+                {
+                    if (mFrame != WindowFrameType.Frameless)
+                    {
+                        DebugEx.VeryVerboseFormat("WindowScript.height: {0} => {1}", mHeight - SHADOW_WIDTH * 2, value);
+                    }
+                    else
+                    {
+                        DebugEx.VeryVerboseFormat("WindowScript.height: {0} => {1}", mHeight, value);
+                    }
+                }
+#endif
+
                 if (value < MINIMAL_HEIGHT)
                 {
                     value = MINIMAL_HEIGHT;
@@ -524,11 +620,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.backgroundColor = {0}", mBackgroundColor);
+
                 return mBackgroundColor;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.backgroundColor: {0} => {1}", mBackgroundColor, value);
+
                 if (mBackgroundColor != value)
                 {
                     mBackgroundColor = value;
@@ -549,36 +649,44 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (!IsUICreated())
                 {
-                    return 0;
-                }
-
-                if (mState == WindowState.FullScreen)
-                {
-                    return 0;
-                }
-
-                if (mState == WindowState.Maximized)
-                {
-                    if (mFrame != WindowFrameType.Frameless)
-                    {
-                        return -MAXIMIZED_OFFSET;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
-                }
-
-                if (mFrame != WindowFrameType.Frameless)
-                {
-                    return mWindowTransform.offsetMin.x + SHADOW_WIDTH;
+                    res = 0;
                 }
                 else
                 {
-                    return mWindowTransform.offsetMin.x;
+                    if (mState == WindowState.FullScreen)
+                    {
+                        res = 0;
+                    }
+                    else
+                    if (mState == WindowState.Maximized)
+                    {
+                        if (mFrame != WindowFrameType.Frameless)
+                        {
+                            res = -MAXIMIZED_OFFSET;
+                        }
+                        else
+                        {
+                            res = 0;
+                        }
+                    }
+                    else
+                    if (mFrame != WindowFrameType.Frameless)
+                    {
+                        res = mWindowTransform.offsetMin.x + SHADOW_WIDTH;
+                    }
+                    else
+                    {
+                        res = mWindowTransform.offsetMin.x;
+                    }
                 }
+
+                DebugEx.VeryVeryVerboseFormat("WindowScript.realX = {0}", res);
+
+                return res;
             }
         }
 
@@ -590,36 +698,44 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (!IsUICreated())
                 {
-                    return 0;
-                }
-
-                if (mState == WindowState.FullScreen)
-                {
-                    return 0;
-                }
-
-                if (mState == WindowState.Maximized)
-                {
-                    if (mFrame != WindowFrameType.Frameless)
-                    {
-                        return -MAXIMIZED_OFFSET;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
-                }
-
-                if (mFrame != WindowFrameType.Frameless)
-                {
-                    return -mWindowTransform.offsetMax.y + SHADOW_WIDTH;
+                    res = 0;
                 }
                 else
                 {
-                    return -mWindowTransform.offsetMax.y;
+                    if (mState == WindowState.FullScreen)
+                    {
+                        res = 0;
+                    }
+                    else
+                    if (mState == WindowState.Maximized)
+                    {
+                        if (mFrame != WindowFrameType.Frameless)
+                        {
+                            res = -MAXIMIZED_OFFSET;
+                        }
+                        else
+                        {
+                            res = 0;
+                        }
+                    }
+                    else
+                    if (mFrame != WindowFrameType.Frameless)
+                    {
+                        res = -mWindowTransform.offsetMax.y + SHADOW_WIDTH;
+                    }
+                    else
+                    {
+                        res = -mWindowTransform.offsetMax.y;
+                    }
                 }
+
+                DebugEx.VeryVeryVerboseFormat("WindowScript.realY = {0}", res);
+
+                return res;
             }
         }
 
@@ -631,36 +747,44 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (!IsUICreated())
                 {
-                    return 0;
-                }
-
-                if (mState == WindowState.FullScreen)
-                {
-                    return Utils.scaledScreenWidth;
-                }
-
-                if (mState == WindowState.Maximized)
-                {
-                    if (mFrame != WindowFrameType.Frameless)
-                    {
-                        return Utils.scaledScreenWidth + MAXIMIZED_OFFSET * 2;
-                    }
-                    else
-                    {
-                        return Utils.scaledScreenWidth;
-                    }
-                }
-
-                if (mFrame != WindowFrameType.Frameless)
-                {
-                    return mWindowTransform.sizeDelta.x - SHADOW_WIDTH * 2;
+                    res = 0;
                 }
                 else
                 {
-                    return mWindowTransform.sizeDelta.x;
+                    if (mState == WindowState.FullScreen)
+                    {
+                        res = Utils.scaledScreenWidth;
+                    }
+                    else
+                    if (mState == WindowState.Maximized)
+                    {
+                        if (mFrame != WindowFrameType.Frameless)
+                        {
+                            res = Utils.scaledScreenWidth + MAXIMIZED_OFFSET * 2;
+                        }
+                        else
+                        {
+                            res = Utils.scaledScreenWidth;
+                        }
+                    }
+                    else
+                    if (mFrame != WindowFrameType.Frameless)
+                    {
+                        res = mWindowTransform.sizeDelta.x - SHADOW_WIDTH * 2;
+                    }
+                    else
+                    {
+                        res = mWindowTransform.sizeDelta.x;
+                    }
                 }
+
+                DebugEx.VeryVeryVerboseFormat("WindowScript.realWidth = {0}", res);
+
+                return res;
             }
         }
 
@@ -672,36 +796,44 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (!IsUICreated())
                 {
-                    return 0;
-                }
-
-                if (mState == WindowState.FullScreen)
-                {
-                    return Utils.scaledScreenHeight;
-                }
-
-                if (mState == WindowState.Maximized)
-                {
-                    if (mFrame != WindowFrameType.Frameless)
-                    {
-                        return Utils.scaledScreenHeight + MAXIMIZED_OFFSET * 2;
-                    }
-                    else
-                    {
-                        return Utils.scaledScreenHeight;
-                    }
-                }
-
-                if (mFrame != WindowFrameType.Frameless)
-                {
-                    return mWindowTransform.sizeDelta.y - SHADOW_WIDTH * 2;
+                    res = 0;
                 }
                 else
                 {
-                    return mWindowTransform.sizeDelta.y;
+                    if (mState == WindowState.FullScreen)
+                    {
+                        res = Utils.scaledScreenHeight;
+                    }
+                    else
+                    if (mState == WindowState.Maximized)
+                    {
+                        if (mFrame != WindowFrameType.Frameless)
+                        {
+                            res = Utils.scaledScreenHeight + MAXIMIZED_OFFSET * 2;
+                        }
+                        else
+                        {
+                            res = Utils.scaledScreenHeight;
+                        }
+                    }
+                    else
+                    if (mFrame != WindowFrameType.Frameless)
+                    {
+                        res = mWindowTransform.sizeDelta.y - SHADOW_WIDTH * 2;
+                    }
+                    else
+                    {
+                        res = mWindowTransform.sizeDelta.y;
+                    }
                 }
+
+                DebugEx.VeryVeryVerboseFormat("WindowScript.realHeight = {0}", res);
+
+                return res;
             }
         }
 
@@ -713,34 +845,44 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (!IsUICreated())
                 {
-                    return 0;
+                    res = 0;
                 }
-
-                if (mState == WindowState.FullScreen)
+                else
                 {
-                    return 0;
-                }
-
-                if (mState == WindowState.Maximized)
-                {
-                    if (mFrame != WindowFrameType.Frameless)
+                    if (mState == WindowState.FullScreen)
                     {
-                        return mBorderLeft - SHADOW_WIDTH - MAXIMIZED_OFFSET;
+                        res = 0;
+                    }
+                    else
+                    if (mState == WindowState.Maximized)
+                    {
+                        if (mFrame != WindowFrameType.Frameless)
+                        {
+                            res = mBorderLeft - SHADOW_WIDTH - MAXIMIZED_OFFSET;
+                        }
+                        else
+                        {
+                            res = 0;
+                        }
+                    }
+                    else
+                    if (mState == WindowState.Minimized)
+                    {
+                        res = 0;
                     }
                     else
                     {
-                        return 0;
+                        res = mX + mBorderLeft;
                     }
                 }
 
-                if (mState == WindowState.Minimized)
-                {
-                    return 0;
-                }
+                DebugEx.VeryVeryVerboseFormat("WindowScript.contentX = {0}", res);
 
-                return mX + mBorderLeft;
+                return res;
             }
         }
 
@@ -752,34 +894,44 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (!IsUICreated())
                 {
-                    return 0;
+                    res = 0;
                 }
-
-                if (mState == WindowState.FullScreen)
+                else
                 {
-                    return 0;
-                }
-
-                if (mState == WindowState.Maximized)
-                {
-                    if (mFrame != WindowFrameType.Frameless)
+                    if (mState == WindowState.FullScreen)
                     {
-                        return mBorderTop - SHADOW_WIDTH - MAXIMIZED_OFFSET;
+                        res = 0;
+                    }
+                    else
+                    if (mState == WindowState.Maximized)
+                    {
+                        if (mFrame != WindowFrameType.Frameless)
+                        {
+                            res = mBorderTop - SHADOW_WIDTH - MAXIMIZED_OFFSET;
+                        }
+                        else
+                        {
+                            res = 0;
+                        }
+                    }
+                    else
+                    if (mState == WindowState.Minimized)
+                    {
+                        res = 0;
                     }
                     else
                     {
-                        return 0;
+                        res = mY + mBorderTop;
                     }
                 }
 
-                if (mState == WindowState.Minimized)
-                {
-                    return 0;
-                }
+                DebugEx.VeryVeryVerboseFormat("WindowScript.contentY = {0}", res);
 
-                return mY + mBorderTop;
+                return res;
             }
         }
 
@@ -791,34 +943,44 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (!IsUICreated())
                 {
-                    return 0;
+                    res = 0;
                 }
-
-                if (mState == WindowState.FullScreen)
+                else
                 {
-                    return Utils.scaledScreenWidth;
-                }
-
-                if (mState == WindowState.Maximized)
-                {
-                    if (mFrame != WindowFrameType.Frameless)
+                    if (mState == WindowState.FullScreen)
                     {
-                        return Utils.scaledScreenWidth - mBorderLeft - mBorderRight + SHADOW_WIDTH * 2 + MAXIMIZED_OFFSET * 2;
+                        res = Utils.scaledScreenWidth;
+                    }
+                    else
+                    if (mState == WindowState.Maximized)
+                    {
+                        if (mFrame != WindowFrameType.Frameless)
+                        {
+                            res = Utils.scaledScreenWidth - mBorderLeft - mBorderRight + SHADOW_WIDTH * 2 + MAXIMIZED_OFFSET * 2;
+                        }
+                        else
+                        {
+                            res = Utils.scaledScreenWidth;
+                        }
+                    }
+                    else
+                    if (mState == WindowState.Minimized)
+                    {
+                        res = 0;
                     }
                     else
                     {
-                        return Utils.scaledScreenWidth;
+                        res = mWindowTransform.sizeDelta.x - mBorderLeft - mBorderRight;
                     }
                 }
 
-                if (mState == WindowState.Minimized)
-                {
-                    return 0;
-                }
+                DebugEx.VeryVeryVerboseFormat("WindowScript.contentWidth = {0}", res);
 
-                return mWindowTransform.sizeDelta.x - mBorderLeft - mBorderRight;
+                return res;
             }
         }
 
@@ -830,34 +992,44 @@ namespace Common.UI.Windows
         {
             get
             {
+                float res;
+
                 if (!IsUICreated())
                 {
-                    return 0;
+                    res = 0;
                 }
-
-                if (mState == WindowState.FullScreen)
+                else
                 {
-                    return Utils.scaledScreenHeight;
-                }
-
-                if (mState == WindowState.Maximized)
-                {
-                    if (mFrame != WindowFrameType.Frameless)
+                    if (mState == WindowState.FullScreen)
                     {
-                        return Utils.scaledScreenHeight - mBorderTop - mBorderBottom + SHADOW_WIDTH * 2 + MAXIMIZED_OFFSET * 2;
+                        res = Utils.scaledScreenHeight;
+                    }
+
+                    if (mState == WindowState.Maximized)
+                    {
+                        if (mFrame != WindowFrameType.Frameless)
+                        {
+                            res = Utils.scaledScreenHeight - mBorderTop - mBorderBottom + SHADOW_WIDTH * 2 + MAXIMIZED_OFFSET * 2;
+                        }
+                        else
+                        {
+                            res = Utils.scaledScreenHeight;
+                        }
+                    }
+
+                    if (mState == WindowState.Minimized)
+                    {
+                        res = 0;
                     }
                     else
                     {
-                        return Utils.scaledScreenHeight;
+                        res = mWindowTransform.sizeDelta.y - mBorderTop - mBorderBottom;
                     }
                 }
 
-                if (mState == WindowState.Minimized)
-                {
-                    return 0;
-                }
+                DebugEx.VeryVeryVerboseFormat("WindowScript.contentHeight = {0}", res);
 
-                return mWindowTransform.sizeDelta.y - mBorderTop - mBorderBottom;
+                return res;
             }
         }
 
@@ -867,7 +1039,12 @@ namespace Common.UI.Windows
         /// <value>The content transform.</value>
         public RectTransform contentTransform
         {
-            get { return mContentTransform; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.contentTransform = {0}", mContentTransform);
+
+                return mContentTransform;
+            }
         }
 
         /// <summary>
@@ -876,8 +1053,19 @@ namespace Common.UI.Windows
         /// <value><c>true</c> if window is resizable; otherwise, <c>false</c>.</value>
         public bool resizable
         {
-            get { return mResizable;  }
-            set { mResizable = value; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.resizable = {0}", mResizable);
+
+                return mResizable;
+            }
+
+            set
+            {
+                DebugEx.VeryVerboseFormat("WindowScript.resizable: {0} => {1}", mResizable, value);
+
+                mResizable = value;
+            }
         }
 
         /// <summary>
@@ -888,11 +1076,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.minimumWidth = {0}", mMinimumWidth);
+
                 return mMinimumWidth;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.minimumWidth: {0} => {1}", mMinimumWidth, value);
+
                 if (mMinimumWidth != value)
                 {
                     mMinimumWidth = value;
@@ -927,11 +1119,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.maximumWidth = {0}", mMaximumWidth);
+
                 return mMaximumWidth;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.maximumWidth: {0} => {1}", mMaximumWidth, value);
+
                 if (mMaximumWidth != value)
                 {
                     mMaximumWidth = value;
@@ -966,11 +1162,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.minimumHeight = {0}", mMinimumHeight);
+
                 return mMinimumHeight;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.minimumHeight: {0} => {1}", mMinimumHeight, value);
+
                 if (mMinimumHeight != value)
                 {
                     mMinimumHeight = value;
@@ -1005,11 +1205,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.maximumHeight = {0}", mMaximumHeight);
+
                 return mMaximumHeight;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.maximumHeight: {0} => {1}", mMaximumHeight, value);
+
                 if (mMaximumHeight != value)
                 {
                     mMaximumHeight = value;
@@ -1044,11 +1248,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.allowMinimize = {0}", mAllowMinimize);
+
                 return mAllowMinimize;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.allowMinimize: {0} => {1}", mAllowMinimize, value);
+
                 if (mAllowMinimize != value)
                 {
                     mAllowMinimize = value;
@@ -1069,11 +1277,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.allowMaximize = {0}", mAllowMaximize);
+
                 return mAllowMaximize;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.allowMaximize: {0} => {1}", mAllowMaximize, value);
+
                 if (mAllowMaximize != value)
                 {
                     mAllowMaximize = value;
@@ -1094,11 +1306,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.allowClose = {0}", mAllowClose);
+
                 return mAllowClose;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.allowClose: {0} => {1}", mAllowClose, value);
+
                 if (mAllowClose != value)
                 {
                     mAllowClose = value;
@@ -1119,11 +1335,15 @@ namespace Common.UI.Windows
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("WindowScript.tokenId = {0}", mTokenId);
+
                 return mTokenId;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("WindowScript.tokenId: {0} => {1}", mTokenId, value);
+
                 if (mTokenId != value)
                 {
                     mTokenId = value;
@@ -1144,12 +1364,20 @@ namespace Common.UI.Windows
         {
             get
             {
+                string res;
+
                 if (mTokenId == R.sections.WindowTitles.strings.Count)
                 {
-                    return "";
+                    res = "";
+                }
+                else
+                {
+                    res = Translator.GetString(mTokenId);
                 }
 
-                return Translator.GetString(mTokenId);
+                DebugEx.VeryVeryVerboseFormat("WindowScript.windowTitle = {0}", res);
+
+                return res;
             }
         }
 
@@ -1159,7 +1387,14 @@ namespace Common.UI.Windows
         /// <value><c>true</c> if selected; otherwise, <c>false</c>.</value>
         public virtual bool selected
         {
-            get { return sSelectedWindow == this; }
+            get
+            {
+                bool res = (sSelectedWindow == this);
+
+                DebugEx.VeryVeryVerboseFormat("WindowScript.selected = {0}", res);
+
+                return res;
+            }
         }
 
 
@@ -1212,6 +1447,8 @@ namespace Common.UI.Windows
         public WindowScript()
             : base()
         {
+            DebugEx.Verbose("Created WindowScript object");
+
             sInstances.Add(this);
 
             mFrame           = WindowFrameType.Window;
@@ -1262,6 +1499,8 @@ namespace Common.UI.Windows
         /// </summary>
         protected virtual void Start()
         {
+            DebugEx.Verbose("WindowScript.Start()");
+
             ResizeListenerScript.AddListener(OnScreenResize);
 
             CreateUI();
@@ -1272,6 +1511,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void CreateUI()
         {
+            DebugEx.Verbose("WindowScript.CreateUI()");
+
             //===========================================================================
             // RectTransform Component
             //===========================================================================
@@ -1417,6 +1658,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void CreateBorder()
         {
+            DebugEx.Verbose("WindowScript.CreateBorder()");
+
             if (mBorderGameObject == null)
             {
                 //***************************************************************************
@@ -1472,6 +1715,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void UpdateBorderImage()
         {
+            DebugEx.Verbose("WindowScript.UpdateBorderImage()");
+
             switch (mFrame)
             {
                 case WindowFrameType.Window:
@@ -1539,6 +1784,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void UpdateBorders()
         {
+            DebugEx.Verbose("WindowScript.UpdateBorders()");
+
             if (mBorderImage != null)
             {
                 Vector4	borders = mBorderImage.sprite.border;
@@ -1562,6 +1809,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void DestroyBorder()
         {
+            DebugEx.Verbose("WindowScript.DestroyBorder()");
+
             DestroyHeader();
 
             UnityEngine.Object.DestroyObject(mBorderGameObject);
@@ -1576,6 +1825,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void CreateHeader()
         {
+            DebugEx.Verbose("WindowScript.CreateHeader()");
+
             switch (mFrame)
             {
                 case WindowFrameType.Window:
@@ -2059,6 +2310,8 @@ namespace Common.UI.Windows
         /// </summary>
         public void UpdateTitleText()
         {
+            DebugEx.Verbose("WindowScript.UpdateTitleText()");
+
             mTitleText.text = windowTitle;
         }
 
@@ -2067,6 +2320,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void DestroyHeader()
         {
+            DebugEx.Verbose("WindowScript.DestroyHeader()");
+
             if (mTitleGameObject != null)
             {
                 UnityEngine.Object.DestroyObject(mTitleGameObject);
@@ -2103,6 +2358,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void RebuildHeader()
         {
+            DebugEx.Verbose("WindowScript.RebuildHeader()");
+
             DestroyHeader();
 
             if (IsFramePresent())
@@ -2122,6 +2379,8 @@ namespace Common.UI.Windows
         /// <param name="height">Height of content.</param>
         protected virtual void CreateContent(Transform contentTransform, out float width, out float height)
         {
+            DebugEx.VerboseFormat("WindowScript.CreateContent(contentTransform = {0})", contentTransform);
+
             // Nothing
             width  = 0;
             height = 0;
@@ -2132,6 +2391,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void UpdateState()
         {
+            DebugEx.Verbose("WindowScript.UpdateState()");
+
             switch (mState)
             {
                 case WindowState.NoState:
@@ -2190,6 +2451,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void CreateReplacementStretchLeft()
         {
+            DebugEx.Verbose("WindowScript.CreateReplacementStretchLeft()");
+
             CreateReplacement();
             Utils.AlignRectTransformStretchLeft(mReplacementTransform, Utils.scaledScreenWidth / 2 + SHADOW_WIDTH, -SHADOW_WIDTH / 2, -SHADOW_WIDTH / 2, -SHADOW_WIDTH / 2);
         }
@@ -2199,6 +2462,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void CreateReplacementStretchRight()
         {
+            DebugEx.Verbose("WindowScript.CreateReplacementStretchRight()");
+
             CreateReplacement();
             Utils.AlignRectTransformStretchRight(mReplacementTransform, Utils.scaledScreenWidth / 2 + SHADOW_WIDTH, -SHADOW_WIDTH / 2, -SHADOW_WIDTH / 2, -SHADOW_WIDTH / 2);
         }
@@ -2208,6 +2473,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void CreateReplacementStretchStretch()
         {
+            DebugEx.Verbose("WindowScript.CreateReplacementStretchStretch()");
+
             CreateReplacement();
             Utils.AlignRectTransformStretchStretch(mReplacementTransform, -SHADOW_WIDTH / 2, -SHADOW_WIDTH / 2, -SHADOW_WIDTH / 2, -SHADOW_WIDTH / 2);
         }
@@ -2217,6 +2484,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void CreateReplacementStretchVertical()
         {
+            DebugEx.Verbose("WindowScript.CreateReplacementStretchVertical()");
+
             CreateReplacement();
             Utils.AlignRectTransformTopLeft(mReplacementTransform, mWidth, Utils.scaledScreenHeight + SHADOW_WIDTH, mX, -SHADOW_WIDTH / 2);
         }
@@ -2227,6 +2496,8 @@ namespace Common.UI.Windows
         /// <returns>The replacement RectTransform.</returns>
         private void CreateReplacement()
         {
+            DebugEx.Verbose("WindowScript.CreateReplacement()");
+
             if (mReplacementGameObject == null)
             {
                 //***************************************************************************
@@ -2269,6 +2540,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void DestroyReplacement()
         {
+            DebugEx.Verbose("WindowScript.DestroyReplacement()");
+
             if (mReplacementGameObject != null)
             {
                 UnityEngine.Object.DestroyObject(mReplacementGameObject);
@@ -2282,6 +2555,8 @@ namespace Common.UI.Windows
         /// </summary>
         protected virtual void OnDestroy()
         {
+            DebugEx.Verbose("WindowScript.OnDestroy()");
+
             ResizeListenerScript.RemoveListener(OnScreenResize);
 
             if (mTitleText != null)
@@ -2330,6 +2605,8 @@ namespace Common.UI.Windows
         /// </summary>
         protected void OnMinimizeClicked()
         {
+            DebugEx.UserInteraction("WindowScript.OnMinimizeClicked()");
+
             if (mState != WindowState.Minimized)
             {
                 state = WindowState.Minimized;
@@ -2345,6 +2622,8 @@ namespace Common.UI.Windows
         /// </summary>
         protected void OnMaximizeClicked()
         {
+            DebugEx.UserInteraction("WindowScript.OnMaximizeClicked()");
+
             if (mState != WindowState.Maximized)
             {
                 state = WindowState.Maximized;
@@ -2360,6 +2639,8 @@ namespace Common.UI.Windows
         /// </summary>
         public void Close()
         {
+            DebugEx.UserInteraction("WindowScript.Close()");
+
             UnityEngine.Object.DestroyObject(gameObject);
         }
 
@@ -2369,6 +2650,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void RemoveCursorIfNeeded()
         {
+            DebugEx.Verbose("WindowScript.RemoveCursorIfNeeded()");
+
             if (
                 mResizable
                 &&
@@ -2400,6 +2683,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void RemoveCursor()
         {
+            DebugEx.Verbose("WindowScript.RemoveCursor()");
+
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
 #endif
@@ -2412,6 +2697,8 @@ namespace Common.UI.Windows
         /// <param name="eventCamera">Event camera.</param>
         public bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera)
         {
+            DebugEx.VeryVerboseFormat("WindowScript.IsRaycastLocationValid(sp = {0}, eventCamera = {1})", sp, eventCamera);
+
             if (IsFramePresent())
             {
                 if (mState == WindowState.Maximized)
@@ -2447,6 +2734,8 @@ namespace Common.UI.Windows
         /// <param name="eventData">Pointer data.</param>
         public void OnPointerEnter(PointerEventData eventData)
         {
+            DebugEx.VerboseFormat("WindowScript.OnPointerEnter(eventData = {0})", eventData);
+
             if (mMouseState == MouseState.NoState)
             {
                 mMouseLocation = MouseLocation.Inside;
@@ -2459,6 +2748,8 @@ namespace Common.UI.Windows
         /// <param name="eventData">Pointer data.</param>
         public void OnPointerExit(PointerEventData eventData)
         {
+            DebugEx.VerboseFormat("WindowScript.OnPointerExit(eventData = {0})", eventData);
+
             if (mMouseState == MouseState.NoState)
             {
 #if !CURSORLESS_PLATFORM
@@ -2474,6 +2765,8 @@ namespace Common.UI.Windows
         /// </summary>
         protected void StartDragging()
         {
+            DebugEx.Verbose("WindowScript.StartDragging()");
+
             float mouseX = Mouse.scaledX;
             float mouseY = Mouse.scaledY;
 
@@ -2487,6 +2780,8 @@ namespace Common.UI.Windows
         /// </summary>
         protected virtual void Update()
         {
+            DebugEx.VeryVeryVerbose("WindowScript.Update()");
+
             bool leftMouseButtonPressed = InputControl.GetMouseButtonDown(MouseButton.Left);
 
             if (IsFramePresent())
@@ -3340,6 +3635,8 @@ namespace Common.UI.Windows
         /// </summary>
         public void OnScreenResize()
         {
+            DebugEx.Verbose("WindowScript.OnScreenResize()");
+
             if (
                 mState == WindowState.Maximized
                 ||
@@ -3355,6 +3652,8 @@ namespace Common.UI.Windows
         /// </summary>
         protected virtual void OnResize()
         {
+            DebugEx.Verbose("WindowScript.OnResize()");
+
             // Nothing
         }
 
@@ -3364,6 +3663,8 @@ namespace Common.UI.Windows
         /// <param name="value">If set to <c>true</c> window is selected.</param>
         private void SetSelected(bool value)
         {
+            DebugEx.VerboseFormat("WindowScript.SetSelected(value = {0})", value);
+
             if (value != (sSelectedWindow == this))
             {
                 if (value)
@@ -3510,6 +3811,8 @@ namespace Common.UI.Windows
         /// </summary>
         public void Select()
         {
+            DebugEx.Verbose("WindowScript.Select()");
+
             SetSelected(true);
         }
 
@@ -3518,6 +3821,8 @@ namespace Common.UI.Windows
         /// </summary>
         protected virtual void OnSelected()
         {
+            DebugEx.Verbose("WindowScript.OnSelected()");
+
             // Nothing
         }
 
@@ -3526,6 +3831,8 @@ namespace Common.UI.Windows
         /// </summary>
         protected virtual void OnDeselected()
         {
+            DebugEx.Verbose("WindowScript.OnDeselected()");
+
             // Nothing
         }
 
@@ -3534,6 +3841,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void AddToFullscreenList()
         {
+            DebugEx.Verbose("WindowScript.AddToFullscreenList()");
+
             if (mState == WindowState.FullScreen)
             {
                 List<WindowScript> visibleWindows = new List<WindowScript>();
@@ -3560,6 +3869,8 @@ namespace Common.UI.Windows
         /// </summary>
         private void RemoveFromFullscreenList()
         {
+            DebugEx.Verbose("WindowScript.RemoveFromFullscreenList()");
+
             int index = -1;
 
             for (int i = sFullscreenWindows.Count - 1; i >= 0; --i)
@@ -3599,6 +3910,8 @@ namespace Common.UI.Windows
         /// </summary>
         public virtual void Save(string key)
         {
+            DebugEx.VerboseFormat("WindowScript.Save(key = {0})", key);
+
             PlayerPrefs.SetFloat( "Windows." + key + ".X",         x);
             PlayerPrefs.SetFloat( "Windows." + key + ".Y",         y);
             PlayerPrefs.SetFloat( "Windows." + key + ".Width",     width);
@@ -3613,6 +3926,8 @@ namespace Common.UI.Windows
         /// </summary>
         public virtual void Load(string key)
         {
+            DebugEx.VerboseFormat("WindowScript.Load(key = {0})", key);
+
             float tempWidth = PlayerPrefs.GetFloat("Windows." + key + ".Width", 0f);
 
             if (tempWidth > 0f)
@@ -3634,6 +3949,8 @@ namespace Common.UI.Windows
         /// </summary>
         public void Show()
         {
+            DebugEx.Verbose("WindowScript.Show()");
+
             gameObject.SetActive(true);
 
             SetSelected(true);
@@ -3644,6 +3961,8 @@ namespace Common.UI.Windows
         /// </summary>
         public void Hide()
         {
+            DebugEx.Verbose("WindowScript.Hide()");
+
             gameObject.SetActive(false);
         }
 
@@ -3653,6 +3972,8 @@ namespace Common.UI.Windows
         /// <returns><c>true</c> if this window is visible; otherwise, <c>false</c>.</returns>
         public bool IsVisible()
         {
+            DebugEx.Verbose("WindowScript.IsVisible()");
+
             return gameObject.activeSelf;
         }
 
@@ -3662,6 +3983,8 @@ namespace Common.UI.Windows
         /// <returns><c>true</c> if frame present; otherwise, <c>false</c>.</returns>
         private bool IsFramePresent()
         {
+            DebugEx.Verbose("WindowScript.IsFramePresent()");
+
             return (mFrame != WindowFrameType.Frameless && mState != WindowState.FullScreen);
         }
 
@@ -3671,6 +3994,8 @@ namespace Common.UI.Windows
         /// <returns><c>true</c> if user interface created; otherwise, <c>false</c>.</returns>
         private bool IsUICreated()
         {
+            DebugEx.Verbose("WindowScript.IsUICreated()");
+
             return (mWindowTransform != null);
         }
     }

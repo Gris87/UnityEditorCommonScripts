@@ -22,6 +22,8 @@ namespace Common.UI.Windows
         /// <param name="eventCamera">Event camera.</param>
         public bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera)
         {
+            DebugEx.VeryVerboseFormat("ButtonGlowScript.IsRaycastLocationValid(sp = {0}, eventCamera = {1})", sp, eventCamera);
+
             return RectTransformUtility.RectangleContainsScreenPoint(rectTransform, sp, eventCamera);
         }
     }

@@ -12,18 +12,18 @@ namespace Common.UI.MenuItems
         public bool visible
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("CustomMenuItem.visible = {0}", mVisible);
+            {
+                DebugEx.VeryVeryVerboseFormat("CustomMenuItem.visible = {0}", mVisible);
 
-				return mVisible;
-			}
+                return mVisible;
+            }
 
             set
-			{
-				DebugEx.VeryVerboseFormat("CustomMenuItem.visible: {0} => {1}", mVisible, value);
+            {
+                DebugEx.VeryVerboseFormat("CustomMenuItem.visible: {0} => {1}", mVisible, value);
 
-				mVisible = value;
-			}
+                mVisible = value;
+            }
         }
 
         /// <summary>
@@ -33,11 +33,11 @@ namespace Common.UI.MenuItems
         public TreeNode<CustomMenuItem> node
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("CustomMenuItem.node = {0}", mNode);
+            {
+                DebugEx.VeryVeryVerboseFormat("CustomMenuItem.node = {0}", mNode);
 
-				return mNode; 
-			}
+                return mNode;
+            }
         }
 
 
@@ -56,7 +56,7 @@ namespace Common.UI.MenuItems
         /// </summary>
         public CustomMenuItem()
         {
-			DebugEx.Verbose("Created CustomMenuItem object");
+            DebugEx.Verbose("Created CustomMenuItem object");
 
             mVisible = true;
 

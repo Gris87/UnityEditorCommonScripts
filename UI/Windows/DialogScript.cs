@@ -22,6 +22,8 @@ namespace Common.UI.Windows
         {
             base.Start();
 
+            DebugEx.Verbose("DialogScript.Start()");
+
             mComponentStates = new Dictionary<MonoBehaviour, bool>();
 
 
@@ -60,6 +62,8 @@ namespace Common.UI.Windows
         protected override void OnDestroy()
         {
             base.OnDestroy();
+
+            DebugEx.Verbose("DialogScript.OnDestroy()");
 
             foreach (KeyValuePair<MonoBehaviour, bool> componentState in mComponentStates)
             {

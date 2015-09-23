@@ -35,7 +35,7 @@ namespace Common.UI.Toasts
         public ToastScript()
             : base()
         {
-			DebugEx.Verbose("Created ToastScript object");
+            DebugEx.Verbose("Created ToastScript object");
 
             mDelay = 0f;
 
@@ -50,7 +50,7 @@ namespace Common.UI.Toasts
         /// </summary>
         void OnDestroy()
         {
-			DebugEx.Verbose("ToastScript.OnDestroy()");
+            DebugEx.Verbose("ToastScript.OnDestroy()");
 
             if (tokenId != R.sections.Toasts.strings.Count)
             {
@@ -65,7 +65,7 @@ namespace Common.UI.Toasts
         /// </summary>
         void OnDisable()
         {
-			DebugEx.Verbose("ToastScript.OnDisable()");
+            DebugEx.Verbose("ToastScript.OnDisable()");
 
             UnityEngine.Object.DestroyObject(gameObject);
         }
@@ -75,7 +75,7 @@ namespace Common.UI.Toasts
         /// </summary>
         void Update()
         {
-			DebugEx.VeryVeryVerbose("ToastScript.Update()");
+            DebugEx.VeryVeryVerbose("ToastScript.Update()");
 
             mDelay -= Time.deltaTime;
 
@@ -97,7 +97,7 @@ namespace Common.UI.Toasts
         /// </summary>
         public void Show()
         {
-			DebugEx.Verbose("ToastScript.Show()");
+            DebugEx.Verbose("ToastScript.Show()");
 
             //===========================================================================
             // CanvasRenderer Component
@@ -175,7 +175,7 @@ namespace Common.UI.Toasts
         /// </summary>
         public void UpdateText()
         {
-			DebugEx.Verbose("ToastScript.UpdateText()");
+            DebugEx.Verbose("ToastScript.UpdateText()");
 
             if (tokenArguments == null || tokenArguments.Length == 0)
             {
@@ -192,7 +192,7 @@ namespace Common.UI.Toasts
         /// </summary>
         private void DestroyToast()
         {
-			DebugEx.Verbose("ToastScript.DestroyToast()");
+            DebugEx.Verbose("ToastScript.DestroyToast()");
 
             UnityEngine.Object.DestroyObject(gameObject);
         }

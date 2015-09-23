@@ -11,7 +11,7 @@ namespace Common.UI.MenuItems
         private MenuSeparatorItem()
             : base()
         {
-			DebugEx.Verbose("Created MenuSeparatorItem object");
+            DebugEx.Verbose("Created MenuSeparatorItem object");
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Common.UI.MenuItems
         /// <param name="owner"><see cref="Common.TreeNode`1"/> instance.</param>
         public static TreeNode<CustomMenuItem> Create(TreeNode<CustomMenuItem> owner)
         {
-			DebugEx.VerboseFormat("MenuSeparatorItem.Create(owner = {0})", owner);
+            DebugEx.VerboseFormat("MenuSeparatorItem.Create(owner = {0})", owner);
 
             MenuSeparatorItem        item = new MenuSeparatorItem();
             TreeNode<CustomMenuItem> node = owner.AddChild(item);

@@ -18,11 +18,11 @@ namespace Common.UI.DragAndDrop
         public static DraggingType type
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("DragData.type = {0}", sType);
+            {
+                DebugEx.VeryVeryVerboseFormat("DragData.type = {0}", sType);
 
-				return sType; 
-			}
+                return sType;
+            }
         }
 
         /// <summary>
@@ -32,11 +32,11 @@ namespace Common.UI.DragAndDrop
         public static GameObject draggingImage
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("DragData.draggingImage = {0}", sDraggingImage);
+            {
+                DebugEx.VeryVeryVerboseFormat("DragData.draggingImage = {0}", sDraggingImage);
 
-				return sDraggingImage;
-			}
+                return sDraggingImage;
+            }
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Common.UI.DragAndDrop
         {
             get
             {
-				float res = 0f;
+                float res = 0f;
 
                 if (sDraggingImage != null)
                 {
@@ -56,7 +56,7 @@ namespace Common.UI.DragAndDrop
                     res = imageTransform.offsetMin.x;
                 }
 
-				DebugEx.VeryVeryVerboseFormat("DragData.x = {0}", res);
+                DebugEx.VeryVeryVerboseFormat("DragData.x = {0}", res);
 
                 return res;
             }
@@ -70,7 +70,7 @@ namespace Common.UI.DragAndDrop
         {
             get
             {
-				float res = 0f;
+                float res = 0f;
 
                 if (sDraggingImage != null)
                 {
@@ -79,7 +79,7 @@ namespace Common.UI.DragAndDrop
                     res = -imageTransform.offsetMax.y;
                 }
 
-				DebugEx.VeryVeryVerboseFormat("DragData.y = {0}", res);
+                DebugEx.VeryVeryVerboseFormat("DragData.y = {0}", res);
 
                 return res;
             }
@@ -92,11 +92,11 @@ namespace Common.UI.DragAndDrop
         public static float width
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("DragData.width = {0}", sWidth);
+            {
+                DebugEx.VeryVeryVerboseFormat("DragData.width = {0}", sWidth);
 
-				return sWidth; 
-			}
+                return sWidth;
+            }
         }
 
         /// <summary>
@@ -106,11 +106,11 @@ namespace Common.UI.DragAndDrop
         public static float height
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("DragData.height = {0}", sHeight);
+            {
+                DebugEx.VeryVeryVerboseFormat("DragData.height = {0}", sHeight);
 
-				return sHeight; 
-			}
+                return sHeight;
+            }
         }
 
 
@@ -129,7 +129,7 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         static DragData()
         {
-			DebugEx.Verbose("Static class DragData initialized");
+            DebugEx.Verbose("Static class DragData initialized");
 
             sType          = DraggingType.None;
             sDraggingImage = null;
@@ -159,17 +159,17 @@ namespace Common.UI.DragAndDrop
                                      , float dragPosY = 0f
                                     )
         {
-			DebugEx.VerboseFormat("DragData.BeginDrag(gameObject = {0}, sprite = {1}, width = {2}, height = {3}, dragPosX = {4}, dragPosY = {5})"
-			                      , gameObject
-			                      , sprite
-			                      , width
-			                      , height
-			                      , dragPosX
-			                      , dragPosY);
+            DebugEx.VerboseFormat("DragData.BeginDrag(gameObject = {0}, sprite = {1}, width = {2}, height = {3}, dragPosX = {4}, dragPosY = {5})"
+                                  , gameObject
+                                  , sprite
+                                  , width
+                                  , height
+                                  , dragPosX
+                                  , dragPosY);
 
             if (draggingType == DraggingType.None)
             {
-				DebugEx.ErrorFormat("Invalid dragging type value: {0}", draggingType);
+                DebugEx.ErrorFormat("Invalid dragging type value: {0}", draggingType);
                 return;
             }
 
@@ -243,7 +243,7 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         public static void Drag()
         {
-			DebugEx.VeryVerbose("DragData.Drag()");
+            DebugEx.VeryVerbose("DragData.Drag()");
 
             if (sType != DraggingType.None)
             {
@@ -256,7 +256,7 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         public static void EndDrag()
         {
-			DebugEx.Verbose("DragData.EndDrag()");
+            DebugEx.Verbose("DragData.EndDrag()");
 
             if (sType != DraggingType.None)
             {
@@ -276,7 +276,7 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         private static void SetDraggedPosition()
         {
-			DebugEx.VeryVerbose("DragData.SetDraggedPosition()");
+            DebugEx.VeryVerbose("DragData.SetDraggedPosition()");
 
             RectTransform imageTransform = sDraggingImage.transform as RectTransform;
 
@@ -292,7 +292,7 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         public static void HideImage()
         {
-			DebugEx.Verbose("DragData.HideImage()");
+            DebugEx.Verbose("DragData.HideImage()");
 
             if (sDraggingImage != null)
             {
@@ -305,7 +305,7 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         public static void ShowImage()
         {
-			DebugEx.Verbose("DragData.ShowImage()");
+            DebugEx.Verbose("DragData.ShowImage()");
 
             if (sDraggingImage != null)
             {

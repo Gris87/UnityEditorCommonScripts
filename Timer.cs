@@ -22,14 +22,14 @@ namespace Common
         {
             get
             {
-				DebugEx.VeryVeryVerboseFormat("Timer.duration = {0}", mDuration);
+                DebugEx.VeryVeryVerboseFormat("Timer.duration = {0}", mDuration);
 
                 return mDuration;
             }
 
             set
             {
-				DebugEx.VeryVerboseFormat("Timer.duration: {0} => {1}", mDuration, value);
+                DebugEx.VeryVerboseFormat("Timer.duration: {0} => {1}", mDuration, value);
 
                 if (value >= 0f)
                 {
@@ -37,7 +37,7 @@ namespace Common
                 }
                 else
                 {
-					DebugEx.ErrorFormat("Invalid duration value: {0}", duration);
+                    DebugEx.ErrorFormat("Invalid duration value: {0}", duration);
                 }
             }
         }
@@ -50,30 +50,30 @@ namespace Common
         {
             get
             {
-				bool res = (mTime != TIMER_NOT_ACTIVE);
+                bool res = (mTime != TIMER_NOT_ACTIVE);
 
-				DebugEx.VeryVeryVerboseFormat("Timer.active = {0}", res);
+                DebugEx.VeryVeryVerboseFormat("Timer.active = {0}", res);
 
                 return res;
             }
 
             set
             {
-				bool isActive = (mTime != TIMER_NOT_ACTIVE);
+                bool isActive = (mTime != TIMER_NOT_ACTIVE);
 
-				DebugEx.VeryVerboseFormat("Timer.active: {0} => {1}", isActive, value);
+                DebugEx.VeryVerboseFormat("Timer.active: {0} => {1}", isActive, value);
 
-				if (isActive != value)
-				{
-					if (value)
-					{
-						Start();
-					}
-					else
-					{
-						Stop();
-					}
-				}
+                if (isActive != value)
+                {
+                    if (value)
+                    {
+                        Start();
+                    }
+                    else
+                    {
+                        Stop();
+                    }
+                }
             }
         }
 
@@ -84,13 +84,13 @@ namespace Common
         public bool isAboutToShot
         {
             get
-			{
-				bool res = mTime >= mDuration;
+            {
+                bool res = mTime >= mDuration;
 
-				DebugEx.VeryVeryVerboseFormat("Timer.isAboutToShot = {0}", res);
+                DebugEx.VeryVeryVerboseFormat("Timer.isAboutToShot = {0}", res);
 
-				return res;
-			}
+                return res;
+            }
         }
 
 
@@ -108,7 +108,7 @@ namespace Common
         /// <param name="duration">Duration.</param>
         public Timer(UnityAction onTimeout, float duration = 0f)
         {
-			DebugEx.VerboseFormat("Created Timer(onTimeout = {0}, duration = {1}) object", onTimeout, duration);
+            DebugEx.VerboseFormat("Created Timer(onTimeout = {0}, duration = {1}) object", onTimeout, duration);
 
             mDuration  = duration;
             mTime      = TIMER_NOT_ACTIVE;
@@ -120,7 +120,7 @@ namespace Common
         /// </summary>
         public void Update()
         {
-			DebugEx.VeryVeryVerbose("Timer.Update()");
+            DebugEx.VeryVeryVerbose("Timer.Update()");
 
             if (mTime != TIMER_NOT_ACTIVE)
             {
@@ -138,7 +138,7 @@ namespace Common
         /// </summary>
         public void Start()
         {
-			DebugEx.Verbose("Timer.Start()");
+            DebugEx.Verbose("Timer.Start()");
 
             mTime = 0f;
         }
@@ -149,7 +149,7 @@ namespace Common
         /// <param name="duration">Duration.</param>
         public void Start(float duration)
         {
-			DebugEx.VerboseFormat("Timer.Start(duration = {0})", duration);
+            DebugEx.VerboseFormat("Timer.Start(duration = {0})", duration);
 
             if (duration >= 0f)
             {
@@ -158,7 +158,7 @@ namespace Common
             }
             else
             {
-				DebugEx.ErrorFormat("Invalid duration value: {0}", duration);
+                DebugEx.ErrorFormat("Invalid duration value: {0}", duration);
             }
         }
 
@@ -167,7 +167,7 @@ namespace Common
         /// </summary>
         public void Stop()
         {
-			DebugEx.Verbose("Timer.Stop()");
+            DebugEx.Verbose("Timer.Stop()");
 
             mTime = TIMER_NOT_ACTIVE;
         }

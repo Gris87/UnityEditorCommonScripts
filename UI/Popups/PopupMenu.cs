@@ -27,7 +27,7 @@ namespace Common.UI.Popups
             /// </summary>
             static PopupMenuCommon()
             {
-				DebugEx.Verbose("Static class PopupMenuCommon initialized");
+                DebugEx.Verbose("Static class PopupMenuCommon initialized");
 
                 defaultNavigation   = Navigation.defaultNavigation;
                 noneNavigation      = new Navigation();
@@ -56,11 +56,11 @@ namespace Common.UI.Popups
         public TreeNode<CustomMenuItem> items
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("PopupMenu.items = {0}", mItems);
+            {
+                DebugEx.VeryVeryVerboseFormat("PopupMenu.items = {0}", mItems);
 
-				return mItems; 
-			}
+                return mItems;
+            }
         }
 
         /// <summary>
@@ -70,11 +70,11 @@ namespace Common.UI.Popups
         public UnityEvent onDestroy
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("PopupMenu.onDestroy = {0}", mOnDestroy);
+            {
+                DebugEx.VeryVeryVerboseFormat("PopupMenu.onDestroy = {0}", mOnDestroy);
 
-				return mOnDestroy; 
-			}
+                return mOnDestroy;
+            }
         }
 
 
@@ -93,7 +93,7 @@ namespace Common.UI.Popups
         /// <param name="items">Items.</param>
         public PopupMenu(TreeNode<CustomMenuItem> items)
         {
-			DebugEx.VerboseFormat("Created PopupMenu(items = {0}) object", items);
+            DebugEx.VerboseFormat("Created PopupMenu(items = {0}) object", items);
 
             mItems     = items;
             mOnDestroy = new UnityEvent();
@@ -107,7 +107,7 @@ namespace Common.UI.Popups
         /// </summary>
         public void Destroy()
         {
-			DebugEx.Verbose("PopupMenu.Destroy()");
+            DebugEx.Verbose("PopupMenu.Destroy()");
 
             if (mChildPopupMenu != null)
             {
@@ -135,7 +135,7 @@ namespace Common.UI.Popups
         /// <param name="bottom">Bottom edge for button of parent popup if present.</param>
         public void Show(float x, float y, float left = -1, float bottom = -1)
         {
-			DebugEx.VerboseFormat("PopupMenu.Show(x = {0}, y = {1}, left = {2}, bottom = {3})", x, y, left, bottom);
+            DebugEx.VerboseFormat("PopupMenu.Show(x = {0}, y = {1}, left = {2}, bottom = {3})", x, y, left, bottom);
 
             PopupMenuAreaScript.RegisterPopupMenu(this);
 
@@ -726,7 +726,7 @@ namespace Common.UI.Popups
         /// <param name="item">Item.</param>
         public void OnSelectItem(MenuItem item)
         {
-			DebugEx.VerboseFormat("PopupMenu.OnSelectItem(item = {0})", item);
+            DebugEx.VerboseFormat("PopupMenu.OnSelectItem(item = {0})", item);
 
             if (item.radioGroup != null)
             {
@@ -734,7 +734,7 @@ namespace Common.UI.Popups
             }
             else
             {
-				DebugEx.Fatal("Unexpected behaviour in PopupMenu.OnSelectItem()");
+                DebugEx.Fatal("Unexpected behaviour in PopupMenu.OnSelectItem()");
             }
         }
 
@@ -749,7 +749,7 @@ namespace Common.UI.Popups
             if (node.data is MenuItem)
             {
                 MenuItem item = node.data as MenuItem;
-				DebugEx.UserInteractionFormat("PopupMenu.OnShowMenuSubItems({0})", item.name);
+                DebugEx.UserInteractionFormat("PopupMenu.OnShowMenuSubItems({0})", item.name);
 
                 if (mChildPopupMenu != null)
                 {

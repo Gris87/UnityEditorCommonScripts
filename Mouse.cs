@@ -21,7 +21,7 @@ namespace Common
             {
                 UpdatePosition();
 
-				DebugEx.VeryVeryVerboseFormat("Mouse.x = {0}", sX);
+                DebugEx.VeryVeryVerboseFormat("Mouse.x = {0}", sX);
 
                 return sX;
             }
@@ -37,7 +37,7 @@ namespace Common
             {
                 UpdatePosition();
 
-				DebugEx.VeryVeryVerboseFormat("Mouse.y = {0}", sY);
+                DebugEx.VeryVeryVerboseFormat("Mouse.y = {0}", sY);
 
                 return sY;
             }
@@ -50,13 +50,13 @@ namespace Common
         public static float scaledX
         {
             get
-			{
-				float res = x / Utils.canvasScale;
+            {
+                float res = x / Utils.canvasScale;
 
-				DebugEx.VeryVeryVerboseFormat("Mouse.scaledX = {0}", res);
+                DebugEx.VeryVeryVerboseFormat("Mouse.scaledX = {0}", res);
 
-				return res;
-			}
+                return res;
+            }
         }
 
         /// <summary>
@@ -66,13 +66,13 @@ namespace Common
         public static float scaledY
         {
             get
-			{
-				float res = y / Utils.canvasScale;
-				
-				DebugEx.VeryVeryVerboseFormat("Mouse.scaledY = {0}", res);
-				
-				return res;
-			}
+            {
+                float res = y / Utils.canvasScale;
+
+                DebugEx.VeryVeryVerboseFormat("Mouse.scaledY = {0}", res);
+
+                return res;
+            }
         }
 
 
@@ -89,7 +89,7 @@ namespace Common
         /// </summary>
         static Mouse()
         {
-			DebugEx.Verbose("Static class Mouse initialized");
+            DebugEx.Verbose("Static class Mouse initialized");
 
             sLastUpdate = -1;
             sX          = -1;
@@ -102,7 +102,7 @@ namespace Common
         /// </summary>
         private static void UpdatePosition()
         {
-			DebugEx.VeryVeryVerbose("Mouse.UpdatePosition()");
+            DebugEx.VeryVeryVerbose("Mouse.UpdatePosition()");
 
             if (sLastUpdate != Time.frameCount)
             {
@@ -123,7 +123,7 @@ namespace Common
         /// <param name="hits">List of raycast results.</param>
         public static void RaycastAll(List<RaycastResult> hits)
         {
-			DebugEx.VeryVeryVerbose("Mouse.RaycastAll()");
+            DebugEx.VeryVeryVerbose("Mouse.RaycastAll()");
 
             UpdatePosition();
 

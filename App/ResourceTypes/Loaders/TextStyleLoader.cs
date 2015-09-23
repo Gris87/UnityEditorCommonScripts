@@ -20,7 +20,7 @@ namespace Common.App.ResourceTypes.Loaders
         /// <param name="path">Path to text style.</param>
         public TextStyleLoader(string path)
         {
-			DebugEx.VerboseFormat("Created TextStyleLoader(path = {0}) object", path);
+            DebugEx.VerboseFormat("Created TextStyleLoader(path = {0}) object", path);
 
             mPath      = path;
             mTextStyle = null;
@@ -32,7 +32,7 @@ namespace Common.App.ResourceTypes.Loaders
         /// <param name="text">Text component.</param>
         public void Apply(Text text)
         {
-			DebugEx.VerboseFormat("TextStyleLoader.Apply(text = {0})", text);
+            DebugEx.VerboseFormat("TextStyleLoader.Apply(text = {0})", text);
 
             if (mTextStyle == null)
             {

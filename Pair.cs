@@ -24,7 +24,7 @@ namespace Common
         /// <param name="v2">Second value.</param>
         public Pair(T1 v1, T2 v2)
         {
-			DebugEx.VerboseFormat("Created Pair(v1 = {0}, v2 = {1}) object", v1, v2);
+            DebugEx.VerboseFormat("Created Pair(v1 = {0}, v2 = {1}) object", v1, v2);
 
             first  = v1;
             second = v2;

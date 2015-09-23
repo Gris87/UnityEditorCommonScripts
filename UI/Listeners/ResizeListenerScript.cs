@@ -31,7 +31,7 @@ namespace Common.UI.Listeners
         /// </summary>
         void Start()
         {
-			DebugEx.Verbose("ResizeListenerScript.Start()");
+            DebugEx.Verbose("ResizeListenerScript.Start()");
 
             if (sInstance == null)
             {
@@ -54,7 +54,7 @@ namespace Common.UI.Listeners
         /// </summary>
         void OnDestroy()
         {
-			DebugEx.Verbose("ResizeListenerScript.OnDestroy()");
+            DebugEx.Verbose("ResizeListenerScript.OnDestroy()");
 
             if (sInstance == this)
             {
@@ -67,7 +67,7 @@ namespace Common.UI.Listeners
         /// </summary>
         void Update()
         {
-			DebugEx.VeryVeryVerbose("ResizeListenerScript.Update()");
+            DebugEx.VeryVeryVerbose("ResizeListenerScript.Update()");
 
             mDelay -= Time.deltaTime;
 
@@ -98,7 +98,7 @@ namespace Common.UI.Listeners
         /// <param name="listener">Listener.</param>
         public static void AddListener(UnityAction listener)
         {
-			DebugEx.VerboseFormat("ResizeListenerScript.AddListener(listener = {0})", listener);
+            DebugEx.VerboseFormat("ResizeListenerScript.AddListener(listener = {0})", listener);
 
             if (sInstance != null)
             {
@@ -116,7 +116,7 @@ namespace Common.UI.Listeners
         /// <param name="listener">Listener.</param>
         public static void RemoveListener(UnityAction listener)
         {
-			DebugEx.VerboseFormat("ResizeListenerScript.RemoveListener(listener = {0})", listener);
+            DebugEx.VerboseFormat("ResizeListenerScript.RemoveListener(listener = {0})", listener);
 
             if (sInstance != null)
             {

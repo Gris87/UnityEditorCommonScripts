@@ -22,7 +22,7 @@ namespace Common.App.ResourceTypes.Loaders
                     mSprite = AssetUtils.LoadResource<Sprite>(mPath);
                 }
 
-				DebugEx.VeryVeryVerboseFormat("SpriteLoader.sprite = {0}", mSprite);
+                DebugEx.VeryVeryVerboseFormat("SpriteLoader.sprite = {0}", mSprite);
 
                 return mSprite;
             }
@@ -41,7 +41,7 @@ namespace Common.App.ResourceTypes.Loaders
         /// <param name="path">Path to sprite.</param>
         public SpriteLoader(string path)
         {
-			DebugEx.VerboseFormat("Created SpriteLoader(path = {0}) object", path);
+            DebugEx.VerboseFormat("Created SpriteLoader(path = {0}) object", path);
 
             mPath   = path;
             mSprite = null;

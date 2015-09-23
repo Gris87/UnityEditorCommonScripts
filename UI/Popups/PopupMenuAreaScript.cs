@@ -24,11 +24,11 @@ namespace Common.UI.Popups
         public static Transform geometry
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("PopupMenuAreaScript.geometry = {0}", sInstance.transform);
+            {
+                DebugEx.VeryVeryVerboseFormat("PopupMenuAreaScript.geometry = {0}", sInstance.transform);
 
-				return sInstance.transform; 
-			}
+                return sInstance.transform;
+            }
         }
 
 
@@ -48,7 +48,7 @@ namespace Common.UI.Popups
         /// </summary>
         void Start()
         {
-			DebugEx.Verbose("PopupMenuAreaScript.Start()");
+            DebugEx.Verbose("PopupMenuAreaScript.Start()");
 
             if (sInstance == null)
             {
@@ -71,7 +71,7 @@ namespace Common.UI.Popups
         /// </summary>
         void OnDestroy()
         {
-			DebugEx.Verbose("PopupMenuAreaScript.OnDestroy()");
+            DebugEx.Verbose("PopupMenuAreaScript.OnDestroy()");
 
             if (sInstance == this)
             {
@@ -84,7 +84,7 @@ namespace Common.UI.Popups
         /// </summary>
         void Update()
         {
-			DebugEx.VeryVeryVerbose("PopupMenuAreaScript.Update()");
+            DebugEx.VeryVeryVerbose("PopupMenuAreaScript.Update()");
 
             if (InputControl.GetMouseButtonDown(MouseButton.Left))
             {
@@ -133,7 +133,7 @@ namespace Common.UI.Popups
         /// <returns><c>true</c>, if escape button was handled, <c>false</c> otherwise.</returns>
         public bool OnEscapeButtonPressed()
         {
-			DebugEx.UserInteraction("PopupMenuAreaScript.OnEscapeButtonPressed()");
+            DebugEx.UserInteraction("PopupMenuAreaScript.OnEscapeButtonPressed()");
 
             mPopupMenus[mPopupMenus.Count - 1].Destroy();
 
@@ -146,7 +146,7 @@ namespace Common.UI.Popups
         /// <param name="item">Popup menu item.</param>
         public static void OnAutoPopupItemDestroy(AutoPopupItemScript item)
         {
-			DebugEx.VerboseFormat("PopupMenuAreaScript.OnAutoPopupItemDestroy(item = {0})", item);
+            DebugEx.VerboseFormat("PopupMenuAreaScript.OnAutoPopupItemDestroy(item = {0})", item);
 
             if (sInstance != null)
             {
@@ -167,7 +167,7 @@ namespace Common.UI.Popups
         /// <param name="item">Popup menu item.</param>
         public static void OnAutoPopupItemDisable(AutoPopupItemScript item)
         {
-			DebugEx.VerboseFormat("PopupMenuAreaScript.OnAutoPopupItemDisable(item = {0})", item);
+            DebugEx.VerboseFormat("PopupMenuAreaScript.OnAutoPopupItemDisable(item = {0})", item);
 
             if (sInstance != null)
             {
@@ -192,7 +192,7 @@ namespace Common.UI.Popups
         /// <param name="item">Popup menu item.</param>
         public static void OnAutoPopupItemEnter(AutoPopupItemScript item)
         {
-			DebugEx.VerboseFormat("PopupMenuAreaScript.OnAutoPopupItemEnter(item = {0})", item);
+            DebugEx.VerboseFormat("PopupMenuAreaScript.OnAutoPopupItemEnter(item = {0})", item);
 
             if (sInstance != null)
             {
@@ -214,7 +214,7 @@ namespace Common.UI.Popups
         /// <param name="item">Popup menu item.</param>
         public static void OnAutoPopupItemExit(AutoPopupItemScript item)
         {
-			DebugEx.VerboseFormat("PopupMenuAreaScript.OnAutoPopupItemExit(item = {0})", item);
+            DebugEx.VerboseFormat("PopupMenuAreaScript.OnAutoPopupItemExit(item = {0})", item);
 
             if (sInstance != null)
             {
@@ -236,7 +236,7 @@ namespace Common.UI.Popups
         /// <param name="menu">Popup menu.</param>
         public static void RegisterPopupMenu(PopupMenu menu)
         {
-			DebugEx.VerboseFormat("PopupMenuAreaScript.RegisterPopupMenu(menu = {0})", menu);
+            DebugEx.VerboseFormat("PopupMenuAreaScript.RegisterPopupMenu(menu = {0})", menu);
 
             if (sInstance != null)
             {
@@ -257,7 +257,7 @@ namespace Common.UI.Popups
         /// <param name="menu">Popup menu.</param>
         public static void DeregisterPopupMenu(PopupMenu menu)
         {
-			DebugEx.VerboseFormat("PopupMenuAreaScript.DeregisterPopupMenu(menu = {0})", menu);
+            DebugEx.VerboseFormat("PopupMenuAreaScript.DeregisterPopupMenu(menu = {0})", menu);
 
             if (sInstance != null)
             {
@@ -288,7 +288,7 @@ namespace Common.UI.Popups
         /// </summary>
         public static void DestroyAll()
         {
-			DebugEx.Verbose("PopupMenuAreaScript.DestroyAll()");
+            DebugEx.Verbose("PopupMenuAreaScript.DestroyAll()");
 
             if (sInstance != null)
             {
@@ -309,11 +309,11 @@ namespace Common.UI.Popups
         /// <param name="ms">Delay in ms.</param>
         private void StartTimer(float ms)
         {
-			DebugEx.VerboseFormat("PopupMenuAreaScript.StartTimer(ms = {0})", ms);
+            DebugEx.VerboseFormat("PopupMenuAreaScript.StartTimer(ms = {0})", ms);
 
             if (ms < 0f)
             {
-				DebugEx.ErrorFormat("Incorrect delay value: {0}", ms);
+                DebugEx.ErrorFormat("Incorrect delay value: {0}", ms);
             }
 
             mDelay = ms / 1000f;
@@ -324,7 +324,7 @@ namespace Common.UI.Popups
         /// </summary>
         private void StopTimer()
         {
-			DebugEx.Verbose("PopupMenuAreaScript.StopTimer()");
+            DebugEx.Verbose("PopupMenuAreaScript.StopTimer()");
 
             mDelay = TIMER_NOT_ACTIVE;
         }
@@ -335,7 +335,7 @@ namespace Common.UI.Popups
         /// <returns><c>true</c> if timer is active; otherwise, <c>false</c>.</returns>
         private bool IsTimerActive()
         {
-			DebugEx.Verbose("PopupMenuAreaScript.IsTimerActive()");
+            DebugEx.Verbose("PopupMenuAreaScript.IsTimerActive()");
 
             return mDelay != TIMER_NOT_ACTIVE;
         }

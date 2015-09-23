@@ -18,18 +18,18 @@ namespace Common.UI.Tooltips
         public R.sections.Tooltips.strings tokenId
         {
             get
-			{
-				DebugEx.VeryVeryVerboseFormat("TooltipOwnerScript.tokenId = {0}", mTokenId);
+            {
+                DebugEx.VeryVeryVerboseFormat("TooltipOwnerScript.tokenId = {0}", mTokenId);
 
-				return mTokenId; 
-			}
+                return mTokenId;
+            }
 
             set
-			{
-				DebugEx.VeryVerboseFormat("TooltipOwnerScript.tokenId: {0} => {1}", mTokenId, value);
+            {
+                DebugEx.VeryVerboseFormat("TooltipOwnerScript.tokenId: {0} => {1}", mTokenId, value);
 
-				mTokenId = value; 
-			}
+                mTokenId = value;
+            }
         }
 
 
@@ -43,7 +43,7 @@ namespace Common.UI.Tooltips
         /// </summary>
         void OnDestroy()
         {
-			DebugEx.Verbose("TooltipOwnerScript.OnDestroy()");
+            DebugEx.Verbose("TooltipOwnerScript.OnDestroy()");
 
             TooltipAreaScript.OnTooltipOwnerDestroy(this);
         }
@@ -53,7 +53,7 @@ namespace Common.UI.Tooltips
         /// </summary>
         void OnDisable()
         {
-			DebugEx.Verbose("TooltipOwnerScript.OnDisable()");
+            DebugEx.Verbose("TooltipOwnerScript.OnDisable()");
 
             TooltipAreaScript.OnTooltipOwnerDisable(this);
         }
@@ -64,7 +64,7 @@ namespace Common.UI.Tooltips
         /// <param name="eventData">Pointer data.</param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-			DebugEx.VerboseFormat("TooltipOwnerScript.OnPointerEnter(eventData = {0})", eventData);
+            DebugEx.VerboseFormat("TooltipOwnerScript.OnPointerEnter(eventData = {0})", eventData);
 
             TooltipAreaScript.OnTooltipOwnerEnter(this);
         }
@@ -75,7 +75,7 @@ namespace Common.UI.Tooltips
         /// <param name="eventData">Pointer data.</param>
         public void OnPointerExit(PointerEventData eventData)
         {
-			DebugEx.VerboseFormat("TooltipOwnerScript.OnPointerExit(eventData = {0})", eventData);
+            DebugEx.VerboseFormat("TooltipOwnerScript.OnPointerExit(eventData = {0})", eventData);
 
             TooltipAreaScript.OnTooltipOwnerExit(this);
         }

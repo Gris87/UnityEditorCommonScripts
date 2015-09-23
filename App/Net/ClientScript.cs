@@ -18,7 +18,7 @@ namespace Common.App.Net
     /// </summary>
     public class ClientScript : MonoBehaviour
     {
-		#region States
+        #region States
         /// <summary>
         /// Client state.
         /// </summary>
@@ -31,7 +31,7 @@ namespace Common.App.Net
             /// <param name="previousState">Previous state.</param>
             public virtual void OnEnter(ClientScript script, ClientState previousState)
             {
-				DebugEx.VerboseFormat("ClientScript.IClientState.OnEnter(script = {0}, previousState = {1})", script, previousState);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnEnter(script = {0}, previousState = {1})", script, previousState);
 
                 // Nothing
             }
@@ -43,7 +43,7 @@ namespace Common.App.Net
             /// <param name="nextState">Next state.</param>
             public virtual void OnExit(ClientScript script, ClientState nextState)
             {
-				DebugEx.VerboseFormat("ClientScript.IClientState.OnExit(script = {0}, nextState = {1})", script, nextState);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnExit(script = {0}, nextState = {1})", script, nextState);
 
                 // Nothing
             }
@@ -54,9 +54,9 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public virtual void OnRequestTimeout(ClientScript script)
             {
-				DebugEx.VerboseFormat("ClientScript.IClientState.OnRequestTimeout(script = {0})", script);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnRequestTimeout(script = {0})", script);
 
-				DebugEx.FatalFormat("Unexpected OnRequestTimeout() in {0} state", script.mState);
+                DebugEx.FatalFormat("Unexpected OnRequestTimeout() in {0} state", script.mState);
             }
 
             /// <summary>
@@ -65,9 +65,9 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public virtual void OnPollTimeout(ClientScript script)
             {
-				DebugEx.VerboseFormat("ClientScript.IClientState.OnPollTimeout(script = {0})", script);
-				
-				DebugEx.FatalFormat("Unexpected OnPollTimeout() in {0} state", script.mState);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnPollTimeout(script = {0})", script);
+
+                DebugEx.FatalFormat("Unexpected OnPollTimeout() in {0} state", script.mState);
             }
 
             /// <summary>
@@ -76,9 +76,9 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public virtual void OnConnectedToServer(ClientScript script)
             {
-				DebugEx.VerboseFormat("ClientScript.IClientState.OnConnectedToServer(script = {0})", script);
-				
-				DebugEx.FatalFormat("Unexpected OnConnectedToServer() in {0} state", script.mState);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnConnectedToServer(script = {0})", script);
+
+                DebugEx.FatalFormat("Unexpected OnConnectedToServer() in {0} state", script.mState);
             }
 
             /// <summary>
@@ -88,9 +88,9 @@ namespace Common.App.Net
             /// <param name="info">Disconnection info.</param>
             public virtual void OnDisconnectedFromServer(ClientScript script, NetworkDisconnection info)
             {
-				DebugEx.VerboseFormat("ClientScript.IClientState.OnDisconnectedFromServer(script = {0}, info = {1})", script, info);
-				
-				DebugEx.FatalFormat("Unexpected OnDisconnectedFromServer() in {0} state", script.mState);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnDisconnectedFromServer(script = {0}, info = {1})", script, info);
+
+                DebugEx.FatalFormat("Unexpected OnDisconnectedFromServer() in {0} state", script.mState);
             }
 
             /// <summary>
@@ -100,9 +100,9 @@ namespace Common.App.Net
             /// <param name="error">Error description.</param>
             public virtual void OnFailedToConnect(ClientScript script, NetworkConnectionError error)
             {
-				DebugEx.VerboseFormat("ClientScript.IClientState.OnFailedToConnect(script = {0}, error = {1})", script, error);
-				
-				DebugEx.FatalFormat("Unexpected OnFailedToConnect() in {0} state", script.mState);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnFailedToConnect(script = {0}, error = {1})", script, error);
+
+                DebugEx.FatalFormat("Unexpected OnFailedToConnect() in {0} state", script.mState);
             }
 
             /// <summary>
@@ -112,9 +112,9 @@ namespace Common.App.Net
             /// <param name="error">Error description.</param>
             public virtual void OnFailedToConnectToMasterServer(ClientScript script, NetworkConnectionError error)
             {
-				DebugEx.VerboseFormat("ClientScript.IClientState.OnFailedToConnectToMasterServer(script = {0}, error = {1})", script, error);
-				
-				DebugEx.FatalFormat("Unexpected OnFailedToConnectToMasterServer() in {0} state", script.mState);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnFailedToConnectToMasterServer(script = {0}, error = {1})", script, error);
+
+                DebugEx.FatalFormat("Unexpected OnFailedToConnectToMasterServer() in {0} state", script.mState);
             }
 
             /// <summary>
@@ -124,9 +124,9 @@ namespace Common.App.Net
             /// <param name="msEvent">Master server event.</param>
             public virtual void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
             {
-				DebugEx.VerboseFormat("ClientScript.IClientState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
-				
-				DebugEx.FatalFormat("Unexpected OnMasterServerEvent() in {0} state", script.mState);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
+
+                DebugEx.FatalFormat("Unexpected OnMasterServerEvent() in {0} state", script.mState);
             }
 
             /// <summary>
@@ -136,9 +136,9 @@ namespace Common.App.Net
             /// <param name="bytes">Byte array.</param>
             public virtual void OnMessageReceivedFromServer(ClientScript script, byte[] bytes)
             {
-				DebugEx.VerboseFormat("ClientScript.IClientState.OnMessageReceivedFromServer(script = {0}, bytes = {1})", script, Utils.BytesInHex(bytes));
-				
-				DebugEx.FatalFormat("Unexpected OnMessageReceivedFromServer() in {0} state", script.mState);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnMessageReceivedFromServer(script = {0}, bytes = {1})", script, Utils.BytesInHex(bytes));
+
+                DebugEx.FatalFormat("Unexpected OnMessageReceivedFromServer() in {0} state", script.mState);
             }
         }
 
@@ -154,7 +154,7 @@ namespace Common.App.Net
             /// <param name="previousState">Previous state.</param>
             public override void OnEnter(ClientScript script, ClientState previousState)
             {
-				DebugEx.VerboseFormat("ClientScript.RequestingState.OnEnter(script = {0}, previousState = {1})", script, previousState);
+                DebugEx.VerboseFormat("ClientScript.RequestingState.OnEnter(script = {0}, previousState = {1})", script, previousState);
 
                 if (previousState != ClientState.Count)
                 {
@@ -172,7 +172,7 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public override void OnRequestTimeout(ClientScript script)
             {
-				DebugEx.VerboseFormat("ClientScript.RequestingState.OnRequestTimeout(script = {0})", script);
+                DebugEx.VerboseFormat("ClientScript.RequestingState.OnRequestTimeout(script = {0})", script);
 
                 Client.RequestHostList();
 
@@ -186,7 +186,7 @@ namespace Common.App.Net
             /// <param name="error">Error description.</param>
             public override void OnFailedToConnect(ClientScript script, NetworkConnectionError error)
             {
-				DebugEx.VerboseFormat("ClientScript.RequestingState.OnFailedToConnect(script = {0}, error = {1})", script, error);
+                DebugEx.VerboseFormat("ClientScript.RequestingState.OnFailedToConnect(script = {0}, error = {1})", script, error);
 
                 // Nothing
             }
@@ -198,9 +198,9 @@ namespace Common.App.Net
             /// <param name="error">Error description.</param>
             public override void OnFailedToConnectToMasterServer(ClientScript script, NetworkConnectionError error)
             {
-				DebugEx.VerboseFormat("ClientScript.RequestingState.OnFailedToConnectToMasterServer(script = {0}, error = {1})", script, error);
+                DebugEx.VerboseFormat("ClientScript.RequestingState.OnFailedToConnectToMasterServer(script = {0}, error = {1})", script, error);
 
-				DebugEx.ErrorFormat("Could not connect to master server: {0}", error);
+                DebugEx.ErrorFormat("Could not connect to master server: {0}", error);
 
                 script.mRequestTimer.Start();
             }
@@ -212,7 +212,7 @@ namespace Common.App.Net
             /// <param name="msEvent">Master server event.</param>
             public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
             {
-				DebugEx.VerboseFormat("ClientScript.RequestingState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
+                DebugEx.VerboseFormat("ClientScript.RequestingState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
 
                 switch (msEvent)
                 {
@@ -235,7 +235,7 @@ namespace Common.App.Net
 
                     default:
                     {
-						DebugEx.ErrorFormat("Unknown master server event: {0}", msEvent);
+                        DebugEx.ErrorFormat("Unknown master server event: {0}", msEvent);
                     }
                     break;
                 }
@@ -254,7 +254,7 @@ namespace Common.App.Net
             /// <param name="previousState">Previous state.</param>
             public override void OnEnter(ClientScript script, ClientState previousState)
             {
-				DebugEx.VerboseFormat("ClientScript.PollingState.OnEnter(script = {0}, previousState = {1})", script, previousState);
+                DebugEx.VerboseFormat("ClientScript.PollingState.OnEnter(script = {0}, previousState = {1})", script, previousState);
 
                 if (previousState == ClientState.Requesting)
                 {
@@ -272,7 +272,7 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public override void OnRequestTimeout(ClientScript script)
             {
-				DebugEx.VerboseFormat("ClientScript.PollingState.OnRequestTimeout(script = {0})", script);
+                DebugEx.VerboseFormat("ClientScript.PollingState.OnRequestTimeout(script = {0})", script);
 
                 script.mRequestTimer.Stop();
                 script.mPollTimer.Stop();
@@ -286,7 +286,7 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public override void OnPollTimeout(ClientScript script)
             {
-				DebugEx.VerboseFormat("ClientScript.PollingState.OnPollTimeout(script = {0})", script);
+                DebugEx.VerboseFormat("ClientScript.PollingState.OnPollTimeout(script = {0})", script);
 
                 script.mHosts       = Client.PollHostList();
                 script.mCurrentHost = 0;
@@ -306,7 +306,7 @@ namespace Common.App.Net
             /// <param name="msEvent">Master server event.</param>
             public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
             {
-				DebugEx.VerboseFormat("ClientScript.PollingState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
+                DebugEx.VerboseFormat("ClientScript.PollingState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
 
                 // Nothing
             }
@@ -324,7 +324,7 @@ namespace Common.App.Net
             /// <param name="previousState">Previous state.</param>
             public override void OnEnter(ClientScript script, ClientState previousState)
             {
-				DebugEx.VerboseFormat("ClientScript.AskingState.OnEnter(script = {0}, previousState = {1})", script, previousState);
+                DebugEx.VerboseFormat("ClientScript.AskingState.OnEnter(script = {0}, previousState = {1})", script, previousState);
 
                 while (
                        script.mCurrentHost < script.mHosts.Length
@@ -365,7 +365,7 @@ namespace Common.App.Net
             /// <param name="previousState">Previous state.</param>
             public override void OnEnter(ClientScript script, ClientState previousState)
             {
-				DebugEx.VerboseFormat("ClientScript.ConnectingState.OnEnter(script = {0}, previousState = {1})", script, previousState);
+                DebugEx.VerboseFormat("ClientScript.ConnectingState.OnEnter(script = {0}, previousState = {1})", script, previousState);
 
                 Network.Connect(script.mHosts[script.mCurrentHost]);
             }
@@ -376,7 +376,7 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public override void OnRequestTimeout(ClientScript script)
             {
-				DebugEx.VeryVeryVerboseFormat("ClientScript.ConnectingState.OnRequestTimeout(script = {0})", script);
+                DebugEx.VeryVeryVerboseFormat("ClientScript.ConnectingState.OnRequestTimeout(script = {0})", script);
 
                 // Nothing
             }
@@ -387,7 +387,7 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public override void OnConnectedToServer(ClientScript script)
             {
-				DebugEx.VerboseFormat("ClientScript.ConnectingState.OnConnectedToServer(script = {0})", script);
+                DebugEx.VerboseFormat("ClientScript.ConnectingState.OnConnectedToServer(script = {0})", script);
 
                 script.state = ClientState.Connected;
             }
@@ -399,9 +399,9 @@ namespace Common.App.Net
             /// <param name="error">Error description.</param>
             public override void OnFailedToConnect(ClientScript script, NetworkConnectionError error)
             {
-				DebugEx.VerboseFormat("ClientScript.ConnectingState.OnFailedToConnect(script = {0}, error = {1})", script, error);
+                DebugEx.VerboseFormat("ClientScript.ConnectingState.OnFailedToConnect(script = {0}, error = {1})", script, error);
 
-				DebugEx.ErrorFormat("Could not connect to server: {0}", error);
+                DebugEx.ErrorFormat("Could not connect to server: {0}", error);
 
                 ++script.mCurrentHost;
                 script.state = ClientState.Asking;
@@ -414,7 +414,7 @@ namespace Common.App.Net
             /// <param name="msEvent">Master server event.</param>
             public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
             {
-				DebugEx.VerboseFormat("ClientScript.ConnectingState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
+                DebugEx.VerboseFormat("ClientScript.ConnectingState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
 
                 // Nothing
             }
@@ -432,7 +432,7 @@ namespace Common.App.Net
             /// <param name="previousState">Previous state.</param>
             public override void OnEnter(ClientScript script, ClientState previousState)
             {
-				DebugEx.VerboseFormat("ClientScript.ConnectedState.OnEnter(script = {0}, previousState = {1})", script, previousState);
+                DebugEx.VerboseFormat("ClientScript.ConnectedState.OnEnter(script = {0}, previousState = {1})", script, previousState);
 
                 script.Send(Client.BuildRevisionRequestMessage());
             }
@@ -443,7 +443,7 @@ namespace Common.App.Net
             /// <param name="script">Script.</param>
             public override void OnRequestTimeout(ClientScript script)
             {
-				DebugEx.VeryVeryVerboseFormat("ClientScript.ConnectedState.OnRequestTimeout(script = {0})", script);
+                DebugEx.VeryVeryVerboseFormat("ClientScript.ConnectedState.OnRequestTimeout(script = {0})", script);
 
                 // Nothing
             }
@@ -455,7 +455,7 @@ namespace Common.App.Net
             /// <param name="info">Disconnection info.</param>
             public override void OnDisconnectedFromServer(ClientScript script, NetworkDisconnection info)
             {
-				DebugEx.VerboseFormat("ClientScript.ConnectedState.OnDisconnectedFromServer(script = {0}, info = {1})", script, info);
+                DebugEx.VerboseFormat("ClientScript.ConnectedState.OnDisconnectedFromServer(script = {0}, info = {1})", script, info);
 
                 ++script.mCurrentHost;
                 script.state = ClientState.Asking;
@@ -468,12 +468,12 @@ namespace Common.App.Net
             /// <param name="msEvent">Master server event.</param>
             public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
             {
-				DebugEx.VerboseFormat("ClientScript.ConnectedState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
+                DebugEx.VerboseFormat("ClientScript.ConnectedState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
 
                 // Nothing
             }
         }
-		#endregion
+        #endregion
 
         // =======================================================================
 
@@ -490,21 +490,21 @@ namespace Common.App.Net
         {
             get
             {
-				DebugEx.VeryVeryVerboseFormat("ClientScript.state = {0}", mState);
+                DebugEx.VeryVeryVerboseFormat("ClientScript.state = {0}", mState);
 
                 return mState;
             }
 
             set
             {
-				DebugEx.VeryVerboseFormat("ClientScript.state: {0} => {1}", mState, value);
+                DebugEx.VeryVerboseFormat("ClientScript.state: {0} => {1}", mState, value);
 
                 if (mState != value)
                 {
                     ClientState oldState = mState;
                     mState = value;
 
-					DebugEx.DebugFormat("Client state changed: {0} => {1}", oldState, mState);
+                    DebugEx.DebugFormat("Client state changed: {0} => {1}", oldState, mState);
 
                     mCurrentState.OnExit(this, mState);
                     mCurrentState = mAllStates[(int)mState];
@@ -521,16 +521,16 @@ namespace Common.App.Net
         {
             get
             {
-				float res = mRequestTimer.duration;
+                float res = mRequestTimer.duration;
 
-				DebugEx.VeryVeryVerboseFormat("ClientScript.requestDuration = {0}", res);
+                DebugEx.VeryVeryVerboseFormat("ClientScript.requestDuration = {0}", res);
 
-				return res;
+                return res;
             }
 
             set
             {
-				DebugEx.VeryVerboseFormat("ClientScript.requestDuration: {0} => {1}", mRequestTimer.duration, value);
+                DebugEx.VeryVerboseFormat("ClientScript.requestDuration: {0} => {1}", mRequestTimer.duration, value);
 
                 mRequestTimer.duration = value;
             }
@@ -558,7 +558,7 @@ namespace Common.App.Net
         /// </summary>
         void Start()
         {
-			DebugEx.Verbose("ClientScript.Start()");
+            DebugEx.Verbose("ClientScript.Start()");
 
 #if LOOPBACK_SERVER
             MasterServer.ipAddress     = "127.0.0.1";
@@ -596,7 +596,7 @@ namespace Common.App.Net
         /// </summary>
         void Update()
         {
-			DebugEx.VeryVeryVerbose("ClientScript.Update()");
+            DebugEx.VeryVeryVerbose("ClientScript.Update()");
 
             mRequestTimer.Update();
             mPollTimer.Update();
@@ -607,7 +607,7 @@ namespace Common.App.Net
         /// </summary>
         private void OnRequestTimeout()
         {
-			DebugEx.VeryVeryVerbose("ClientScript.OnRequestTimeout()");
+            DebugEx.VeryVeryVerbose("ClientScript.OnRequestTimeout()");
 
             mCurrentState.OnRequestTimeout(this);
         }
@@ -617,7 +617,7 @@ namespace Common.App.Net
         /// </summary>
         private void OnPollTimeout()
         {
-			DebugEx.Verbose("ClientScript.OnPollTimeout()");
+            DebugEx.Verbose("ClientScript.OnPollTimeout()");
 
             mCurrentState.OnPollTimeout(this);
         }
@@ -627,7 +627,7 @@ namespace Common.App.Net
         /// </summary>
         void OnConnectedToServer()
         {
-			DebugEx.Verbose("ClientScript.OnConnectedToServer()");
+            DebugEx.Verbose("ClientScript.OnConnectedToServer()");
 
             mCurrentState.OnConnectedToServer(this);
         }
@@ -638,7 +638,7 @@ namespace Common.App.Net
         /// <param name="info">Disconnection info.</param>
         void OnDisconnectedFromServer(NetworkDisconnection info)
         {
-			DebugEx.VerboseFormat("ClientScript.OnDisconnectedFromServer(info = {0})", info);
+            DebugEx.VerboseFormat("ClientScript.OnDisconnectedFromServer(info = {0})", info);
 
             mCurrentState.OnDisconnectedFromServer(this, info);
         }
@@ -649,7 +649,7 @@ namespace Common.App.Net
         /// <param name="error">Error description.</param>
         void OnFailedToConnect(NetworkConnectionError error)
         {
-			DebugEx.VerboseFormat("ClientScript.OnFailedToConnect(error = {0})", error);
+            DebugEx.VerboseFormat("ClientScript.OnFailedToConnect(error = {0})", error);
 
             mCurrentState.OnFailedToConnect(this, error);
         }
@@ -660,7 +660,7 @@ namespace Common.App.Net
         /// <param name="error">Error description.</param>
         void OnFailedToConnectToMasterServer(NetworkConnectionError error)
         {
-			DebugEx.VerboseFormat("ClientScript.OnFailedToConnectToMasterServer(error = {0})", error);
+            DebugEx.VerboseFormat("ClientScript.OnFailedToConnectToMasterServer(error = {0})", error);
 
             mCurrentState.OnFailedToConnectToMasterServer(this, error);
         }
@@ -671,7 +671,7 @@ namespace Common.App.Net
         /// <param name="msEvent">Master server event.</param>
         void OnMasterServerEvent(MasterServerEvent msEvent)
         {
-			DebugEx.VerboseFormat("ClientScript.OnMasterServerEvent(msEvent = {0})", msEvent);
+            DebugEx.VerboseFormat("ClientScript.OnMasterServerEvent(msEvent = {0})", msEvent);
 
             mCurrentState.OnMasterServerEvent(this, msEvent);
         }
@@ -682,7 +682,7 @@ namespace Common.App.Net
         /// <param name="bytes">Byte array.</param>
         public void Send(byte[] bytes)
         {
-			DebugEx.VerboseFormat("ClientScript.Send(bytes = {0})", Utils.BytesInHex(bytes));
+            DebugEx.VerboseFormat("ClientScript.Send(bytes = {0})", Utils.BytesInHex(bytes));
 
             mNetworkView.RPC("RPC_SendToServer", RPCMode.Server, mNetworkView.viewID, bytes);
         }
@@ -695,9 +695,9 @@ namespace Common.App.Net
         [RPC]
         private void RPC_SendToServer(NetworkViewID id, byte[] bytes)
         {
-			DebugEx.VerboseFormat("ClientScript.RPC_SendToServer(id = {0}, bytes = {1})", id, Utils.BytesInHex(bytes));
+            DebugEx.VerboseFormat("ClientScript.RPC_SendToServer(id = {0}, bytes = {1})", id, Utils.BytesInHex(bytes));
 
-			DebugEx.Fatal("Unexpected behaviour in ClientScript.RPC_SendToServer()");
+            DebugEx.Fatal("Unexpected behaviour in ClientScript.RPC_SendToServer()");
         }
 
         /// <summary>
@@ -707,7 +707,7 @@ namespace Common.App.Net
         [RPC]
         private void RPC_SendToClient(byte[] bytes)
         {
-			DebugEx.VerboseFormat("ClientScript.RPC_SendToClient(bytes = {0})", Utils.BytesInHex(bytes));
+            DebugEx.VerboseFormat("ClientScript.RPC_SendToClient(bytes = {0})", Utils.BytesInHex(bytes));
 
             mCurrentState.OnMessageReceivedFromServer(this, bytes);
         }

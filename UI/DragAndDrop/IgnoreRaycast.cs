@@ -17,7 +17,7 @@ namespace Common.UI.DragAndDrop
         /// <param name="eventCamera">Event camera.</param>
         public bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera)
         {
-			DebugEx.VeryVerbose("DragData.IsRaycastLocationValid()");
+            DebugEx.VeryVerboseFormat("DragData.IsRaycastLocationValid(sp = {0}, eventCamera = {1})", sp, eventCamera);
 
             return false;
         }

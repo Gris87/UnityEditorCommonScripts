@@ -32,7 +32,7 @@ namespace Common.UI.Toasts
         /// </summary>
         static Toast()
         {
-			DebugEx.Verbose("Static class Toast initialized");
+            DebugEx.Verbose("Static class Toast initialized");
 
             sToasts = new List<ToastScript>();
         }
@@ -45,7 +45,7 @@ namespace Common.UI.Toasts
         /// <param name="duration">Duration.</param>
         public static void Show(Transform parent, string message, float duration)
         {
-			DebugEx.VerboseFormat("Toast.Show(parent = {0}, message = {1}, duration = {2})", parent, message, duration);
+            DebugEx.VerboseFormat("Toast.Show(parent = {0}, message = {1}, duration = {2})", parent, message, duration);
 
             AddToast(parent, message, R.sections.Toasts.strings.Count, null, duration);
         }
@@ -58,7 +58,7 @@ namespace Common.UI.Toasts
         /// <param name="duration">Duration.</param>
         public static void Show(Transform parent, R.sections.Toasts.strings tokenId, float duration)
         {
-			DebugEx.VerboseFormat("Toast.Show(parent = {0}, tokenId = {1}, duration = {2})", parent, tokenId, duration);
+            DebugEx.VerboseFormat("Toast.Show(parent = {0}, tokenId = {1}, duration = {2})", parent, tokenId, duration);
 
             AddToast(parent, null, tokenId, null, duration);
         }
@@ -72,7 +72,7 @@ namespace Common.UI.Toasts
         /// <param name="tokenArguments">Token arguments.</param>
         public static void Show(Transform parent, R.sections.Toasts.strings tokenId, float duration, params object[] tokenArguments)
         {
-			DebugEx.VerboseFormat("Toast.Show(parent = {0}, tokenId = {1}, duration = {2}, tokenArguments = {3})", parent, tokenId, duration, tokenArguments);
+            DebugEx.VerboseFormat("Toast.Show(parent = {0}, tokenId = {1}, duration = {2}, tokenArguments = {3})", parent, tokenId, duration, tokenArguments);
 
             AddToast(parent, null, tokenId, tokenArguments, duration);
         }
@@ -93,12 +93,12 @@ namespace Common.UI.Toasts
                                      , float                     duration
                                     )
         {
-			DebugEx.VerboseFormat("Toast.AddToast(parent = {0}, text = {1}, tokenId = {2}, tokenArguments = {3}, duration = {4})"
-			                      , parent
-			                      , text
-			                      , tokenId
-			                      , tokenArguments
-			                      , duration);
+            DebugEx.VerboseFormat("Toast.AddToast(parent = {0}, text = {1}, tokenId = {2}, tokenArguments = {3}, duration = {4})"
+                                  , parent
+                                  , text
+                                  , tokenId
+                                  , tokenArguments
+                                  , duration);
 
             #region Toast GameObject
             GameObject toast = new GameObject("Toast");
@@ -138,7 +138,7 @@ namespace Common.UI.Toasts
         /// </summary>
         private static void ShowNextToast()
         {
-			DebugEx.Verbose("Toast.ShowNextToast()");
+            DebugEx.Verbose("Toast.ShowNextToast()");
 
             sToasts[0].Show();
         }
@@ -149,7 +149,7 @@ namespace Common.UI.Toasts
         /// <param name="toast">Toast script.</param>
         public static void ToastDestroyed(ToastScript toast)
         {
-			DebugEx.VerboseFormat("Toast.ToastDestroyed(toast = {0})", toast);
+            DebugEx.VerboseFormat("Toast.ToastDestroyed(toast = {0})", toast);
 
             int index = sToasts.IndexOf(toast);
 
