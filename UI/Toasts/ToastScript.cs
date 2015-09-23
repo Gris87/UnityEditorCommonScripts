@@ -35,6 +35,8 @@ namespace Common.UI.Toasts
         public ToastScript()
             : base()
         {
+			DebugEx.Verbose("Created ToastScript object");
+
             mDelay = 0f;
 
             mToastCanvasGroup = null;
@@ -48,6 +50,8 @@ namespace Common.UI.Toasts
         /// </summary>
         void OnDestroy()
         {
+			DebugEx.Verbose("ToastScript.OnDestroy()");
+
             if (tokenId != R.sections.Toasts.strings.Count)
             {
                 Translator.RemoveLanguageChangedListener(UpdateText);
@@ -61,6 +65,8 @@ namespace Common.UI.Toasts
         /// </summary>
         void OnDisable()
         {
+			DebugEx.Verbose("ToastScript.OnDisable()");
+
             UnityEngine.Object.DestroyObject(gameObject);
         }
 
@@ -69,6 +75,8 @@ namespace Common.UI.Toasts
         /// </summary>
         void Update()
         {
+			DebugEx.VeryVeryVerbose("ToastScript.Update()");
+
             mDelay -= Time.deltaTime;
 
             if (mDelay <= 0f)
@@ -89,6 +97,8 @@ namespace Common.UI.Toasts
         /// </summary>
         public void Show()
         {
+			DebugEx.Verbose("ToastScript.Show()");
+
             //===========================================================================
             // CanvasRenderer Component
             //===========================================================================
@@ -165,6 +175,8 @@ namespace Common.UI.Toasts
         /// </summary>
         public void UpdateText()
         {
+			DebugEx.Verbose("ToastScript.UpdateText()");
+
             if (tokenArguments == null || tokenArguments.Length == 0)
             {
                 mToastText.text = Translator.GetString(tokenId);
@@ -180,6 +192,8 @@ namespace Common.UI.Toasts
         /// </summary>
         private void DestroyToast()
         {
+			DebugEx.Verbose("ToastScript.DestroyToast()");
+
             UnityEngine.Object.DestroyObject(gameObject);
         }
     }

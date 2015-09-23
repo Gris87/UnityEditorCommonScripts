@@ -11,19 +11,30 @@ namespace Common.UI.Popups
     /// </summary>
     public class AutoPopupItemScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        private Button mButton;
-        private float  mDelay  = 0f;
-
-
-
         /// <summary>
         /// Delay before showing popup.
         /// </summary>
         public float delay
         {
-            get { return mDelay;  }
-            set { mDelay = value; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("AutoPopupItemScript.delay = {0}", mDelay);
+
+				return mDelay;
+			}
+
+            set
+			{
+				DebugEx.VeryVerboseFormat("AutoPopupItemScript.delay: {0} => {1}", mDelay, value);
+
+				mDelay = value; 
+			}
         }
+
+
+
+		private Button mButton;
+		private float  mDelay  = 0f;
 
 
 
@@ -32,6 +43,8 @@ namespace Common.UI.Popups
         /// </summary>
         void Start()
         {
+			DebugEx.Verbose("AutoPopupItemScript.Start()");
+
             mButton = GetComponent<Button>();
 
             if (mButton == null)
@@ -45,6 +58,8 @@ namespace Common.UI.Popups
         /// </summary>
         void OnDestroy()
         {
+			DebugEx.Verbose("AutoPopupItemScript.OnDestroy()");
+
             PopupMenuAreaScript.OnAutoPopupItemDestroy(this);
         }
 
@@ -53,6 +68,8 @@ namespace Common.UI.Popups
         /// </summary>
         void OnDisable()
         {
+			DebugEx.Verbose("AutoPopupItemScript.OnDisable()");
+
             PopupMenuAreaScript.OnAutoPopupItemDisable(this);
         }
 
@@ -62,6 +79,8 @@ namespace Common.UI.Popups
         /// <param name="eventData">Pointer data.</param>
         public void OnPointerEnter(PointerEventData eventData)
         {
+			DebugEx.VerboseFormat("AutoPopupItemScript.OnPointerEnter(eventData = {0})", eventData);
+
             PopupMenuAreaScript.OnAutoPopupItemEnter(this);
         }
 
@@ -71,6 +90,8 @@ namespace Common.UI.Popups
         /// <param name="eventData">Pointer data.</param>
         public void OnPointerExit(PointerEventData eventData)
         {
+			DebugEx.VerboseFormat("AutoPopupItemScript.OnPointerExit(eventData = {0})", eventData);
+
             PopupMenuAreaScript.OnAutoPopupItemExit(this);
         }
 
@@ -79,6 +100,8 @@ namespace Common.UI.Popups
         /// </summary>
         public void Click()
         {
+			DebugEx.Verbose("AutoPopupItemScript.Click()");
+
             mButton.onClick.Invoke();
         }
     }

@@ -34,6 +34,8 @@ namespace Common.UI.Tooltips
         /// </summary>
         void Start()
         {
+			DebugEx.Verbose("TooltipAreaScript.Start()");
+
             if (sInstance == null)
             {
                 sInstance = this;
@@ -54,6 +56,8 @@ namespace Common.UI.Tooltips
         /// </summary>
         void OnDestroy()
         {
+			DebugEx.Verbose("TooltipAreaScript.OnDestroy()");
+
             if (sInstance == this)
             {
                 sInstance = null;
@@ -65,6 +69,8 @@ namespace Common.UI.Tooltips
         /// </summary>
         void Update()
         {
+			DebugEx.VeryVeryVerbose("TooltipAreaScript.Update()");
+
             if (IsTimerActive())
             {
                 mDelay -= Time.deltaTime;
@@ -91,6 +97,8 @@ namespace Common.UI.Tooltips
         /// <param name="owner">Tooltip owner.</param>
         public static void OnTooltipOwnerDestroy(TooltipOwnerScript owner)
         {
+			DebugEx.VerboseFormat("TooltipAreaScript.OnTooltipOwnerDestroy(owner = {0})", owner);
+
             if (sInstance != null)
             {
                 if (sInstance.mCurrentOwner == owner)
@@ -116,6 +124,8 @@ namespace Common.UI.Tooltips
         /// <param name="owner">Tooltip owner.</param>
         public static void OnTooltipOwnerDisable(TooltipOwnerScript owner)
         {
+			DebugEx.VerboseFormat("TooltipAreaScript.OnTooltipOwnerDisable(owner = {0})", owner);
+
             if (sInstance != null)
             {
                 if (sInstance.mCurrentOwner == owner)
@@ -141,6 +151,8 @@ namespace Common.UI.Tooltips
         /// <param name="owner">Tooltip owner.</param>
         public static void OnTooltipOwnerEnter(TooltipOwnerScript owner)
         {
+			DebugEx.VerboseFormat("TooltipAreaScript.OnTooltipOwnerEnter(owner = {0})", owner);
+
             if (sInstance != null)
             {
                 if (sInstance.mCurrentOwner != null)
@@ -183,6 +195,8 @@ namespace Common.UI.Tooltips
         /// <param name="owner">Tooltip owner.</param>
         public static void OnTooltipOwnerExit(TooltipOwnerScript owner)
         {
+			DebugEx.VerboseFormat("TooltipAreaScript.OnTooltipOwnerExit(owner = {0})", owner);
+
             if (sInstance != null)
             {
                 sInstance.mNextOwner = null;
@@ -210,6 +224,8 @@ namespace Common.UI.Tooltips
         /// </summary>
         private void CreateTooltip()
         {
+			DebugEx.Verbose("TooltipAreaScript.CreateTooltip()");
+
             DestroyTooltip();
 
             mCurrentOwner = mNextOwner;
@@ -318,6 +334,8 @@ namespace Common.UI.Tooltips
         /// </summary>
         private void DestroyTooltip()
         {
+			DebugEx.Verbose("TooltipAreaScript.DestroyTooltip()");
+
             if (transform.childCount > 0)
             {
                 if (transform.childCount == 1)
@@ -340,9 +358,11 @@ namespace Common.UI.Tooltips
         /// <param name="onTimeout">Timeout handler.</param>
         private void StartTimer(float ms, UnityAction onTimeout)
         {
+			DebugEx.VerboseFormat("TooltipAreaScript.StartTimer(ms = {0}, onTimeout = {1})", ms, onTimeout);
+
             if (ms < 0f)
             {
-                DebugEx.Error("Incorrect delay value: " + ms);
+				DebugEx.ErrorFormat("Incorrect delay value: {0}", ms);
             }
 
             mDelay     = ms / 1000f;
@@ -354,6 +374,8 @@ namespace Common.UI.Tooltips
         /// </summary>
         private void StopTimer()
         {
+			DebugEx.Verbose("TooltipAreaScript.StopTimer()");
+
             mDelay     = TIMER_NOT_ACTIVE;
             mOnTimeout = null;
         }
@@ -364,6 +386,8 @@ namespace Common.UI.Tooltips
         /// <returns><c>true</c> if timer is active; otherwise, <c>false</c>.</returns>
         private bool IsTimerActive()
         {
+			DebugEx.Verbose("TooltipAreaScript.IsTimerActive()");
+
             return mDelay != TIMER_NOT_ACTIVE;
         }
     }
