@@ -1004,7 +1004,7 @@ namespace Common.UI.Windows
                     {
                         res = Utils.scaledScreenHeight;
                     }
-
+                    else
                     if (mState == WindowState.Maximized)
                     {
                         if (mFrame != WindowFrameType.Frameless)
@@ -1016,7 +1016,7 @@ namespace Common.UI.Windows
                             res = Utils.scaledScreenHeight;
                         }
                     }
-
+                    else
                     if (mState == WindowState.Minimized)
                     {
                         res = 0;
