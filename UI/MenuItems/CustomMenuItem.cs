@@ -11,8 +11,19 @@ namespace Common.UI.MenuItems
         /// <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
         public bool visible
         {
-            get { return mVisible;  }
-            set { mVisible = value; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("CustomMenuItem.visible = {0}", mVisible);
+
+				return mVisible;
+			}
+
+            set
+			{
+				DebugEx.VeryVerboseFormat("CustomMenuItem.visible: {0} => {1}", mVisible, value);
+
+				mVisible = value;
+			}
         }
 
         /// <summary>
@@ -21,7 +32,12 @@ namespace Common.UI.MenuItems
         /// <value>The assigned <see cref="Common.TreeNode`1"/> instance.</value>
         public TreeNode<CustomMenuItem> node
         {
-            get { return mNode; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("CustomMenuItem.node = {0}", mNode);
+
+				return mNode; 
+			}
         }
 
 
@@ -40,6 +56,8 @@ namespace Common.UI.MenuItems
         /// </summary>
         public CustomMenuItem()
         {
+			DebugEx.Verbose("Created CustomMenuItem object");
+
             mVisible = true;
 
             mNode = null;

@@ -14,7 +14,7 @@ namespace Common.UI.Listeners
 
 
 
-        private List<EscapeButtonHandler> mHandlers;
+        private List<IEscapeButtonHandler> mHandlers;
 
 
 
@@ -23,6 +23,8 @@ namespace Common.UI.Listeners
         /// </summary>
         void Start()
         {
+			DebugEx.Verbose("EscapeButtonListenerScript.Start()");
+
             if (sInstance == null)
             {
                 sInstance = this;
@@ -32,7 +34,7 @@ namespace Common.UI.Listeners
                 DebugEx.Error("Two instances of EscapeButtonListener not supported");
             }
 
-            mHandlers = new List<EscapeButtonHandler>();
+            mHandlers = new List<IEscapeButtonHandler>();
 
             enabled = false;
         }
@@ -42,6 +44,8 @@ namespace Common.UI.Listeners
         /// </summary>
         void OnDestroy()
         {
+			DebugEx.Verbose("EscapeButtonListenerScript.OnDestroy()");
+
             if (sInstance == this)
             {
                 sInstance = null;
@@ -53,6 +57,8 @@ namespace Common.UI.Listeners
         /// </summary>
         void Update()
         {
+			DebugEx.VeryVeryVerbose("EscapeButtonListenerScript.Update()");
+
             if (InputControl.GetButtonDown(Controls.buttons.escape, true))
             {
                 for (int i = mHandlers.Count - 1; i >= 0; --i)
@@ -69,8 +75,10 @@ namespace Common.UI.Listeners
         /// Push handler to the top.
         /// </summary>
         /// <param name="handler">Handler.</param>
-        public static void PushHandlerToTop(EscapeButtonHandler handler)
+        public static void PushHandlerToTop(IEscapeButtonHandler handler)
         {
+			DebugEx.VerboseFormat("EscapeButtonListenerScript.PushHandlerToTop(handler = {0})", handler);
+
             if (sInstance != null)
             {
                 sInstance.mHandlers.Remove(handler);
@@ -88,8 +96,10 @@ namespace Common.UI.Listeners
         /// Removes the handler.
         /// </summary>
         /// <param name="handler">Handler.</param>
-        public static void RemoveHandler(EscapeButtonHandler handler)
+        public static void RemoveHandler(IEscapeButtonHandler handler)
         {
+			DebugEx.VerboseFormat("EscapeButtonListenerScript.RemoveHandler(handler = {0})", handler);
+
             if (sInstance != null)
             {
                 if (sInstance.mHandlers.Remove(handler))

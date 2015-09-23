@@ -17,7 +17,12 @@ namespace Common.UI.DragAndDrop
         /// <value>Dragging type.</value>
         public static DraggingType type
         {
-            get { return sType; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("DragData.type = {0}", sType);
+
+				return sType; 
+			}
         }
 
         /// <summary>
@@ -26,7 +31,12 @@ namespace Common.UI.DragAndDrop
         /// <value>Dragging image object.</value>
         public static GameObject draggingImage
         {
-            get { return sDraggingImage; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("DragData.draggingImage = {0}", sDraggingImage);
+
+				return sDraggingImage;
+			}
         }
 
         /// <summary>
@@ -37,14 +47,18 @@ namespace Common.UI.DragAndDrop
         {
             get
             {
+				float res = 0f;
+
                 if (sDraggingImage != null)
                 {
                     RectTransform imageTransform = sDraggingImage.transform as RectTransform;
 
-                    return imageTransform.offsetMin.x;
+                    res = imageTransform.offsetMin.x;
                 }
 
-                return 0f;
+				DebugEx.VeryVeryVerboseFormat("DragData.x = {0}", res);
+
+                return res;
             }
         }
 
@@ -56,14 +70,18 @@ namespace Common.UI.DragAndDrop
         {
             get
             {
+				float res = 0f;
+
                 if (sDraggingImage != null)
                 {
                     RectTransform imageTransform = sDraggingImage.transform as RectTransform;
 
-                    return -imageTransform.offsetMax.y;
+                    res = -imageTransform.offsetMax.y;
                 }
 
-                return 0f;
+				DebugEx.VeryVeryVerboseFormat("DragData.y = {0}", res);
+
+                return res;
             }
         }
 
@@ -73,7 +91,12 @@ namespace Common.UI.DragAndDrop
         /// <value>Width.</value>
         public static float width
         {
-            get { return sWidth; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("DragData.width = {0}", sWidth);
+
+				return sWidth; 
+			}
         }
 
         /// <summary>
@@ -82,7 +105,12 @@ namespace Common.UI.DragAndDrop
         /// <value>Height.</value>
         public static float height
         {
-            get { return sHeight; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("DragData.height = {0}", sHeight);
+
+				return sHeight; 
+			}
         }
 
 
@@ -101,6 +129,8 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         static DragData()
         {
+			DebugEx.Verbose("Static class DragData initialized");
+
             sType          = DraggingType.None;
             sDraggingImage = null;
             sWidth         = 0f;
@@ -129,9 +159,17 @@ namespace Common.UI.DragAndDrop
                                      , float dragPosY = 0f
                                     )
         {
+			DebugEx.VerboseFormat("DragData.BeginDrag(gameObject = {0}, sprite = {1}, width = {2}, height = {3}, dragPosX = {4}, dragPosY = {5})"
+			                      , gameObject
+			                      , sprite
+			                      , width
+			                      , height
+			                      , dragPosX
+			                      , dragPosY);
+
             if (draggingType == DraggingType.None)
             {
-                DebugEx.Error("Invalid dragging type value: " + draggingType);
+				DebugEx.ErrorFormat("Invalid dragging type value: {0}", draggingType);
                 return;
             }
 
@@ -205,6 +243,8 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         public static void Drag()
         {
+			DebugEx.VeryVerbose("DragData.Drag()");
+
             if (sType != DraggingType.None)
             {
                 SetDraggedPosition();
@@ -216,6 +256,8 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         public static void EndDrag()
         {
+			DebugEx.Verbose("DragData.EndDrag()");
+
             if (sType != DraggingType.None)
             {
                 UnityEngine.Object.DestroyObject(sDraggingImage);
@@ -234,6 +276,8 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         private static void SetDraggedPosition()
         {
+			DebugEx.VeryVerbose("DragData.SetDraggedPosition()");
+
             RectTransform imageTransform = sDraggingImage.transform as RectTransform;
 
             float mouseX = Mouse.scaledX;
@@ -248,6 +292,8 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         public static void HideImage()
         {
+			DebugEx.Verbose("DragData.HideImage()");
+
             if (sDraggingImage != null)
             {
                 sDraggingImage.SetActive(false);
@@ -259,6 +305,8 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         public static void ShowImage()
         {
+			DebugEx.Verbose("DragData.ShowImage()");
+
             if (sDraggingImage != null)
             {
                 sDraggingImage.SetActive(true);

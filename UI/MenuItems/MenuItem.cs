@@ -17,8 +17,19 @@ namespace Common.UI.MenuItems
         /// <value>The token identifier.</value>
         public R.sections.MenuItems.strings tokenId
         {
-            get { return mTokenId;  }
-            set { mTokenId = value; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("MenuItem.tokenId = {0}", mTokenId);
+
+				return mTokenId; 
+			}
+
+            set
+			{
+				DebugEx.VeryVerboseFormat("MenuItem.tokenId: {0} => {1}", mTokenId, value);
+
+				mTokenId = value; 
+			}
         }
 
         /// <summary>
@@ -27,8 +38,19 @@ namespace Common.UI.MenuItems
         /// <value>The token arguments.</value>
         public object[] tokenArguments
         {
-            get { return mTokenArguments;  }
-            set { mTokenArguments = value; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("MenuItem.tokenArguments = {0}", mTokenArguments);
+
+				return mTokenArguments; 
+			}
+
+            set 
+			{
+				DebugEx.VeryVerboseFormat("MenuItem.tokenArguments: {0} => {1}", mTokenArguments, value);
+
+				mTokenArguments = value; 
+			}
         }
 
         /// <summary>
@@ -41,15 +63,21 @@ namespace Common.UI.MenuItems
             {
                 if (mText != null)
                 {
+					DebugEx.VeryVeryVerboseFormat("MenuItem.name = {0}", mText);
+
                     return mText;
                 }
 
                 if (mTokenId != R.sections.MenuItems.strings.Count)
                 {
+					DebugEx.VeryVeryVerboseFormat("MenuItem.name = {0}", mTokenId);
+
                     return mTokenId.ToString();
                 }
 
-                DebugEx.Error("MenuItem.Name returns empty string");
+				DebugEx.VeryVeryVerbose("MenuItem.name = ");
+                DebugEx.Error("MenuItem.name returns empty string");
+
                 return "";
             }
         }
@@ -64,22 +92,32 @@ namespace Common.UI.MenuItems
             {
                 if (mText != null)
                 {
+					DebugEx.VeryVeryVerboseFormat("MenuItem.text = {0}", mText);
+
                     return mText;
                 }
 
                 if (mTokenId != R.sections.MenuItems.strings.Count)
                 {
+					string res;
+
                     if (mTokenArguments == null || mTokenArguments.Length == 0)
                     {
-                        return Translator.GetString(mTokenId);
+                        res = Translator.GetString(mTokenId);
                     }
                     else
                     {
-                        return Translator.GetString(mTokenId, mTokenArguments);
+                        res = Translator.GetString(mTokenId, mTokenArguments);
                     }
+
+					DebugEx.VeryVeryVerboseFormat("MenuItem.text = {0}", res);
+
+					return res;
                 }
 
-                DebugEx.Error("MenuItem.Text returns empty string");
+				DebugEx.VeryVeryVerbose("MenuItem.text = ");
+                DebugEx.Error("MenuItem.text returns empty string");
+
                 return "";
             }
 
@@ -104,11 +142,15 @@ namespace Common.UI.MenuItems
         {
             get
             {
+				DebugEx.VeryVeryVerboseFormat("MenuItem.enabled = {0}", mEnabled);
+
                 return mEnabled;
             }
 
             set
             {
+				DebugEx.VeryVerboseFormat("MenuItem.enabled: {0} => {1}", mEnabled, value);
+
                 if (mEnabled != value)
                 {
                     mEnabled = value;
@@ -134,7 +176,12 @@ namespace Common.UI.MenuItems
         /// <value>The click event handler.</value>
         public UnityAction onClick
         {
-            get { return mOnClick; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("MenuItem.onClick = {0}", mOnClick);
+
+				return mOnClick; 
+			}
         }
 
         /// <summary>
@@ -147,8 +194,12 @@ namespace Common.UI.MenuItems
             {
                 if (mShortcut != null)
                 {
+					DebugEx.VeryVeryVerboseFormat("MenuItem.shortcut = {0}", mShortcut.ToString());
+
                     return mShortcut.ToString();
                 }
+
+				DebugEx.VeryVeryVerbose("MenuItem.shortcut = null");
 
                 return null;
             }
@@ -160,8 +211,19 @@ namespace Common.UI.MenuItems
         /// <value>Menu radio group.</value>
         public MenuRadioGroup radioGroup
         {
-            get { return mRadioGroup;  }
-            set { mRadioGroup = value; }
+            get
+			{
+				DebugEx.VeryVeryVerboseFormat("MenuItem.radioGroup = {0}", mRadioGroup);
+
+				return mRadioGroup;
+			}
+
+            set
+			{
+				DebugEx.VeryVerboseFormat("MenuItem.radioGroup: {0} => {1}", mRadioGroup, value);
+
+				mRadioGroup = value;
+			}
         }
 
 
@@ -200,6 +262,16 @@ namespace Common.UI.MenuItems
                         )
             : base()
         {
+			DebugEx.VerboseFormat("Created MenuItem(tokenId = {0}, tokenArguments = {1}, text = {2}, enabled = {3}, onClick = {4}, shortcutHandler = {5}, shortcut = {6}, radioGroup = {7}) object"
+			                      , tokenId
+			                      , tokenArguments
+			                      , text
+			                      , enabled
+			                      , onClick
+			                      , shortcutHandler
+			                      , shortcut
+			                      , radioGroup);
+
             mTokenId         = tokenId;
             mTokenArguments  = tokenArguments;
             mText            = text;
@@ -246,6 +318,15 @@ namespace Common.UI.MenuItems
                                                       , MenuRadioGroup               radioGroup      = null
                                                      )
         {
+			DebugEx.VerboseFormat("MenuItem.Create(owner = {0}, tokenId = {1}, onClick = {2}, enabled = {3}, shortcutHandler = {4}, shortcut = {5}, radioGroup = {6})"
+			                      , owner
+			                      , tokenId
+			                      , onClick
+			                      , enabled
+			                      , shortcutHandler
+			                      , shortcut
+			                      , radioGroup);
+
             MenuItem item = new MenuItem(
                                            tokenId                            // Token ID
                                          , null                               // Token arguments
@@ -285,6 +366,15 @@ namespace Common.UI.MenuItems
                                                       , MenuRadioGroup           radioGroup      = null
                                                      )
         {
+			DebugEx.VerboseFormat("MenuItem.Create(owner = {0}, text = {1}, onClick = {2}, enabled = {3}, shortcutHandler = {4}, shortcut = {5}, radioGroup = {6})"
+			                      , owner
+			                      , text
+			                      , onClick
+			                      , enabled
+			                      , shortcutHandler
+			                      , shortcut
+			                      , radioGroup);
+
             MenuItem item = new MenuItem(
                                            R.sections.MenuItems.strings.Count // Token ID
                                          , null                               // Token arguments
@@ -309,6 +399,8 @@ namespace Common.UI.MenuItems
         /// <returns><c>true</c>, if shortcut was handled, <c>false</c> otherwise.</returns>
         public bool HandleShortcut()
         {
+			DebugEx.Verbose("MenuItem.HandleShortcut()");
+
             if (mShortcut.GetInputDown(true) != 0)
             {
                 mOnClick.Invoke();

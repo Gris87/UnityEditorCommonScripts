@@ -401,7 +401,7 @@ namespace Common.App.Net
             {
 				DebugEx.VerboseFormat("ClientScript.ConnectingState.OnFailedToConnect(script = {0}, error = {1})", script, error);
 
-				DebugEx.Error("Could not connect to server: {0}", error);
+				DebugEx.ErrorFormat("Could not connect to server: {0}", error);
 
                 ++script.mCurrentHost;
                 script.state = ClientState.Asking;

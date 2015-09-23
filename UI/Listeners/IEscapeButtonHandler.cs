@@ -3,7 +3,7 @@ namespace Common.UI.Listeners
     /// <summary>
     /// Interface for escape button handler.
     /// </summary>
-    public interface EscapeButtonHandler
+    public interface IEscapeButtonHandler
     {
         /// <summary>
         /// Handles escape button press event.

@@ -11,7 +11,7 @@ namespace Common.UI.Popups
     /// <summary>
     /// Script that realize behaviour for PopupMenus controller.
     /// </summary>
-    public class PopupMenuAreaScript : MonoBehaviour, EscapeButtonHandler
+    public class PopupMenuAreaScript : MonoBehaviour, IEscapeButtonHandler
     {
         private const float TIMER_NOT_ACTIVE = -10000f;
 
