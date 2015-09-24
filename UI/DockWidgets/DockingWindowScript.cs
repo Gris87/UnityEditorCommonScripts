@@ -19,8 +19,19 @@ namespace Common.UI.DockWidgets
         /// <value>The dock widget.</value>
         public DockWidgetScript dockWidget
         {
-            get { return mDockWidget;  }
-            set { mDockWidget = value; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DockingWindowScript.dockWidget = {0}", mDockWidget);
+
+                return mDockWidget;
+            }
+
+            set
+            {
+                DebugEx.VeryVerboseFormat("DockingWindowScript.dockWidget: {0} => {1}", mDockWidget, value);
+
+                mDockWidget = value;
+            }
         }
 
 
@@ -37,6 +48,8 @@ namespace Common.UI.DockWidgets
         private DockingWindowScript()
             : base()
         {
+            DebugEx.Verbose("Created DockingWindowScript object");
+
             mDockWidget        = null;
 
             mDockingAreaScript = null;
@@ -53,6 +66,8 @@ namespace Common.UI.DockWidgets
         /// <param name="height">Height of content.</param>
         protected override void CreateContent(Transform contentTransform, out float width, out float height)
         {
+            DebugEx.VerboseFormat("DockingWindowScript.CreateContent(contentTransform = {0})", contentTransform);
+
             width  = 150f;
             height = 150f;
 
@@ -195,6 +210,8 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void OnPointerDown(PointerEventData eventData)
         {
+            DebugEx.VerboseFormat("DockingWindowScript.OnPointerDown(eventData = {0})", eventData);
+
             float mouseX = Mouse.scaledX;
             float mouseY = Mouse.scaledY;
 
@@ -218,6 +235,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         protected override void OnResize()
         {
+            DebugEx.Verbose("DockingWindowScript.OnResize()");
+
             if (mDockingAreaScript != null)
             {
                 mDockingAreaScript.OnResize();

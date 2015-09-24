@@ -23,8 +23,19 @@ namespace Common.UI.DockWidgets
         /// <value>Parent docking area.</value>
         public DockingAreaScript parent
         {
-            get { return mParent;  }
-            set { mParent = value; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DockingGroupScript.parent = {0}", mParent);
+
+                return mParent;
+            }
+
+            set
+            {
+                DebugEx.VeryVerboseFormat("DockingGroupScript.parent: {0} => {1}", mParent, value);
+
+                mParent = value;
+            }
         }
 
         /// <summary>
@@ -33,7 +44,12 @@ namespace Common.UI.DockWidgets
         /// <value>The children.</value>
         public ReadOnlyCollection<DockWidgetScript> children
         {
-            get { return mChildren.AsReadOnly(); }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DockingGroupScript.children = List({0})", mChildren.Count);
+
+                return mChildren.AsReadOnly();
+            }
         }
 
         /// <summary>
@@ -44,11 +60,15 @@ namespace Common.UI.DockWidgets
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("DockingGroupScript.selectedIndex = {0}", mSelectedIndex);
+
                 return mSelectedIndex;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("DockingGroupScript.selectedIndex: {0} => {1}", mSelectedIndex, value);
+
                 if (mSelectedIndex != value)
                 {
                     if (value >= 0 && value < mChildren.Count)
@@ -73,7 +93,7 @@ namespace Common.UI.DockWidgets
                     }
                     else
                     {
-                        DebugEx.Error("Invalid selected index value: " + value);
+						DebugEx.ErrorFormat("Invalid selected index value: {0}", value);
                     }
                 }
             }
@@ -96,6 +116,8 @@ namespace Common.UI.DockWidgets
         public DockingGroupScript()
             : base()
         {
+            DebugEx.Verbose("Created DockingGroupScript object");
+
             mParent        = null;
             mChildren      = new List<DockWidgetScript>();
             mSelectedIndex = -1;
@@ -109,6 +131,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         void Awake()
         {
+            DebugEx.Verbose("DockingGroupScript.Awake()");
+
             Translator.AddLanguageChangedListener(UpdateTabs);
 
             CreateUI();
@@ -119,6 +143,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private void CreateUI()
         {
+            DebugEx.Verbose("DockingGroupScript.CreateUI()");
+
             //===========================================================================
             // Tabs GameObject
             //===========================================================================
@@ -288,6 +314,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public void Destroy()
         {
+            DebugEx.Verbose("DockingGroupScript.Destroy()");
+
             UnityEngine.Object.DestroyObject(gameObject);
 
             if (mParent != null)
@@ -301,6 +329,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         void OnDestroy()
         {
+            DebugEx.Verbose("DockingGroupScript.OnDestroy()");
+
             Translator.RemoveLanguageChangedListener(UpdateTabs);
         }
 
@@ -309,6 +339,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public void OnResize()
         {
+            DebugEx.Verbose("DockingGroupScript.OnResize()");
+
             UpdateTabsGeometry();
 
             foreach (DockWidgetScript child in mChildren)
@@ -322,6 +354,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private void UpdateTabsGeometry()
         {
+            DebugEx.Verbose("DockingGroupScript.UpdateTabsGeometry()");
+
             bool hasDummyWidget = false;
             List<float> tabWidths = new List<float>();
             float totalWidth = 0f;
@@ -393,6 +427,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private void UpdateTabs()
         {
+            DebugEx.Verbose("DockingGroupScript.UpdateTabs()");
+
             for (int i = 0; i < mChildren.Count; ++i)
             {
                 Text tabText = mTabsTransform.GetChild(i).GetChild(1).GetComponent<Text>(); // Tab/Text
@@ -409,6 +445,8 @@ namespace Common.UI.DockWidgets
         /// <param name="dockWidget">Dock widget.</param>
         public void UpdateTabImage(DockWidgetScript dockWidget)
         {
+            DebugEx.VerboseFormat("DockingGroupScript.UpdateTabImage(dockWidget = {0})", dockWidget);
+
             if (dockWidget.parent == this)
             {
                 int index = mChildren.IndexOf(dockWidget);
@@ -436,6 +474,8 @@ namespace Common.UI.DockWidgets
         /// <param name="dockWidget">Dock widget.</param>
         public void UpdateTab(DockWidgetScript dockWidget)
         {
+            DebugEx.VerboseFormat("DockingGroupScript.UpdateTab(dockWidget = {0})", dockWidget);
+
             if (dockWidget.parent == this)
             {
                 int index = mChildren.IndexOf(dockWidget);
@@ -465,6 +505,8 @@ namespace Common.UI.DockWidgets
         /// <param name="dockWidget">Dock widget.</param>
         public void OnSelectTab(DockWidgetScript dockWidget)
         {
+            DebugEx.VerboseFormat("DockingGroupScript.OnSelectTab(dockWidget = {0})", dockWidget);
+
             if (dockWidget.parent == this)
             {
                 int index = mChildren.IndexOf(dockWidget);
@@ -491,6 +533,8 @@ namespace Common.UI.DockWidgets
         /// <param name="dragCorners">Cached drag corners.</param>
         public void ProcessDockWidgetDrag(PointerEventData eventData, Vector3[] dragCorners)
         {
+            DebugEx.VerboseFormat("DockingGroupScript.ProcessDockWidgetDrag(eventData = {0}, dragCorners = {1})", eventData, dragCorners);
+
             float x = Mouse.scaledX - dragCorners[0].x;
 
             DragInfoHolder.dockingArea = mParent;
@@ -609,6 +653,8 @@ namespace Common.UI.DockWidgets
         /// <param name="index">Index.</param>
         public void InsertDockWidget(DockWidgetScript dockWidget, int index = 0)
         {
+            DebugEx.VerboseFormat("DockingGroupScript.InsertDockWidget(dockWidget = {0}, index = {1})", dockWidget, index);
+
             if (dockWidget.parent != null)
             {
                 if (dockWidget.parent == this)
@@ -805,6 +851,8 @@ namespace Common.UI.DockWidgets
         /// <param name="dockWidget">Dock widget.</param>
         public void RemoveDockWidget(DockWidgetScript dockWidget)
         {
+            DebugEx.VerboseFormat("DockingGroupScript.RemoveDockWidget(dockWidget = {0})", dockWidget);
+
             if (dockWidget.parent == this)
             {
                 int index = mChildren.IndexOf(dockWidget);
@@ -866,6 +914,8 @@ namespace Common.UI.DockWidgets
         /// <param name="sourceObject">Source object.</param>
         private void OnShowContextMenu(object sourceObject)
         {
+            DebugEx.VerboseFormat("DockingGroupScript.OnShowContextMenu(sourceObject = {0})", sourceObject);
+
             DockWidgetScript dockWidget = sourceObject as DockWidgetScript;
 
             if (dockWidget != null)
@@ -884,6 +934,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private void OnLockButtonClicked()
         {
+            DebugEx.Verbose("DockingGroupScript.OnLockButtonClicked()");
+
             // TODO: [Major] Implement DockingGroupScript.OnLockButtonClicked
             AppUtils.ShowContributeMessage();
         }
@@ -893,6 +945,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private void OnContextMenuButtonClicked()
         {
+            DebugEx.Verbose("DockingGroupScript.OnContextMenuButtonClicked()");
+
             // TODO: [Major] Implement DockingGroupScript.OnContextMenuButtonClicked
             AppUtils.ShowContributeMessage();
         }

@@ -22,8 +22,19 @@ namespace Common.UI.DockWidgets
         /// <value>The dock widget.</value>
         public DockWidgetScript dockWidget
         {
-            get { return mDockWidget;  }
-            set { mDockWidget = value; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DockingTabButton.dockWidget = {0}", mDockWidget);
+
+                return mDockWidget;
+            }
+
+            set
+            {
+                DebugEx.VeryVerboseFormat("DockingTabButton.dockWidget: {0} => {1}", mDockWidget, value);
+
+                mDockWidget = value;
+            }
         }
 
         /// <summary>
@@ -34,11 +45,15 @@ namespace Common.UI.DockWidgets
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("DockingTabButton.active = {0}", mActive);
+
                 return mActive;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("DockingTabButton.active: {0} => {1}", mActive, value);
+
                 if (mActive != value)
                 {
                     mActive = value;
@@ -63,6 +78,8 @@ namespace Common.UI.DockWidgets
         public DockingTabButton()
             : base()
         {
+            DebugEx.Verbose("Created DockingTabButton object");
+
             transition = Selectable.Transition.SpriteSwap;
 
             mDockWidget = null;
@@ -80,6 +97,8 @@ namespace Common.UI.DockWidgets
         {
             base.Start();
 
+            DebugEx.Verbose("DockingTabButton.Start()");
+
             UpdateImage();
         }
 
@@ -90,6 +109,8 @@ namespace Common.UI.DockWidgets
         public override void OnPointerDown(PointerEventData eventData)
         {
             base.OnPointerDown(eventData);
+
+            DebugEx.VerboseFormat("DockingTabButton.OnPointerDown(eventData = {0})", eventData);
 
             if (eventData.button == PointerEventData.InputButton.Middle)
             {
@@ -103,6 +124,8 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void OnBeginDrag(PointerEventData eventData)
         {
+            DebugEx.VerboseFormat("DockingTabButton.OnBeginDrag(eventData = {0})", eventData);
+
             ButtonClicked();
 
             DragInfoHolder.dockWidget    = mDockWidget;
@@ -126,6 +149,8 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void OnDrag(PointerEventData eventData)
         {
+            DebugEx.VerboseFormat("DockingTabButton.OnDrag(eventData = {0})", eventData);
+
             DragInfoHolder.minimum       = float.MaxValue;
             DragInfoHolder.dockingArea   = null;
             DragInfoHolder.mouseLocation = DragInfoHolder.MouseLocation.Outside;
@@ -174,6 +199,8 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void OnEndDrag(PointerEventData eventData)
         {
+            DebugEx.VerboseFormat("DockingTabButton.OnEndDrag(eventData = {0})", eventData);
+
             foreach (DockingAreaScript dockingArea in mDockingAreas)
             {
                 dockingArea.ClearDragInfo();
@@ -249,6 +276,8 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public IEnumerator CreateDraggingImage(PointerEventData eventData)
         {
+            DebugEx.VerboseFormat("DockingTabButton.CreateDraggingImage(eventData = {0})", eventData);
+
             yield return new WaitForEndOfFrame();
 
             Vector3[] corners = Utils.GetWindowCorners(mDockWidget.parent.transform as RectTransform);
@@ -309,6 +338,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private void ButtonClicked()
         {
+            DebugEx.Verbose("DockingTabButton.ButtonClicked()");
+
             mDockWidget.Select();
         }
 
@@ -317,6 +348,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private void UpdateImage()
         {
+            DebugEx.Verbose("DockingTabButton.UpdateImage()");
+
             if (mActive)
             {
                 image.sprite = Assets.Common.DockWidgets.Textures.tabActive.sprite;

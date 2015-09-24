@@ -56,7 +56,12 @@ namespace Common.UI.DockWidgets
         /// <value>The instances.</value>
         public static ReadOnlyCollection<DockingAreaScript> instances
         {
-            get { return sInstances.AsReadOnly(); }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DockingAreaScript.instances = List({0})", sInstances.Count);
+
+                return sInstances.AsReadOnly();
+            }
         }
 
 
@@ -80,7 +85,12 @@ namespace Common.UI.DockWidgets
         /// <value>Orientation.</value>
         public DockingAreaOrientation orientation
         {
-            get { return mOrientation; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DockingAreaScript.orientation = {0}", mOrientation);
+
+                return mOrientation;
+            }
         }
 
         /// <summary>
@@ -89,7 +99,12 @@ namespace Common.UI.DockWidgets
         /// <value>Parent docking area.</value>
         public DockingAreaScript parent
         {
-            get { return mParent; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DockingAreaScript.parent = {0}", mParent);
+
+                return mParent;
+            }
         }
 
         /// <summary>
@@ -98,7 +113,12 @@ namespace Common.UI.DockWidgets
         /// <value>The children.</value>
         public ReadOnlyCollection<DockingAreaScript> children
         {
-            get { return mChildren.AsReadOnly(); }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DockingAreaScript.children = List({0})", mChildren.Count);
+
+                return mChildren.AsReadOnly();
+            }
         }
 
         /// <summary>
@@ -109,11 +129,15 @@ namespace Common.UI.DockWidgets
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("DockingAreaScript.sizes = List({0})", mSizes.Count);
+
                 return mSizes.AsReadOnly();
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("DockingAreaScript.sizes: List({0}) => List({1})", mSizes.Count, value.Count);
+
                 if (value.Count == mChildren.Count)
                 {
                     if (value.Count > 0)
@@ -128,7 +152,7 @@ namespace Common.UI.DockWidgets
                             }
                             else
                             {
-                                DebugEx.Error("Incorrect size (" + size + ") in size list");
+								DebugEx.ErrorFormat("Incorrect size ({0}) in size list", size);
                                 return;
                             }
                         }
@@ -141,7 +165,7 @@ namespace Common.UI.DockWidgets
 
                             if (newSize < MINIMUM_SIZE)
                             {
-                                DebugEx.Error("New size " + newSize + " is less than minimum value: " + MINIMUM_SIZE);
+								DebugEx.ErrorFormat("New size {0} is less than minimum value: {1}", newSize, MINIMUM_SIZE);
                                 return;
                             }
 
@@ -180,7 +204,7 @@ namespace Common.UI.DockWidgets
                         listStr += value[i];
                     }
 
-                    DebugEx.Error("Invalid size list argument: [" + listStr + "]");
+					DebugEx.ErrorFormat("Invalid size list argument: [{0}]", listStr);
                 }
             }
         }
@@ -191,7 +215,12 @@ namespace Common.UI.DockWidgets
         /// <value>The docking group.</value>
         public DockingGroupScript dockingGroupScript
         {
-            get { return mDockingGroupScript; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DockingAreaScript.dockingGroupScript = {0}", mDockingGroupScript);
+
+                return mDockingGroupScript;
+            }
         }
 
 
@@ -212,6 +241,8 @@ namespace Common.UI.DockWidgets
         public DockingAreaScript()
             : base()
         {
+            DebugEx.Verbose("Created DockingAreaScript object");
+
             sInstances.Add(this);
 
             mOrientation        = DockingAreaOrientation.None;
@@ -228,6 +259,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public void Destroy()
         {
+            DebugEx.Verbose("DockingAreaScript.Destroy()");
+
             UnityEngine.Object.DestroyObject(gameObject);
 
             if (mParent != null)
@@ -241,6 +274,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         void OnDestroy()
         {
+            DebugEx.Verbose("DockingAreaScript.OnDestroy()");
+
             if (sResizingArea == this)
             {
 #if !CURSORLESS_PLATFORM
@@ -266,6 +301,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private void RemoveCursorIfNeeded()
         {
+            DebugEx.Verbose("DockingAreaScript.RemoveCursorIfNeeded()");
+
             if (
                 sMouseLocation == MouseLocation.North
                 ||
@@ -285,6 +322,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private void RemoveCursor()
         {
+            DebugEx.Verbose("DockingAreaScript.RemoveCursor()");
+
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
 #endif
@@ -294,6 +333,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public void OnResize()
         {
+            DebugEx.Verbose("DockingAreaScript.OnResize()");
+
             switch (mOrientation)
             {
                 case DockingAreaOrientation.None:
@@ -372,7 +413,7 @@ namespace Common.UI.DockWidgets
 
                 default:
                 {
-                    DebugEx.Error("Unknown orientation: " + mOrientation);
+					DebugEx.ErrorFormat("Unknown orientation: {0}", mOrientation);
                 }
                 break;
             }
@@ -388,6 +429,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public void CacheDragInfo()
         {
+            DebugEx.Verbose("DockingAreaScript.CacheDragInfo()");
+
             mCachedDragCorners = Utils.GetWindowCorners(transform as RectTransform);
         }
 
@@ -397,6 +440,8 @@ namespace Common.UI.DockWidgets
         /// <returns><c>true</c> if this instance has drag info; otherwise, <c>false</c>.</returns>
         public bool HasDragInfo()
         {
+            DebugEx.Verbose("DockingAreaScript.HasDragInfo()");
+
             return mCachedDragCorners != null;
         }
 
@@ -406,6 +451,8 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void PreprocessDockWidgetDrag(PointerEventData eventData)
         {
+            DebugEx.VerboseFormat("DockingAreaScript.PreprocessDockWidgetDrag(eventData = {0})", eventData);
+
             if (mCachedDragCorners != null)
             {
                 float gap    = GAP / 2f + 1f;
@@ -523,6 +570,8 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void ProcessDockWidgetDrag(PointerEventData eventData)
         {
+            DebugEx.VerboseFormat("DockingAreaScript.ProcessDockWidgetDrag(eventData = {0})", eventData);
+
             DragInfoHolder.dockingArea = null;
 
             switch (DragInfoHolder.mouseLocation)
@@ -1200,13 +1249,13 @@ namespace Common.UI.DockWidgets
 
                 case DragInfoHolder.MouseLocation.Outside:
                 {
-                    DebugEx.Fatal("Unexpected mouse location: " + DragInfoHolder.mouseLocation);
+					DebugEx.FatalFormat("Unexpected mouse location: {0}", DragInfoHolder.mouseLocation);
                 }
                 break;
 
                 default:
                 {
-                    DebugEx.Error("Unknown mouse location: " + DragInfoHolder.mouseLocation);
+					DebugEx.ErrorFormat("Unknown mouse location: {0}", DragInfoHolder.mouseLocation);
                 }
                 break;
             }
@@ -1217,6 +1266,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public void ClearDragInfo()
         {
+            DebugEx.Verbose("DockingAreaScript.ClearDragInfo()");
+
             mCachedDragCorners = null;
         }
 
@@ -1225,6 +1276,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         void Update()
         {
+            DebugEx.VeryVeryVerbose("DockingAreaScript.Update()");
+
             if (
                 mParent != null
                 &&
@@ -1437,13 +1490,13 @@ namespace Common.UI.DockWidgets
                                             case MouseLocation.Inside:
                                             case MouseLocation.Outside:
                                             {
-                                                DebugEx.Error("Incorrect mouse location: " + usedLocation);
+                                                DebugEx.ErrorFormat("Incorrect mouse location: {0}", usedLocation);
                                             }
                                             break;
 
                                             default:
                                             {
-                                                DebugEx.Error("Unknown mouse location: " + usedLocation);
+                                                DebugEx.ErrorFormat("Unknown mouse location: {0}", usedLocation);
                                             }
                                             break;
                                         }
@@ -1532,13 +1585,13 @@ namespace Common.UI.DockWidgets
                                             case MouseLocation.Inside:
                                             case MouseLocation.Outside:
                                             {
-                                                DebugEx.Error("Incorrect mouse location: " + usedLocation);
+                                                DebugEx.ErrorFormat("Incorrect mouse location: {0}", usedLocation);
                                             }
                                             break;
 
                                             default:
                                             {
-                                                DebugEx.Error("Unknown mouse location: " + usedLocation);
+                                                DebugEx.ErrorFormat("Unknown mouse location: {0}", usedLocation);
                                             }
                                             break;
                                         }
@@ -1611,13 +1664,13 @@ namespace Common.UI.DockWidgets
                                             case MouseLocation.Inside:
                                             case MouseLocation.Outside:
                                             {
-                                                DebugEx.Error("Incorrect mouse location: " + usedLocation);
+                                                DebugEx.ErrorFormat("Incorrect mouse location: {0}", usedLocation);
                                             }
                                             break;
 
                                             default:
                                             {
-                                                DebugEx.Error("Unknown mouse location: " + usedLocation);
+                                                DebugEx.ErrorFormat("Unknown mouse location: {0}", usedLocation);
                                             }
                                             break;
                                         }
@@ -1646,7 +1699,7 @@ namespace Common.UI.DockWidgets
 
                     default:
                     {
-                        DebugEx.Error("Unknown mouse state: " + sMouseState);
+						DebugEx.ErrorFormat("Unknown mouse state: {0}", sMouseState);
                     }
                     break;
                 }
@@ -1658,6 +1711,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         void LateUpdate()
         {
+            DebugEx.VeryVeryVerbose("DockingAreaScript.LateUpdate()");
+
 #if !CURSORLESS_PLATFORM
             if (sPreviousMouseLocation != sMouseLocation)
             {
@@ -1703,7 +1758,7 @@ namespace Common.UI.DockWidgets
 
                         default:
                         {
-                            DebugEx.Error("Unknown mouse location: " + sMouseLocation);
+							DebugEx.ErrorFormat("Unknown mouse location: {0}", sMouseLocation);
                         }
                         break;
                     }
@@ -1728,6 +1783,8 @@ namespace Common.UI.DockWidgets
         /// <param name="index">Index.</param>
         public void InsertDockWidget(DockWidgetScript dockWidget, DockingAreaOrientation orientation = DockingAreaOrientation.Horizontal, int index = 0)
         {
+            DebugEx.VerboseFormat("DockingAreaScript.InsertDockWidget(dockWidget = {0}, orientation = {1}, index = {2})", dockWidget, orientation, index);
+
             //***************************************************************************
             // DockingGroup GameObject
             //***************************************************************************
@@ -1998,7 +2055,7 @@ namespace Common.UI.DockWidgets
                 }
                 else
                 {
-                    DebugEx.Error("Invalid orientation value: " + orientation);
+					DebugEx.ErrorFormat("Invalid orientation value: {0}", orientation);
                 }
             }
 
@@ -2011,6 +2068,8 @@ namespace Common.UI.DockWidgets
         /// <param name="dockingGroup">Docking group.</param>
         public void RemoveDockingGroup(DockingGroupScript dockingGroup)
         {
+            DebugEx.VerboseFormat("DockingAreaScript.RemoveDockingGroup(dockingGroup = {0})", dockingGroup);
+
             if (mDockingGroupScript == dockingGroup)
             {
                 if (mParent != null)
@@ -2037,6 +2096,8 @@ namespace Common.UI.DockWidgets
         /// <param name="dockingArea">Docking area.</param>
         public void RemoveDockingArea(DockingAreaScript dockingArea)
         {
+            DebugEx.VerboseFormat("DockingAreaScript.RemoveDockingArea(dockingArea = {0})", dockingArea);
+
             if (dockingArea.parent == this)
             {
                 int index = mChildren.IndexOf(dockingArea);
@@ -2120,6 +2181,8 @@ namespace Common.UI.DockWidgets
         /// <param name="listener">Listener.</param>
         public void AddChildlessListener(UnityAction listener)
         {
+            DebugEx.VerboseFormat("DockingAreaScript.AddChildlessListener(listener = {0})", listener);
+
             mChildlessListeners.AddListener(listener);
         }
 
@@ -2129,6 +2192,8 @@ namespace Common.UI.DockWidgets
         /// <param name="listener">Listener.</param>
         public void RemoveChildlessListener(UnityAction listener)
         {
+            DebugEx.VerboseFormat("DockingAreaScript.RemoveChildlessListener(listener = {0})", listener);
+
             mChildlessListeners.RemoveListener(listener);
         }
     }

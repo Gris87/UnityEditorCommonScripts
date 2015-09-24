@@ -54,8 +54,19 @@ namespace Common.UI.DockWidgets
         /// <value>The dock widget.</value>
         public static DockWidgetScript dockWidget
         {
-            get { return sDockWidget;  }
-            set { sDockWidget = value; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DragInfoHolder.dockWidget = {0}", sDockWidget);
+
+                return sDockWidget;
+            }
+
+            set
+            {
+                DebugEx.VeryVerboseFormat("DragInfoHolder.dockWidget: {0} => {1}", sDockWidget, value);
+
+                sDockWidget = value;
+            }
         }
 
         /// <summary>
@@ -64,8 +75,19 @@ namespace Common.UI.DockWidgets
         /// <value>The minimum value.</value>
         public static float minimum
         {
-            get { return sMinimum;  }
-            set { sMinimum = value; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DragInfoHolder.minimum = {0}", sMinimum);
+
+                return sMinimum;
+            }
+
+            set
+            {
+                DebugEx.VeryVerboseFormat("DragInfoHolder.minimum: {0} => {1}", sMinimum, value);
+
+                sMinimum = value;
+            }
         }
 
         /// <summary>
@@ -74,8 +96,19 @@ namespace Common.UI.DockWidgets
         /// <value>The docking area.</value>
         public static DockingAreaScript dockingArea
         {
-            get { return sDockingArea;  }
-            set { sDockingArea = value; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DragInfoHolder.dockingArea = {0}", sDockingArea);
+
+                return sDockingArea;
+            }
+
+            set
+            {
+                DebugEx.VeryVerboseFormat("DragInfoHolder.dockingArea: {0} => {1}", sDockingArea, value);
+
+                sDockingArea = value;
+            }
         }
 
         /// <summary>
@@ -84,8 +117,19 @@ namespace Common.UI.DockWidgets
         /// <value>The mouse location.</value>
         public static MouseLocation mouseLocation
         {
-            get { return sMouseLocation;  }
-            set { sMouseLocation = value; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DragInfoHolder.mouseLocation = {0}", sMouseLocation);
+
+                return sMouseLocation;
+            }
+
+            set
+            {
+                DebugEx.VeryVerboseFormat("DragInfoHolder.mouseLocation: {0} => {1}", sMouseLocation, value);
+
+                sMouseLocation = value;
+            }
         }
 
 
@@ -102,6 +146,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         static DragInfoHolder()
         {
+            DebugEx.Verbose("Created DragInfoHolder object");
+
             sDockWidget    = null;
             sMinimum       = float.MaxValue;
             sDockingArea   = null;

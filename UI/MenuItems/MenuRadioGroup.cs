@@ -35,7 +35,7 @@ namespace Common.UI.MenuItems
                     }
                     else
                     {
-                        DebugEx.Error("Trying to select item \"{0}\" that is not registered in this radio group", value.name);
+                        DebugEx.ErrorFormat("Trying to select item \"{0}\" that is not registered in this radio group", value.name);
                     }
                 }
             }

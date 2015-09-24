@@ -15,7 +15,12 @@ namespace Common.UI.DockWidgets
         /// <value>The instance.</value>
         public static DummyDockWidgetScript instance
         {
-            get { return sInstance; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DummyDockWidgetScript.instance = {0}", sInstance);
+
+                return sInstance;
+            }
         }
 
 
@@ -29,7 +34,7 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private DummyDockWidgetScript()
         {
-            // Nothing
+            DebugEx.Verbose("Created DummyDockWidgetScript object");
         }
 
         /// <summary>
@@ -38,6 +43,8 @@ namespace Common.UI.DockWidgets
         /// <param name="baseScript">Base script.</param>
         public static DummyDockWidgetScript Create(DockWidgetScript baseScript)
         {
+            DebugEx.VerboseFormat("DummyDockWidgetScript.Create(baseScript = {0})", baseScript);
+
             DestroyInstance();
 
             //***************************************************************************
@@ -67,6 +74,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public static void DestroyInstance()
         {
+            DebugEx.Verbose("DummyDockWidgetScript.DestroyInstance()");
+
             if (sInstance != null)
             {
                 sInstance.Destroy();
@@ -79,6 +88,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         void OnDestroy()
         {
+            DebugEx.Verbose("DummyDockWidgetScript.OnDestroy()");
+
             if (sInstance == this)
             {
                 sInstance = null;

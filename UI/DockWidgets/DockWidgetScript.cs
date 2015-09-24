@@ -17,8 +17,19 @@ namespace Common.UI.DockWidgets
         /// <value>Parent docking group.</value>
         public DockingGroupScript parent
         {
-            get { return mParent;  }
-            set { mParent = value; }
+            get
+            {
+                DebugEx.VeryVeryVerboseFormat("DockWidgetScript.parent = {0}", mParent);
+
+                return mParent;
+            }
+
+            set
+            {
+                DebugEx.VeryVerboseFormat("DockWidgetScript.parent: {0} => {1}", mParent, value);
+
+                mParent = value;
+            }
         }
 
         /// <summary>
@@ -29,11 +40,15 @@ namespace Common.UI.DockWidgets
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("DockWidgetScript.backgroundColor = {0}", mBackgroundColor);
+
                 return mBackgroundColor;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("DockWidgetScript.backgroundColor: {0} => {1}", mBackgroundColor, value);
+
                 if (mBackgroundColor != value)
                 {
                     mBackgroundColor = value;
@@ -54,11 +69,15 @@ namespace Common.UI.DockWidgets
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("DockWidgetScript.image = {0}", mImage);
+
                 return mImage;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("DockWidgetScript.image: {0} => {1}", mImage, value);
+
                 if (mImage != value)
                 {
                     mImage = value;
@@ -79,11 +98,15 @@ namespace Common.UI.DockWidgets
         {
             get
             {
+                DebugEx.VeryVeryVerboseFormat("DockWidgetScript.tokenId = {0}", mTokenId);
+
                 return mTokenId;
             }
 
             set
             {
+                DebugEx.VeryVerboseFormat("DockWidgetScript.tokenId: {0} => {1}", mTokenId, value);
+
                 if (mTokenId != value)
                 {
                     mTokenId = value;
@@ -104,12 +127,20 @@ namespace Common.UI.DockWidgets
         {
             get
             {
+                string res;
+
                 if (mTokenId == R.sections.DockWidgets.strings.Count)
                 {
-                    return "";
+                    res = "";
+                }
+                else
+                {
+                    res = Translator.GetString(mTokenId);
                 }
 
-                return Translator.GetString(mTokenId);
+                DebugEx.VeryVeryVerboseFormat("DockWidgetScript.title = {0}", res);
+
+                return res;
             }
         }
 
@@ -128,6 +159,8 @@ namespace Common.UI.DockWidgets
         public DockWidgetScript()
             : base()
         {
+            DebugEx.Verbose("Created DockWidgetScript object");
+
             mParent          = null;
             mBackgroundColor = Assets.Common.DockWidgets.Colors.background;
             mImage           = Assets.Common.DockWidgets.Textures.icon.sprite;
@@ -142,6 +175,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         void Start()
         {
+            DebugEx.Verbose("DockWidgetScript.Start()");
+
             CreateUI();
         }
 
@@ -150,6 +185,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         private void CreateUI()
         {
+            DebugEx.Verbose("DockWidgetScript.CreateUI()");
+
             //===========================================================================
             // RectTransform Component
             //===========================================================================
@@ -189,7 +226,9 @@ namespace Common.UI.DockWidgets
         /// <param name="contentTransform">Content transform.</param>
         protected virtual void CreateContent(Transform contentTransform)
         {
-            // Nothing
+            DebugEx.VerboseFormat("DockWidgetScript.CreateContent(contentTransform = {0})", contentTransform);
+
+            DebugEx.Fatal("Unexpected behaviour in DockWidgetScript.CreateContent()");
         }
 
         /// <summary>
@@ -197,6 +236,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public void Destroy()
         {
+            DebugEx.Verbose("DockWidgetScript.Destroy()");
+
             UnityEngine.Object.DestroyObject(gameObject);
 
             if (mParent != null)
@@ -210,7 +251,7 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public virtual void OnResize()
         {
-            // Nothing
+            DebugEx.Verbose("DockWidgetScript.OnResize()");
         }
 
         /// <summary>
@@ -221,6 +262,8 @@ namespace Common.UI.DockWidgets
         /// <param name="index">Index.</param>
         public void InsertToDockingArea(DockingAreaScript dockingArea, DockingAreaOrientation orientation = DockingAreaOrientation.Horizontal, int index = 0)
         {
+            DebugEx.VerboseFormat("DockWidgetScript.InsertToDockingArea(dockingArea = {0}, orientation = {1}, index = {2})", dockingArea, orientation, index);
+
             dockingArea.InsertDockWidget(this, orientation, index);
         }
 
@@ -232,6 +275,8 @@ namespace Common.UI.DockWidgets
         /// <param name="index">Index.</param>
         public void InsertToDockingGroup(DockingGroupScript dockingGroup, int index = 0)
         {
+            DebugEx.VerboseFormat("DockWidgetScript.InsertToDockingGroup(dockingGroup = {0}, index = {1})", dockingGroup, index);
+
             dockingGroup.InsertDockWidget(this, index);
         }
 
@@ -240,6 +285,8 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public void Select()
         {
+            DebugEx.Verbose("DockWidgetScript.Select()");
+
             mParent.OnSelectTab(this);
         }
 
@@ -249,6 +296,8 @@ namespace Common.UI.DockWidgets
         /// <returns><c>true</c> if user interface created; otherwise, <c>false</c>.</returns>
         private bool IsUICreated()
         {
+            DebugEx.Verbose("DockWidgetScript.IsUICreated()");
+
             return (mContentTransform != null);
         }
     }
