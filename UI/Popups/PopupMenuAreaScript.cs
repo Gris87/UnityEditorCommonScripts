@@ -13,10 +13,6 @@ namespace Common.UI.Popups
     /// </summary>
     public class PopupMenuAreaScript : MonoBehaviour, IEscapeButtonHandler
     {
-        private const float TIMER_NOT_ACTIVE = -10000f;
-
-
-
         /// <summary>
         /// Gets the instance geometry.
         /// </summary>
@@ -39,7 +35,7 @@ namespace Common.UI.Popups
 
         private List<PopupMenu>     mPopupMenus;
         private AutoPopupItemScript mAutoPopupItem;
-        private float               mDelay;
+		private Timer               mTimer;
 
 
 
@@ -61,7 +57,7 @@ namespace Common.UI.Popups
 
             mPopupMenus    = new List<PopupMenu>();
             mAutoPopupItem = null;
-            mDelay         = TIMER_NOT_ACTIVE;
+			mTimer         = new Timer(OnAutoPopupTimeout);
 
             enabled = false;
         }
@@ -115,17 +111,20 @@ namespace Common.UI.Popups
                 }
             }
 
-            if (IsTimerActive())
-            {
-                mDelay -= Time.deltaTime;
-
-                if (mDelay <= 0f)
-                {
-                    mAutoPopupItem.Click();
-                    StopTimer();
-                }
-            }
+			mTimer.Update();
         }
+
+		/// <summary>
+		/// Handler for auto popup timeout event.
+		/// </summary>
+		private void OnAutoPopupTimeout()
+		{
+			DebugEx.Verbose("PopupMenuAreaScript.OnAutoPopupTimeout()");
+
+			mAutoPopupItem.Click();
+
+			mTimer.Stop();
+		}
 
         /// <summary>
         /// Handles escape button press event.
@@ -155,7 +154,7 @@ namespace Common.UI.Popups
                     if (sInstance.mAutoPopupItem == item)
                     {
                         sInstance.mAutoPopupItem = null;
-                        sInstance.StopTimer();
+                        sInstance.mTimer.Stop();
                     }
                 }
             }
@@ -176,7 +175,7 @@ namespace Common.UI.Popups
                     if (sInstance.mAutoPopupItem == item)
                     {
                         sInstance.mAutoPopupItem = null;
-                        sInstance.StopTimer();
+                        sInstance.mTimer.Stop();
                     }
                 }
             }
@@ -199,7 +198,7 @@ namespace Common.UI.Popups
                 if (sInstance.mPopupMenus.Count > 0)
                 {
                     sInstance.mAutoPopupItem = item;
-                    sInstance.StartTimer(sInstance.mAutoPopupItem.delay);
+                    sInstance.mTimer.Start(item.delay);
                 }
             }
             else
@@ -221,7 +220,7 @@ namespace Common.UI.Popups
                 if (sInstance.mPopupMenus.Count > 0)
                 {
                     sInstance.mAutoPopupItem = null;
-                    sInstance.StopTimer();
+                    sInstance.mTimer.Stop();
                 }
             }
             else
@@ -267,7 +266,7 @@ namespace Common.UI.Popups
                     {
                         sInstance.enabled = false;
                         sInstance.mAutoPopupItem = null;
-                        sInstance.StopTimer();
+                        sInstance.mTimer.Stop();
 
                         EscapeButtonListenerScript.RemoveHandler(sInstance);
                     }
@@ -301,43 +300,6 @@ namespace Common.UI.Popups
             {
                 DebugEx.Error("There is no PopupMenuAreaScript instance");
             }
-        }
-
-        /// <summary>
-        /// Starts timer with specified delay.
-        /// </summary>
-        /// <param name="ms">Delay in ms.</param>
-        private void StartTimer(float ms)
-        {
-            DebugEx.VerboseFormat("PopupMenuAreaScript.StartTimer(ms = {0})", ms);
-
-            if (ms < 0f)
-            {
-                DebugEx.ErrorFormat("Incorrect delay value: {0}", ms);
-            }
-
-            mDelay = ms / 1000f;
-        }
-
-        /// <summary>
-        /// Stops timer.
-        /// </summary>
-        private void StopTimer()
-        {
-            DebugEx.Verbose("PopupMenuAreaScript.StopTimer()");
-
-            mDelay = TIMER_NOT_ACTIVE;
-        }
-
-        /// <summary>
-        /// Determines whether timer is active.
-        /// </summary>
-        /// <returns><c>true</c> if timer is active; otherwise, <c>false</c>.</returns>
-        private bool IsTimerActive()
-        {
-            DebugEx.Verbose("PopupMenuAreaScript.IsTimerActive()");
-
-            return mDelay != TIMER_NOT_ACTIVE;
         }
     }
 }

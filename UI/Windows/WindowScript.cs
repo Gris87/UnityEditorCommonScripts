@@ -3983,7 +3983,7 @@ namespace Common.UI.Windows
         /// <returns><c>true</c> if frame present; otherwise, <c>false</c>.</returns>
         private bool IsFramePresent()
         {
-            DebugEx.Verbose("WindowScript.IsFramePresent()");
+            DebugEx.VeryVeryVerbose("WindowScript.IsFramePresent()");
 
             return (mFrame != WindowFrameType.Frameless && mState != WindowState.FullScreen);
         }

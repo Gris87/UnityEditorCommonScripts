@@ -12,9 +12,8 @@ namespace Common.UI.Tooltips
     /// </summary>
     public class TooltipAreaScript : MonoBehaviour
     {
-        private const float TIMER_NOT_ACTIVE = -10000f;
-        private const float SHOW_DELAY       = 500f;
-        private const float HIDE_DELAY       = 500f;
+        private const float SHOW_DELAY = 500f;
+        private const float HIDE_DELAY = 500f;
 
 
 
@@ -24,8 +23,7 @@ namespace Common.UI.Tooltips
 
         private TooltipOwnerScript mCurrentOwner;
         private TooltipOwnerScript mNextOwner;
-        private float              mDelay;
-        private UnityAction        mOnTimeout;
+        private Timer              mTimer;
 
 
 
@@ -47,8 +45,7 @@ namespace Common.UI.Tooltips
 
             mCurrentOwner  = null;
             mNextOwner     = null;
-            mDelay         = TIMER_NOT_ACTIVE;
-            mOnTimeout     = null;
+			mTimer         = new Timer();
         }
 
         /// <summary>
@@ -71,16 +68,7 @@ namespace Common.UI.Tooltips
         {
             DebugEx.VeryVeryVerbose("TooltipAreaScript.Update()");
 
-            if (IsTimerActive())
-            {
-                mDelay -= Time.deltaTime;
-
-                if (mDelay <= 0f)
-                {
-                    mOnTimeout.Invoke();
-                    StopTimer();
-                }
-            }
+			mTimer.Update();
 
             if (mCurrentOwner != null)
             {
@@ -109,7 +97,7 @@ namespace Common.UI.Tooltips
                 if (sInstance.mNextOwner == owner)
                 {
                     sInstance.mNextOwner = null;
-                    sInstance.StopTimer();
+                    sInstance.mTimer.Stop();
                 }
             }
             else
@@ -136,7 +124,7 @@ namespace Common.UI.Tooltips
                 if (sInstance.mNextOwner == owner)
                 {
                     sInstance.mNextOwner = null;
-                    sInstance.StopTimer();
+                    sInstance.mTimer.Stop();
                 }
             }
             else
@@ -160,27 +148,27 @@ namespace Common.UI.Tooltips
                     if (sInstance.mCurrentOwner == owner)
                     {
                         sInstance.mNextOwner = null;
-                        sInstance.StopTimer();
+                        sInstance.mTimer.Stop();
                     }
                     else
                     {
                         sInstance.mNextOwner = owner;
 
-                        if (sInstance.IsTimerActive())
+                        if (sInstance.mTimer.active)
                         {
                             sInstance.CreateTooltip();
-                            sInstance.StopTimer();
+                            sInstance.mTimer.Stop();
                         }
                         else
                         {
-                            sInstance.StartTimer(SHOW_DELAY, sInstance.CreateTooltip);
+							sInstance.mTimer.Start(sInstance.OnShowTimeout, SHOW_DELAY);
                         }
                     }
                 }
                 else
                 {
                     sInstance.mNextOwner = owner;
-                    sInstance.StartTimer(SHOW_DELAY, sInstance.CreateTooltip);
+					sInstance.mTimer.Start(sInstance.OnShowTimeout, SHOW_DELAY);
                 }
             }
             else
@@ -205,12 +193,12 @@ namespace Common.UI.Tooltips
                 {
                     if (sInstance.mCurrentOwner == owner)
                     {
-                        sInstance.StartTimer(HIDE_DELAY, sInstance.DestroyTooltip);
+						sInstance.mTimer.Start(sInstance.OnHideTimeout, HIDE_DELAY);
                     }
                 }
                 else
                 {
-                    sInstance.StopTimer();
+                    sInstance.mTimer.Stop();
                 }
             }
             else
@@ -351,44 +339,24 @@ namespace Common.UI.Tooltips
             mCurrentOwner = null;
         }
 
-        /// <summary>
-        /// Starts timer with specified delay and timeout handler.
-        /// </summary>
-        /// <param name="ms">Delay in ms.</param>
-        /// <param name="onTimeout">Timeout handler.</param>
-        private void StartTimer(float ms, UnityAction onTimeout)
-        {
-            DebugEx.VerboseFormat("TooltipAreaScript.StartTimer(ms = {0}, onTimeout = {1})", ms, onTimeout);
+		/// <summary>
+		/// Handler for show timeout event.
+		/// </summary>
+		private void OnShowTimeout()
+		{
+			CreateTooltip();
 
-            if (ms < 0f)
-            {
-                DebugEx.ErrorFormat("Incorrect delay value: {0}", ms);
-            }
+			mTimer.Stop();
+		}
 
-            mDelay     = ms / 1000f;
-            mOnTimeout = onTimeout;
-        }
-
-        /// <summary>
-        /// Stops timer.
-        /// </summary>
-        private void StopTimer()
-        {
-            DebugEx.Verbose("TooltipAreaScript.StopTimer()");
-
-            mDelay     = TIMER_NOT_ACTIVE;
-            mOnTimeout = null;
-        }
-
-        /// <summary>
-        /// Determines whether timer is active.
-        /// </summary>
-        /// <returns><c>true</c> if timer is active; otherwise, <c>false</c>.</returns>
-        private bool IsTimerActive()
-        {
-            DebugEx.Verbose("TooltipAreaScript.IsTimerActive()");
-
-            return mDelay != TIMER_NOT_ACTIVE;
-        }
+		/// <summary>
+		/// Handler for hide timeout event.
+		/// </summary>
+		private void OnHideTimeout()
+		{
+			DestroyTooltip();
+			
+			mTimer.Stop();
+		}
     }
 }
