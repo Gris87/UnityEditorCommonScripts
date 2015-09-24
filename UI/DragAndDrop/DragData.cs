@@ -292,7 +292,7 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         public static void HideImage()
         {
-            DebugEx.Verbose("DragData.HideImage()");
+			DebugEx.VeryVerbose("DragData.HideImage()");
 
             if (sDraggingImage != null)
             {
@@ -305,7 +305,7 @@ namespace Common.UI.DragAndDrop
         /// </summary>
         public static void ShowImage()
         {
-            DebugEx.Verbose("DragData.ShowImage()");
+			DebugEx.VeryVerbose("DragData.ShowImage()");
 
             if (sDraggingImage != null)
             {

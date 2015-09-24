@@ -451,7 +451,7 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void PreprocessDockWidgetDrag(PointerEventData eventData)
         {
-            DebugEx.VerboseFormat("DockingAreaScript.PreprocessDockWidgetDrag(eventData = {0})", eventData);
+			DebugEx.VeryVerboseFormat("DockingAreaScript.PreprocessDockWidgetDrag(eventData = {0})", eventData);
 
             if (mCachedDragCorners != null)
             {
@@ -570,7 +570,7 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void ProcessDockWidgetDrag(PointerEventData eventData)
         {
-            DebugEx.VerboseFormat("DockingAreaScript.ProcessDockWidgetDrag(eventData = {0})", eventData);
+			DebugEx.VeryVerboseFormat("DockingAreaScript.ProcessDockWidgetDrag(eventData = {0})", eventData);
 
             DragInfoHolder.dockingArea = null;
 

@@ -149,7 +149,7 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void OnDrag(PointerEventData eventData)
         {
-            DebugEx.VerboseFormat("DockingTabButton.OnDrag(eventData = {0})", eventData);
+            DebugEx.VeryVerboseFormat("DockingTabButton.OnDrag(eventData = {0})", eventData);
 
             DragInfoHolder.minimum       = float.MaxValue;
             DragInfoHolder.dockingArea   = null;
