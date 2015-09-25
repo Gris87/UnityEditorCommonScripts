@@ -35,7 +35,7 @@ namespace Common.UI.Popups
 
         private List<PopupMenu>     mPopupMenus;
         private AutoPopupItemScript mAutoPopupItem;
-		private Timer               mTimer;
+        private Timer               mTimer;
 
 
 
@@ -57,7 +57,7 @@ namespace Common.UI.Popups
 
             mPopupMenus    = new List<PopupMenu>();
             mAutoPopupItem = null;
-			mTimer         = new Timer(OnAutoPopupTimeout);
+            mTimer         = new Timer(OnAutoPopupTimeout);
 
             enabled = false;
         }
@@ -111,20 +111,20 @@ namespace Common.UI.Popups
                 }
             }
 
-			mTimer.Update();
+            mTimer.Update();
         }
 
-		/// <summary>
-		/// Handler for auto popup timeout event.
-		/// </summary>
-		private void OnAutoPopupTimeout()
-		{
-			DebugEx.Verbose("PopupMenuAreaScript.OnAutoPopupTimeout()");
+        /// <summary>
+        /// Handler for auto popup timeout event.
+        /// </summary>
+        private void OnAutoPopupTimeout()
+        {
+            DebugEx.Verbose("PopupMenuAreaScript.OnAutoPopupTimeout()");
 
-			mAutoPopupItem.Click();
+            mAutoPopupItem.Click();
 
-			mTimer.Stop();
-		}
+            mTimer.Stop();
+        }
 
         /// <summary>
         /// Handles escape button press event.

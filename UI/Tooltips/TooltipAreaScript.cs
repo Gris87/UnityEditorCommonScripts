@@ -45,7 +45,7 @@ namespace Common.UI.Tooltips
 
             mCurrentOwner  = null;
             mNextOwner     = null;
-			mTimer         = new Timer();
+            mTimer         = new Timer();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Common.UI.Tooltips
         {
             DebugEx.VeryVeryVerbose("TooltipAreaScript.Update()");
 
-			mTimer.Update();
+            mTimer.Update();
 
             if (mCurrentOwner != null)
             {
@@ -161,14 +161,14 @@ namespace Common.UI.Tooltips
                         }
                         else
                         {
-							sInstance.mTimer.Start(sInstance.OnShowTimeout, SHOW_DELAY);
+                            sInstance.mTimer.Start(sInstance.OnShowTimeout, SHOW_DELAY);
                         }
                     }
                 }
                 else
                 {
                     sInstance.mNextOwner = owner;
-					sInstance.mTimer.Start(sInstance.OnShowTimeout, SHOW_DELAY);
+                    sInstance.mTimer.Start(sInstance.OnShowTimeout, SHOW_DELAY);
                 }
             }
             else
@@ -193,7 +193,7 @@ namespace Common.UI.Tooltips
                 {
                     if (sInstance.mCurrentOwner == owner)
                     {
-						sInstance.mTimer.Start(sInstance.OnHideTimeout, HIDE_DELAY);
+                        sInstance.mTimer.Start(sInstance.OnHideTimeout, HIDE_DELAY);
                     }
                 }
                 else
@@ -339,24 +339,24 @@ namespace Common.UI.Tooltips
             mCurrentOwner = null;
         }
 
-		/// <summary>
-		/// Handler for show timeout event.
-		/// </summary>
-		private void OnShowTimeout()
-		{
-			CreateTooltip();
+        /// <summary>
+        /// Handler for show timeout event.
+        /// </summary>
+        private void OnShowTimeout()
+        {
+            CreateTooltip();
 
-			mTimer.Stop();
-		}
+            mTimer.Stop();
+        }
 
-		/// <summary>
-		/// Handler for hide timeout event.
-		/// </summary>
-		private void OnHideTimeout()
-		{
-			DestroyTooltip();
-			
-			mTimer.Stop();
-		}
+        /// <summary>
+        /// Handler for hide timeout event.
+        /// </summary>
+        private void OnHideTimeout()
+        {
+            DestroyTooltip();
+
+            mTimer.Stop();
+        }
     }
 }

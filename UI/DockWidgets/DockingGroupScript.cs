@@ -93,7 +93,7 @@ namespace Common.UI.DockWidgets
                     }
                     else
                     {
-						DebugEx.ErrorFormat("Invalid selected index value: {0}", value);
+                        DebugEx.ErrorFormat("Invalid selected index value: {0}", value);
                     }
                 }
             }

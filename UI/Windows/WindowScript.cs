@@ -2293,7 +2293,7 @@ namespace Common.UI.Windows
                 case WindowFrameType.SingleFrame:
                 case WindowFrameType.Frameless:
                 {
-					DebugEx.ErrorFormat("Incorrect window frame: {0}", mFrame);
+                    DebugEx.ErrorFormat("Incorrect window frame: {0}", mFrame);
                 }
                 break;
 
@@ -3580,7 +3580,7 @@ namespace Common.UI.Windows
 
                     default:
                     {
-						DebugEx.ErrorFormat("Unknown mouse state: {0}", mMouseState);
+                        DebugEx.ErrorFormat("Unknown mouse state: {0}", mMouseState);
                     }
                     break;
                 }
@@ -3653,8 +3653,6 @@ namespace Common.UI.Windows
         protected virtual void OnResize()
         {
             DebugEx.Verbose("WindowScript.OnResize()");
-
-            // Nothing
         }
 
         /// <summary>
@@ -3822,8 +3820,6 @@ namespace Common.UI.Windows
         protected virtual void OnSelected()
         {
             DebugEx.Verbose("WindowScript.OnSelected()");
-
-            // Nothing
         }
 
         /// <summary>
@@ -3832,8 +3828,6 @@ namespace Common.UI.Windows
         protected virtual void OnDeselected()
         {
             DebugEx.Verbose("WindowScript.OnDeselected()");
-
-            // Nothing
         }
 
         /// <summary>

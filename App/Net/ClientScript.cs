@@ -32,8 +32,6 @@ namespace Common.App.Net
             public virtual void OnEnter(ClientScript script, ClientState previousState)
             {
                 DebugEx.VerboseFormat("ClientScript.IClientState.OnEnter(script = {0}, previousState = {1})", script, previousState);
-
-                // Nothing
             }
 
             /// <summary>
@@ -44,8 +42,6 @@ namespace Common.App.Net
             public virtual void OnExit(ClientScript script, ClientState nextState)
             {
                 DebugEx.VerboseFormat("ClientScript.IClientState.OnExit(script = {0}, nextState = {1})", script, nextState);
-
-                // Nothing
             }
 
             /// <summary>
@@ -179,6 +175,16 @@ namespace Common.App.Net
                 script.mRequestTimer.Stop();
             }
 
+			/// <summary>
+			/// Handler for event on disconnection.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="info">Disconnection info.</param>
+			public override void OnDisconnectedFromServer(ClientScript script, NetworkDisconnection info)
+			{
+				DebugEx.VerboseFormat("ClientScript.RequestingState.OnDisconnectedFromServer(script = {0}, info = {1})", script, info);
+			}
+
             /// <summary>
             /// Handler for connecting failure event.
             /// </summary>
@@ -187,8 +193,6 @@ namespace Common.App.Net
             public override void OnFailedToConnect(ClientScript script, NetworkConnectionError error)
             {
                 DebugEx.VerboseFormat("ClientScript.RequestingState.OnFailedToConnect(script = {0}, error = {1})", script, error);
-
-                // Nothing
             }
 
             /// <summary>
@@ -299,6 +303,16 @@ namespace Common.App.Net
                 }
             }
 
+			/// <summary>
+			/// Handler for event on disconnection.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="info">Disconnection info.</param>
+			public override void OnDisconnectedFromServer(ClientScript script, NetworkDisconnection info)
+			{
+				DebugEx.VerboseFormat("ClientScript.PollingState.OnDisconnectedFromServer(script = {0}, info = {1})", script, info);
+			}
+
             /// <summary>
             /// Handler for master server event.
             /// </summary>
@@ -307,8 +321,6 @@ namespace Common.App.Net
             public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
             {
                 DebugEx.VerboseFormat("ClientScript.PollingState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
-
-                // Nothing
             }
         }
 
@@ -377,8 +389,6 @@ namespace Common.App.Net
             public override void OnRequestTimeout(ClientScript script)
             {
                 DebugEx.VeryVeryVerboseFormat("ClientScript.ConnectingState.OnRequestTimeout(script = {0})", script);
-
-                // Nothing
             }
 
             /// <summary>
@@ -391,6 +401,16 @@ namespace Common.App.Net
 
                 script.state = ClientState.Connected;
             }
+
+			/// <summary>
+			/// Handler for event on disconnection.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="info">Disconnection info.</param>
+			public override void OnDisconnectedFromServer(ClientScript script, NetworkDisconnection info)
+			{
+				DebugEx.VerboseFormat("ClientScript.ConnectingState.OnDisconnectedFromServer(script = {0}, info = {1})", script, info);
+			}
 
             /// <summary>
             /// Handler for connecting failure event.
@@ -415,8 +435,6 @@ namespace Common.App.Net
             public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
             {
                 DebugEx.VerboseFormat("ClientScript.ConnectingState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
-
-                // Nothing
             }
         }
 
@@ -444,8 +462,6 @@ namespace Common.App.Net
             public override void OnRequestTimeout(ClientScript script)
             {
                 DebugEx.VeryVeryVerboseFormat("ClientScript.ConnectedState.OnRequestTimeout(script = {0})", script);
-
-                // Nothing
             }
 
             /// <summary>
@@ -469,8 +485,6 @@ namespace Common.App.Net
             public override void OnMasterServerEvent(ClientScript script, MasterServerEvent msEvent)
             {
                 DebugEx.VerboseFormat("ClientScript.ConnectedState.OnMasterServerEvent(script = {0}, msEvent = {1})", script, msEvent);
-
-                // Nothing
             }
         }
         #endregion

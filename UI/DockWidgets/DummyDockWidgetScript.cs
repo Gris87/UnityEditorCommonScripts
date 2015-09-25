@@ -74,7 +74,7 @@ namespace Common.UI.DockWidgets
         /// </summary>
         public static void DestroyInstance()
         {
-			DebugEx.VeryVerbose("DummyDockWidgetScript.DestroyInstance()");
+            DebugEx.VeryVerbose("DummyDockWidgetScript.DestroyInstance()");
 
             if (sInstance != null)
             {

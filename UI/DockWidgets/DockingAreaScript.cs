@@ -152,7 +152,7 @@ namespace Common.UI.DockWidgets
                             }
                             else
                             {
-								DebugEx.ErrorFormat("Incorrect size ({0}) in size list", size);
+                                DebugEx.ErrorFormat("Incorrect size ({0}) in size list", size);
                                 return;
                             }
                         }
@@ -165,7 +165,7 @@ namespace Common.UI.DockWidgets
 
                             if (newSize < MINIMUM_SIZE)
                             {
-								DebugEx.ErrorFormat("New size {0} is less than minimum value: {1}", newSize, MINIMUM_SIZE);
+                                DebugEx.ErrorFormat("New size {0} is less than minimum value: {1}", newSize, MINIMUM_SIZE);
                                 return;
                             }
 
@@ -204,7 +204,7 @@ namespace Common.UI.DockWidgets
                         listStr += value[i];
                     }
 
-					DebugEx.ErrorFormat("Invalid size list argument: [{0}]", listStr);
+                    DebugEx.ErrorFormat("Invalid size list argument: [{0}]", listStr);
                 }
             }
         }
@@ -413,7 +413,7 @@ namespace Common.UI.DockWidgets
 
                 default:
                 {
-					DebugEx.ErrorFormat("Unknown orientation: {0}", mOrientation);
+                    DebugEx.ErrorFormat("Unknown orientation: {0}", mOrientation);
                 }
                 break;
             }
@@ -451,7 +451,7 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void PreprocessDockWidgetDrag(PointerEventData eventData)
         {
-			DebugEx.VeryVerboseFormat("DockingAreaScript.PreprocessDockWidgetDrag(eventData = {0})", eventData);
+            DebugEx.VeryVerboseFormat("DockingAreaScript.PreprocessDockWidgetDrag(eventData = {0})", eventData);
 
             if (mCachedDragCorners != null)
             {
@@ -570,7 +570,7 @@ namespace Common.UI.DockWidgets
         /// <param name="eventData">Pointer data.</param>
         public void ProcessDockWidgetDrag(PointerEventData eventData)
         {
-			DebugEx.VeryVerboseFormat("DockingAreaScript.ProcessDockWidgetDrag(eventData = {0})", eventData);
+            DebugEx.VeryVerboseFormat("DockingAreaScript.ProcessDockWidgetDrag(eventData = {0})", eventData);
 
             DragInfoHolder.dockingArea = null;
 
@@ -1249,13 +1249,13 @@ namespace Common.UI.DockWidgets
 
                 case DragInfoHolder.MouseLocation.Outside:
                 {
-					DebugEx.FatalFormat("Unexpected mouse location: {0}", DragInfoHolder.mouseLocation);
+                    DebugEx.FatalFormat("Unexpected mouse location: {0}", DragInfoHolder.mouseLocation);
                 }
                 break;
 
                 default:
                 {
-					DebugEx.ErrorFormat("Unknown mouse location: {0}", DragInfoHolder.mouseLocation);
+                    DebugEx.ErrorFormat("Unknown mouse location: {0}", DragInfoHolder.mouseLocation);
                 }
                 break;
             }
@@ -1699,7 +1699,7 @@ namespace Common.UI.DockWidgets
 
                     default:
                     {
-						DebugEx.ErrorFormat("Unknown mouse state: {0}", sMouseState);
+                        DebugEx.ErrorFormat("Unknown mouse state: {0}", sMouseState);
                     }
                     break;
                 }
@@ -1758,7 +1758,7 @@ namespace Common.UI.DockWidgets
 
                         default:
                         {
-							DebugEx.ErrorFormat("Unknown mouse location: {0}", sMouseLocation);
+                            DebugEx.ErrorFormat("Unknown mouse location: {0}", sMouseLocation);
                         }
                         break;
                     }
@@ -2055,7 +2055,7 @@ namespace Common.UI.DockWidgets
                 }
                 else
                 {
-					DebugEx.ErrorFormat("Invalid orientation value: {0}", orientation);
+                    DebugEx.ErrorFormat("Invalid orientation value: {0}", orientation);
                 }
             }
 

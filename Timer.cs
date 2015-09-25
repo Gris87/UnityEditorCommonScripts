@@ -143,17 +143,17 @@ namespace Common
             mTime = 0f;
         }
 
-		/// <summary>
-		/// Starts timer with specified timeout action.
-		/// </summary>
-		/// <param name="onTimeout">On timeout action.</param>
-		public void Start(UnityAction onTimeout)
-		{
-			DebugEx.VerboseFormat("Timer.Start(onTimeout = {0})", onTimeout);
-			
-			mOnTimeout = onTimeout;
-			mTime      = 0f;
-		}
+        /// <summary>
+        /// Starts timer with specified timeout action.
+        /// </summary>
+        /// <param name="onTimeout">On timeout action.</param>
+        public void Start(UnityAction onTimeout)
+        {
+            DebugEx.VerboseFormat("Timer.Start(onTimeout = {0})", onTimeout);
+
+            mOnTimeout = onTimeout;
+            mTime      = 0f;
+        }
 
         /// <summary>
         /// Starts timer with specified duration.
@@ -174,26 +174,26 @@ namespace Common
             }
         }
 
-		/// <summary>
-		/// Starts timer with specified duration and timeout action.
-		/// </summary>
-		/// <param name="onTimeout">On timeout action.</param>
-		/// <param name="duration">Duration.</param>
-		public void Start(UnityAction onTimeout, float duration)
-		{
-			DebugEx.VerboseFormat("Timer.Start(onTimeout = {0}, duration = {1})", onTimeout, duration);
-			
-			if (duration >= 0f)
-			{
-				mDuration  = duration;
-				mOnTimeout = onTimeout;
-				mTime      = 0f;
-			}
-			else
-			{
-				DebugEx.ErrorFormat("Invalid duration value: {0}", duration);
-			}
-		}
+        /// <summary>
+        /// Starts timer with specified duration and timeout action.
+        /// </summary>
+        /// <param name="onTimeout">On timeout action.</param>
+        /// <param name="duration">Duration.</param>
+        public void Start(UnityAction onTimeout, float duration)
+        {
+            DebugEx.VerboseFormat("Timer.Start(onTimeout = {0}, duration = {1})", onTimeout, duration);
+
+            if (duration >= 0f)
+            {
+                mDuration  = duration;
+                mOnTimeout = onTimeout;
+                mTime      = 0f;
+            }
+            else
+            {
+                DebugEx.ErrorFormat("Invalid duration value: {0}", duration);
+            }
+        }
 
         /// <summary>
         /// Stops timer.
