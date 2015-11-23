@@ -297,7 +297,7 @@ namespace Common.App.Net
 
                 script.mPollTimer.Stop();
 
-                if (script.mHosts.Length > 0)
+				if (script.mHosts.Length > script.mAskedHosts.Count)
                 {
                     script.state = ClientState.Asking;
                 }
