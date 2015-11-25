@@ -7,6 +7,7 @@
 
 
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 
@@ -455,6 +456,55 @@ namespace Common.App.Net
                 script.Send(Client.BuildRevisionRequestMessage());
             }
 
+			/// <summary>
+			/// Handler for message received from server.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="bytes">Byte array.</param>
+			public override void OnMessageReceivedFromServer(ClientScript script, byte[] bytes)
+			{
+				DebugEx.VerboseFormat("ClientScript.ConnectedState.OnMessageReceivedFromServer(script = {0}, bytes = {1})", script, Utils.BytesInHex(bytes));
+				
+				MemoryStream stream = new MemoryStream(bytes);
+				BinaryReader reader = new BinaryReader(stream);
+				
+				MessageType messageType = NetUtils.ReadMessageHeader(reader);
+				
+                DebugEx.DebugFormat("Message type = {0}", messageType);
+
+				switch (messageType)
+				{
+					case MessageType.RevisionResponse:
+					{
+						HandleRevisionResponse(reader);
+					}
+					break;
+					
+					case MessageType.RevisionRequest:
+					{
+						DebugEx.ErrorFormat("Unexpected message type: {0}", messageType);
+	                }
+                    break;
+                    
+	                default:
+	                {
+	                    DebugEx.ErrorFormat("Unknown message type: {0}", messageType);
+	                }
+                    break;
+				}
+            }
+
+			/// <summary>
+			/// Handles RevisionResponse message.
+			/// </summary>
+			/// <param name="reader">Binary reader.</param>
+			private void HandleRevisionResponse(BinaryReader reader)
+			{
+				DebugEx.VerboseFormat("ClientScript.ConnectedState.HandleRevisionResponse(reader = {0})", reader);
+                
+				// TODO: Implement it
+			}
+            
             /// <summary>
             /// Handler for request timeout event.
             /// </summary>

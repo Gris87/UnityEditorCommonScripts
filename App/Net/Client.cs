@@ -36,18 +36,6 @@ namespace Common.App.Net
         }
 
         /// <summary>
-        /// Fills the message header.
-        /// </summary>
-        /// <param name="writer">Binary writer.</param>
-        /// <param name="type">Message type.</param>
-        private static void FillMessageHeader(BinaryWriter writer, MessageType type)
-        {
-            DebugEx.VerboseFormat("Client.FillMessageHeader(writer = {0}, type = {1})", writer, type);
-
-            writer.Write((byte)type);
-        }
-
-        /// <summary>
         /// Builds RevisionRequest message.
         /// </summary>
         /// <returns>Byte array that represents RevisionRequest message.</returns>
@@ -58,7 +46,7 @@ namespace Common.App.Net
             MemoryStream stream = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(stream);
 
-            FillMessageHeader(writer, MessageType.RevisionRequest);
+			NetUtils.WriteMessageHeader(writer, MessageType.RevisionRequest);
 
             return stream.ToArray();
         }
