@@ -23,8 +23,8 @@ namespace Common
 
 
 
-		private static string       sFileName;
-		private static StreamWriter sFileWriter;
+		private static string       sFileName   = null;
+		private static StreamWriter sFileWriter = null;
 
 
 

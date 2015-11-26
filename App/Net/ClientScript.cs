@@ -453,6 +453,8 @@ namespace Common.App.Net
             {
                 DebugEx.VerboseFormat("ClientScript.ConnectedState.OnEnter(script = {0}, previousState = {1})", script, previousState);
 
+				DebugEx.ErrorFormat("MY GUID = {0}", Network.player.guid);
+
                 script.Send(Client.BuildRevisionRequestMessage());
             }
 
