@@ -751,7 +751,6 @@ namespace Common.App.Net
             mNetworkView.RPC("RPC_SendToServer", RPCMode.Server, Network.player.guid, bytes);
         }
 
-		/*
         /// <summary>
         /// RPC for sending message to server.
         /// </summary>
@@ -764,7 +763,6 @@ namespace Common.App.Net
 
             DebugEx.Fatal("Unexpected behaviour in ClientScript.RPC_SendToServer()");
         }
-		*/
 
         /// <summary>
         /// RPC for receiving message from server.
