@@ -757,9 +757,9 @@ namespace Common.App.Net
         /// <param name="id">Network view ID.</param>
         /// <param name="bytes">Byte array.</param>
         [RPC]
-        private void RPC_SendToServer(NetworkViewID id, byte[] bytes)
+		private void RPC_SendToServer(string guid, byte[] bytes)
         {
-            DebugEx.VerboseFormat("ClientScript.RPC_SendToServer(id = {0}, bytes = {1})", id, Utils.BytesInHex(bytes));
+			DebugEx.VerboseFormat("ClientScript.RPC_SendToServer(guid = {0}, bytes = {1})", guid, Utils.BytesInHex(bytes));
 
             DebugEx.Fatal("Unexpected behaviour in ClientScript.RPC_SendToServer()");
         }
