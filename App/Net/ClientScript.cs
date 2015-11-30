@@ -453,8 +453,6 @@ namespace Common.App.Net
             {
                 DebugEx.VerboseFormat("ClientScript.ConnectedState.OnEnter(script = {0}, previousState = {1})", script, previousState);
 
-				DebugEx.ErrorFormat("MY GUID = {0}", Network.player.guid);
-
                 script.Send(Client.BuildRevisionRequestMessage());
             }
 
@@ -750,9 +748,10 @@ namespace Common.App.Net
         {
             DebugEx.VerboseFormat("ClientScript.Send(bytes = {0})", Utils.BytesInHex(bytes));
 
-            mNetworkView.RPC("RPC_SendToServer", RPCMode.Server, mNetworkView.viewID, bytes);
+            mNetworkView.RPC("RPC_SendToServer", RPCMode.Server, Network.player.guid, bytes);
         }
 
+		/*
         /// <summary>
         /// RPC for sending message to server.
         /// </summary>
@@ -765,6 +764,7 @@ namespace Common.App.Net
 
             DebugEx.Fatal("Unexpected behaviour in ClientScript.RPC_SendToServer()");
         }
+		*/
 
         /// <summary>
         /// RPC for receiving message from server.
