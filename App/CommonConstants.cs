@@ -11,8 +11,8 @@ namespace Common.App
         public const string SOURCE_CODE_URL = "https://github.com/Gris87/UnityEditor";
 
         /// <summary>
-        /// Server name.
+        /// Server port.
         /// </summary>
-        public const string SERVER_NAME = "UnityEditor";
+		public const int SERVER_PORT = 52794;
     }
 }

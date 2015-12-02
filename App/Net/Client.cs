@@ -1,9 +1,6 @@
-#pragma warning disable 618
-
-
-
 using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 
 
 
@@ -14,25 +11,66 @@ namespace Common.App.Net
     /// </summary>
     public static class Client
     {
-        /// <summary>
-        /// Requests the host list.
-        /// </summary>
-        public static void RequestHostList()
-        {
-            DebugEx.Verbose("Client.RequestHostList()");
-
-            MasterServer.RequestHostList(CommonConstants.SERVER_NAME);
+		private static byte         sChannelId;
+		private static HostTopology sTopology;
+		private static int          sHostId;
+		private static int          sConnectionId;
+		
+		
+		
+		/// <summary>
+		/// Initializes the <see cref="Common.App.Net.Client"/> class.
+		/// </summary>
+		static Client()
+		{
+			DebugEx.Verbose("Static class Client initialized");
+			
+			NetworkTransport.Init();
+			
+			ConnectionConfig config = new ConnectionConfig();
+			sChannelId = config.AddChannel(QosType.ReliableSequenced);
+            
+            sTopology     = new HostTopology(config, 1);
+			sHostId       = NetworkTransport.AddHost(sTopology);
+			sConnectionId = -1;
         }
-
+        
         /// <summary>
-        /// Polls host list from master server.
-        /// </summary>
-        /// <returns>Host list.</returns>
-        public static HostData[] PollHostList()
-        {
-            DebugEx.Verbose("Client.PollHostList()");
+        /// Connects to the server.
+		/// </summary>
+		/// <returns><c>true</c>, if connection successfully started, <c>false</c> otherwise.</returns>
+        public static bool Connect()
+		{
+			byte error;
 
-            return MasterServer.PollHostList();
+			sConnectionId = NetworkTransport.Connect(sHostId, "localhost", CommonConstants.SERVER_PORT, 0, out error);
+
+			if (error != 0)
+			{
+				DebugEx.ErrorFormat("Impossible to connect to server, error: {1}", error);
+			}
+
+			return (error == 0);
+		}
+
+		/// <summary>
+		/// Sends byte array to server.
+		/// </summary>
+		/// <returns><c>true</c>, if successfully sent, <c>false</c> otherwise.</returns>
+		/// <param name="bytes">Byte array.</param>
+		public static bool Send(byte[] bytes)
+		{
+			DebugEx.VerboseFormat("Client.Send(bytes = {0})", Utils.BytesInHex(bytes));
+			
+			byte error;
+			NetworkTransport.Send(sHostId, sConnectionId, sChannelId, bytes, bytes.Length, out error);
+
+			if (error != 0)
+			{
+				DebugEx.ErrorFormat("Impossible to send message to server, error: {0}", error);
+            }
+
+			return (error == 0);
         }
 
         /// <summary>
