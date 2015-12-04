@@ -65,7 +65,11 @@ namespace Common.App.Net
 			byte error;
 			NetworkTransport.Send(sHostId, sConnectionId, sChannelId, bytes, bytes.Length, out error);
 
-			if (error != 0)
+			if (error == 0)
+			{
+				DebugEx.DebugFormat("Message sent to server: {0}", Utils.BytesInHex(bytes));
+			}
+			else
 			{
 				DebugEx.ErrorFormat("Impossible to send message to server, error: {0}", error);
             }

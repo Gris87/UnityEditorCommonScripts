@@ -75,9 +75,10 @@ namespace Common.App.Net
             /// </summary>
             /// <param name="script">Script.</param>
             /// <param name="bytes">Byte array.</param>
-            public virtual void OnMessageReceivedFromServer(ClientScript script, byte[] bytes)
+			/// <param name="dataSize">Data size.</param>
+			public virtual void OnMessageReceivedFromServer(ClientScript script, byte[] bytes, int dataSize)
             {
-                DebugEx.VerboseFormat("ClientScript.IClientState.OnMessageReceivedFromServer(script = {0}, bytes = {1})", script, Utils.BytesInHex(bytes));
+				DebugEx.VerboseFormat("ClientScript.IClientState.OnMessageReceivedFromServer(script = {0}, bytes = {1}, dataSize = {2})", script, Utils.BytesInHex(bytes, dataSize), dataSize);
 
                 DebugEx.FatalFormat("Unexpected OnMessageReceivedFromServer() in {0} state", script.mState);
             }
@@ -174,10 +175,13 @@ namespace Common.App.Net
 			/// </summary>
 			/// <param name="script">Script.</param>
 			/// <param name="bytes">Byte array.</param>
-			public override void OnMessageReceivedFromServer(ClientScript script, byte[] bytes)
+			/// <param name="dataSize">Data size.</param>
+			public override void OnMessageReceivedFromServer(ClientScript script, byte[] bytes, int dataSize)
 			{
-				DebugEx.VerboseFormat("ClientScript.ConnectedState.OnMessageReceivedFromServer(script = {0}, bytes = {1})", script, Utils.BytesInHex(bytes));
-				
+				DebugEx.VerboseFormat("ClientScript.ConnectedState.OnMessageReceivedFromServer(script = {0}, bytes = {1}, dataSize = {2})", script, Utils.BytesInHex(bytes, dataSize), dataSize);
+
+				DebugEx.DebugFormat("Message received from server: {0}", Utils.BytesInHex(bytes, dataSize));
+
 				MemoryStream stream = new MemoryStream(bytes);
 				BinaryReader reader = new BinaryReader(stream);
 				
@@ -337,7 +341,7 @@ namespace Common.App.Net
 				
 				case NetworkEventType.DataEvent:      
 	            {
-					mCurrentState.OnMessageReceivedFromServer(this, mBuffer);
+					mCurrentState.OnMessageReceivedFromServer(this, mBuffer, dataSize);
 	            }
                 break;
                 
