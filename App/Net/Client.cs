@@ -43,11 +43,11 @@ namespace Common.App.Net
 		{
 			byte error;
 
-			sConnectionId = NetworkTransport.Connect(sHostId, "localhost", CommonConstants.SERVER_PORT, 0, out error);
+			sConnectionId = NetworkTransport.Connect(sHostId, "127.0.0.1", CommonConstants.SERVER_PORT, 0, out error);
 
 			if (error != 0)
 			{
-				DebugEx.ErrorFormat("Impossible to connect to server, error: {1}", error);
+				DebugEx.ErrorFormat("Impossible to connect to server, error: {0}", error);
 			}
 
 			return (error == 0);

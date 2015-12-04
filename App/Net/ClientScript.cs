@@ -161,7 +161,7 @@ namespace Common.App.Net
             {
                 DebugEx.VerboseFormat("ClientScript.ConnectedState.OnEnter(script = {0}, previousState = {1})", script, previousState);
 
-                if (Client.Send(Client.BuildRevisionRequestMessage()))
+                if (!Client.Send(Client.BuildRevisionRequestMessage()))
 				{
 					DebugEx.ErrorFormat("Failed to send RevisionRequest message to server");
 
@@ -297,7 +297,7 @@ namespace Common.App.Net
 
 			mReconnectTimer = new Timer(OnReconnectTimeout, DEFAULT_RECONNECT_DURATION);
 
-			mBuffer = new byte[4096]; ;
+			mBuffer = new byte[4096];
 
 
 
