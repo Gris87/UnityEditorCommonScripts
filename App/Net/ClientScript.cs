@@ -44,7 +44,7 @@ namespace Common.App.Net
 			/// <param name="script">Script.</param>
 			public virtual void OnReconnectTimeout(ClientScript script)
 			{
-				DebugEx.VeryVeryVerboseFormat("ClientScript.ConnectingState.OnReconnectTimeout(script = {0})", script);
+				DebugEx.VeryVeryVerboseFormat("ClientScript.IClientState.OnReconnectTimeout(script = {0})", script);
             }            
             
             /// <summary>
