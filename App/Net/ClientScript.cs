@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -71,7 +72,7 @@ namespace Common.App.Net
             }
         
             /// <summary>
-            /// Handler for message received from server.
+            /// Handler for message received from the server.
             /// </summary>
             /// <param name="script">Script.</param>
             /// <param name="bytes">Byte array.</param>
@@ -83,6 +84,49 @@ namespace Common.App.Net
                 DebugEx.FatalFormat("Unexpected OnMessageReceivedFromServer() in {0} state", script.mState);
             }
         }
+
+		/// <summary>
+		/// Client state when client disconnected from the host.
+		/// </summary>
+		private class DisconnectedState: IClientState
+		{
+			/// <summary>
+			/// Handler for enter event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="previousState">Previous state.</param>
+			public override void OnEnter(ClientScript script, ClientState previousState)
+			{
+				DebugEx.VerboseFormat("ClientScript.DisconnectedState.OnEnter(script = {0}, previousState = {1})", script, previousState);
+
+				if (previousState != ClientState.Count)
+				{
+					if (!Client.Disconnect())
+					{
+						DebugEx.Error("Failed to disconnect from the server");
+					}
+				}
+			}
+
+			/// <summary>
+			/// Handler for event on disconnection.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="error">Error.</param>
+			public override void OnDisconnectedFromServer(ClientScript script, byte error)
+			{
+				DebugEx.VerboseFormat("ClientScript.DisconnectedState.OnDisconnectedFromServer(script = {0}, error = {1})", script, error);
+				
+				if (error == 0)
+				{
+					DebugEx.Debug("Succesfully disconnected from the server");
+				}
+				else
+				{
+					DebugEx.ErrorFormat("Failed to disconnect from the server, error: {0}", error);
+				}
+			}
+		}
 
         /// <summary>
         /// Client state when client connecting to the host.
@@ -142,7 +186,7 @@ namespace Common.App.Net
 			{
 				DebugEx.VerboseFormat("ClientScript.ConnectingState.OnDisconnectedFromServer(script = {0}, error = {1})", script, error);
                 
-				DebugEx.ErrorFormat("Could not connect to server: {0}", error);
+				DebugEx.ErrorFormat("Could not connect to the server: {0}", error);
 
                 script.mReconnectTimer.Start();
             }
@@ -164,14 +208,14 @@ namespace Common.App.Net
 
                 if (!Client.Send(Client.BuildRevisionRequestMessage()))
 				{
-					DebugEx.ErrorFormat("Failed to send RevisionRequest message to server");
+					DebugEx.ErrorFormat("Failed to send RevisionRequest message to the server");
 
 					script.state = ClientState.Connecting;
 				}
             }
 
 			/// <summary>
-			/// Handler for message received from server.
+			/// Handler for message received from the server.
 			/// </summary>
 			/// <param name="script">Script.</param>
 			/// <param name="bytes">Byte array.</param>
@@ -180,7 +224,7 @@ namespace Common.App.Net
 			{
 				DebugEx.VerboseFormat("ClientScript.ConnectedState.OnMessageReceivedFromServer(script = {0}, bytes = {1}, dataSize = {2})", script, Utils.BytesInHex(bytes, dataSize), dataSize);
 
-				DebugEx.DebugFormat("Message received from server: {0}", Utils.BytesInHex(bytes, dataSize));
+				DebugEx.DebugFormat("Message received from the server: {0}", Utils.BytesInHex(bytes, dataSize));
 
 				MemoryStream stream = new MemoryStream(bytes);
 				BinaryReader reader = new BinaryReader(stream);
@@ -193,11 +237,13 @@ namespace Common.App.Net
 				{
 					case MessageType.RevisionResponse:
 					{
-						HandleRevisionResponse(reader);
+						HandleRevisionResponse(script, reader);
 					}
 					break;
 					
 					case MessageType.RevisionRequest:
+					case MessageType.MD5HashesRequest:
+					case MessageType.MD5HashesResponse:
 					{
 						DebugEx.ErrorFormat("Unexpected message type: {0}", messageType);
 	                }
@@ -214,12 +260,32 @@ namespace Common.App.Net
 			/// <summary>
 			/// Handles RevisionResponse message.
 			/// </summary>
+			/// <param name="script">Script.</param>
 			/// <param name="reader">Binary reader.</param>
-			private void HandleRevisionResponse(BinaryReader reader)
+			private void HandleRevisionResponse(ClientScript script, BinaryReader reader)
 			{
 				DebugEx.VerboseFormat("ClientScript.ConnectedState.HandleRevisionResponse(reader = {0})", reader);
-                
-				// TODO: Implement it
+
+				int remoteRevision = reader.ReadInt32();
+				int localRevision  = 0;
+
+				if (File.Exists(Application.persistentDataPath + "/Revision.txt"))
+				{
+					string text   = File.ReadAllText(Application.persistentDataPath + "/Revision.txt", Encoding.UTF8);
+					localRevision = int.Parse(text);
+				}
+
+				DebugEx.DebugFormat("Revision at the client: {0}", localRevision);
+				DebugEx.DebugFormat("Revision at the server: {0}", remoteRevision);
+
+				if (remoteRevision > localRevision)
+				{
+					script.state = ClientState.RequestingMD5Hashes;
+				}
+				else
+				{
+					script.state = ClientState.Disconnected;
+				}
 			}
 
 			/// <summary>
@@ -234,6 +300,104 @@ namespace Common.App.Net
                 script.state = ClientState.Connecting;
             }
         }
+
+		/// <summary>
+		/// Client state when client requesting MD5 hashes for files from the host.
+		/// </summary>
+		private class RequestingMD5HashesState: IClientState
+		{
+			/// <summary>
+			/// Handler for enter event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="previousState">Previous state.</param>
+			public override void OnEnter(ClientScript script, ClientState previousState)
+			{
+				DebugEx.VerboseFormat("ClientScript.RequestingMD5HashesState.OnEnter(script = {0}, previousState = {1})", script, previousState);
+				
+				if (!Client.Send(Client.BuildMD5HashesRequestMessage()))
+				{
+					DebugEx.ErrorFormat("Failed to send MD5HashesRequest message to the server");
+					
+					script.state = ClientState.Connecting;
+				}
+			}
+			
+			/// <summary>
+			/// Handler for message received from the server.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="bytes">Byte array.</param>
+			/// <param name="dataSize">Data size.</param>
+			public override void OnMessageReceivedFromServer(ClientScript script, byte[] bytes, int dataSize)
+			{
+				DebugEx.VerboseFormat("ClientScript.RequestingMD5HashesState.OnMessageReceivedFromServer(script = {0}, bytes = {1}, dataSize = {2})", script, Utils.BytesInHex(bytes, dataSize), dataSize);
+				
+				DebugEx.DebugFormat("Message received from the server: {0}", Utils.BytesInHex(bytes, dataSize));
+				
+				MemoryStream stream = new MemoryStream(bytes);
+				BinaryReader reader = new BinaryReader(stream);
+				
+				MessageType messageType = NetUtils.ReadMessageHeader(reader);
+				
+				DebugEx.DebugFormat("Message type = {0}", messageType);
+				
+				switch (messageType)
+				{
+					case MessageType.MD5HashesResponse:
+					{
+						HandleMD5HashesResponse(script, reader);
+					}
+					break;
+					
+					case MessageType.RevisionRequest:
+					case MessageType.RevisionResponse:
+					case MessageType.MD5HashesRequest:
+					{
+						DebugEx.ErrorFormat("Unexpected message type: {0}", messageType);
+					}
+					break;
+					
+					default:
+					{
+						DebugEx.ErrorFormat("Unknown message type: {0}", messageType);
+					}
+					break;
+				}
+			}
+			
+			/// <summary>
+			/// Handles MD5HashesResponse message.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="reader">Binary reader.</param>
+			private void HandleMD5HashesResponse(ClientScript script, BinaryReader reader)
+			{
+				DebugEx.VerboseFormat("ClientScript.RequestingMD5HashesState.HandleMD5HashesResponse(reader = {0})", reader);
+				
+				// TODO: Implement it
+			}
+			
+			/// <summary>
+			/// Handler for event on disconnection.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="error">Error.</param>
+			public override void OnDisconnectedFromServer(ClientScript script, byte error)
+			{
+				DebugEx.VerboseFormat("ClientScript.RequestingMD5HashesState.OnDisconnectedFromServer(script = {0}, error = {1})", script, error);
+				
+				script.state = ClientState.Connecting;
+			}
+		}
+
+		/// <summary>
+		/// Client state when client downloading files from the host.
+		/// </summary>
+		private class DownloadingState: IClientState
+		{
+			// TODO: Implement it
+		}
         #endregion
 
         // =======================================================================
@@ -292,9 +456,12 @@ namespace Common.App.Net
         {
             DebugEx.Verbose("ClientScript.Start()");
 
-            mAllStates                              = new IClientState[(int)ClientState.Count];
-            mAllStates[(int)ClientState.Connecting] = new ConnectingState();
-            mAllStates[(int)ClientState.Connected]  = new ConnectedState();
+            mAllStates                                       = new IClientState[(int)ClientState.Count];
+			mAllStates[(int)ClientState.Disconnected]        = new DisconnectedState();
+			mAllStates[(int)ClientState.Connecting]          = new ConnectingState();
+			mAllStates[(int)ClientState.Connected]           = new ConnectedState();
+			mAllStates[(int)ClientState.RequestingMD5Hashes] = new RequestingMD5HashesState();
+			mAllStates[(int)ClientState.Downloading]         = new DownloadingState();
 
 			mState        = ClientState.Connecting;
             mCurrentState = mAllStates[(int)mState];

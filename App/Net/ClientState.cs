@@ -5,6 +5,11 @@ namespace Common.App.Net
     /// </summary>
     public enum ClientState
     {
+		/// <summary>
+		/// Client state when client disconnected from the host.
+		/// </summary>
+		Disconnected
+		,
         /// <summary>
         /// Client state when client connecting to the host.
         /// </summary>
@@ -15,6 +20,16 @@ namespace Common.App.Net
         /// </summary>
         Connected
         ,
+		/// <summary>
+		/// Client state when client requesting MD5 hashes for files from the host.
+		/// </summary>
+		RequestingMD5Hashes
+		,
+		/// <summary>
+		/// Client state when client downloading files from the host.
+		/// </summary>
+		Downloading
+		,
         Count
     }
 }

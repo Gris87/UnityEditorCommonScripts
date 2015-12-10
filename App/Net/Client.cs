@@ -48,7 +48,7 @@ namespace Common.App.Net
 
 			if (!res)
 			{
-				DebugEx.ErrorFormat("Impossible to connect to server, error: {0}", error);
+				DebugEx.ErrorFormat("Impossible to connect to the server, error: {0}", error);
 			}
 
 			DebugEx.VerboseFormat("Client.Connect() = {0}", res);
@@ -57,7 +57,28 @@ namespace Common.App.Net
 		}
 
 		/// <summary>
-		/// Sends byte array to server.
+		/// Disconnects from the server.
+		/// </summary>
+		/// <returns><c>true</c>, if successfully disconnected, <c>false</c> otherwise.</returns>
+		public static bool Disconnect()
+		{
+			byte error;
+			NetworkTransport.Disconnect(sHostId, sConnectionId, out error);
+
+			bool res = (error == 0);
+			
+			if (!res)
+			{
+				DebugEx.ErrorFormat("Impossible to disconnect from the server, error: {0}", error);
+			}
+			
+			DebugEx.VerboseFormat("Client.Disconnect() = {0}", res);
+			
+			return res;
+		}
+
+		/// <summary>
+		/// Sends byte array to the server.
 		/// </summary>
 		/// <returns><c>true</c>, if successfully sent, <c>false</c> otherwise.</returns>
 		/// <param name="bytes">Byte array.</param>
@@ -70,11 +91,11 @@ namespace Common.App.Net
 
 			if (res)
 			{
-				DebugEx.DebugFormat("Message sent to server: {0}", Utils.BytesInHex(bytes));
+				DebugEx.DebugFormat("Message sent to the server: {0}", Utils.BytesInHex(bytes));
 			}
 			else
 			{
-				DebugEx.ErrorFormat("Impossible to send message to server, error: {0}", error);
+				DebugEx.ErrorFormat("Impossible to send message to the server, error: {0}", error);
             }
 
 			DebugEx.VerboseFormat("Client.Send(bytes = {0}) = {1}", Utils.BytesInHex(bytes), res);
@@ -97,5 +118,21 @@ namespace Common.App.Net
 
             return stream.ToArray();
         }
+
+		/// <summary>
+		/// Builds MD5HashesRequest message.
+		/// </summary>
+		/// <returns>Byte array that represents MD5HashesRequest message.</returns>
+		public static byte[] BuildMD5HashesRequestMessage()
+		{
+			DebugEx.Verbose("Client.BuildMD5HashesRequestMessage()");
+			
+			MemoryStream stream = new MemoryStream();
+			BinaryWriter writer = new BinaryWriter(stream);
+			
+			NetUtils.WriteMessageHeader(writer, MessageType.MD5HashesRequest);
+			
+			return stream.ToArray();
+		}
     }
 }
