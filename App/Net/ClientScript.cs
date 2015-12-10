@@ -484,13 +484,13 @@ namespace Common.App.Net
 
 			mReconnectTimer.Update();
 
-			int recHostId; 
+			int hostId; 
 			int connectionId; 
 			int channelId;
 			int dataSize;
 			byte error;
 			
-			NetworkEventType eventType = NetworkTransport.Receive(out recHostId, out connectionId, out channelId, mBuffer, 4096, out dataSize, out error);
+			NetworkEventType eventType = NetworkTransport.Receive(out hostId, out connectionId, out channelId, mBuffer, 4096, out dataSize, out error);
 			
 			switch (eventType)
 			{
