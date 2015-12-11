@@ -344,7 +344,7 @@ namespace Common.UI.Tooltips
         /// </summary>
         private void OnShowTimeout()
         {
-			DebugEx.Verbose("TooltipAreaScript.OnShowTimeout()");
+            DebugEx.Verbose("TooltipAreaScript.OnShowTimeout()");
 
             CreateTooltip();
 
@@ -356,7 +356,7 @@ namespace Common.UI.Tooltips
         /// </summary>
         private void OnHideTimeout()
         {
-			DebugEx.Verbose("TooltipAreaScript.OnHideTimeout()");
+            DebugEx.Verbose("TooltipAreaScript.OnHideTimeout()");
 
             DestroyTooltip();
 

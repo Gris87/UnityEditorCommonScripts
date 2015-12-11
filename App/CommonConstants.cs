@@ -13,6 +13,6 @@ namespace Common.App
         /// <summary>
         /// Server port.
         /// </summary>
-		public const int SERVER_PORT = 52794;
+        public const int SERVER_PORT = 52794;
     }
 }

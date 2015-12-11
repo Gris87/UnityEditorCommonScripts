@@ -138,7 +138,7 @@ namespace Common
         /// </summary>
         public void Start()
         {
-            DebugEx.Verbose("Timer.Start()");
+            DebugEx.VeryVerbose("Timer.Start()");
 
             mTime = 0f;
         }
@@ -149,7 +149,7 @@ namespace Common
         /// <param name="onTimeout">On timeout action.</param>
         public void Start(UnityAction onTimeout)
         {
-            DebugEx.VerboseFormat("Timer.Start(onTimeout = {0})", onTimeout);
+            DebugEx.VeryVerboseFormat("Timer.Start(onTimeout = {0})", onTimeout);
 
             mOnTimeout = onTimeout;
             mTime      = 0f;
@@ -161,7 +161,7 @@ namespace Common
         /// <param name="duration">Duration.</param>
         public void Start(float duration)
         {
-            DebugEx.VerboseFormat("Timer.Start(duration = {0})", duration);
+            DebugEx.VeryVerboseFormat("Timer.Start(duration = {0})", duration);
 
             if (duration >= 0f)
             {
@@ -181,7 +181,7 @@ namespace Common
         /// <param name="duration">Duration.</param>
         public void Start(UnityAction onTimeout, float duration)
         {
-            DebugEx.VerboseFormat("Timer.Start(onTimeout = {0}, duration = {1})", onTimeout, duration);
+            DebugEx.VeryVerboseFormat("Timer.Start(onTimeout = {0}, duration = {1})", onTimeout, duration);
 
             if (duration >= 0f)
             {

@@ -105,17 +105,17 @@ namespace Common
         /// </summary>
         /// <returns>Byte array representation in HEX.</returns>
         /// <param name="bytes">Byte array.</param>
-		/// <param name="count">Count.</param>
+        /// <param name="count">Count.</param>
         public static string BytesInHex(byte[] bytes, int count = -1)
         {
             string res = "";
 
-			if (count < 0)
-			{
-				count = bytes.Length;
-			}
+            if (count < 0)
+            {
+                count = bytes.Length;
+            }
 
-			for (int i = 0; i < count; ++i)
+            for (int i = 0; i < count; ++i)
             {
                 byte left  = (byte)(bytes[i] >> 4);
                 byte right = (byte)(bytes[i] & 0x0F);
@@ -139,7 +139,7 @@ namespace Common
                 }
             }
 
-			DebugEx.VeryVerboseFormat("Utils.BytesInHex(bytes = {0}, count = {1})", res, count);
+            DebugEx.VeryVerboseFormat("Utils.BytesInHex(bytes = {0}, count = {1})", res, count);
 
             return res;
         }
