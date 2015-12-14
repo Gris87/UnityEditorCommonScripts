@@ -227,7 +227,7 @@ namespace Common.App.Net
                 DebugEx.DebugFormat("Message received from the server: {0}", Utils.BytesInHex(bytes, dataSize));
 
                 MemoryStream stream = new MemoryStream(bytes);
-                BinaryReader reader = new BinaryReader(stream);
+                BinaryReader reader = new BinaryReader(stream, Encoding.UTF8);
 
                 MessageType messageType = NetUtils.ReadMessageHeader(reader);
 
@@ -336,7 +336,7 @@ namespace Common.App.Net
                 DebugEx.DebugFormat("Message received from the server: {0}", Utils.BytesInHex(bytes, dataSize));
 
                 MemoryStream stream = new MemoryStream(bytes);
-                BinaryReader reader = new BinaryReader(stream);
+				BinaryReader reader = new BinaryReader(stream, Encoding.UTF8);
 
                 MessageType messageType = NetUtils.ReadMessageHeader(reader);
 

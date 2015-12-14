@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -112,7 +113,7 @@ namespace Common.App.Net
             DebugEx.Verbose("Client.BuildRevisionRequestMessage()");
 
             MemoryStream stream = new MemoryStream();
-            BinaryWriter writer = new BinaryWriter(stream);
+			BinaryWriter writer = new BinaryWriter(stream, Encoding.UTF8);
 
             NetUtils.WriteMessageHeader(writer, MessageType.RevisionRequest);
 
@@ -128,7 +129,7 @@ namespace Common.App.Net
             DebugEx.Verbose("Client.BuildMD5HashesRequestMessage()");
 
             MemoryStream stream = new MemoryStream();
-            BinaryWriter writer = new BinaryWriter(stream);
+			BinaryWriter writer = new BinaryWriter(stream, Encoding.UTF8);
 
             NetUtils.WriteMessageHeader(writer, MessageType.MD5HashesRequest);
 
