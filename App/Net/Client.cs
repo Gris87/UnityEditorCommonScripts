@@ -29,7 +29,8 @@ namespace Common.App.Net
             NetworkTransport.Init();
 
             ConnectionConfig config = new ConnectionConfig();
-            sChannelId = config.AddChannel(QosType.ReliableSequenced);
+			config.PacketSize       = 32000;
+			sChannelId              = config.AddChannel(QosType.ReliableSequenced);
 
             sTopology     = new HostTopology(config, 1);
             sHostId       = NetworkTransport.AddHost(sTopology);
@@ -92,14 +93,14 @@ namespace Common.App.Net
 
             if (res)
             {
-                DebugEx.DebugFormat("Message sent to the server: {0}", Utils.BytesInHex(bytes));
+                DebugEx.VeryVerboseFormat("Message sent to the server: {0}", Utils.BytesInHex(bytes));
             }
             else
             {
                 DebugEx.ErrorFormat("Impossible to send message to the server, error: {0}({1})", (NetworkError)error, error);
             }
 
-            DebugEx.VerboseFormat("Client.Send(bytes = {0}) = {1}", Utils.BytesInHex(bytes), res);
+            DebugEx.VerboseFormat("Client.Send(bytes = {0}) = {1}", bytes, res);
 
             return res;
         }

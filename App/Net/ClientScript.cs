@@ -13,6 +13,52 @@ namespace Common.App.Net
     /// </summary>
     public class ClientScript : MonoBehaviour
     {
+		/// <summary>
+		/// File info.
+		/// </summary>
+		private class FileInfo
+		{
+			/// <summary>
+			/// File name.
+			/// </summary>
+			public string name;
+			
+			/// <summary>
+			/// Is file a folder or not.
+			/// </summary>
+			public bool isFolder;
+			
+			/// <summary>
+			/// MD5 hash.
+			/// </summary>
+			public string md5;
+			
+			
+			
+			/// <summary>
+			/// Initializes a new instance of the <see cref="Common.App.Net.ClientScript+FileInfo"/> class.
+			/// </summary>
+			/// <param name="fileName">File name.</param>
+			/// <param name="md5Hash">Md5 hash.</param>
+			public FileInfo(string fileName, string md5Hash)
+			{
+				name     = fileName;
+				isFolder = false;
+				md5      = md5Hash;
+			}
+
+			/// <summary>
+			/// Initializes a new instance of the <see cref="Common.App.Net.ClientScript+FileInfo"/> class.
+			/// </summary>
+			/// <param name="fileName">File name.</param>
+			public FileInfo(string fileName)
+			{
+				name     = fileName;
+				isFolder = true;
+				md5      = null;
+			}
+		}
+
         #region States
         /// <summary>
         /// Client state.
@@ -79,7 +125,7 @@ namespace Common.App.Net
             /// <param name="dataSize">Data size.</param>
             public virtual void OnMessageReceivedFromServer(ClientScript script, byte[] bytes, int dataSize)
             {
-                DebugEx.VerboseFormat("ClientScript.IClientState.OnMessageReceivedFromServer(script = {0}, bytes = {1}, dataSize = {2}) in {3} state", script, Utils.BytesInHex(bytes, dataSize), dataSize, script.mState);
+                DebugEx.VerboseFormat("ClientScript.IClientState.OnMessageReceivedFromServer(script = {0}, bytes = {1}, dataSize = {2}) in {3} state", script, bytes, dataSize, script.mState);
 
                 DebugEx.FatalFormat("Unexpected OnMessageReceivedFromServer() in {0} state", script.mState);
             }
@@ -119,7 +165,7 @@ namespace Common.App.Net
 
                 if (error == (byte)NetworkError.Ok)
                 {
-                    DebugEx.Debug("Succesfully disconnected from the server");
+                    DebugEx.Debug("Successfully disconnected from the server");
                 }
                 else
                 {
@@ -222,9 +268,9 @@ namespace Common.App.Net
             /// <param name="dataSize">Data size.</param>
             public override void OnMessageReceivedFromServer(ClientScript script, byte[] bytes, int dataSize)
             {
-                DebugEx.VerboseFormat("ClientScript.ConnectedState.OnMessageReceivedFromServer(script = {0}, bytes = {1}, dataSize = {2})", script, Utils.BytesInHex(bytes, dataSize), dataSize);
+                DebugEx.VerboseFormat("ClientScript.ConnectedState.OnMessageReceivedFromServer(script = {0}, bytes = {1}, dataSize = {2})", script, bytes, dataSize);
 
-                DebugEx.DebugFormat("Message received from the server: {0}", Utils.BytesInHex(bytes, dataSize));
+				DebugEx.VeryVerboseFormat("Message received from the server: {0}", Utils.BytesInHex(bytes, dataSize));
 
                 MemoryStream stream = new MemoryStream(bytes);
                 BinaryReader reader = new BinaryReader(stream, Encoding.UTF8);
@@ -246,12 +292,16 @@ namespace Common.App.Net
                     case MessageType.MD5HashesResponse:
                     {
                         DebugEx.ErrorFormat("Unexpected message type: {0}", messageType);
+
+						script.state = ClientState.Connecting;
                     }
                     break;
 
                     default:
                     {
                         DebugEx.ErrorFormat("Unknown message type: {0}", messageType);
+
+						script.state = ClientState.Connecting;
                     }
                     break;
                 }
@@ -331,9 +381,9 @@ namespace Common.App.Net
             /// <param name="dataSize">Data size.</param>
             public override void OnMessageReceivedFromServer(ClientScript script, byte[] bytes, int dataSize)
             {
-                DebugEx.VerboseFormat("ClientScript.RequestingMD5HashesState.OnMessageReceivedFromServer(script = {0}, bytes = {1}, dataSize = {2})", script, Utils.BytesInHex(bytes, dataSize), dataSize);
+                DebugEx.VerboseFormat("ClientScript.RequestingMD5HashesState.OnMessageReceivedFromServer(script = {0}, bytes = {1}, dataSize = {2})", script, bytes, dataSize);
 
-                DebugEx.DebugFormat("Message received from the server: {0}", Utils.BytesInHex(bytes, dataSize));
+				DebugEx.VeryVerboseFormat("Message received from the server: {0}", Utils.BytesInHex(bytes, dataSize));
 
                 MemoryStream stream = new MemoryStream(bytes);
 				BinaryReader reader = new BinaryReader(stream, Encoding.UTF8);
@@ -346,7 +396,7 @@ namespace Common.App.Net
                 {
                     case MessageType.MD5HashesResponse:
                     {
-                        HandleMD5HashesResponse(script, reader);
+					HandleMD5HashesResponse(script, reader, dataSize);
                     }
                     break;
 
@@ -355,12 +405,18 @@ namespace Common.App.Net
                     case MessageType.MD5HashesRequest:
                     {
                         DebugEx.ErrorFormat("Unexpected message type: {0}", messageType);
+
+						script.mFiles.Clear();
+						script.state = ClientState.Connecting;
                     }
                     break;
 
                     default:
                     {
                         DebugEx.ErrorFormat("Unknown message type: {0}", messageType);
+
+						script.mFiles.Clear();
+						script.state = ClientState.Connecting;
                     }
                     break;
                 }
@@ -371,11 +427,33 @@ namespace Common.App.Net
             /// </summary>
             /// <param name="script">Script.</param>
             /// <param name="reader">Binary reader.</param>
-            private void HandleMD5HashesResponse(ClientScript script, BinaryReader reader)
+			/// <param name="dataSize">Data size.</param>
+			private void HandleMD5HashesResponse(ClientScript script, BinaryReader reader, int dataSize)
             {
                 DebugEx.VerboseFormat("ClientScript.RequestingMD5HashesState.HandleMD5HashesResponse(reader = {0})", reader);
 
-                // TODO: Implement it
+				bool isContinued = reader.ReadBoolean();
+
+				while (reader.BaseStream.Position < dataSize)
+				{
+					string fileName = reader.ReadString();
+					bool   isFolder = reader.ReadBoolean();
+
+					if (isFolder)
+					{
+						script.mFiles.Add(new FileInfo(fileName));
+					}
+					else
+					{
+						string md5Hash = reader.ReadString();
+						script.mFiles.Add(new FileInfo(fileName, md5Hash));
+					}
+				}
+
+				if (!isContinued)
+				{
+					script.state = ClientState.Downloading;
+				}
             }
 
             /// <summary>
@@ -387,6 +465,7 @@ namespace Common.App.Net
             {
                 DebugEx.VerboseFormat("ClientScript.RequestingMD5HashesState.OnDisconnectedFromServer(script = {0}, error = {1}({2}))", script, (NetworkError)error, error);
 
+				script.mFiles.Clear();
                 script.state = ClientState.Connecting;
             }
         }
@@ -396,6 +475,22 @@ namespace Common.App.Net
         /// </summary>
         private class DownloadingState: IClientState
         {
+			/// <summary>
+			/// Handler for enter event.
+			/// </summary>
+			/// <param name="script">Script.</param>
+			/// <param name="previousState">Previous state.</param>
+			public override void OnEnter(ClientScript script, ClientState previousState)
+			{
+				DebugEx.VerboseFormat("ClientScript.DownloadingState.OnEnter(script = {0}, previousState = {1})", script, previousState);
+				
+				// TODO: Remove it
+				for (int i = 0; i < script.mFiles.Count; ++i)
+				{
+					DebugEx.ErrorFormat("File: {0} {1} {2}", script.mFiles[i].name, script.mFiles[i].isFolder, script.mFiles[i].md5);
+				}
+			}
+
             // TODO: Implement it
         }
         #endregion
@@ -451,6 +546,7 @@ namespace Common.App.Net
         private Timer          mReconnectTimer;
 
         private byte[]         mBuffer;
+		private List<FileInfo> mFiles;
 
 
 
@@ -473,7 +569,8 @@ namespace Common.App.Net
 
             mReconnectTimer = new Timer(OnReconnectTimeout, DEFAULT_RECONNECT_DURATION);
 
-            mBuffer = new byte[4096];
+            mBuffer = new byte[30000];
+			mFiles  = new List<FileInfo>();
 
 
 
@@ -495,7 +592,7 @@ namespace Common.App.Net
             int dataSize;
             byte error;
 
-            NetworkEventType eventType = NetworkTransport.Receive(out hostId, out connectionId, out channelId, mBuffer, 4096, out dataSize, out error);
+			NetworkEventType eventType = NetworkTransport.Receive(out hostId, out connectionId, out channelId, mBuffer, 30000, out dataSize, out error);
 
             switch (eventType)
             {
