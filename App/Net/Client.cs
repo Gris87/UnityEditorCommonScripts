@@ -29,7 +29,7 @@ namespace Common.App.Net
             NetworkTransport.Init();
 
             ConnectionConfig config = new ConnectionConfig();
-			config.PacketSize       = 32000;
+			config.PacketSize       = CommonConstants.PACKET_SIZE;
 			sChannelId              = config.AddChannel(QosType.ReliableSequenced);
 
             sTopology     = new HostTopology(config, 1);

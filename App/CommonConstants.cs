@@ -14,5 +14,10 @@ namespace Common.App
         /// Server port.
         /// </summary>
         public const int SERVER_PORT = 52794;
+
+		/// <summary>
+		/// Packet size.
+		/// </summary>
+		public const int PACKET_SIZE = 20000; // Must be more than 2000
     }
 }

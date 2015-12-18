@@ -256,7 +256,7 @@ namespace Common.App.Net
                 {
                     DebugEx.ErrorFormat("Failed to send RevisionRequest message to the server");
 
-                    script.state = ClientState.Connecting;
+                    script.state = ClientState.Disconnected;
                 }
             }
 
@@ -293,7 +293,7 @@ namespace Common.App.Net
                     {
                         DebugEx.ErrorFormat("Unexpected message type: {0}", messageType);
 
-						script.state = ClientState.Connecting;
+						script.state = ClientState.Disconnected;
                     }
                     break;
 
@@ -301,7 +301,7 @@ namespace Common.App.Net
                     {
                         DebugEx.ErrorFormat("Unknown message type: {0}", messageType);
 
-						script.state = ClientState.Connecting;
+						script.state = ClientState.Disconnected;
                     }
                     break;
                 }
@@ -369,7 +369,7 @@ namespace Common.App.Net
                 {
                     DebugEx.ErrorFormat("Failed to send MD5HashesRequest message to the server");
 
-                    script.state = ClientState.Connecting;
+                    script.state = ClientState.Disconnected;
                 }
             }
 
@@ -407,7 +407,7 @@ namespace Common.App.Net
                         DebugEx.ErrorFormat("Unexpected message type: {0}", messageType);
 
 						script.mFiles.Clear();
-						script.state = ClientState.Connecting;
+						script.state = ClientState.Disconnected;
                     }
                     break;
 
@@ -416,7 +416,7 @@ namespace Common.App.Net
                         DebugEx.ErrorFormat("Unknown message type: {0}", messageType);
 
 						script.mFiles.Clear();
-						script.state = ClientState.Connecting;
+						script.state = ClientState.Disconnected;
                     }
                     break;
                 }
@@ -569,8 +569,8 @@ namespace Common.App.Net
 
             mReconnectTimer = new Timer(OnReconnectTimeout, DEFAULT_RECONNECT_DURATION);
 
-            mBuffer = new byte[30000];
-			mFiles  = new List<FileInfo>();
+			mBuffer = new byte[CommonConstants.PACKET_SIZE];
+            mFiles  = new List<FileInfo>();
 
 
 
@@ -592,7 +592,7 @@ namespace Common.App.Net
             int dataSize;
             byte error;
 
-			NetworkEventType eventType = NetworkTransport.Receive(out hostId, out connectionId, out channelId, mBuffer, 30000, out dataSize, out error);
+			NetworkEventType eventType = NetworkTransport.Receive(out hostId, out connectionId, out channelId, mBuffer, CommonConstants.PACKET_SIZE, out dataSize, out error);
 
             switch (eventType)
             {
