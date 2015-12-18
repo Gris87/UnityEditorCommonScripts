@@ -18,11 +18,11 @@ namespace Common.App
 		/// <summary>
 		/// Packet size.
 		/// </summary>
-		public const int PACKET_SIZE = 5000; // Must be more than PACKET_SAFE_LIMIT
+		public const int PACKET_SIZE = 1024; // Must be more than PACKET_SAFE_LIMIT
 
 		/// <summary>
 		/// The safe limit to avoid packet size exhaustion.
 		/// </summary>
-		public const int PACKET_SAFE_LIMIT = 2000;
+		public const int PACKET_SAFE_LIMIT = 524;
     }
 }

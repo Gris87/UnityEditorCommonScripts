@@ -436,8 +436,17 @@ namespace Common.App.Net
 
 				while (reader.BaseStream.Position < dataSize)
 				{
+					DebugEx.VerboseFormat("AAAA: {0} / {1}", reader.BaseStream.Position, dataSize);
+
 					string fileName = reader.ReadString();
+
+					DebugEx.VerboseFormat("BBBB: fileName = {0}", fileName);
+					DebugEx.VerboseFormat("CCCC: {0} / {1}", reader.BaseStream.Position, dataSize);
+
 					bool   isFolder = reader.ReadBoolean();
+
+					DebugEx.VerboseFormat("DDDD: isFolder = {0}", isFolder);
+					DebugEx.VerboseFormat("EEEE: {0} / {1}", reader.BaseStream.Position, dataSize);
 
 					if (isFolder)
 					{
@@ -446,6 +455,8 @@ namespace Common.App.Net
 					else
 					{
 						string md5Hash = reader.ReadString();
+						DebugEx.VerboseFormat("FFFF: md5Hash = {0}", md5Hash);
+						DebugEx.VerboseFormat("GGGG: {0} / {1}", reader.BaseStream.Position, dataSize);
 						script.mFiles.Add(new FileInfo(fileName, md5Hash));
 					}
 				}
